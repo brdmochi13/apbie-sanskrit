@@ -3,2068 +3,1050 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>संस्कृतम् | Charan's Sanskrit Study App</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>संस्कृतम् | Charan — Score 90%+</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --saffron: #C45E00;
-  --saffron-light: #F07020;
-  --parchment: #FAF6EE;
-  --ink: #1A2E1A;
-  --gold: #D4A017;
-  --ochre: #8B6914;
-  --teal: #1B5563;
-  --amber: #FFF3D4;
-  --amber-dark: #F5E6B0;
-  --success: #2D6A4F;
-  --error: #9B1B1B;
-  --card: #FFFFFF;
-  --border: #E8DFC8;
-  --shadow: 0 2px 12px rgba(26,46,26,0.08);
-  --shadow-lg: 0 8px 32px rgba(26,46,26,0.12);
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--parchment);
-  color: var(--ink);
-  min-height: 100vh;
-}
-
-/* ── HEADER ── */
-.app-header {
-  background: linear-gradient(135deg, var(--ink) 0%, #2D4A2D 60%, #1B5563 100%);
-  color: white;
-  padding: 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-}
-
-.header-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 20px;
-  border-bottom: 1px solid rgba(212,160,23,0.3);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.brand-devanagari {
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 26px;
-  color: var(--gold);
-  line-height: 1;
-  text-shadow: 0 0 20px rgba(212,160,23,0.4);
-}
-
-.brand-sub {
-  font-size: 11px;
-  color: rgba(255,255,255,0.6);
-  letter-spacing: 0.5px;
-}
-
-.brand-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: white;
-}
-
-.header-badge {
-  background: rgba(212,160,23,0.2);
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-/* ── SLOKA BANNER ── */
-.sloka-banner {
-  background: rgba(0,0,0,0.2);
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-
-.sloka-banner:hover { background: rgba(0,0,0,0.3); }
-
-.sloka-label {
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 3px;
-}
-
-.sloka-text {
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 15px;
-  color: rgba(255,255,255,0.95);
-  line-height: 1.5;
-}
-
-.sloka-meaning {
-  font-size: 11px;
-  color: rgba(255,255,255,0.55);
-  margin-top: 2px;
-  display: none;
-  font-style: italic;
-}
-
-.sloka-banner:hover .sloka-meaning,
-.sloka-banner.revealed .sloka-meaning {
-  display: block;
-}
-
-.sloka-tap-hint {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 10px;
-  color: rgba(255,255,255,0.3);
-}
-
-/* ── TABS ── */
-.nav-tabs {
-  display: flex;
-  overflow-x: auto;
-  scrollbar-width: none;
-  padding: 0 20px;
-  gap: 2px;
-  background: rgba(0,0,0,0.15);
-}
-
-.nav-tabs::-webkit-scrollbar { display: none; }
-
-.tab-btn {
-  flex: none;
-  background: none;
-  border: none;
-  color: rgba(255,255,255,0.55);
-  padding: 10px 14px;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: all 0.2s;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.tab-btn:hover { color: rgba(255,255,255,0.85); }
-.tab-btn.active {
-  color: var(--gold);
-  border-bottom-color: var(--gold);
-  background: rgba(212,160,23,0.08);
-}
-
-/* ── MAIN CONTENT ── */
-.main { max-width: 900px; margin: 0 auto; padding: 20px 16px 80px; }
-
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
-
-/* ── DASHBOARD ── */
-.welcome-card {
-  background: linear-gradient(135deg, var(--saffron) 0%, #A04A00 100%);
-  border-radius: 16px;
-  padding: 24px;
-  color: white;
-  margin-bottom: 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.welcome-card::before {
-  content: 'ॐ';
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 80px;
-  opacity: 0.1;
-  color: white;
-}
-
-.welcome-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
-.welcome-sub { font-size: 13px; opacity: 0.8; }
-.welcome-stats {
-  display: flex;
-  gap: 20px;
-  margin-top: 16px;
-}
-.stat-box {
-  background: rgba(255,255,255,0.15);
-  border-radius: 10px;
-  padding: 10px 16px;
-  text-align: center;
-}
-.stat-num { font-size: 24px; font-weight: 700; }
-.stat-lbl { font-size: 10px; opacity: 0.75; text-transform: uppercase; letter-spacing: 0.5px; }
-
-.section-title {
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--ochre);
-  margin: 24px 0 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.section-title::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-/* ── PROGRESS GRID ── */
-.progress-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.prog-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  position: relative;
-}
-
-.prog-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-
-.prog-section-tag {
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--ochre);
-  margin-bottom: 4px;
-}
-
-.prog-title {
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 13px;
-  color: var(--ink);
-  margin-bottom: 8px;
-  line-height: 1.3;
-}
-
-.prog-bar-wrap {
-  background: var(--amber-dark);
-  border-radius: 4px;
-  height: 5px;
-  overflow: hidden;
-}
-
-.prog-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--saffron), var(--gold));
-  border-radius: 4px;
-  transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
-}
-
-.prog-pct {
-  font-size: 10px;
-  color: var(--ochre);
-  margin-top: 4px;
-  font-weight: 600;
-}
-
-/* ── HEATMAP ── */
-.heatmap-wrap {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 20px;
-}
-
-.heatmap-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--ochre);
-  margin-bottom: 10px;
-}
-
-.heatmap-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 4px;
-}
-
-.heatmap-cell {
-  aspect-ratio: 1;
-  border-radius: 3px;
-  background: var(--amber-dark);
-  cursor: pointer;
-  transition: transform 0.1s;
-  position: relative;
-}
-
-.heatmap-cell:hover { transform: scale(1.3); z-index: 2; }
-.heatmap-cell.h1 { background: #FDE68A; }
-.heatmap-cell.h2 { background: #F59E0B; }
-.heatmap-cell.h3 { background: var(--saffron-light); }
-.heatmap-cell.h4 { background: var(--saffron); }
-.heatmap-cell.today { outline: 2px solid var(--gold); }
-
-/* ── CHAPTER CARDS ── */
-.chapter-list { display: flex; flex-direction: column; gap: 12px; }
-
-.chapter-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden;
-  transition: box-shadow 0.2s;
-}
-
-.chapter-card:hover { box-shadow: var(--shadow); }
-
-.chapter-header {
-  display: flex;
-  align-items: center;
-  padding: 14px 16px;
-  cursor: pointer;
-  gap: 12px;
-}
-
-.chapter-num {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: var(--amber);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 16px;
-  color: var(--saffron);
-  flex-shrink: 0;
-}
-
-.chapter-info { flex: 1 }
-
-.chapter-title-dev {
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 16px;
-  color: var(--ink);
-  font-weight: 600;
-  line-height: 1.3;
-}
-
-.chapter-title-en {
-  font-size: 11px;
-  color: var(--ochre);
-  margin-top: 2px;
-}
-
-.chapter-author {
-  font-size: 10px;
-  color: #aaa;
-  margin-top: 1px;
-  font-style: italic;
-}
-
-.chapter-score {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.score-circle {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 3px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--ochre);
-  background: var(--amber);
-  margin: 0 auto 2px;
-}
-
-.score-circle.good { border-color: var(--success); color: var(--success); background: #E8F5EE; }
-.score-circle.mid { border-color: var(--gold); color: #8B6914; background: #FFF8E0; }
-
-.chapter-expand-icon {
-  font-size: 16px;
-  color: #ccc;
-  margin-left: 4px;
-  transition: transform 0.2s;
-}
-
-.chapter-card.open .chapter-expand-icon { transform: rotate(180deg); }
-
-.chapter-body {
-  display: none;
-  border-top: 1px solid var(--border);
-  padding: 16px;
-  background: #FDFAF4;
-}
-
-.chapter-card.open .chapter-body { display: block; }
-
-/* ── TABS inside chapter ── */
-.mini-tabs {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
-}
-
-.mini-tab {
-  padding: 5px 12px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  font-size: 11px;
-  cursor: pointer;
-  background: white;
-  color: var(--ochre);
-  transition: all 0.15s;
-}
-
-.mini-tab.active {
-  background: var(--saffron);
-  color: white;
-  border-color: var(--saffron);
-}
-
-.mini-panel { display: none; }
-.mini-panel.active { display: block; }
-
-/* ── Q&A Cards ── */
-.qa-card {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-
-.qa-question {
-  padding: 12px 14px;
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--ink);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 10px;
-  line-height: 1.5;
-}
-
-.qa-mark {
-  font-size: 10px;
-  background: var(--amber);
-  border: 1px solid var(--border);
-  color: var(--ochre);
-  padding: 2px 7px;
-  border-radius: 10px;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.qa-answer {
-  display: none;
-  padding: 12px 14px;
-  border-top: 1px solid var(--amber-dark);
-  background: var(--amber);
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--ink);
-}
-
-.qa-card.open .qa-answer { display: block; }
-
-.qa-Sanskrit {
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 15px;
-  color: var(--saffron);
-  display: block;
-  margin-bottom: 6px;
-  line-height: 1.6;
-}
-
-/* ── GRAMMAR ── */
-.grammar-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.grammar-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px 12px;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s;
-}
-
-.grammar-card:hover {
-  background: var(--teal);
-  color: white;
-  border-color: var(--teal);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(27,85,99,0.25);
-}
-
-.grammar-card:hover .grammar-icon { filter: invert(1); }
-.grammar-card:hover .grammar-name { color: white; }
-.grammar-card:hover .grammar-sub { color: rgba(255,255,255,0.7); }
-
-.grammar-icon { font-size: 24px; margin-bottom: 6px; }
-
-.grammar-name {
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 15px;
-  color: var(--ink);
-  font-weight: 600;
-}
-
-.grammar-sub { font-size: 10px; color: var(--ochre); margin-top: 2px; }
-
-/* ── DRILL ── */
-.drill-box {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 20px;
-  margin-bottom: 16px;
-}
-
-.drill-question-dev {
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 22px;
-  color: var(--saffron);
-  text-align: center;
-  margin-bottom: 6px;
-  line-height: 1.5;
-}
-
-.drill-question-en {
-  font-size: 13px;
-  color: var(--ochre);
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.drill-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-.drill-opt {
-  padding: 12px;
-  border: 2px solid var(--border);
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 13px;
-  text-align: center;
-  transition: all 0.15s;
-  background: white;
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 15px;
-}
-
-.drill-opt:hover { border-color: var(--saffron); background: var(--amber); }
-.drill-opt.correct { border-color: var(--success); background: #E8F5EE; color: var(--success); }
-.drill-opt.wrong { border-color: var(--error); background: #FDE8E8; color: var(--error); }
-
-.drill-feedback {
-  margin-top: 14px;
-  padding: 12px 14px;
-  border-radius: 10px;
-  font-size: 13px;
-  line-height: 1.6;
-  display: none;
-}
-
-.drill-feedback.correct { background: #E8F5EE; color: var(--success); border: 1px solid #A8D5BC; }
-.drill-feedback.wrong { background: #FDE8E8; color: var(--error); border: 1px solid #F5B5B5; }
-.drill-feedback.show { display: block; }
-
-.drill-next-btn {
-  display: block;
-  width: 100%;
-  margin-top: 12px;
-  padding: 12px;
-  background: var(--saffron);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.drill-next-btn:hover { background: var(--saffron-light); }
-
-/* ── PRACTICE PAPERS ── */
-.paper-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  margin-bottom: 14px;
-  overflow: hidden;
-}
-
-.paper-header {
-  display: flex;
-  align-items: center;
-  padding: 16px;
-  gap: 14px;
-  cursor: pointer;
-}
-
-.paper-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--amber);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  flex-shrink: 0;
-}
-
-.paper-title { font-size: 15px; font-weight: 600; color: var(--ink); }
-.paper-meta { font-size: 11px; color: var(--ochre); margin-top: 2px; }
-
-.paper-badge {
-  margin-left: auto;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 10px;
-  font-weight: 700;
-}
-
-.badge-new { background: #E8F5EE; color: var(--success); }
-.badge-hard { background: #FDE8E8; color: var(--error); }
-.badge-medium { background: var(--amber); color: var(--ochre); }
-
-.paper-body {
-  display: none;
-  border-top: 1px solid var(--border);
-  padding: 16px;
-}
-
-.paper-card.open .paper-body { display: block; }
-
-.exam-question {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px;
-  margin-bottom: 10px;
-}
-
-.q-num {
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--saffron);
-  letter-spacing: 0.5px;
-  margin-bottom: 6px;
-}
-
-.q-text {
-  font-size: 13px;
-  line-height: 1.6;
-  margin-bottom: 8px;
-}
-
-.q-text-dev {
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 15px;
-  color: var(--saffron);
-  display: block;
-  margin-bottom: 4px;
-}
-
-.q-marks {
-  font-size: 10px;
-  color: var(--ochre);
-  background: var(--amber);
-  padding: 2px 8px;
-  border-radius: 8px;
-  display: inline-block;
-}
-
-.show-answer-btn {
-  margin-top: 10px;
-  padding: 8px 14px;
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 11px;
-  color: var(--ochre);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.show-answer-btn:hover { background: var(--amber); border-color: var(--gold); }
-
-.q-answer-box {
-  display: none;
-  margin-top: 10px;
-  padding: 12px;
-  background: var(--amber);
-  border-radius: 8px;
-  font-size: 12px;
-  line-height: 1.7;
-  color: var(--ink);
-  border: 1px solid var(--amber-dark);
-}
-
-/* ── AI TUTOR ── */
-.ai-tutor-wrap {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 500px;
-}
-
-.ai-header {
-  background: linear-gradient(135deg, var(--teal), #153D48);
-  padding: 14px 16px;
-  color: white;
-}
-
-.ai-name {
-  font-size: 15px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ai-name-dev {
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 18px;
-  color: var(--gold);
-}
-
-.ai-sub { font-size: 11px; opacity: 0.7; margin-top: 2px; }
-
-.ai-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.msg {
-  max-width: 85%;
-  padding: 11px 14px;
-  border-radius: 14px;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.msg.ai {
-  background: var(--amber);
-  border: 1px solid var(--border);
-  align-self: flex-start;
-  border-bottom-left-radius: 4px;
-}
-
-.msg.user {
-  background: var(--teal);
-  color: white;
-  align-self: flex-end;
-  border-bottom-right-radius: 4px;
-}
-
-.ai-input-area {
-  padding: 12px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  gap: 8px;
-}
-
-.ai-input {
-  flex: 1;
-  padding: 10px 14px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  font-size: 13px;
-  font-family: 'Inter', sans-serif;
-  resize: none;
-  outline: none;
-  background: var(--parchment);
-}
-
-.ai-input:focus { border-color: var(--teal); }
-
-.ai-send-btn {
-  padding: 10px 16px;
-  background: var(--teal);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background 0.15s;
-}
-
-.ai-send-btn:hover { background: #234E5A; }
-.ai-send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-.ai-quick-prompts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 0 16px 12px;
-}
-
-.quick-prompt {
-  padding: 5px 10px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  font-size: 11px;
-  cursor: pointer;
-  background: white;
-  color: var(--teal);
-  transition: all 0.15s;
-}
-
-.quick-prompt:hover { background: var(--teal); color: white; border-color: var(--teal); }
-
-/* ── SANDHI TABLE ── */
-.sandhi-table-wrap { overflow-x: auto; margin-bottom: 14px; }
-
-.sandhi-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 12px;
-}
-
-.sandhi-table th {
-  background: var(--teal);
-  color: white;
-  padding: 8px 10px;
-  text-align: left;
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 13px;
-}
-
-.sandhi-table td {
-  padding: 8px 10px;
-  border-bottom: 1px solid var(--border);
-  vertical-align: top;
-}
-
-.sandhi-table tr:nth-child(even) { background: var(--amber); }
-
-.dev { font-family: 'Noto Serif Devanagari', serif; color: var(--saffron); font-size: 14px; }
-
-/* ── CONJUGATION TABLE ── */
-.conj-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 12px;
-  margin-bottom: 14px;
-}
-
-.conj-table th {
-  background: var(--ink);
-  color: var(--gold);
-  padding: 7px 10px;
-  text-align: center;
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 13px;
-}
-
-.conj-table td {
-  padding: 7px 10px;
-  border: 1px solid var(--border);
-  text-align: center;
-  font-family: 'Noto Serif Devanagari', serif;
-  font-size: 14px;
-  color: var(--ink);
-}
-
-.conj-table tr:nth-child(even) td { background: var(--amber); }
-
-.conj-row-label {
-  font-size: 10px;
-  color: var(--ochre);
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-}
-
-/* ── LOADING ── */
-.ai-loading {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  padding: 4px 0;
-}
-
-.ai-loading span {
-  width: 6px;
-  height: 6px;
-  background: var(--ochre);
-  border-radius: 50%;
-  animation: bounce 1s infinite;
-}
-
-.ai-loading span:nth-child(2) { animation-delay: 0.15s; }
-.ai-loading span:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); opacity: 0.4; }
-  50% { transform: translateY(-5px); opacity: 1; }
-}
-
-/* ── PROGRESS BAR RING (SVG) ── */
-.prog-ring { display: inline-block; vertical-align: middle; }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 600px) {
-  .progress-grid { grid-template-columns: repeat(2, 1fr); }
-  .drill-options { grid-template-columns: 1fr; }
-  .grammar-grid { grid-template-columns: repeat(2, 1fr); }
-  .welcome-stats { gap: 10px; }
-}
-
-/* ── FIREBASE SYNC INDICATOR ── */
-.sync-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #4CAF50;
-  display: inline-block;
-  animation: pulse-green 2s infinite;
-}
-
-@keyframes pulse-green {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
+:root{--saffron:#C45E00;--sl:#F07020;--parch:#FAF6EE;--ink:#1A2E1A;--gold:#D4A017;--ochre:#8B6914;--teal:#1B5563;--amber:#FFF3D4;--ambd:#F5E6B0;--success:#2D6A4F;--error:#9B1B1B;--card:#FFF;--border:#E8DFC8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--parch);color:var(--ink);min-height:100vh}
+.dev{font-family:'Noto Serif Devanagari',serif;color:var(--saffron)}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,var(--ink) 0%,#2D4A2D 60%,#1B5563 100%);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(212,160,23,.3)}
+.brand-dev{font-family:'Noto Serif Devanagari',serif;font-size:24px;color:var(--gold)}
+.brand-name{font-size:13px;font-weight:600}.brand-sub{font-size:10px;color:rgba(255,255,255,.6)}
+.badge-hdr{background:rgba(212,160,23,.2);border:1px solid var(--gold);color:var(--gold);padding:3px 9px;border-radius:16px;font-size:10px;font-weight:600}
+.sloka-bar{background:rgba(0,0,0,.2);padding:8px 16px;cursor:pointer}
+.sloka-lbl{font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
+.sloka-txt{font-family:'Noto Serif Devanagari',serif;font-size:14px;color:rgba(255,255,255,.95);line-height:1.5}
+.sloka-mn{font-size:11px;color:rgba(255,255,255,.55);display:none;font-style:italic;margin-top:2px}
+.sloka-bar.open .sloka-mn{display:block}
+.nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 16px;background:rgba(0,0,0,.15)}
+.nav-tabs::-webkit-scrollbar{display:none}
+.tab-btn{flex:none;background:none;border:none;color:rgba(255,255,255,.55);padding:9px 12px;font-size:11px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(212,160,23,.08)}
+
+/* MAIN */
+.main{max-width:900px;margin:0 auto;padding:16px 14px 80px}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.sec-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ochre);margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* WELCOME */
+.welcome{background:linear-gradient(135deg,var(--saffron),#A04A00);border-radius:14px;padding:20px;color:#fff;margin-bottom:16px;position:relative;overflow:hidden}
+.welcome::before{content:'ॐ';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-family:'Noto Serif Devanagari',serif;font-size:70px;opacity:.1}
+.wstats{display:flex;gap:12px;margin-top:14px}
+.wstat{background:rgba(255,255,255,.15);border-radius:10px;padding:8px 14px;text-align:center}
+.wstat-num{font-size:22px;font-weight:700}.wstat-lbl{font-size:9px;opacity:.75;text-transform:uppercase}
+
+/* TIPS */
+.tips{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px}
+.tips-title{font-size:13px;font-weight:700;color:var(--saffron);margin-bottom:10px}
+.tip{display:flex;gap:8px;margin-bottom:8px;font-size:12px;line-height:1.5;align-items:flex-start}
+.tip::before{content:'✅';flex-shrink:0}
+
+/* QUICKGRID */
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.qbtn{padding:14px;border:none;border-radius:12px;font-size:12px;font-weight:600;cursor:pointer;color:#fff;text-align:left;transition:opacity .15s}
+.qbtn:hover{opacity:.85}
+.qbtn-icon{font-size:20px;display:block;margin-bottom:4px}
+.qbtn-sub{display:block;font-size:10px;opacity:.8;margin-top:2px}
+
+/* PROGRESS */
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.pcard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;cursor:pointer;transition:all .2s}
+.pcard:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.ptag{font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:var(--ochre);margin-bottom:3px}
+.ptitle{font-family:'Noto Serif Devanagari',serif;font-size:12px;color:var(--ink);margin-bottom:6px;line-height:1.3}
+.pbar-w{background:var(--ambd);border-radius:4px;height:5px;overflow:hidden}
+.pbar{height:100%;background:linear-gradient(90deg,var(--saffron),var(--gold));border-radius:4px;transition:width .8s ease}
+.ppct{font-size:9px;color:var(--ochre);margin-top:3px;font-weight:600}
+
+/* CHAPTERS */
+.ch-list{display:flex;flex-direction:column;gap:10px}
+.ch-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.ch-hdr{display:flex;align-items:center;padding:12px 14px;cursor:pointer;gap:10px}
+.ch-num{width:34px;height:34px;border-radius:8px;background:var(--amber);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Noto Serif Devanagari',serif;font-size:15px;color:var(--saffron);flex-shrink:0}
+.ch-info{flex:1}
+.ch-tdev{font-family:'Noto Serif Devanagari',serif;font-size:15px;color:var(--ink);font-weight:600}
+.ch-ten{font-size:11px;color:var(--ochre)}.ch-auth{font-size:10px;color:#bbb;font-style:italic}
+.ch-score{text-align:right;flex-shrink:0}
+.spill{padding:3px 8px;border-radius:12px;font-size:10px;font-weight:700;background:var(--amber);color:var(--ochre);border:1px solid var(--border)}
+.spill.good{background:#E8F5EE;color:var(--success);border-color:#A8D5BC}
+.ch-exp{font-size:14px;color:#ccc;margin-left:4px;transition:transform .2s}
+.ch-card.open .ch-exp{transform:rotate(180deg)}
+.ch-body{display:none;border-top:1px solid var(--border);background:#FDFAF4}
+.ch-card.open .ch-body{display:block}
+.mt{display:flex;gap:4px;padding:10px 12px 0;flex-wrap:wrap}
+.mtab{padding:5px 10px;border:1px solid var(--border);border-radius:16px;font-size:11px;cursor:pointer;background:#fff;color:var(--ochre);transition:all .15s}
+.mtab.active{background:var(--saffron);color:#fff;border-color:var(--saffron)}
+.mpanel{display:none;padding:12px}.mpanel.active{display:block}
+
+/* HIGHLIGHT */
+.hbox{background:linear-gradient(135deg,var(--amber),#FFF8E0);border:1px solid var(--gold);border-radius:10px;padding:12px;margin-bottom:10px}
+.hbox-title{font-size:11px;font-weight:700;color:var(--saffron);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+
+/* SLOKAS */
+.scard{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px}
+.sdev{font-family:'Noto Serif Devanagari',serif;font-size:16px;color:var(--saffron);line-height:1.7;margin-bottom:6px}
+.sen{font-size:12px;color:var(--ochre);line-height:1.6;font-style:italic;border-top:1px solid var(--ambd);padding-top:6px}
+.smn{font-size:12px;color:var(--ink);line-height:1.6;padding-top:6px;border-top:1px solid var(--ambd);margin-top:6px}
+
+/* Q&A */
+.qacard{background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.qaq{padding:10px 12px;cursor:pointer;font-size:12px;font-weight:600;color:var(--ink);display:flex;justify-content:space-between;align-items:flex-start;gap:8px;line-height:1.5}
+.qamk{font-size:9px;background:var(--amber);border:1px solid var(--border);color:var(--ochre);padding:2px 6px;border-radius:8px;white-space:nowrap;flex-shrink:0;font-weight:700}
+.qaa{display:none;padding:10px 12px;border-top:1px solid var(--ambd);background:var(--amber);font-size:12px;line-height:1.7;color:var(--ink)}
+.qacard.open .qaa{display:block}
+
+/* VOCAB */
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.vcard{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px}
+.vdev{font-family:'Noto Serif Devanagari',serif;font-size:15px;color:var(--saffron)}
+.ven{font-size:10px;color:var(--ochre);margin-top:2px}
+
+/* GRAMMAR */
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:16px}
+.gcard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 10px;cursor:pointer;text-align:center;transition:all .2s}
+.gcard:hover,.gcard.active{background:var(--teal);color:#fff;border-color:var(--teal);transform:translateY(-2px)}
+.gcard:hover .gname,.gcard.active .gname{color:#fff}
+.gcard:hover .gsub,.gcard.active .gsub{color:rgba(255,255,255,.7)}
+.gicon{font-size:22px;margin-bottom:6px}
+.gname{font-family:'Noto Serif Devanagari',serif;font-size:14px;color:var(--ink);font-weight:600}
+.gsub{font-size:10px;color:var(--ochre);margin-top:2px}
+
+/* TABLES */
+.tw{overflow-x:auto;margin-bottom:12px}
+table.skt{width:100%;border-collapse:collapse;font-size:11px}
+table.skt th{background:var(--teal);color:#fff;padding:7px 8px;text-align:center;font-family:'Noto Serif Devanagari',serif;font-size:12px}
+table.skt td{padding:7px 8px;border:1px solid var(--border);text-align:center;font-family:'Noto Serif Devanagari',serif;font-size:13px}
+table.skt tr:nth-child(even) td{background:var(--amber)}
+table.skt .rl{font-family:'Inter',sans-serif;font-size:9px;color:var(--ochre);font-weight:600;text-align:left}
+table.snd{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:10px}
+table.snd th{background:var(--ink);color:var(--gold);padding:7px 8px;text-align:left;font-size:11px}
+table.snd td{padding:7px 8px;border-bottom:1px solid var(--border);vertical-align:top;font-size:11px}
+table.snd tr:nth-child(even) td{background:var(--amber)}
+
+/* DRILL */
+.dw{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px}
+.dbar{height:4px;background:var(--ambd);border-radius:4px;margin-bottom:14px;overflow:hidden}
+.dbar-f{height:100%;background:var(--gold);transition:width .3s}
+.dqdev{font-family:'Noto Serif Devanagari',serif;font-size:20px;color:var(--saffron);text-align:center;margin-bottom:4px;line-height:1.5}
+.dqen{font-size:12px;color:var(--ochre);text-align:center;margin-bottom:16px}
+.dopts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dopt{padding:10px;border:2px solid var(--border);border-radius:10px;cursor:pointer;text-align:center;background:#fff;font-family:'Noto Serif Devanagari',serif;font-size:13px;line-height:1.4;transition:all .15s}
+.dopt:hover{border-color:var(--saffron);background:var(--amber)}
+.dopt.correct{border-color:var(--success);background:#E8F5EE;color:var(--success)}
+.dopt.wrong{border-color:var(--error);background:#FDE8E8;color:var(--error)}
+.dfb{margin-top:12px;padding:10px 12px;border-radius:10px;font-size:12px;line-height:1.6;display:none}
+.dfb.correct{background:#E8F5EE;color:var(--success);border:1px solid #A8D5BC}
+.dfb.wrong{background:#FDE8E8;color:var(--error);border:1px solid #F5B5B5}
+.dfb.show{display:block}
+.dnext{display:none;width:100%;margin-top:10px;padding:11px;background:var(--saffron);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer}
+
+/* PAPERS */
+.ppr{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.pprhdr{display:flex;align-items:center;padding:14px;gap:12px;cursor:pointer}
+.pprico{width:42px;height:42px;border-radius:10px;background:var(--amber);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.pprtitle{font-size:14px;font-weight:600;color:var(--ink)}.pprmeta{font-size:11px;color:var(--ochre)}
+.pprbdg{margin-left:auto;padding:3px 9px;border-radius:16px;font-size:9px;font-weight:700}
+.bdgb{background:#E8F0FE;color:#1a56db}.bdgr{background:#FDE8E8;color:var(--error)}
+.pprbody{display:none;border-top:1px solid var(--border);padding:14px}
+.ppr.open .pprbody{display:block}
+.eq{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px}
+.eqnum{font-size:10px;font-weight:700;color:var(--saffron);margin-bottom:4px}
+.eqtxt{font-size:12px;line-height:1.6;margin-bottom:6px}
+.eqmk{font-size:9px;color:var(--ochre);background:var(--amber);padding:2px 7px;border-radius:8px;display:inline-block}
+.showbtn{margin-top:8px;padding:6px 12px;background:none;border:1px solid var(--border);border-radius:8px;font-size:11px;color:var(--ochre);cursor:pointer}
+.showbtn:hover{background:var(--amber);border-color:var(--gold)}
+.ansbox{display:none;margin-top:8px;padding:10px;background:var(--amber);border-radius:8px;font-size:12px;line-height:1.7;border:1px solid var(--ambd)}
+
+/* AI */
+.aiw{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;height:480px}
+.aihdr{background:linear-gradient(135deg,var(--teal),#153D48);padding:12px 14px;color:#fff}
+.ainame{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+.aidev{font-family:'Noto Serif Devanagari',serif;font-size:17px;color:var(--gold)}
+.aisub{font-size:10px;opacity:.7;margin-top:2px}
+.aimsgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:85%;padding:10px 13px;border-radius:13px;font-size:12px;line-height:1.6}
+.msg.ai{background:var(--amber);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:3px}
+.msg.user{background:var(--teal);color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
+.aiqp{display:flex;flex-wrap:wrap;gap:5px;padding:0 12px 10px}
+.qp{padding:4px 9px;border:1px solid var(--border);border-radius:16px;font-size:10px;cursor:pointer;background:#fff;color:var(--teal)}
+.qp:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+.aiarea{padding:10px;border-top:1px solid var(--border);display:flex;gap:8px}
+.aiinp{flex:1;padding:9px 12px;border:1px solid var(--border);border-radius:10px;font-size:12px;font-family:'Inter',sans-serif;resize:none;outline:none;background:var(--parch)}
+.aiinp:focus{border-color:var(--teal)}
+.aisend{padding:9px 14px;background:var(--teal);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:15px}
+.aisend:disabled{opacity:.5;cursor:not-allowed}
+.ldots{display:flex;gap:4px;align-items:center}
+.ldots span{width:6px;height:6px;background:var(--ochre);border-radius:50%;animation:bounce 1s infinite}
+.ldots span:nth-child(2){animation-delay:.15s}.ldots span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-5px);opacity:1}}
+
+/* SANDARBHA */
+.sancard{background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:10px;padding:12px}
+.sandev{font-family:'Noto Serif Devanagari',serif;font-size:16px;color:var(--saffron);margin-bottom:8px;line-height:1.6}
+
+/* SYNC */
+.syncdot{width:7px;height:7px;border-radius:50%;background:#4CAF50;display:inline-block;animation:pg 2s infinite}
+@keyframes pg{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* LETTER */
+.ltrbox{background:#fff;border:2px solid var(--border);border-radius:12px;padding:16px;font-family:'Noto Serif Devanagari',serif;font-size:14px;line-height:2.2;color:var(--ink);margin-bottom:12px}
+
+@media(max-width:600px){.pgrid{grid-template-columns:repeat(2,1fr)}.dopts{grid-template-columns:1fr}.ggrid{grid-template-columns:repeat(2,1fr)}.wstats{gap:8px}}
 </style>
 </head>
 <body>
-
-<!-- HEADER -->
-<header class="app-header">
-  <div class="header-top">
-    <div class="brand">
-      <div class="brand-devanagari">संस्कृतम्</div>
-      <div>
-        <div class="brand-name">Charan's Sanskrit</div>
-        <div class="brand-sub">AP Inter 1st Year · Narayana Jr College</div>
-      </div>
+<header class="hdr">
+  <div class="hdr-top">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="brand-dev">संस्कृतम्</div>
+      <div><div class="brand-name">Charan's Sanskrit — Target 90%+</div>
+      <div class="brand-sub">AP Jr. Inter · Narayana Jr. College, Nidamanuru · 2026-27</div></div>
     </div>
     <div style="display:flex;align-items:center;gap:8px">
-      <span class="sync-dot" id="syncDot"></span>
-      <div class="header-badge">2025-26</div>
+      <span class="syncdot" id="syncDot"></span>
+      <span class="badge-hdr">APBIE 2026-27</span>
     </div>
   </div>
-
-  <!-- Sloka of the Day -->
-  <div class="sloka-banner" onclick="this.classList.toggle('revealed')">
-    <div class="sloka-label">📿 Sloka of the Day — tap to reveal meaning</div>
-    <div class="sloka-text" id="slokaText">विद्या ददाति विनयं विनयाद् याति पात्रताम् ।</div>
-    <div class="sloka-meaning" id="slokaMeaning">Knowledge gives humility, from humility one attains worthiness — the foundation of Charan's learning journey.</div>
+  <div class="sloka-bar" onclick="this.classList.toggle('open')">
+    <div class="sloka-lbl">📿 Sloka of the Day — tap to reveal meaning</div>
+    <div class="sloka-txt" id="slokaText"></div>
+    <div class="sloka-mn" id="slokaMean"></div>
   </div>
-
-  <!-- Nav Tabs -->
   <nav class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('dashboard',this)">📊 Dashboard</button>
-    <button class="tab-btn" onclick="switchTab('padya',this)">📜 पद्य (Poetry)</button>
-    <button class="tab-btn" onclick="switchTab('gadya',this)">📖 गद्य (Prose)</button>
-    <button class="tab-btn" onclick="switchTab('upavachakam',this)">📚 उपवाचकम्</button>
-    <button class="tab-btn" onclick="switchTab('vyakarana',this)">🔤 व्याकरणम्</button>
-    <button class="tab-btn" onclick="switchTab('papers',this)">📝 Practice</button>
-    <button class="tab-btn" onclick="switchTab('aiTutor',this)">🤖 AI Tutor</button>
+    <button class="tab-btn active" onclick="switchTab('dash',this)">📊 Dashboard</button>
+    <button class="tab-btn" onclick="switchTab('padya',this)">📜 पद्य</button>
+    <button class="tab-btn" onclick="switchTab('gadya',this)">📖 गद्य</button>
+    <button class="tab-btn" onclick="switchTab('upa',this)">📚 उपवाचकम्</button>
+    <button class="tab-btn" onclick="switchTab('vya',this)">🔤 व्याकरणम्</button>
+    <button class="tab-btn" onclick="switchTab('papers',this)">📝 Papers</button>
+    <button class="tab-btn" onclick="switchTab('ai',this)">🤖 AI Guru</button>
   </nav>
 </header>
 
 <main class="main">
 
-<!-- ══════════ DASHBOARD ══════════ -->
-<div class="tab-panel active" id="tab-dashboard">
-  
-  <div class="welcome-card">
-    <div class="welcome-title">नमस्ते, Charan! 🙏</div>
-    <div class="welcome-sub">AP Inter 1st Year Sanskrit · सुरभारतीसौरभम्</div>
-    <div class="welcome-stats">
-      <div class="stat-box">
-        <div class="stat-num" id="totalScore">0%</div>
-        <div class="stat-lbl">Overall</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num" id="questionsAttempted">0</div>
-        <div class="stat-lbl">Questions Done</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num" id="streakDays">0</div>
-        <div class="stat-lbl">Day Streak</div>
-      </div>
+<!-- DASHBOARD -->
+<div class="tab-panel active" id="tab-dash">
+  <div class="welcome">
+    <div style="font-size:20px;font-weight:700">🙏 नमस्ते, Charan!</div>
+    <div style="font-size:12px;opacity:.8;margin-top:2px">Narayana Junior College, Nidamanuru · Score 90%+ in Sanskrit</div>
+    <div class="wstats">
+      <div class="wstat"><div class="wstat-num" id="totPct">0%</div><div class="wstat-lbl">Overall</div></div>
+      <div class="wstat"><div class="wstat-num" id="totQ">0</div><div class="wstat-lbl">Q's Done</div></div>
+      <div class="wstat"><div class="wstat-num" id="drillSc">—</div><div class="wstat-lbl">Drill Score</div></div>
     </div>
   </div>
-
-  <div class="section-title">📅 Study Activity (Last 12 Weeks)</div>
-  <div class="heatmap-wrap">
-    <div class="heatmap-title">Darker = more questions attempted</div>
-    <div class="heatmap-grid" id="heatmapGrid"></div>
+  <div class="tips">
+    <div class="tips-title">🎯 90%+ Strategy — From Your Narayana Study Material (PDF)</div>
+    <div class="tip">For <strong>सन्दर्भ वाक्यानि (4M each)</strong>: always write 4 parts — <strong>कविपरिचयः + कविः/ग्रन्थः + सन्दर्भः + भावः</strong></div>
+    <div class="tip">Memorise <strong>कविपरिचयः</strong> for ALL 10 chapters (5 padya + 5 gadya) — appears in almost every question</div>
+    <div class="tip"><strong>नीतिश्लोकाः</strong> — memorise all 8 slokas with word meanings — guaranteed 4-8 marks</div>
+    <div class="tip">Grammar: <strong>राम + लता + फल शब्दरूप</strong> (all 8 vibhaktis × 3 numbers) = 8 marks alone</div>
+    <div class="tip">Learn all <strong>4 model letters</strong> from पत्रलेखनम् — at least 1 letter = 5 marks in every paper</div>
+    <div class="tip">Translate 15 sentences from <strong>अनुवादाभ्यासः</strong> — present, past, future tenses (वर्तमान/भूत/भविष्यत्)</div>
+    <div class="tip"><strong>एकपद समाधान प्रश्नाः (1M)</strong> — practice all single-word answers from each chapter</div>
   </div>
-
-  <div class="section-title">📋 Chapter Progress</div>
-  <div class="progress-grid" id="progressGrid"></div>
-
-  <div class="section-title">⚡ Quick Jump</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-    <button onclick="switchTab('vyakarana',document.querySelectorAll('.tab-btn')[4])" 
-      style="padding:14px;background:var(--teal);color:white;border:none;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer">
-      🔤 Grammar Drill
-    </button>
-    <button onclick="switchTab('papers',document.querySelectorAll('.tab-btn')[5])"
-      style="padding:14px;background:var(--saffron);color:white;border:none;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer">
-      📝 Practice Paper
-    </button>
-    <button onclick="switchTab('aiTutor',document.querySelectorAll('.tab-btn')[6])"
-      style="padding:14px;background:var(--ink);color:white;border:none;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer">
-      🤖 Ask AI Tutor
-    </button>
-    <button onclick="switchTab('padya',document.querySelectorAll('.tab-btn')[1])"
-      style="padding:14px;background:var(--success);color:white;border:none;border-radius:12px;font-size:13px;font-weight:600;cursor:pointer">
-      📜 Study Poems
-    </button>
+  <div class="sec-title">⚡ Quick Jump</div>
+  <div class="qgrid">
+    <button class="qbtn" style="background:var(--saffron)" onclick="switchTab('padya',document.querySelectorAll('.tab-btn')[1])">
+      <span class="qbtn-icon">📜</span>पद्यभागः — 5 Poems<span class="qbtn-sub">Slokas + Meanings + Sandarbha</span></button>
+    <button class="qbtn" style="background:var(--teal)" onclick="switchTab('vya',document.querySelectorAll('.tab-btn')[4])">
+      <span class="qbtn-icon">🔤</span>व्याकरणम् + Drill<span class="qbtn-sub">Sandhi · Shabda · Dhatu</span></button>
+    <button class="qbtn" style="background:var(--success)" onclick="switchTab('gadya',document.querySelectorAll('.tab-btn')[2])">
+      <span class="qbtn-icon">📖</span>गद्यभागः — 5 Chapters<span class="qbtn-sub">Stories + Q&A + Sandarbha</span></button>
+    <button class="qbtn" style="background:#7B3F00" onclick="switchTab('papers',document.querySelectorAll('.tab-btn')[5])">
+      <span class="qbtn-icon">📝</span>Model Papers<span class="qbtn-sub">APBIE Pattern · Full Answers</span></button>
   </div>
+  <div class="sec-title">📋 Chapter Progress</div>
+  <div class="pgrid" id="pgrid"></div>
 </div>
 
-<!-- ══════════ PADYA (Poetry) ══════════ -->
+<!-- PADYA -->
 <div class="tab-panel" id="tab-padya">
-  <div class="section-title">पद्यभागः — Poems</div>
-  <div class="chapter-list" id="padyaList"></div>
+  <div class="sec-title">पद्यभागः — 5 Poems (from your Narayana material)</div>
+  <div class="ch-list" id="padyaList"></div>
 </div>
 
-<!-- ══════════ GADYA (Prose) ══════════ -->
+<!-- GADYA -->
 <div class="tab-panel" id="tab-gadya">
-  <div class="section-title">गद्यभागः — Prose Lessons</div>
-  <div class="chapter-list" id="gadyaList"></div>
+  <div class="sec-title">गद्यभागः — 5 Prose Chapters</div>
+  <div class="ch-list" id="gadyaList"></div>
 </div>
 
-<!-- ══════════ UPAVACHAKAM ══════════ -->
-<div class="tab-panel" id="tab-upavachakam">
-  <div class="section-title">उपवाचकम् — Non-Detailed Lessons</div>
-  <div class="chapter-list" id="upavachakamList"></div>
+<!-- UPAVACHAKAM -->
+<div class="tab-panel" id="tab-upa">
+  <div class="sec-title">उपवाचकम् — 5 Non-Detailed Chapters</div>
+  <div class="ch-list" id="upaList"></div>
 </div>
 
-<!-- ══════════ VYAKARANA ══════════ -->
-<div class="tab-panel" id="tab-vyakarana">
-  <div class="section-title">व्याकरणम् — Grammar</div>
-  <div class="grammar-grid">
-    <div class="grammar-card" onclick="showGrammar('sandhi')">
-      <div class="grammar-icon">⚡</div>
-      <div class="grammar-name">सन्धयः</div>
-      <div class="grammar-sub">Sandhi Rules</div>
-    </div>
-    <div class="grammar-card" onclick="showGrammar('shabda')">
-      <div class="grammar-icon">🏛</div>
-      <div class="grammar-name">शब्दरूपाणि</div>
-      <div class="grammar-sub">Noun Declensions</div>
-    </div>
-    <div class="grammar-card" onclick="showGrammar('dhatu')">
-      <div class="grammar-icon">🔄</div>
-      <div class="grammar-name">धातुरूपाणि</div>
-      <div class="grammar-sub">Verb Conjugations</div>
-    </div>
-    <div class="grammar-card" onclick="showGrammar('patra')">
-      <div class="grammar-icon">✉️</div>
-      <div class="grammar-name">पत्रलेखनम्</div>
-      <div class="grammar-sub">Letter Writing</div>
-    </div>
-    <div class="grammar-card" onclick="showGrammar('anuvaad')">
-      <div class="grammar-icon">🔁</div>
-      <div class="grammar-name">अनुवादाभ्यासः</div>
-      <div class="grammar-sub">Translation Practice</div>
-    </div>
-    <div class="grammar-card" onclick="showGrammar('sankhya')">
-      <div class="grammar-icon">🔢</div>
-      <div class="grammar-name">सङ्ख्याः</div>
-      <div class="grammar-sub">Numbers in Sanskrit</div>
+<!-- VYAKARANA -->
+<div class="tab-panel" id="tab-vya">
+  <div class="sec-title">व्याकरणम् — Grammar</div>
+  <div class="ggrid">
+    <div class="gcard" onclick="showG('sandhi',this)"><div class="gicon">⚡</div><div class="gname">सन्धयः</div><div class="gsub">Sandhi Rules</div></div>
+    <div class="gcard" onclick="showG('ram',this)"><div class="gicon">🏛</div><div class="gname">राम शब्द</div><div class="gsub">Masculine Noun</div></div>
+    <div class="gcard" onclick="showG('lata',this)"><div class="gicon">🌿</div><div class="gname">लता शब्द</div><div class="gsub">Feminine Noun</div></div>
+    <div class="gcard" onclick="showG('phala',this)"><div class="gicon">🍎</div><div class="gname">फल शब्द</div><div class="gsub">Neuter Noun</div></div>
+    <div class="gcard" onclick="showG('dhatu',this)"><div class="gicon">🔄</div><div class="gname">धातुरूपाणि</div><div class="gsub">पठ् Verb Tables</div></div>
+    <div class="gcard" onclick="showG('patra',this)"><div class="gicon">✉️</div><div class="gname">पत्रलेखनम्</div><div class="gsub">Letter Writing</div></div>
+    <div class="gcard" onclick="showG('anuvaad',this)"><div class="gicon">🔁</div><div class="gname">अनुवादाभ्यासः</div><div class="gsub">Translation</div></div>
+    <div class="gcard" onclick="showG('drill',this)"><div class="gicon">🎯</div><div class="gname">Quick Drill</div><div class="gsub">Test Yourself!</div></div>
+  </div>
+  <div id="gcontent"></div>
+</div>
+
+<!-- PAPERS -->
+<div class="tab-panel" id="tab-papers">
+  <div class="sec-title">📝 Practice Papers — APBIE Pattern (100 Marks · 3 Hours)</div>
+  <div class="hbox">
+    <div class="hbox-title">📊 Marks Distribution</div>
+    <div style="font-size:12px;line-height:1.9">
+      <strong>Poetry Section:</strong> निबन्ध 4M×2 + लघु 2M×4 + एकपद 1M×4 + सन्दर्भ 4M×2 = 28M<br>
+      <strong>Prose Section:</strong> निबन्ध 4M×2 + लघु 2M×4 + एकपद 1M×4 + सन्दर्भ 4M×2 = 28M<br>
+      <strong>Grammar:</strong> शब्दरूप 8M + धातुरूप 4M + सन्धि 4M = 16M<br>
+      <strong>Writing:</strong> पत्रलेखनम् 5M + अनुवाद 8M + निबन्ध 5M = 18M<br>
+      <strong>उपवाचकम्:</strong> 10M
     </div>
   </div>
-
-  <div id="grammarContent"></div>
-  <div id="drillArea"></div>
-</div>
-
-<!-- ══════════ PRACTICE PAPERS ══════════ -->
-<div class="tab-panel" id="tab-papers">
-  <div class="section-title">📝 Practice Papers (APBIE Pattern)</div>
-  <p style="font-size:12px;color:var(--ochre);margin-bottom:16px">100 marks paper · 3 hours · Pattern: Section A (Prose/Poetry Q&A) + Section B (Grammar) + Section C (Translation/Letter)</p>
   <div id="papersList"></div>
 </div>
 
-<!-- ══════════ AI TUTOR ══════════ -->
-<div class="tab-panel" id="tab-aiTutor">
-  <div class="section-title">🤖 AI Sanskrit Tutor</div>
-  <p style="font-size:12px;color:var(--ochre);margin-bottom:14px">Ask anything about your syllabus — grammar rules, word meanings, essay help, or exam tips!</p>
-  
-  <div class="ai-tutor-wrap">
-    <div class="ai-header">
-      <div class="ai-name">
-        <span class="ai-name-dev">गुरुः</span>
-        AI Sanskrit Tutor
-      </div>
-      <div class="ai-sub">Powered by Claude · AP Inter 1st Year Specialist</div>
+<!-- AI GURU -->
+<div class="tab-panel" id="tab-ai">
+  <div class="sec-title">🤖 AI Sanskrit Guru — Your Personal Tutor</div>
+  <p style="font-size:11px;color:var(--ochre);margin-bottom:12px">Ask anything about your Narayana study material — I know your exact syllabus and PDF content!</p>
+  <div class="aiw">
+    <div class="aihdr">
+      <div class="ainame"><span class="aidev">गुरुः</span> AI Sanskrit Guru</div>
+      <div class="aisub">Powered by Claude · Narayana Jr. Inter Specialist · Target 90%+</div>
     </div>
-    
-    <div class="ai-messages" id="aiMessages">
-      <div class="msg ai">
-        🙏 <strong>नमस्ते Charan!</strong> I am your Sanskrit Guru.<br><br>
-        I can help you with:<br>
-        • Meanings of Sanskrit words and slokas<br>
-        • Grammar rules — Sandhi, Shabda, Dhatu<br>
-        • Summary and Q&A for all 15 chapters<br>
-        • Translation (Sanskrit ↔ English/Hindi)<br>
-        • Exam tips and important questions<br><br>
-        What would you like to learn today? 📚
-      </div>
+    <div class="aimsgs" id="aiMsgs">
+      <div class="msg ai">🙏 <strong>नमस्ते Charan!</strong> I am your personal Sanskrit Guru!<br><br>
+      I know your <strong>exact Narayana study material</strong>. Ask me:<br>
+      • सन्दर्भ वाक्यानि for any sloka (all 4 parts)<br>
+      • Summary/कविपरिचय of any chapter<br>
+      • Grammar — Sandhi rules, Shabdarupa tables, Dhaturupa<br>
+      • Model letters in Sanskrit<br>
+      • Translation practice<br><br>
+      <strong>Together we'll score 90+! 💪</strong></div>
     </div>
-
-    <div class="ai-quick-prompts">
-      <div class="quick-prompt" onclick="askQuick('Explain the Sandhi rules for vowels with examples')">⚡ Sandhi Rules</div>
-      <div class="quick-prompt" onclick="askQuick('Give me the summary of Hanumad-Upadesha poem')">📜 हनुमदुपदेशः</div>
-      <div class="quick-prompt" onclick="askQuick('What are the most important questions from Gadya section for APBIE exam?')">❓ Important Qs</div>
-      <div class="quick-prompt" onclick="askQuick('Explain Ram shabda declension in all 8 vibhaktis')">🔤 राम शब्द</div>
-      <div class="quick-prompt" onclick="askQuick('How to write a formal letter in Sanskrit for the exam?')">✉️ Letter Format</div>
-      <div class="quick-prompt" onclick="askQuick('Give me 5 Niti-shlokas with meanings from the syllabus')">🏛 नीतिश्लोकाः</div>
+    <div class="aiqp">
+      <div class="qp" onclick="askQ('Write complete sandarbha vakya for: धर्मार्थं सहितं वाक्यमिह चामुत्र च क्षमम् — from हनुमदुपदेशः with all 4 parts')">सन्दर्भ: हनुमदुपदेशः</div>
+      <div class="qp" onclick="askQ('Give me all 8 Niti-shlokas with complete word meanings and summaries for exam')">नीतिश्लोकाः all 8</div>
+      <div class="qp" onclick="askQ('Write kaviparichy for all 5 poems — I need to memorise them for APBIE exam')">All कविपरिचयः</div>
+      <div class="qp" onclick="askQ('Write a model letter in Sanskrit from a student to principal requesting leave for illness — ज्वरार्तस्य विरामग्रहणाय')">पत्रलेखनम् example</div>
+      <div class="qp" onclick="askQ('Translate these sentences into Sanskrit with tense identification: 1) He reads a book 2) They went to school 3) She will eat rice 4) We are studying Sanskrit 5) Truth always wins')">अनुवाद practice</div>
+      <div class="qp" onclick="askQ('What are the most important questions from gadya section that definitely come in APBIE exam?')">Important Qs — Gadya</div>
     </div>
-
-    <div class="ai-input-area">
-      <textarea class="ai-input" id="aiInput" rows="2" placeholder="Ask your Sanskrit question here... (English or Hindi)"></textarea>
-      <button class="ai-send-btn" id="aiSendBtn" onclick="sendAIMessage()">➤</button>
+    <div class="aiarea">
+      <textarea class="aiinp" id="aiInp" rows="2" placeholder="Ask in English or Hindi..."></textarea>
+      <button class="aisend" id="aiBtn" onclick="sendAI()">➤</button>
     </div>
   </div>
 </div>
-
 </main>
 
-<!-- Firebase -->
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
-import { getFirestore, doc, setDoc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDc9owVM5iEkDoO1ZjEbL8yqzOd7CLoJmM",
-  authDomain: "charan-apbie-sanskrit.firebaseapp.com",
-  projectId: "charan-apbie-sanskrit",
-  storageBucket: "charan-apbie-sanskrit.firebasestorage.app",
-  messagingSenderId: "73369212961",
-  appId: "1:73369212961:web:4945cbe8b36fdddced2b60",
-  measurementId: "G-86CW4RKM2C"
+import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
+const cfg = {
+  apiKey:"AIzaSyDc9owVM5iEkDoO1ZjEbL8yqzOd7CLoJmM",
+  authDomain:"charan-apbie-sanskrit.firebaseapp.com",
+  projectId:"charan-apbie-sanskrit",
+  storageBucket:"charan-apbie-sanskrit.firebasestorage.app",
+  messagingSenderId:"73369212961",
+  appId:"1:73369212961:web:4945cbe8b36fdddced2b60"
 };
-
 try {
-  const app = initializeApp(firebaseConfig);
+  const app = initializeApp(cfg);
   const db = getFirestore(app);
-  window.db = db;
-  window.firestoreDoc = doc;
-  window.firestoreSetDoc = setDoc;
-  window.firestoreGetDoc = getDoc;
-  document.getElementById('syncDot').style.background = '#4CAF50';
-} catch(e) {
-  console.log('Firebase not configured yet — using localStorage');
-  document.getElementById('syncDot').style.background = '#FFA500';
-}
+  window._db=db; window._doc=doc; window._set=setDoc; window._get=getDoc;
+  document.getElementById('syncDot').style.background='#4CAF50';
+  const snap = await getDoc(doc(db,'students','charan'));
+  if(snap.exists()){ window._prog = snap.data(); }
+} catch(e){ document.getElementById('syncDot').style.background='#FFA500'; }
 </script>
 
 <script>
-// ─── DATA ───────────────────────────────────────────────
-const SLOKAS = [
-  { dev: "विद्या ददाति विनयं विनयाद् याति पात्रताम् ।", meaning: "Knowledge gives humility; from humility one attains worthiness." },
-  { dev: "न चोरहार्यं न च राजहार्यं न भ्रातृभाज्यं न च भारकारि ।", meaning: "Knowledge cannot be stolen, taxed, divided, or burdened — it is the one true wealth." },
-  { dev: "अभिवादनशीलस्य नित्यं वृद्धोपसेविनः ।", meaning: "One who is respectful and serves elders gains four things: long life, knowledge, fame and strength." },
-  { dev: "सुखार्थी चेत् त्यजेद् विद्यां विद्यार्थी चेत् त्यजेत् सुखम् ।", meaning: "If you want comfort, abandon learning; if you want learning, abandon comfort. You cannot have both." },
-  { dev: "उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः ।", meaning: "Tasks are accomplished through effort, not mere wishes." }
+// ═══ SLOKAS OF DAY ═══
+const SDAY=[
+  {d:"धर्मार्थं सहितं वाक्यमिह चामुत्र च क्षमम् ।",m:"A word accompanied by Dharma is beneficial in this world and the next. (हनुमदुपदेशः)"},
+  {d:"न हि धर्मविरुद्धेषु बह्वपायेषु कर्मसु । मूलघातिषु सज्जन्ते बुद्धिमन्तो भवद्विधाः ॥",m:"The wise do not engage in acts against Dharma. (हनुमदुपदेशः)"},
+  {d:"वपुः प्रकर्षेण विडम्बितेश्वरः ।",m:"With his superb physique, Raghu appeared like a God himself. (रघोः शौर्यम्)"},
+  {d:"नास्ति विद्यासमं चक्षुः नास्ति सत्यसमं तपः ।",m:"No eye equals education; no penance equals truth. (नीतिश्लोकाः)"},
+  {d:"परोपकारः कर्तव्यः प्राणैरपि धनैरपि ।",m:"Helping others is duty — even at the cost of life and wealth. (नीतिश्लोकाः)"},
+  {d:"अज्ञातकुलशीलस्य वासो देयो न कस्यचित् ।",m:"Never give shelter to one of unknown character. (अज्ञातस्य वासो न देयः — MORAL)"},
+  {d:"परोपकारः पुण्याय पापाय परपीडनम् ।",m:"Helping others is merit; harming others is sin. (दयावान् राक्षसः — MORAL)"}
 ];
 
-const PADYA_DATA = [
-  {
-    id: 'padya1',
-    devTitle: 'हनुमदुपदेशः',
-    enTitle: 'Instructions of Hanuman',
-    author: 'वाल्मीकिमहर्षिः (Maharshi Valmiki)',
-    num: '१',
-    summary: `This poem is taken from Valmiki's Ramayana. It contains the advice given by Hanuman to Vibhishana. The poem emphasizes devotion to Lord Rama, ethical conduct, and the importance of serving the righteous. Key themes: Bhakti (devotion), Dharma (righteousness), and Niti (proper conduct).`,
-    questions: [
-      { q: "What advice did Hanuman give to Vibhishana?", marks: "4M", a: "Hanuman advised Vibhishana to leave Ravana's company and seek the shelter of Lord Rama. He emphasized that those who are devoted to Rama live righteously. He taught that serving the wicked brings destruction while serving the righteous leads to liberation. He urged Vibhishana to take refuge in Rama without delay." },
-      { q: "What is the central theme of हनुमदुपदेशः?", marks: "2M", a: "The central theme is Bhakti (devotion) to Lord Rama and the importance of choosing righteous company. Hanuman demonstrates that wisdom lies in abandoning evil associations and surrendering to God." },
-      { q: "Explain: रामं दशरथम् प्राप्य", marks: "1M", a: "This phrase means 'having attained Rama, the son of Dasharatha.' It refers to seeking the divine shelter of Lord Rama, born as the son of King Dasharatha of Ayodhya." },
-      { q: "Who is the author of the poem and what is the source text?", marks: "2M", a: "The author is Maharshi Valmiki, the Adi Kavi (first poet). The poem is taken from the Ramayana, specifically from the Yuddha Kanda section where Hanuman counsels Vibhishana before the battle of Lanka." },
-      { q: "Write the Sanskrit meaning of 'Vibhishana' as mentioned in the poem.", marks: "1M", a: "Vibhishana means one who frightens or is terrifying. He was the younger brother of Ravana but chose righteousness over family loyalty, ultimately surrendering to Lord Rama." }
-    ],
-    keyWords: [
-      { dev: "उपदेशः", en: "advice / instruction" },
-      { dev: "भक्तिः", en: "devotion" },
-      { dev: "धर्मः", en: "righteousness / duty" },
-      { dev: "शरणम्", en: "refuge / shelter" },
-      { dev: "विभीषणः", en: "Vibhishana (Ravana's brother)" }
-    ]
+// ═══ PADYA DATA (from Narayana PDF) ═══
+const PD=[
+  {id:'p1',num:'१',dt:'हनुमदुपदेशः',et:'Instructions of Hanuman',auth:'वाल्मीकिमहर्षिः — श्रीमद्रामायणे सुन्दरकाण्डात् (51वाँ सर्ग)',
+   kp:`इति पाठ्यभागः वाल्मीकि महर्षिणा विरचित श्रीमद्रामायणे सुन्दरकाण्डस्य "एकपञ्चाशत्तमसर्गात्" संगृहीतः।\nSource: 51st canto of Sundarakanda of Srimad Ramayana by Maharshi Valmiki.`,
+   intro:'After destroying Ashokavana, Hanuman was imprisoned and brought before Ravana. As Sugriva\'s messenger (दूत), Hanuman gave his diplomatic advice.',
+   sl:[
+     {d:"स तेन निहतः सङ्ख्ये शरेणैकेन वानरः ।",e:"That monkey (Vali) was killed in battle by Rama with a single arrow.",m:"Showing Rama's extraordinary power — he killed mighty Vali with just one arrow."},
+     {d:"धर्मार्थं सहितं वाक्यमिह चामुत्र च क्षमम् ।",e:"A word rooted in Dharma is beneficial both in this world and the next.",m:"Hanuman's advice to Ravana — listen to words of Dharma for eternal benefit."},
+     {d:"न हि धर्मविरुद्धेषु बह्वपायेषु कर्मसु । मूलघातिषु सज्जन्ते बुद्धिमन्तो भवद्विधाः ॥",e:"The wise do not engage in acts against Dharma that cause widespread harm.",m:"Hanuman warns that wise people like Ravana should not commit adharma."},
+     {d:"फलमस्याप्यधर्मस्य क्षिप्रमेव प्रपत्यसे ।",e:"You will quickly receive the fruit of this unrighteousness.",m:"Warning: punishment for sin and adharma comes swiftly."},
+     {d:"नरदेवाय जानकीं प्रतिदीयताम् ।",e:"Return Janaki (Sita) to the divine king Rama.",m:"Core message: Hanuman urges Ravana to return Sita and save himself."},
+     {d:"कालरात्रीति तां विद्धि सर्वलङ्काविनाशिनीम् ।",e:"Know Sita as Kalaratri — the night of destruction of all Lanka.",m:"Final warning: Sita's captivity will cause complete destruction of Lanka."}
+   ],
+   qa:[
+     {q:"रावणं प्रति हनुमता कृतम् उपदेशं सङ्क्षेण लिखत।",m:"4M",a:`Hanuman advised Ravana:\n1. Told him about Rama's power — killed Vali with single arrow (स तेन निहतः सङ्ख्ये शरेणैकेन वानरः।)\n2. Warned: Acts against Dharma lead to swift punishment (फलमस्याप्यधर्मस्य क्षिप्रमेव प्रपत्यसे।)\n3. Core message: Return Sita to Rama (नरदेवाय जानकीं प्रतिदीयताम्।)\n4. Final warning: Sita will destroy Lanka (कालरात्रीति तां विद्धि सर्वलङ्काविनाशिनीम्।)\nConclusion: "I am Rama's servant — came as mediator to advise you sincerely."`},
+     {q:"\"हनुमदुपदेशः\" इति पाठ्यभागस्य सारं समालिखत।",m:"4M",a:`SUMMARY: After destroying Ashokavana, Hanuman was brought before Ravana as a prisoner. As Sugriva's messenger, he delivered his diplomatic message. He told Ravana about:\n• Rama's divine power and his mission to find Sita\n• The warning: Sita is like Kalaratri for Lanka (कालरात्रीति तां विद्धि सर्वलङ्काविनाशिनीम्।)\n• Dharmic advice: words rooted in Dharma benefit in both worlds\nMain message: "Return Sita (नरदेवाय जानकीं प्रतिदीयताम्।) — or Lanka will be completely destroyed."`},
+     {q:"हनुमदुपदेशः इति पाठ्यांशः कस्मात् संगृहीतः?",m:"1M",a:"हनुमदुपदेशः इति पाठ्यांशः वाल्मीकि रामायणे सुन्दरकाण्डात् संगृहीतः।"},
+     {q:"सुग्रीवेण किं प्रतिज्ञातम्?",m:"1M",a:"सुग्रीवेण सीतायाः परिमार्गणं इति प्रतिज्ञातम्।"},
+     {q:"बुद्धिमन्तः कीदृशेषु कर्मसु न सज्जन्ते?",m:"1M",a:"बुद्धिमन्तः धर्मविरुद्धेषु कर्मसु न सज्जन्ते।"},
+     {q:"शरेणैकेन रामेण निहतः वानरः कः?",m:"1M",a:"वालिः।"}
+   ],
+   san:[
+     {v:"धर्मार्थं सहितं वाक्यमिह चामुत्र च क्षमम् ।",k:"वाल्मीकिमहर्षिः",g:"श्रीमद्रामायणम्",s:"आञ्चनेयः रावणं प्रति एवम् अवदत्।",b:"धर्मेण सहितं वाक्यम् इह लोके परलोके च हितकरम्।"},
+     {v:"न हि धर्मविरुद्धेषु बह्वपायेषु कर्मसु ।",k:"वाल्मीकिमहर्षिः",g:"श्रीमद्रामायणम्",s:"आञ्चनेयः रावणं प्रति एवम् अवदत्।",b:"बुद्धिमन्तः धर्मविरुद्धेषु कर्मसु न प्रवर्तन्ते।"},
+     {v:"फलमस्याप्यधर्मस्य क्षिप्रमेव प्रपत्यसे ।",k:"वाल्मीकिमहर्षिः",g:"श्रीमद्रामायणम्",s:"आञ्चनेयः रावणं प्रति एवम् अवदत्।",b:"अधर्मस्य फलं शीघ्रमेव प्राप्यते।"},
+     {v:"कालरात्रीति तां विद्धि सर्वलङ्काविनाशिनीम् ।",k:"वाल्मीकिमहर्षिः",g:"श्रीमद्रामायणम्",s:"आञ्चनेयः रावणं प्रति एवम् अवदत्।",b:"सीता सर्वलङ्का विनाशिनी कालरात्रिः इति जानतु।"}
+   ],
+   kw:[{d:"उपदेशः",e:"advice"},{d:"दूतः",e:"messenger"},{d:"धर्मः",e:"righteousness"},{d:"कालरात्री",e:"night of destruction"},{d:"प्रतिदीयताम्",e:"let it be returned"},{d:"वानरः",e:"monkey"}]
   },
-  {
-    id: 'padya2',
-    devTitle: 'रघोः शौर्यम्',
-    enTitle: 'The Valour of Raghu',
-    author: 'महाकविकालिदासः (Kalidasa)',
-    num: '२',
-    summary: `This poem is from Kalidasa's Raghuvamsha (Canto 4). It describes the military campaign of King Raghu, ancestor of Rama. Raghu performed a Vishvajit Yajna and donated everything to Brahmins, then embarked on a Digvijaya (conquest of all directions). Key themes: Heroism, generosity, royal glory, and the ideal of a perfect king.`,
-    questions: [
-      { q: "Describe the military campaign of Raghu as depicted in this poem.", marks: "4M", a: "King Raghu performed the Vishvajit Yajna and donated his entire treasury to Brahmins. When a student came seeking fees, Raghu's treasury was empty. To fulfill the request, Raghu attacked Kubera (god of wealth) in the north and received abundant wealth. He then conducted a Digvijaya — conquest in all four directions. He defeated kings of the east, south, west, and north, establishing his supremacy over all directions, earning the title Digvijeta." },
-      { q: "What quality of Raghu is highlighted in this poem?", marks: "2M", a: "The poem highlights Raghu's extraordinary generosity (Daana), valor (Shaurya), and devotion to keeping his promise. Even after donating everything, he found a way to honor his commitment to a student — demonstrating that true kings never abandon their dharma." },
-      { q: "Who was Kalidasa and what is Raghuvamsha?", marks: "2M", a: "Kalidasa is considered the greatest Sanskrit poet and playwright (5th century CE), known as the 'Shakespeare of Sanskrit.' Raghuvamsha is his epic poem in 19 cantos describing the dynasty of Raghu, ancestors of Lord Rama — from Dilipa to Agnivarna." },
-      { q: "Explain: विश्वजित् यज्ञः", marks: "1M", a: "Vishvajit Yajna means 'the sacrifice for conquering the world.' It is a Vedic ritual where the king donates his entire wealth and kingdom to Brahmins, symbolizing ultimate renunciation before a new conquest." }
-    ],
-    keyWords: [
-      { dev: "शौर्यम्", en: "valour / heroism" },
-      { dev: "दिग्विजयः", en: "conquest of all directions" },
-      { dev: "दानम्", en: "charity / gift" },
-      { dev: "यज्ञः", en: "sacrifice / ritual" },
-      { dev: "रघुः", en: "King Raghu, ancestor of Rama" }
-    ]
+  {id:'p2',num:'२',dt:'रघोः शौर्यम्',et:'The Valour of Raghu',auth:'महाकविकालिदासः — रघुवंशमहाकाव्ये तृतीयसर्गात्',
+   kp:`"रघोः शौर्यम्" इति पाठ्यभागः महाकवि कालिदासेन विरचित रघुवंशमहाकाव्ये तृतीयसर्गात् संगृहीतः।\nKalidasa is the greatest classical Sanskrit poet (5th century CE). Raghuvamsha has 19 cantos about ancestors of Rama.`,
+   intro:'King Dileepa handed kingdom to son Raghu. For 100th yajna (Ashvamedha), Indra stole the sacred horse. Raghu confronted Indra and defeated him. Impressed Indra granted a boon — Raghu asked only for his father\'s yajna to be completed.',
+   sl:[
+     {d:"धनुर्भृतामग्रत एव रक्षिणां जहार शक्रः किल गूढ विग्रहः ।",e:"Indra, with hidden form, stole the horse right in front of the armed guards.",m:"Shows Indra's cunning — stole the sacrificial horse despite armed protection."},
+     {d:"क्रिया विघाताय कथं प्रवर्तसे ।",e:"How can you act to obstruct this righteous deed (yajna)?",m:"Raghu boldly confronts Indra — questions how Indra, guardian of Dharma, can obstruct a sacred sacrifice."},
+     {d:"वपुः प्रकर्षेण विडम्बितेश्वरः ।",e:"With his superb physique, Raghu appeared like God himself (rivaling Indra).",m:"Description of Raghu's divine appearance in battle — even making Indra feel humbled."},
+     {d:"क्रतोरशेषेण फलेन युज्यताम् ।",e:"May (my father) receive the complete fruit of the sacrifice.",m:"Raghu's noble boon — instead of personal gain, asks only for father's yajna to be fulfilled. Shows ultimate filial devotion."}
+   ],
+   qa:[
+     {q:"रघोः शौर्यम् इति पाठ्यभागस्य सारांशं लिखत। / युवराजस्य रघोः शौर्यं विवृणुत।",m:"4M",a:`King Dileepa handed his kingdom to young son Raghu. For completing his 100th Ashvamedha Yajna, a sacred horse was released. Indra, fearing loss of his title "Shatakrathu" (100-yajna-completer), stole the horse while hidden (धनुर्भृतामग्रत एव रक्षिणां जहार शक्रः किल गूढ विग्रहः।).\n\nRaghu spotted the horse tied to Indra's chariot and boldly confronted him: "How can you obstruct my father's sacred ritual? (क्रिया विघाताय कथं प्रवर्तसे।)"\n\nThough gods and demons trembled, Raghu stood firm with divine physique (वपुः प्रकर्षेण विडम्बितेश्वरः।). Even Brahmastra couldn't harm him. Impressed, Indra granted a boon. Raghu humbly asked: "Let my father receive the complete fruit of the yajna (क्रतोरशेषेण फलेन युज्यताम्।)." Dileepa rejoiced and honored Raghu with the title "Sethakrathu."`},
+     {q:"रघुः केन सह युद्धं कृतवान्?",m:"1M",a:"रघुः इन्द्रेण सह युद्धं कृतवान्।"},
+     {q:"यज्ञना दिलीपेन कः उत्सृष्टः?",m:"1M",a:"यज्ञना दिलीपेन तुरङ्गम् उत्सृष्टः।"},
+     {q:"कालिदासस्य महाकाव्ये के?",m:"1M",a:"कालिदासस्य महाकाव्ये कुमारसम्भवम्, रघुवंशश्च।"},
+     {q:"सुदक्षिणासूनुः कः?",m:"1M",a:"रघुमहाराजः।"},
+     {q:"दिवौकसाम् अधिपतिः कः?",m:"1M",a:"इन्द्रः (देवेन्द्रः)।"},
+     {q:"रघोः शौर्यम् इति पाठ्यभागः कस्मात् स्वीकृतः?",m:"1M",a:"रघुवंशमहाकाव्यात्।"}
+   ],
+   san:[
+     {v:"क्रिया विघाताय कथं प्रवर्तसे ।",k:"कालिदासः",g:"रघुवंशः",s:"रघुमहाराजः इन्द्रं प्रति सन्दर्भे कविः एवम् अवदत्।",b:"हे देवेन्द्र! मम (अस्मत्) पितुः यज्ञविनाशाय कथं प्रवर्तसे।"},
+     {v:"वपुः प्रकर्षेण विडम्बितेश्वरः ।",k:"कालिदासः",g:"रघुवंशः",s:"रघुदेवेन्द्रयोः युद्धारम्भ सन्दर्भे कविः एवम् अवदत्।",b:"रघुः शरीर प्रकर्षेण अनुसृत्येन ईश्वर इव अतिष्ठत्।"},
+     {v:"क्रतोरशेषेण फलेन युज्यताम् ।",k:"कालिदासः",g:"रघुवंशः",s:"रघुमहाराजः इन्द्रं प्रति एवम् अवदत्।",b:"क्रतोः फलम् अशेषेण युज्यताम्।"}
+   ],
+   kw:[{d:"शौर्यम्",e:"valour"},{d:"दिग्विजयः",e:"conquest of all directions"},{d:"तुरङ्गः",e:"horse"},{d:"यज्ञः",e:"sacrifice"},{d:"विडम्बित",e:"rivaling/resembling"}]
   },
-  {
-    id: 'padya3',
-    devTitle: 'नीतिश्लोकाः',
-    enTitle: 'Ethical Verses / Maxims',
-    author: 'विविधकवयः (Various Poets)',
-    num: '३',
-    summary: `A collection of moral and ethical verses from various Sanskrit poets including Chanakya, Bhartrihari, and others. Topics include: the value of knowledge, the importance of hard work, the nature of true friendship, the danger of greed, and the path of righteousness. These slokas are very important for the exam — memorize at least 5-6 slokas with meanings.`,
-    questions: [
-      { q: "What do the Niti-shlokas teach about the value of knowledge?", marks: "4M", a: `The Niti-shlokas emphasize that knowledge (Vidya) is the supreme wealth:\n• विद्या ददाति विनयम् — Knowledge gives humility\n• It cannot be stolen (न चोरहार्यम्), taxed (न राजहार्यम्), or divided\n• A learned person is respected everywhere: विदेशेषु धनं विद्या — In foreign lands, knowledge is wealth\n• Knowledge leads to liberation: विद्या विमुक्तये — Knowledge is for liberation\nThus the poets unanimously declare Vidya as the greatest treasure a person can possess.` },
-      { q: "Write any two Niti-shlokas with their meanings.", marks: "4M", a: "1. उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः। न हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः।।\nMeaning: Tasks are accomplished through effort, not mere wishes. Deer do not walk into the mouth of a sleeping lion.\n\n2. विद्या ददाति विनयं विनयाद् याति पात्रताम्। पात्रत्वाद् धनमाप्नोति धनाद् धर्मं ततः सुखम्।।\nMeaning: Knowledge gives humility → humility gives worthiness → worthiness gives wealth → wealth gives dharma → dharma gives happiness." },
-      { q: "What is the importance of company (संगति) as described in Niti-shlokas?", marks: "2M", a: "The Niti-shlokas warn that company shapes character. As the saying goes: दुर्जनः परिहर्तव्यः — Evil persons must be avoided. Good company (Satsanga) leads to righteousness while bad company leads to ruin, just as a white cloth takes the color of the dye it is soaked in." }
-    ],
-    keyWords: [
-      { dev: "नीतिः", en: "ethics / policy / wise conduct" },
-      { dev: "विनयः", en: "humility / modesty" },
-      { dev: "उद्यमः", en: "effort / industry" },
-      { dev: "पात्रता", en: "worthiness / eligibility" },
-      { dev: "सत्संगः", en: "good company" }
-    ]
+  {id:'p3',num:'३',dt:'नीतिश्लोकाः',et:'Ethical Verses (8 Slokas)',auth:'विविधकवयः — Various Poets',
+   kp:`"नीतिश्लोकाः" इति पाठ्यभागः विविध कविभिः विरचित नीतिशलोकाः इति पाठात् स्वीकृतः।\n⭐ EXAM IMPORTANCE: Memorise ALL 8 slokas with meanings — carries maximum marks!`,
+   intro:'8 key ethical slokas from various Sanskrit poets. These teach universal values: knowledge, truth, service, humility, integrity.',
+   sl:[
+     {d:"नास्ति विद्यासमं चक्षुः नास्ति सत्यसमं तपः । नास्ति रागसमं दुःखं नास्ति त्यागसमं सुखम् ॥",e:"No eye equals education; no penance equals truth; no sorrow equals desire; no happiness equals sacrifice.",m:"The 4 supreme values: Vidya (knowledge), Satya (truth), Non-desire, Sacrifice."},
+     {d:"मातृवत् परदारेषु परद्रव्येषु लोष्ठवत् । आत्मवत् सर्वभूतेषु यः पश्यति स पण्डितः ॥",e:"One who sees others' wives as mother, others' wealth as dirt, all beings as self — he is a true scholar.",m:"True scholarship = universal respect and selfless vision."},
+     {d:"यौवनं धनसम्पत्तिः प्रभुत्वमविवेकिता । एकैकमप्यनर्थाय किमु यत्र चतुष्टयम् ॥",e:"Youth, wealth, power, and foolishness — even one is enough for ruin; what then if all four combine?",m:"Warning against the 4 dangerous combinations."},
+     {d:"अतिदानात् बलिर्बद्धः अतिमानात् सुयोधनः । अतिरूपात् हता सीता अति सर्वत्र वर्जयेत् ॥",e:"Bali fell from excess charity; Duryodhana perished from excess pride; Sita was abducted for excess beauty — avoid all extremes.",m:"Famous examples from Indian epics — the danger of excess in anything."},
+     {d:"सत्यं ब्रूयात् प्रियं ब्रूयात् न ब्रूयात् सत्यमप्रियम् । प्रियं च नानृतं ब्रूयात् एष धर्मः सनातनः ॥",e:"Speak truth; speak what is pleasant; don't speak unpleasant truth; don't speak pleasant falsehood — this is eternal Dharma.",m:"Golden rule of speech: truth + pleasantness. Never speak pleasant lies."},
+     {d:"परोपकारः कर्तव्यः प्राणैरपि धनैरपि । परोपकारजं पुण्यं न स्यात् क्रतुशतैरपि ॥",e:"Helping others is duty even at the cost of life and wealth. Merit of helping others > 100 yagnas.",m:"Highest virtue = selfless service (Seva). Even life should be sacrificed for others' welfare."},
+     {d:"अभिवादनशीलस्य नित्यं वृद्धोपसेविनः । चत्वारि तस्य वर्धन्ते आयुर्विद्या यशोबलम् ॥",e:"One who bows respectfully and serves elders always — 4 things grow: longevity, knowledge, fame, strength.",m:"Practical benefit of respecting elders — 4 guaranteed rewards."},
+     {d:"यथा चित्तं तथा वाचः यथा वाचः तथा क्रियाः । चित्ते वाचि क्रियायां च महतामेकरूपता ॥",e:"As the mind, so the words; as the words, so the actions — great people have unity of thought, word, and deed.",m:"Integrity = alignment of thought, word, action. True greatness."}
+   ],
+   qa:[
+     {q:"नीतिश्लोकाः पाठे विद्यायाः महत्त्वं वर्णयत।",m:"4M",a:`The Niti-shlokas declare Vidya (knowledge) as supreme:\n1. "नास्ति विद्यासमं चक्षुः" — No eye equals education. Knowledge shows us truth just as eyes show us the world.\n2. A truly educated person sees others' wives as mothers, others' wealth as dirt, all beings as self (मातृवत् परदारेषु...)\n3. Only through knowledge does one develop Viveka (discernment) — the 4th dangerous element is Avivekita (foolishness)\nConclusion: Vidya not only gives knowledge but transforms character — making one humble, respectful, and wise. It is the greatest eye (चक्षुः).`},
+     {q:"Write any TWO Niti-slokas with meanings:",m:"4M",a:`1. नास्ति विद्यासमं चक्षुः नास्ति सत्यसमं तपः ।\n   नास्ति रागसमं दुःखं नास्ति त्यागसमं सुखम् ॥\n   Meaning: There is no eye equal to education, no penance equal to truth, no sorrow equal to desire, no happiness equal to sacrifice.\n\n2. परोपकारः कर्तव्यः प्राणैरपि धनैरपि ।\n   परोपकारजं पुण्यं न स्यात् क्रतुशतैरपि ॥\n   Meaning: Helping others is duty even with life and wealth. The merit gained by helping others cannot be gained even by 100 yagnas.`},
+     {q:"केषां वाचः अर्थः अनुधावति?",m:"1M",a:"ऋषीणां वाचः अर्थः अनुधावति।"},
+     {q:"केन विना दैवं न सिद्ध्यति?",m:"1M",a:"पुरुषकारेण विना दैवं न सिद्ध्यति।"},
+     {q:"कथं धर्मम् आचरेत्?",m:"1M",a:"मृत्युना केशेषु गृहीत इव धर्माचरेत्।"},
+     {q:"कीशं वस्तु तथैव तिष्ठति?",m:"1M",a:"हुतं च दत्तं च वस्तु तथैव तिष्ठति।"}
+   ],
+   san:[
+     {v:"नास्ति विद्यासमं चक्षुः नास्ति सत्यसमं तपः ।",k:"विविधकवयः",g:"नीतिशास्त्रम्",s:"अयं श्लोकः विविध कविभिः विरचित नीतिशलोकाः इति पाठात् स्वीकृतम्।",b:"विद्यतः समानं चक्षुः नास्ति; सत्यतः समानं तपः नास्ति।"},
+     {v:"परोपकारः कर्तव्यः प्राणैरपि धनैरपि ।",k:"विविधकवयः",g:"नीतिशास्त्रम्",s:"अयं श्लोकः विविध कविभिः विरचित नीतिशलोकाः इति पाठात् स्वीकृतम्।",b:"प्राणमुलतोनైనసా, ధనముతో నైనను పరులకు ఉపకారము చేయవలెను।"}
+   ],
+   kw:[{d:"नीतिः",e:"ethics/conduct"},{d:"विद्या",e:"knowledge"},{d:"त्यागः",e:"sacrifice"},{d:"परोपकारः",e:"helping others"},{d:"सनातनः",e:"eternal"},{d:"पण्डितः",e:"true scholar"}]
   },
-  {
-    id: 'padya4',
-    devTitle: 'जनादरः',
-    enTitle: 'Respect of the People',
-    author: 'श्री पि. पट्टाभिरामारावु',
-    num: '४',
-    summary: `A modern Sanskrit poem by Telugu poet P. Pattabhirama Rao. The poem describes how a truly great person earns the love and respect of common people through good deeds, humility, and service. Key message: Real greatness lies not in power or wealth, but in the affection of the people you serve.`,
-    questions: [
-      { q: "What is the central idea of the poem जनादरः?", marks: "4M", a: "The poem 'Janaadarah' (Respect of the People) conveys that true greatness is measured by the love and respect one receives from ordinary people. The poet argues that kings, warriors, and wealthy people may be remembered temporarily, but those who serve people with humility, compassion, and sacrifice live forever in people's hearts. The poem celebrates the spirit of public service (Jana Seva) as the highest form of nobility." },
-      { q: "What qualities earn a person Jana-Adara (public respect) according to the poet?", marks: "2M", a: "According to the poet, public respect is earned through: (1) Seva — selfless service to people without expectation; (2) Vinaya — humility despite achievement; (3) Karuna — compassion for the suffering; (4) Satya — truthfulness in all conduct. These virtues, practiced consistently, create lasting adoration from the public." }
-    ],
-    keyWords: [
-      { dev: "जनादरः", en: "respect/love of the people" },
-      { dev: "सेवा", en: "service" },
-      { dev: "करुणा", en: "compassion" },
-      { dev: "नम्रता", en: "humility" }
-    ]
+  {id:'p4',num:'४',dt:'जनादरः',et:'Respect of the People',auth:'श्री पि. पट्टाभिरामारावु — कथापञ्चकात्',
+   kp:`"जनादरः" इति प्रस्तुत पाठ्यभागः पि. पट्टाभिरामारावु महोदयेन विरचित कथापञ्चकात् संगृहीतः।\nSri Pattabhirama Rao is a noted 20th-century Telugu modern poet.`,
+   intro:'King disguised himself to understand his people\'s lives. He visited villages, saw a farmer Susharma, his wife, village women, and experienced real hospitality.',
+   sl:[
+     {d:"साध्ये स्वकार्ये श्रम एव युक्तिः ।",e:"For achievable goals, hard work alone is the strategy.",m:"King saw a farmer's wife efficiently managing house and field — effort = success."},
+     {d:"दैवस्वरूपो ह्यातिथिर्महात्मन् ।",e:"O great soul! A guest is truly a form of God.",m:"Villager Susharma welcomes the disguised king with this traditional Indian value."},
+     {d:"गृहिणे तन्वन्ति लक्ष्मीः सदा ।",e:"Women who manage the household always bring Lakshmi (prosperity).",m:"King praises Susharma's wife — a good homemaker is a form of Goddess Lakshmi."}
+   ],
+   qa:[
+     {q:"जनादरः इति पाठ्यभागस्य सारांशं संग्रहेण लिखत।",m:"4M",a:`SUMMARY: King disguised himself (नववेषधारी) to observe his people's lives. He visited a village and saw:\n1. A young woman working efficiently in her field (साध्ये स्वकार्ये श्रम एव युक्तिः।)\n2. Village women singing devotional songs around rangoli\n3. An old woman asking daughter-in-law to recite a poem about salvation (दैवस्वरूपो ह्यातिथिर्महात्मन्।)\n4. Villager Susharma hosted him with a 6-taste meal — "Guest is God"\nThe king returned with pure heart saying: a good homemaker brings Lakshmi (गृहिणे तन्वन्ति लक्ष्मीः सदा।). He praised the virtues of family life, service, and gratitude.`},
+     {q:"नृपः कथं प्रतस्थे?",m:"1M",a:"नृपः नववेषधारी प्रतस्थे।"},
+     {q:"गृहिणी किं गायति?",m:"1M",a:"गृहिणी कृष्णकीर्तनम् गायति।"},
+     {q:"वृद्धा कथं वन्दनम् अकरोत्?",m:"1M",a:"वृद्धा मुकुलितकरा वन्दनम् अकरोत्।"},
+     {q:"काना कीशी?",m:"1M",a:"विमलहृदया।"},
+     {q:"जनादरस्य कर्ता कः?",m:"1M",a:"श्री पि. पट्टाभिरामारावु।"}
+   ],
+   san:[
+     {v:"साध्ये स्वकार्ये श्रम एव युक्तिः ।",k:"श्री पि. पट्टाभिरामारावु",g:"कथापञ्चकात्",s:"राजा मन्त्री प्रति एवम् अवदत्।",b:"स्वकार्ये श्रम युक्तिरेव सिद्धति।"},
+     {v:"दैवस्वरूपो ह्यातिथिर्महात्मन् ।",k:"श्री पि. पट्टाभिरामारावु",g:"कथापञ्चकात्",s:"सुशर्मा राजानम् प्रति एवम् अवदत्।",b:"हे महात्मन् अतिथिः दैवस्वरूपः।"},
+     {v:"गृहिणे तन्वन्ति लक्ष्मीः सदा ।",k:"श्री पि. पट्टाभिरामारावु",g:"कथापञ्चकात्",s:"सुशर्मा राजानम् प्रति एवम् अवदत्।",b:"या गृहिणी तन्वति सा सदा लक्ष्मीः।"}
+   ],
+   kw:[{d:"जनादरः",e:"respect of people"},{d:"नववेषधारी",e:"in disguise"},{d:"अतिथिः",e:"guest"},{d:"गृहिणी",e:"homemaker"},{d:"लक्ष्मीः",e:"prosperity/Lakshmi"}]
   },
-  {
-    id: 'padya5',
-    devTitle: 'प्रतिश्रुतिः',
-    enTitle: 'The Promise',
-    author: 'डा. दीवि नरसिंह दीक्षितः',
-    num: '५',
-    summary: `A modern Sanskrit poem about the importance of keeping promises. The poem narrates how a person's word is their greatest asset. Through examples from Indian tradition (Rama keeping his promise to Dasharatha, Harischandra keeping his truth), the poet emphasizes Satya (truthfulness) and promise-keeping as the highest virtue.`,
-    questions: [
-      { q: "What is the theme of the poem प्रतिश्रुतिः and give an example from it.", marks: "4M", a: "The theme of 'Pratishrutih' (The Promise) is that a person's promise is sacred and must be honored at all costs. The poem uses examples from Indian tradition — Rama honored his father Dasharatha's promise to Kaikeyi by going into exile for 14 years without complaint. Harischandra sold himself into slavery to keep his promise of truth. The poet conveys that breaking a promise destroys not just reputation but the very fabric of dharma. One's word (vachanam) should be as firm as a rock." },
-      { q: "What does प्रतिश्रुतिः mean? Explain its Sanskrit etymology.", marks: "2M", a: "प्रतिश्रुतिः = प्रति (back/in response) + श्रुतिः (what is heard). It literally means 'what is heard back' — i.e., a word spoken in response to a request, hence a Promise or Commitment. In Sanskrit tradition, a word once given (Vachanam) is considered as binding as a Vedic oath." }
-    ],
-    keyWords: [
-      { dev: "प्रतिश्रुतिः", en: "promise / commitment" },
-      { dev: "सत्यम्", en: "truth" },
-      { dev: "वचनम्", en: "word / speech" },
-      { dev: "धर्मः", en: "righteousness / duty" }
-    ]
+  {id:'p5',num:'५',dt:'प्रतिश्रुतिः',et:'The Pledge',auth:'डा. दीवि नरसिंह दीक्षितः — वसन्ततिलकात्',
+   kp:`"प्रतिश्रुतिः" इति प्रस्तुत पाठ्यभागः डा. दीवि नरसिंह दीक्षित महोदयेन विरचित वसन्ततिलकात् संगृहीतः।\nPresent text is taken from Vasantatilaka written by Dr. Deevi Narasimha Dikshitulu.`,
+   intro:'Poem contains Swami Vivekananda\'s inspiring message to youth of India — urging them to walk the path of wisdom, serve the nation, grow strong in mind and character.',
+   sl:[
+     {d:"भवाम नित्यं वदाम सत्यम् ।",e:"Let us always speak truth.",m:"Core pledge of the poem — commit to truth as a permanent way of life."},
+     {d:"सतां हि सुप्थे समाजहितदे ।",e:"The path of the righteous leads to welfare of society.",m:"Walking on the path of goodness benefits not just oneself but all of society."},
+     {d:"विवेकपूर्णाः भवाम नित्यम् ।",e:"Let us always be full of wisdom/discernment.",m:"Vivekananda's message: develop Viveka (discriminating intelligence) constantly."},
+     {d:"विजेतृशोभां वहाम सततम् ।",e:"Let us always carry the glory of victors.",m:"March forward with confidence and pride of those who conquer life's challenges."},
+     {d:"चराचराणां श्रेयस्कामाः ।",e:"We who desire the welfare of all moving and unmoving beings.",m:"Universal welfare — caring for all creation, not just humans. True compassion."}
+   ],
+   qa:[
+     {q:"प्रतिश्रुतिः इति पाठ्यभागस्य सारांशं लिखत।",m:"4M",a:`SUMMARY: This poem contains Swami Vivekananda's inspiring message (Pratishruti = pledge) to the youth of India:\n1. Speak truth always (भवाम नित्यं वदाम सत्यम्।)\n2. Walk with determination on the righteous path (सतां हि सुप्थे समाजहितदे।)\n3. Build wisdom: always be full of Viveka (विवेकपूर्णाः भवाम नित्यम्।)\n4. Unite: Set aside differences, embrace unity, have one compassionate mind\n5. March forward: Carry the glory of victors (विजेतृशोभां वहाम सततम्।)\n6. Serve elders; wish welfare of all beings (चराचराणां श्रेयस्कामाः।)`},
+     {q:"नित्यं कीदृशाः भवाम?",m:"1M",a:"नित्यं विवेकपूर्णाः भवाम।"},
+     {q:"दुष्करकार्यं कथं समापयाम?",m:"1M",a:"दुष्करकार्यं सुशीलवृत्या समापयाम।"},
+     {q:"प्रतिश्रुतिः रचयिता कः?",m:"1M",a:"डा. दीवि नरसिंह दीक्षितः।"},
+     {q:"प्रतिश्रुतिः इति पदस्य अर्थः कः?",m:"1M",a:"प्रतिज्ञा।"},
+     {q:"किमर्थं मिलिताः प्रयाम?",m:"1M",a:"पुरोगमार्थम्।"}
+   ],
+   san:[
+     {v:"चराचराणां श्रेयस्कामाः ।",k:"डा. दीवि नरसिंह दीक्षितः",g:"वसन्ततिलका",s:"विवेकानन्दः जनानां प्रति एवम् अवदत्।",b:"यथा वदामः - तथा चरामः चराचराणां श्रेयः कामाः।"},
+     {v:"सदुद्यमेन हि भजाम सिद्धिम् ।",k:"डा. दीवि नरसिंह दीक्षितः",g:"वसन्ततिलका",s:"विवेकानन्दः जनानां प्रति एवम् अवदत्।",b:"सुप्तिकाले जागरणेऽपि उद्यमेन सिद्ध्यति।"},
+     {v:"विजेतृशोभां वहाम सततम् ।",k:"डा. दीवि नरसिंह दीक्षितः",g:"वसन्ततिलका",s:"विवेकानन्दः जनानां प्रति एवम् अवदत्।",b:"सततम् विजेतृशोभां वहाम।"}
+   ],
+   kw:[{d:"प्रतिश्रुतिः",e:"pledge/promise"},{d:"विवेकः",e:"discernment"},{d:"सत्यम्",e:"truth"},{d:"श्रेयस्कामाः",e:"wishing welfare"},{d:"विजेतृशोभा",e:"glory of victors"}]
   }
 ];
 
-const GADYA_DATA = [
-  {
-    id: 'gadya1',
-    devTitle: 'अज्ञातस्य वासो न देयः',
-    enTitle: 'Do Not Give Shelter to an Unknown Person',
-    author: 'नारायणपण्डितः (Narayana Pandita) — Hitopadesha',
-    num: '१',
-    summary: 'From the Hitopadesha by Narayana Pandita. A short story about a merchant who unknowingly gave shelter to a thief. The story teaches the importance of verifying a person\'s character before trusting them. Key moral: Do not give shelter, trust, or friendship to a person whose background and character you do not know.',
-    questions: [
-      { q: "What is the moral of the story 'Ajnatasya Vaaso na Deyah'?", marks: "4M", a: "The moral is: Never give shelter, trust, or friendship to a person whose character and background are unknown to you. In the story, a merchant trusts a stranger who turns out to be a thief. This leads to great loss. The Hitopadesha uses this story to teach that proper verification of character (परीक्षा) before trusting someone is wisdom, not suspicion. True generosity must be accompanied by prudence." },
-      { q: "Who is the author of Hitopadesha and what kind of work is it?", marks: "2M", a: "Hitopadesha was written by Narayana Pandita (नारायणपण्डितः). It is a collection of Sanskrit fables and moral stories, similar to Panchatantra. The title means 'Beneficial Advice' (Hita = beneficial, Upadesha = advice). Stories are narrated through animals and humans to teach practical wisdom (Niti)." },
-      { q: "Explain the title: अज्ञातस्य वासो न देयः", marks: "2M", a: "अज्ञातस्य = of the unknown/stranger; वासः = shelter/dwelling; न देयः = should not be given. 'Shelter should not be given to an unknown person.' This is a Niti maxim (practical wisdom rule) that warns against blind generosity without verification of character." }
-    ],
-    keyWords: [
-      { dev: "अज्ञातः", en: "unknown / stranger" },
-      { dev: "वासः", en: "shelter / dwelling" },
-      { dev: "परीक्षा", en: "examination / testing" },
-      { dev: "विश्वासः", en: "trust / faith" }
-    ]
+// ═══ GADYA DATA (from PDF) ═══
+const GD=[
+  {id:'g1',num:'१',dt:'अज्ञातस्य वासो न देयः',et:'Do Not Shelter an Unknown Person',auth:'श्री नारायण पण्डितः — हितोपदेशः मित्रलाभात्',
+   kp:`"अज्ञातस्य वासो न देयः" इत्यं पाठ्यांशः श्री नारायण पण्डितेन विरचित हितोपदेशे मित्रलाभात् संगृहीतः। Hitopadesha has 4 parts: Mitralabha, Mitrabhedha, Vigraha, Sandhi.`,
+   intro:'On Mount Gridhrakuta by the Ganges stood a large fig tree. Eagle Jaradgava lived there — old, claws fallen off. Birds fed him; he guarded their chicks. One day cat Dheergakarna came claiming to follow Chandrayana Vrata and non-violence...',
+   qa:[
+     {q:"जरद्वनो नाम गृध्रः पक्षिभिः कथं व्यापादितः? / अज्ञातस्य वासो न देयः इति पाठ्यभागसारांशं लिखत।",m:"4M",a:`On Gridhrakuta mountain lived old eagle Jaradgava (claws fallen off, vision dimmed). Birds fed him; he guarded their chicks.\n\nCat Dheergakarna came and claimed to follow Chandrayana Vrata, practice non-violence (अहिंसो परमो धर्मः।). Cat argued for hospitality: "Even enemies should be welcomed as guests — अरावप्युचितं कार्यमातिथ्यं गृहमागते।"\n\nEagle allowed cat to stay in tree hollow. But the cat secretly ate the chicks. When parent birds returned and found remains, they wrongly blamed the eagle and killed him.\n\n⭐ MORAL: अज्ञातकुलशीलस्य वासो देयो न कस्यचित् — Never give shelter to one of unknown character and background.`},
+     {q:"माजारिकः किं व्रतम् आचरति?",m:"1M",a:"माजारिकः चान्द्रायण व्रतम् आचरति।"},
+     {q:"शावकास्थीनि कुत्र प्राप्तानि?",m:"1M",a:"शावकास्थीनि वृक्षस्य कोटरे प्राप्तानि।"},
+     {q:"कस्य वासो न देयः?",m:"1M",a:"अज्ञातस्य वासो न देयः।"},
+     {q:"माजारिस्य नाम किम्?",m:"1M",a:"दीर्घकर्णः।"},
+     {q:"परमो धर्मः कः?",m:"1M",a:"अहिंसा।"}
+   ],
+   san:[
+     {v:"अरावप्युचितं कार्यमातिथ्यं गृहमागते ।",k:"श्रीनारायण पण्डितः",g:"हितोपदेशः भागः मित्रलाभः",s:"दीर्घकर्णः जरद्वं प्रति एवम् अवदत्।",b:"गृहमागते शत्रु अपि आतिथ्यकार्यं उचितम्।"},
+     {v:"अहिंसो परमो धर्मः ।",k:"श्रीनारायण पण्डितः",g:"हितोपदेशः भागः मित्रलाभः",s:"दीर्घकर्णः जरद्वं प्रति एवम् अवदत्।",b:"अहिंसा एव परमः धर्मः।"},
+     {v:"अस्य दग्धोदरस्यार्थे कः कुर्यात् पातकं महत् ।",k:"श्रीनारायण पण्डितः",g:"हितोपदेशः भागः मित्रलाभः",s:"दीर्घकर्णः जरद्वं प्रति एवम् अवदत्।",b:"उदरार्थः कः महत् पातकं करोति।"}
+   ],
+   kw:[{d:"अज्ञातः",e:"unknown"},{d:"गृध्रः",e:"eagle"},{d:"माजारिकः",e:"cat"},{d:"शावकाः",e:"chicks"},{d:"कोटरम्",e:"hollow of tree"},{d:"अहिंसा",e:"non-violence"}]
   },
-  {
-    id: 'gadya2',
-    devTitle: 'शूद्रक-वीरवरकथा',
-    enTitle: 'Story of King Shudraka and Viravara',
-    author: 'जम्भालदत्तः (Jambhaladatta) — Vetala Panchavimshati',
-    num: '२',
-    summary: 'From the Vetala Panchavimshati by Jambhaladatta. The story of King Shudraka and the loyal soldier Viravara who sacrificed his entire family — wife, son, daughter — to fulfill his duty to the king. A profound story about the extremes of loyalty, duty, and sacrifice. Key themes: Swami-bhakti (loyalty to master), sacrifice, and the nature of true dedication.',
-    questions: [
-      { q: "What did Viravara sacrifice and why? Narrate the story briefly.", marks: "4M", a: "Viravara was a loyal soldier of King Shudraka who received 500 gold coins as salary daily but did nothing except stand guard. People questioned why the king paid so much. One night, Viravara heard a woman weeping in the forest. Following the sound, he found the goddess of the kingdom weeping — she foretold that the king would die in three days. To save the king, the goddess demanded a sacrifice of a child born of righteous parents. Viravara immediately offered his own son, then his daughter who died of grief, and then his wife. When King Shudraka learned of this and prepared to kill himself out of guilt, the goddess restored all lives. The story shows the highest form of Swami-bhakti." },
-      { q: "What is the central theme of this story?", marks: "2M", a: "The central theme is absolute loyalty and self-sacrifice for one's master (Swami-bhakti). Viravara's sacrifice goes beyond ordinary duty — he gives not himself but his entire family, the most precious things to a man. The story questions whether such extreme sacrifice is admirable or whether it is a form of madness, leaving the moral open-ended." },
-      { q: "What is the Vetala Panchavimshati and who wrote it?", marks: "2M", a: "Vetala Panchavimshati (25 stories of the Vetala/Vampire) was written by Jambhaladatta. It is a frame story where King Vikramaditya carries a vampire (Vetala) on his back, and the Vetala tells him 25 riddle-stories. The collection is part of the Kathasaritsagara tradition and teaches wisdom, justice, and sharp thinking." }
-    ],
-    keyWords: [
-      { dev: "वीरवरः", en: "Viravara — the brave one" },
-      { dev: "बलिदानम्", en: "sacrifice" },
-      { dev: "स्वामिभक्तिः", en: "loyalty to one's master" },
-      { dev: "कर्तव्यम्", en: "duty / obligation" }
-    ]
+  {id:'g2',num:'२',dt:'शूद्रक वीरवर कथा',et:'King Sudraka and Veeravara',auth:'जम्भालदत्तः — वेतालपञ्चविंशतिः (16वीं शताब्दी)',
+   kp:`"शूद्रक वीरवरकथा" जम्भालदत्तेन विरचित वेतालपञ्चविंशतिः इति ग्रन्थात् संगृहीतः। Written by Jambala Datta, 16th-century scholar. Also called Chaturdha Vethala Katha Prabandham.`,
+   intro:'King Sudraka had loyal soldier Veeravara who received 1500 gold coins daily — used half for Brahmins, rest for poor and himself. One night the king heard a woman crying and secretly followed Veeravara to investigate...',
+   qa:[
+     {q:"शूद्रक - वीरवर कथासारं विशदयत।",m:"4M",a:`King Sudraka had loyal soldier Veeravara (received 1500 gold coins daily, used wisely). One night: King heard crying, Veeravara went to investigate.\n\nHe found Goddess of Sudraka's Kingdom crying, about to abandon it. Veeravara said: "मातः यत्र अपायः अस्ति तत्र उपायः अपि अस्ति।"\n\nGoddess demanded sacrifice of his son Shaktivara. Veeravara told his family — ALL agreed! He beheaded his son (shouting "Hail King Sudraka!" — वीरवरो सपरिवारं जीवतु।), then himself. Wife and daughter followed.\n\nKing prepared to kill himself in grief. Goddess appeared, blessed them — brought all back to life! Next day, Sudraka crowned Veeravara King of Shekaradesa.\n\n⭐ MORAL: True service (सेवकधर्मः) = प्रभुकार्ये प्राण त्यागएव — giving one's life for master's welfare.`},
+     {q:"वीरवरः वेतनस्यार्धं केभ्यः दत्तवान्?",m:"1M",a:"वीरवरः वेतनस्यार्धं ब्राह्मणानां दत्तवान्।"},
+     {q:"शूद्रकः वीरवरं कस्य देशस्य राजानं कृतवान्?",m:"1M",a:"शूद्रकः वीरवरं शेखरदेशस्य राजानं कृतवान्।"},
+     {q:"सेवकधर्मः कः?",m:"1M",a:"सेवकधर्मः प्रभुकार्ये प्राण त्यागएव।"},
+     {q:"वेताल पञ्चविंशतिः केन विरचिता?",m:"1M",a:"जम्भालदत्तेन।"},
+     {q:"वीरवरस्य पुत्रः कः?",m:"1M",a:"शक्तिवरः।"},
+     {q:"राजः का प्रसन्ना अभवत्?",m:"1M",a:"काञ्चयानी।"}
+   ],
+   san:[
+     {v:"किं जीवनं कर्तव्यं तद्वद् ।",k:"जम्भालदत्तः",g:"वेतालपञ्चविंशतिः",s:"राजा शूद्रकः वीरवरं प्रति एवम् अवदत्।",b:"राजा शूद्रकः वीरवरेण भवतां जीवनं कृते किम् आवश्यकम्।"},
+     {v:"तां निश्चित्य मां ज्ञापय ।",k:"जम्भालदत्तः",g:"वेतालपञ्चविंशतिः",s:"राजा शूद्रकः वीरवरं प्रति एवम् अवदत्।",b:"श्री रोदनं श्रुत्वा शूद्रकः वीरवरेण तद् विषयं ज्ञात्वा मां बोधय।"},
+     {v:"वीरवरो सपरिवारं जीवतु ।",k:"जम्भालदत्तः",g:"वेतालपञ्चविंशतिः",s:"राजा शूद्रकः काञ्चयानी प्रति एवम् अवदत्।",b:"वीरवरो भार्यापुत्र समेतं जीवतु इति शूद्रकः काञ्चयानी प्रार्थयामास।"}
+   ],
+   kw:[{d:"वीरवरः",e:"the brave one"},{d:"स्वामिभक्तिः",e:"loyalty to master"},{d:"बलिदानम्",e:"sacrifice"},{d:"आक्रन्दनम्",e:"crying/wailing"}]
   },
-  {
-    id: 'gadya3',
-    devTitle: 'मूर्खपण्डितकथा',
-    enTitle: 'Story of the Foolish Scholars',
-    author: 'विष्णुशर्मा (Vishnusharma) — Panchatantra',
-    num: '३',
-    summary: 'From the Panchatantra by Vishnusharma. Four scholars who are highly educated in scriptures but lack common sense (practical wisdom). They revive a dead lion using their book-knowledge and are promptly eaten by it. Key moral: Book-learning without practical wisdom and good judgement (Viveka) is dangerous.',
-    questions: [
-      { q: "Narrate the story of Moorkhapandita and state its moral.", marks: "4M", a: "Four scholars finished their studies and decided to seek their fortune. Three had mastered the scriptures but lacked common sense. The fourth had only common sense. In the forest, they found a lion's skeleton. Three scholars said: 'Let us use our knowledge!' One arranged the bones, the second added flesh and blood, and the third was about to breathe life into it. The fourth warned: 'Don't! It's a lion — it will kill us!' They ignored him; he climbed a tree. The lion was revived, immediately killed the three scholars, and walked away. The fourth came down safely. Moral: Bookish knowledge without Viveka (discernment/wisdom) leads to destruction." },
-      { q: "What is the difference between Pandita (scholar) and a wise person according to this story?", marks: "2M", a: "A Pandita has mastered texts and scriptures (Shastra-jnana) but may lack Viveka — the ability to apply knowledge wisely in real situations. The story shows that true wisdom involves knowing WHEN to apply knowledge and when to restrain it. The fourth scholar, who had only common sense, survived while the three 'scholars' perished. सा विद्या या विमुक्तये — True knowledge is that which liberates; useless or misapplied knowledge can kill." }
-    ],
-    keyWords: [
-      { dev: "मूर्खः", en: "fool / foolish" },
-      { dev: "पण्डितः", en: "learned scholar" },
-      { dev: "विवेकः", en: "discernment / wisdom" },
-      { dev: "शास्त्रज्ञानम्", en: "scriptural / bookish knowledge" }
-    ]
+  {id:'g3',num:'३',dt:'मूर्खपण्डित कथा',et:'Foolish Scholars Story',auth:'विष्णुशर्मा — पञ्चतन्त्रे अपरीक्षितकारकात्',
+   kp:`"मूर्खपण्डितकथा" पञ्चतन्त्रे अपरीक्षितकारकात् स्वीकृता। Panchatantra written by Vishnusharma for education of princes. 'Apariksitakaraka' = acting without testing/thinking.`,
+   intro:'4 Brahmin scholars studied at Kanyakubja for 12 years. 3 had mastered scriptures but had no common sense. The 4th had only common sense. In the forest they found a lion\'s skeleton and decided to demonstrate their knowledge...',
+   qa:[
+     {q:"ब्राह्मणाः विद्योपार्जनार्थं कुत्र गतवन्तः?",m:"1M",a:"ब्राह्मणाः विद्योपार्जनार्थं काण्यकुब्जं गतवन्तः।"},
+     {q:"ब्राह्मणाः कति अब्दानि पठितवन्तः?",m:"1M",a:"ब्राह्मणाः द्वादश अब्दानि पठितवन्तः।"},
+     {q:"पञ्चतन्त्रं केन विरचितम्?",m:"1M",a:"पञ्चतन्त्रं विष्णुशर्मणा विरचितम्।"},
+     {q:"मूर्खपण्डितकथा कस्मात् स्वीकृता?",m:"1M",a:"मूर्खपण्डितकथा पञ्चतन्त्रे अपरीक्षितकारकात् स्वीकृता।"},
+     {q:"अमरशक्तेः पुत्राः कीदृशाः?",m:"1M",a:"अमरशक्तेः पुत्राः परमदुर्मेधसः।"},
+     {q:"पण्डिताः शमशाने कं दृष्टवन्तः?",m:"1M",a:"पण्डिताः शमशाने रासभं दृष्टवन्तः।"}
+   ],
+   san:[{v:"राक्षसेषु दया न भवति। त्वं सत्यं वद।",k:"विष्णुशर्मा",g:"पञ्चतन्त्रम्",s:"विहगाः राक्षसं प्रति एवम् वदन्ति।",b:"राक्षसेषु दया न भवति। सत्यं वद इति विहगाः वदन्ति।"}],
+   kw:[{d:"मूर्खः",e:"foolish"},{d:"पण्डितः",e:"scholar"},{d:"विवेकः",e:"common sense"},{d:"अपरीक्षितकारकम्",e:"acting without testing"}]
   },
-  {
-    id: 'gadya4',
-    devTitle: 'दयावान् राक्षसः',
-    enTitle: 'The Compassionate Demon',
-    author: 'आचार्य हर्षदेवमाधवः',
-    num: '४',
-    summary: 'A modern Sanskrit story about a demon (Rakshasa) who was expected to be cruel but showed extraordinary compassion. The story challenges stereotypes and shows that character depends on actions, not birth or appearance. Key themes: Karuna (compassion), the unreliability of appearances, and the universality of goodness.',
-    questions: [
-      { q: "How does the story 'Dayavaan Rakshasa' challenge our assumptions about evil?", marks: "4M", a: "The story challenges the assumption that demons (Rakshasas) are inherently evil. The Rakshasa in the story finds an injured animal and instead of eating it, tends to its wounds, feeds it, and protects it until it recovers. When people discover this, they are astonished. The author uses this irony to convey that compassion (Karuna) is a quality of the heart, not of caste, race, or birth. Evil is not innate but a result of circumstances, training, and choices. Even those whom society labels as 'demons' can possess noble qualities." },
-      { q: "What is the literary significance of using a Rakshasa as the hero?", marks: "2M", a: "Using a Rakshasa as the compassionate hero is a literary device of reversal (Viparyaya). The reader expects cruelty and gets kindness — this shock makes the moral more memorable. It also reflects the Sanskrit literary tradition of examining dharma beyond external appearances. The true demon, the story suggests, may be human prejudice itself." }
-    ],
-    keyWords: [
-      { dev: "दयावान्", en: "compassionate / merciful" },
-      { dev: "राक्षसः", en: "demon / Rakshasa" },
-      { dev: "करुणा", en: "compassion / mercy" },
-      { dev: "पूर्वाग्रहः", en: "prejudice / preconception" }
-    ]
+  {id:'g4',num:'४',dt:'दयावान् राक्षसः',et:'The Compassionate Demon Dayaram',auth:'आचार्य हर्षदेव माधवः — कथासङ्कलनम्',
+   kp:`"दयावान् राक्षसः" आचार्य हर्षदेव माधवेन विरचित कथासङ्कलनम् इति ग्रन्थात् संगृहीतः। Harshadev Madhav is Sanskrit professor at HK University Ahmedabad.`,
+   intro:'Near Ujjayini city there was a big forest with a large banyan tree. A monster named DAYARAM lived there. Unlike typical demons, he protected all birds and animals from hunters, wood-cutters, and natural calamities.',
+   qa:[
+     {q:"दयावान् राक्षसः इति पाठ्यांशस्य सारांशं संक्षेपेण लिखत।",m:"4M",a:`Near Ujjayini, demon DAYARAM lived in a forest. He was changed from cruel to kind when sage Sumathi sprinkled holy water on him. He lived on fruits/water, protected all creatures.\n\nHis compassion (दयागुणः):\n• Broke a hunter's leg to protect birds (अस्मान् मा पीडय। त्वं गच्छ अन्यत्र।)\n• Carried another hunter far away to protect animals\n• During drought — brought clouds from far away (तक्षकाः कुठारैः वने प्रविश्य वृक्षाणां विनाशं कर्तुम् ऐच्छन्।) — he protected trees\n• Fought monster with 17 horns and 9 heads — fell unconscious. Animals prayed to Shiva.\n• Shiva appeared: "You are no longer a demon — I grant you divinity" (अहं तुभ्य:देवत्वं ददामि।)\n\n⭐ MORAL: परोपकारः पुण्याय पापाय परपीडनम् — Helping others is virtue; harming others is sin.`},
+     {q:"दयारामः नमसि कान् अपश्यत्?",m:"1M",a:"दयारामः नमसि श्यामान् मेघान् अपश्यत्।"},
+     {q:"तक्षकाः कुठारैः वने प्रविश्य किं कर्तुम् ऐच्छन्?",m:"1M",a:"तक्षकाः कुठारैः वने प्रविश्य वृक्षाणां विनाशं कर्तुम् ऐच्छन्।"},
+     {q:"राक्षसस्य नाम किम्?",m:"1M",a:"दयारामः।"},
+     {q:"कः मेघान् सर्वत्र नयति?",m:"1M",a:"पवनः।"},
+     {q:"कस्य पादस्य अस्थिभङ्गः अभवत्?",m:"1M",a:"शाकुनिकस्य पादस्य अस्थिभङ्गः अभवत्।"}
+   ],
+   san:[
+     {v:"अस्मान् मा पीडय। त्वं गच्छ अन्यत्र।",k:"आचार्य हर्षदेव माधवः",g:"कथासङ्कलनम्",s:"विहगाः राक्षसं प्रति एवम् वदन्ति।",b:"विहगाः राक्षसं प्रति कृपया अस्मान् मा पीडय।"},
+     {v:"राक्षसेषु दया न भवति। त्वं सत्यं वद।",k:"आचार्य हर्षदेव माधवः",g:"कथासङ्कलनम्",s:"विहगाः राक्षसं प्रति एवम् वदन्ति।",b:"राक्षसेषु दया न भवति। सत्यं वद इति विहगाः वदन्ति।"},
+     {v:"अहं विनाकारणं प्राणिनां घातम् अकरवम्।",k:"आचार्य हर्षदेव माधवः",g:"कथासङ्कलनम्",s:"राक्षसः पक्षिणाम् मुखि एवम् वदति।",b:"पूर्वम् अहम् विनाकारणेण प्राणिनां घातम् अकरवम्।"}
+   ],
+   kw:[{d:"दयावान्",e:"compassionate"},{d:"राक्षसः",e:"demon"},{d:"करुणा",e:"compassion"},{d:"देवत्वम्",e:"divinity"},{d:"परोपकारः",e:"helping others"}]
   },
-  {
-    id: 'gadya5',
-    devTitle: 'जीर्णच्छत्रम्',
-    enTitle: 'The Old Umbrella',
-    author: 'म.म. पुल्लेल श्रीरामचन्द्रः',
-    num: '५',
-    summary: 'A charming autobiographical essay in Sanskrit by the great Telugu-Sanskrit scholar Mahamahopadhyaya Pullela Sriramachandra Shastri. He describes an old, tattered umbrella given to him by his father and how it became a symbol of wisdom, simplicity, and the teacher-student relationship. Key themes: Guru-shishya tradition, simplicity, gratitude, and the value of heritage.',
-    questions: [
-      { q: "What does the old umbrella symbolize in this essay?", marks: "4M", a: "The old umbrella (Jirna-cchatram) symbolizes multiple things: (1) The teacher-student (Guru-shishya) tradition — it was given by his father/teacher, connecting generations; (2) Simplicity and non-attachment to material comforts; (3) The value of heritage and ancestral wisdom; (4) Protective care — just as an umbrella protects from rain and sun, a teacher's wisdom protects a student from life's difficulties. The author carries this tattered umbrella with pride despite mockery, showing that true value is not in appearance but in meaning and memory." },
-      { q: "Who was Pullela Sriramachandra Shastri and why is he significant?", marks: "2M", a: "Pullela Sriramachandra Shastri (1927-2017) was one of the greatest Telugu-Sanskrit scholars of the 20th century. He received the title Mahamahopadhyaya — the highest honor given to Sanskrit scholars in India. He compiled the comprehensive Telugu-Sanskrit dictionary and wrote extensively in both languages. He represents the tradition of scholar-poets who kept Sanskrit alive and vibrant in modern India." }
-    ],
-    keyWords: [
-      { dev: "जीर्णम्", en: "old / worn out / dilapidated" },
-      { dev: "छत्रम्", en: "umbrella / parasol" },
-      { dev: "गुरु-शिष्य", en: "teacher-student relationship" },
-      { dev: "सरलता", en: "simplicity" }
-    ]
+  {id:'g5',num:'५',dt:'जीर्णच्छत्रम्',et:'The Old Umbrella',auth:'पुल्लेल श्रीरामचन्द्रः — श्रीरामचन्द्र लघुकाव्य संग्रहः',
+   kp:`"जीर्णच्छत्रम्" पुल्लेल श्रीरामचन्द्रेण विरचित श्रीरामचन्द्र लघुकाव्य सङ्ग्रहः इति ग्रन्थात् संगृहीतः। Pullela Sri Ramachandrudu was Mahamahopadhyaya — highest title for Sanskrit scholars.`,
+   intro:'Vijayasimha\'s father Dhanasimha, a great warrior, died in battle. Mother raised him in fear. One day she gave him one rupee to repair their old umbrella (किमनेन जीर्णच्छत्रेण प्रयोजनम्? — what use is this old umbrella?)...',
+   qa:[
+     {q:"जीर्णच्छत्रम् इति पाठ्यभागस्य सङ्क्षेपेण लिखत। / जीर्णच्छत्रकारणेण विजयसिंहस्य कीर्तिः कथं व्याप्ता?",m:"4M",a:`STORY: Vijayasimha's father Dhanasimha died in battle. Mother raised him in poverty and fear. One day she gave one rupee to repair their old umbrella (किमनेन जीर्णच्छत्रेण प्रयोजनम्।).\n\nOn the train back (unable to get it repaired), Vijayasimha accidentally saved a rich old man and his daughter from thieves by pulling the emergency chain (न मया आकृष्टा।) — causing the train to stop. Thieves were caught.\n\nThe grateful old man praised his bravery, offered him a job, and later made him his son-in-law. Vijayasimha received the title "Raja Bahadur."\n\nHe continued to cherish the old umbrella — it had become the symbol of his transformation (इदं गतं दण्डदरिद्रभावम्।).\n\n⭐ KEY: A single moment can reveal a person's hidden potential — like air inflating a balloon.`},
+     {q:"धनसिंहः कां ररक्ष?",m:"1M",a:"धनसिंहः वृद्धामवलां ररक्ष।"},
+     {q:"पितुः मरण समये विजयसिंहः कति वर्षीयः?",m:"1M",a:"पितुः मरण समये विजयसिंहः पञ्च वर्षीयः।"},
+     {q:"जीर्णच्छत्रम् इति पाठ्यभागस्य कर्ता कः?",m:"1M",a:"पुल्लेल श्रीरामचन्द्रः।"},
+     {q:"विजयसिंहस्य पितुः नाम किम्?",m:"1M",a:"धनसिंहः।"},
+     {q:"छत्रं कीदृशम्?",m:"1M",a:"जीर्णम्।"}
+   ],
+   san:[
+     {v:"इदं गतं दण्डदरिद्रभावम् ।",k:"पुल्लेल श्रीरामचन्द्रः",g:"श्रीरामचन्द्र लघुकाव्य सङ्ग्रहः",s:"विजयसिंहः स्वमनसि एवम् अचिन्तयत्।",b:"मम दरिद्रनाशाय इदमेव कारणम्।"},
+     {v:"किमनेन जीर्णच्छत्रेण प्रयोजनम् ।",k:"पुल्लेल श्रीरामचन्द्रः",g:"श्रीरामचन्द्र लघुकाव्य सङ्ग्रहः",s:"विजयसिंहः मातारं प्रति एवम् अवदत्।",b:"अनेन जीर्णच्छत्रेण किम् प्रयोजनम्।"},
+     {v:"न मया आकृष्टा ।",k:"पुल्लेल श्रीरामचन्द्रः",g:"श्रीरामचन्द्र लघुकाव्य सङ्ग्रहः",s:"विजयसिंहः रक्षकभटान् प्रति एवम् अवदत्।",b:"शृङ्खला मम न आकृष्टा।"}
+   ],
+   kw:[{d:"जीर्णम्",e:"old/worn"},{d:"छत्रम्",e:"umbrella"},{d:"दरिद्रः",e:"poor"},{d:"आकृष्टा",e:"pulled"},{d:"साहसम्",e:"bravery"}]
   }
 ];
 
-const UPAVACHAKAM_DATA = [
-  {
-    id: 'up1',
-    devTitle: 'विनयः विधेयता च',
-    enTitle: 'Humility and Obedience',
-    author: 'श्री जनार्दन हेगडे',
-    num: '१',
-    summary: 'A non-detailed text about the virtues of humility (Vinaya) and obedience (Vidheyata). The author argues that these two qualities are the foundation of character-building and success in any field.',
-    questions: [
-      { q: "What is the difference between Vinaya and Vidheyata according to this lesson?", marks: "2M", a: "Vinaya (विनयः) means humility — the internal quality of not considering oneself superior, remaining modest despite achievements. Vidheyata (विधेयता) means obedience — the external behavior of following rightful authority, teachers, and dharmic rules. Together they form the ideal character: internally humble, externally disciplined." }
-    ],
-    keyWords: [
-      { dev: "विनयः", en: "humility" },
-      { dev: "विधेयता", en: "obedience / compliance" }
-    ]
-  },
-  {
-    id: 'up2', devTitle: 'मित्ररत्नम्', enTitle: 'The Jewel of Friendship',
-    author: 'डा. पूजा उपाध्याया', num: '२',
-    summary: 'About the qualities of a true friend (Mitra). A true friend stands by you in difficulty, speaks truth even when it hurts, and wishes for your good always.',
-    questions: [
-      { q: "What qualities make a true friend (मित्ररत्नम्)?", marks: "2M", a: "A true friend (Mitra-ratnam — jewel of a friend) has these qualities: (1) Speaks truth even if it is unpleasant; (2) Stands by you in difficulty, not just in prosperity; (3) Keeps your secrets; (4) Guides you away from wrong paths. The text contrasts such a friend with a मुखमित्र — a false friend who is sweet in words but selfish in deed." }
-    ],
-    keyWords: [{ dev: "मित्रम्", en: "friend" }, { dev: "रत्नम्", en: "jewel" }]
-  },
-  {
-    id: 'up3', devTitle: 'पापस्य फलम्', enTitle: 'The Fruit of Sin',
-    author: 'डा. सञ्जीवः', num: '३',
-    summary: 'A story illustrating that sinful actions eventually lead to suffering. The text emphasizes karma — that every action has a consequence.',
-    questions: [
-      { q: "What does 'Papasya Phalam' teach about karma?", marks: "2M", a: "The text teaches that no sinful action goes without consequence. Even if punishment is delayed, it comes inevitably — like a tree that takes time to grow before bearing fruit. The lesson is to avoid unrighteous actions not out of fear of punishment alone, but out of understanding that dharma (righteousness) is the only sustainable path." }
-    ],
-    keyWords: [{ dev: "पापम्", en: "sin / wrongdoing" }, { dev: "फलम्", en: "fruit / consequence" }, { dev: "कर्म", en: "action / karma" }]
-  },
-  {
-    id: 'up4', devTitle: 'दानशूरः शिबिः', enTitle: 'Shibi — Hero of Charity',
-    author: 'डा. उदयन हेगडे', num: '४',
-    summary: 'The famous story of King Shibi from the Mahabharata. A hawk pursues a dove for food; the dove seeks Shibi\'s protection. Shibi offers to give the hawk equal weight of his own flesh instead of the dove. He keeps cutting and placing flesh but can never equal the dove\'s weight. Finally he places himself on the scale — and the gods reveal themselves, applauding his sacrifice.',
-    questions: [
-      { q: "Narrate the story of Shibi and state the moral.", marks: "4M", a: "King Shibi was famous for his generosity. One day, a dove (pigeon) flew to his lap seeking protection from a pursuing hawk. The hawk demanded: 'Give me my food — this dove!' Shibi refused to abandon someone who sought his protection. The hawk said: 'Then give me flesh equal to the dove's weight.' Shibi agreed and began cutting flesh from his own body and placing it on the scale. No matter how much flesh he placed, the dove's side was always heavier. Shibi placed his entire body on the scale. The gods (Indra as the hawk, Agni as the dove) revealed themselves and blessed Shibi. Moral: A righteous king protects those who seek his shelter, even at the cost of his own life. Daana (giving) is the highest virtue when practiced without calculation." }
-    ],
-    keyWords: [{ dev: "दानशूरः", en: "hero of charity" }, { dev: "शिबिः", en: "King Shibi" }, { dev: "शरणम्", en: "shelter / refuge" }]
-  },
-  {
-    id: 'up5', devTitle: 'मैत्री', enTitle: 'Friendship / Goodwill',
-    author: 'सुगन्धः', num: '५',
-    summary: 'About Maitri — one of the four Brahmaviharas (divine states of mind) in Indian philosophy. Maitri means universal goodwill — wishing well for all beings without distinction.',
-    questions: [
-      { q: "What is मैत्री and how is it different from ordinary friendship?", marks: "2M", a: "Maitri (Metta in Pali) means universal goodwill or loving-kindness toward all beings without discrimination — friends, strangers, and even enemies. Ordinary friendship (Mitra-bhava) is selective, based on personal benefit. Maitri is boundless — it extends to all creatures without expectation of return. This is one of the four divine states (Brahmaviharas): Maitri (goodwill), Karuna (compassion), Mudita (sympathetic joy), and Upekkha (equanimity)." }
-    ],
-    keyWords: [{ dev: "मैत्री", en: "goodwill / loving-kindness" }, { dev: "ब्रह्मविहारः", en: "divine abode / state of mind" }]
-  }
+// ═══ UPAVACHAKAM ═══
+const UD=[
+  {id:'u1',num:'१',dt:'विनयः विधेयता च',et:'Humility and Obedience',auth:'श्री जनार्दन हेगडे',kp:'Non-detailed text about Vinaya (humility) and Vidheyata (obedience) as foundations of character.',
+   qa:[{q:"विनयः विधेयता च — संक्षिप्त टिप्पणी",m:"2M",a:"Vinaya (विनयः) = inner humility — not considering oneself superior despite achievements. Vidheyata (विधेयता) = external obedience — following rightful authority and dharmic rules. Together = ideal student character: internally humble, externally disciplined."}],
+   kw:[{d:"विनयः",e:"humility"},{d:"विधेयता",e:"obedience"}]},
+  {id:'u2',num:'२',dt:'मित्ररत्नम्',et:'Jewel of Friendship',auth:'डा. पूजा उपाध्याया',kp:'A text about qualities of a true friend.',
+   qa:[{q:"मित्ररत्नम् — संक्षिप्त टिप्पणी",m:"2M",a:"A true friend (मित्र-रत्नम्): speaks truth even if unpleasant, stands by you in difficulty not just prosperity, keeps your secrets, guides away from wrong. Contrast: मुखमित्र = false friend — sweet words, selfish deeds."}],
+   kw:[{d:"मित्रम्",e:"friend"},{d:"रत्नम्",e:"jewel"},{d:"मुखमित्रम्",e:"false friend"}]},
+  {id:'u3',num:'३',dt:'पापस्य फलम्',et:'Fruit of Sin',auth:'डा. सञ्जीवः',kp:'Story illustrating that sinful actions inevitably lead to suffering — karma theory.',
+   qa:[{q:"पापस्य फलम् — संक्षिप्त टिप्पणी",m:"2M",a:"Sinful actions inevitably bear consequences — like a tree bearing fruit with time. Avoid wrongdoing not just from fear of punishment, but because dharma is the only sustainable path. Every action has consequences (karma)."}],
+   kw:[{d:"पापम्",e:"sin"},{d:"फलम्",e:"consequence"},{d:"कर्म",e:"action/karma"}]},
+  {id:'u4',num:'४',dt:'दानशूरः शिबिः',et:'Shibi — Champion of Charity',auth:'डा. उदयन हेगडे',kp:'Famous story of King Shibi from Mahabharata — ultimate test of shelter and sacrifice.',
+   qa:[{q:"दानशूरः शिबिः — सारांशं लिखत।",m:"4M",a:"King Shibi was famous for generosity. A dove (Indra disguised) flew to his lap seeking protection from a pursuing hawk (Agni disguised). Hawk demanded equal flesh weight. Shibi cut his own flesh — no matter how much he placed, dove's side was always heavier. Shibi placed his whole body on scale. Gods revealed themselves and blessed him.\n⭐ MORAL: A righteous king protects those who seek shelter (शरणागत-रक्षणम्) even at the cost of his own life."}],
+   kw:[{d:"दानशूरः",e:"champion of charity"},{d:"शरणागतः",e:"one who seeks refuge"},{d:"बलिदानम्",e:"sacrifice"}]},
+  {id:'u5',num:'५',dt:'मैत्री',et:'Loving-Kindness',auth:'सुगन्धः',kp:'About Maitri — one of 4 Brahmaviharas (divine states of mind).',
+   qa:[{q:"मैत्री — संक्षिप्त टिप्पणी",m:"2M",a:"Maitri = universal goodwill/loving-kindness toward ALL beings — friends, strangers, even enemies. Unlike ordinary friendship (selective, personal benefit), Maitri is boundless. 4 Brahmaviharas: Maitri (goodwill), Karuna (compassion), Mudita (sympathetic joy), Upekkha (equanimity)."}],
+   kw:[{d:"मैत्री",e:"goodwill/loving-kindness"},{d:"ब्रह्मविहारः",e:"divine state of mind"},{d:"करुणा",e:"compassion"}]}
 ];
 
-// Grammar data
-const SANDHI_RULES = [
-  { type: 'स्वर सन्धि (Vowel Sandhi)', rule: 'अ/आ + अ/आ = आ', example: 'राम + अयन = रामायण', name: 'दीर्घ सन्धि (Dirgha)' },
-  { type: 'स्वर सन्धि', rule: 'अ/आ + इ/ई = ए', example: 'देव + इन्द्र = देवेन्द्र', name: 'गुण सन्धि (Guna)' },
-  { type: 'स्वर सन्धि', rule: 'अ/आ + उ/ऊ = ओ', example: 'महा + उत्सव = महोत्सव', name: 'गुण सन्धि (Guna)' },
-  { type: 'स्वर सन्धि', rule: 'अ/आ + ए/ऐ = ऐ', example: 'मत + ऐक्य = मतैक्य', name: 'वृद्धि सन्धि (Vriddhi)' },
-  { type: 'स्वर सन्धि', rule: 'अ/आ + ओ/औ = औ', example: 'महा + ओजः = महौजः', name: 'वृद्धि सन्धि (Vriddhi)' },
-  { type: 'व्यञ्जन सन्धि (Consonant)', rule: 'त् + ज/झ = ज्ज', example: 'सत् + जनः = सज्जनः', name: 'श्चुत्व सन्धि' },
-  { type: 'विसर्ग सन्धि (Visarga)', rule: 'अः + अ = ओ + अ (ः drops)', example: 'रामः + अत्र = राम + ओऽत्र = रामोऽत्र', name: 'विसर्ग सन्धि' },
+// ═══ GRAMMAR ═══
+const RAM={cases:['प्रथमा (Nominative)','द्वितीया (Accusative)','तृतीया (Instrumental)','चतुर्थी (Dative)','पञ्चमी (Ablative)','षष्ठी (Genitive)','सप्तमी (Locative)','सम्बोधन (Vocative)'],
+  sg:['रामः','रामम्','रामेण','रामाय','रामात्','रामस्य','रामे','हे राम !'],
+  du:['रामौ','रामौ','रामाभ्याम्','रामाभ्याम्','रामाभ्याम्','रामयोः','रामयोः','हे रामौ !'],
+  pl:['रामाः','रामान्','रामैः','रामेभ्यः','रामेभ्यः','रामाणाम्','रामेषु','हे रामाः !']};
+const LATA={cases:['प्रथमा','द्वितीया','तृतीया','चतुर्थी','पञ्चमी','षष्ठी','सप्तमी','सम्बोधन'],
+  sg:['लता','लताम्','लतया','लतायै','लतायाः','लतायाः','लतायाम्','हे लते !'],
+  du:['लते','लते','लताभ्याम्','लताभ्याम्','लताभ्याम्','लतयोः','लतयोः','हे लते !'],
+  pl:['लताः','लताः','लताभिः','लताभ्यः','लताभ्यः','लतानाम्','लतासु','हे लताः !']};
+const PHALA={cases:['प्रथमा','द्वितीया','तृतीया','चतुर्थी','पञ्चमी','षष्ठी','सप्तमी','सम्बोधन'],
+  sg:['फलम्','फलम्','फलेन','फलाय','फलात्','फलस्य','फले','हे फल !'],
+  du:['फले','फले','फलाभ्याम्','फलाभ्याम्','फलाभ्याम्','फलयोः','फलयोः','हे फले !'],
+  pl:['फलानि','फलानि','फलैः','फलेभ्यः','फलेभ्यः','फलानाम्','फलेषु','हे फलानि !']};
+
+const SANDHI=[
+  {nm:'दीर्घ सन्धि',rule:'अ/आ + अ/आ = आ',ex:'राम + अयन = रामायण'},
+  {nm:'गुण सन्धि',rule:'अ/आ + इ/ई = ए',ex:'देव + इन्द्र = देवेन्द्र'},
+  {nm:'गुण सन्धि',rule:'अ/आ + उ/ऊ = ओ',ex:'महा + उत्सव = महोत्सव'},
+  {nm:'वृद्धि सन्धि',rule:'अ/आ + ए/ऐ = ऐ',ex:'मत + ऐक्य = मतैक्य'},
+  {nm:'वृद्धि सन्धि',rule:'अ/आ + ओ/औ = औ',ex:'महा + ओजः = महौजः'},
+  {nm:'यण् सन्धि',rule:'इ/ई + vowel = य्',ex:'प्रति + एक = प्रत्येक'},
+  {nm:'विसर्ग सन्धि',rule:'अः + अ = ओऽ',ex:'रामः + अत्र = रामोऽत्र'},
+  {nm:'श्चुत्व सन्धि',rule:'त् + ज = ज्ज',ex:'सत् + जनः = सज्जनः'}
 ];
 
-const SHABDA_RAM = {
-  name: 'राम (Ram) — अकारान्त पुल्लिंग',
-  cases: ['प्रथमा (Nominative)', 'द्वितीया (Accusative)', 'तृतीया (Instrumental)', 'चतुर्थी (Dative)', 'पञ्चमी (Ablative)', 'षष्ठी (Genitive)', 'सप्तमी (Locative)', 'सम्बोधन (Vocative)'],
-  singular: ['रामः', 'रामम्', 'रामेण', 'रामाय', 'रामात्', 'रामस्य', 'रामे', 'हे राम'],
-  dual: ['रामौ', 'रामौ', 'रामाभ्याम्', 'रामाभ्याम्', 'रामाभ्याम्', 'रामयोः', 'रामयोः', 'हे रामौ'],
-  plural: ['रामाः', 'रामान्', 'रामैः', 'रामेभ्यः', 'रामेभ्यः', 'रामाणाम्', 'रामेषु', 'हे रामाः']
-};
-
-const DHATU_PATH = {
-  name: 'पठ् (to read/recite) — परस्मैपदी',
-  tenses: ['लट् (Present)', 'लङ् (Past)', 'लृट् (Future)'],
-  persons: ['प्रथम पुरुष (He/She/It)', 'मध्यम पुरुष (You)', 'उत्तम पुरुष (I/We)'],
-  present: {
-    singular: ['पठति', 'पठसि', 'पठामि'],
-    dual: ['पठतः', 'पठथः', 'पठावः'],
-    plural: ['पठन्ति', 'पठथ', 'पठामः']
-  }
-};
-
-// Grammar drill questions
-const DRILL_QUESTIONS = [
-  { q_dev: "अ + इ = ?", q_en: "What Sandhi is formed?", options: ["ए (Guna Sandhi)", "ऐ (Vriddhi)", "ओ (Guna)", "आ (Dirgha)"], correct: 0, explanation: "अ + इ = ए — This is Guna Sandhi. Example: देव + इन्द्र = देवेन्द्र" },
-  { q_dev: "रामः — This is in which Vibhakti?", q_en: "Identify the case ending", options: ["प्रथमा (Nominative)", "द्वितीया (Accusative)", "षष्ठी (Genitive)", "सप्तमी (Locative)"], correct: 0, explanation: "रामः has the suffix -ः which is the Prathama Vibhakti (Nominative case) singular of Akarant Pullinga nouns." },
-  { q_dev: "पठति means?", q_en: "Translate this verb form", options: ["He/She reads", "You read", "I read", "They read"], correct: 0, explanation: "पठति = पठ् (root: to read) + ति (3rd person singular present) = He/She/It reads. This is Prathama Purusha, Ekavachana, Lat Lakar." },
-  { q_dev: "सत् + जनः = ?", q_en: "Apply Consonant Sandhi", options: ["सज्जनः", "सत्जनः", "साजनः", "सदजनः"], correct: 0, explanation: "सत् + जनः = सज्जनः — When त् comes before ज्, it becomes ज् (Shchutva Sandhi). सज्जनः means 'good person.'" },
-  { q_dev: "महा + उत्सव = ?", q_en: "Apply Guna Sandhi", options: ["महोत्सव", "महाउत्सव", "महैत्सव", "महौत्सव"], correct: 0, explanation: "आ + उ = ओ (Guna Sandhi). So महा + उत्सव = महोत्सव. This means 'great festival.'" },
-  { q_dev: "रामाय — which Vibhakti?", q_en: "Identify the case", options: ["चतुर्थी (Dative)", "तृतीया (Instrumental)", "पञ्चमी (Ablative)", "षष्ठी (Genitive)"], correct: 0, explanation: "रामाय has suffix -आय which is Chaturthi Vibhakti (Dative case) singular. It means 'for Rama' or 'to Rama.'" },
-  { q_dev: "विद्या ददाति _____", q_en: "Complete the Niti-shloka", options: ["विनयम्", "धनम्", "सुखम्", "मोक्षम्"], correct: 0, explanation: "विद्या ददाति विनयम् — Knowledge gives humility (Vinayam). This famous Niti-shloka explains: Vidya → Vinaya → Patrata → Dhana → Dharma → Sukha." },
-  { q_dev: "हनुमदुपदेशः is from which text?", q_en: "Identify the source", options: ["रामायणम्", "महाभारतम्", "पञ्चतन्त्रम्", "हितोपदेशः"], correct: 0, explanation: "Hanumad-Upadesha is from Valmiki's Ramayana (Yuddha Kanda), where Hanuman advises Vibhishana to take shelter of Lord Rama." },
+const DRILLQS=[
+  {dv:'अ + इ = ?',en:'What Sandhi?',opts:['ए — गुण सन्धि','आ — दीर्घ','ओ — गुण','ऐ — वृद्धि'],c:0,fb:'✅ अ+इ=ए (Guna Sandhi). Example: देव+इन्द्र=देवेन्द्र'},
+  {dv:'महा + उत्सव = ?',en:'Apply Sandhi:',opts:['महोत्सव','महाउत्सव','महैत्सव','महौत्सव'],c:0,fb:'✅ आ+उ=ओ (Guna Sandhi). महा+उत्सव=महोत्सव = great festival'},
+  {dv:'सत् + जनः = ?',en:'Consonant Sandhi:',opts:['सज्जनः','सत्जनः','साजनः','सत्सनः'],c:0,fb:'✅ त्+ज=ज्ज (Shchutva Sandhi). सज्जनः = good person'},
+  {dv:'रामः — Vibhakti?',en:'Case:',opts:['प्रथमा (Nominative)','द्वितीया (Accusative)','षष्ठी (Genitive)','सप्तमी (Locative)'],c:0,fb:'✅ रामः (-ः suffix) = Prathama Vibhakti Singular = Nominative case'},
+  {dv:'रामाय — Vibhakti?',en:'Case:',opts:['चतुर्थी (Dative)','तृतीया (Instrumental)','पञ्चमी (Ablative)','षष्ठी (Genitive)'],c:0,fb:'✅ रामाय (-आय suffix) = Chaturthi = Dative (for Rama / to Rama)'},
+  {dv:'पठति = ?',en:'Translate:',opts:['He/She reads','You read','I read','They read'],c:0,fb:'✅ पठति = 3rd person singular present (Lat Lakar) = He/She reads'},
+  {dv:'हनुमदुपदेशः — source?',en:'From which text?',opts:['सुन्दरकाण्डः — वाल्मीकि','किष्किन्धाकाण्डः','युद्धकाण्डः','बालकाण्डः'],c:0,fb:'✅ हनुमदुपदेशः is from सुन्दरकाण्ड (51st canto) of Valmiki\'s Ramayana'},
+  {dv:'नास्ति विद्यासमं ___',en:'Complete:',opts:['चक्षुः','तपः','सुखम्','धनम्'],c:0,fb:'✅ नास्ति विद्यासमं चक्षुः — No eye equals education. (Niti-shloka 1)'},
+  {dv:'रघोः शौर्यम् — source?',en:'From which text?',opts:['रघुवंशमहाकाव्यम् — कालिदासः','कुमारसम्भवम्','मेघदूतम्','अभिज्ञानशाकुन्तलम्'],c:0,fb:'✅ रघोः शौर्यम् is from Raghuvamsha 3rd canto by Kalidasa'},
+  {dv:'अज्ञातकुलशीलस्य ___',en:'Complete the moral:',opts:['वासो देयो न कस्यचित्','वासो देयः सर्वदा','धनं देयम्','मित्रं देयम्'],c:0,fb:'✅ अज्ञातकुलशीलस्य वासो देयो न कस्यचित् — Main moral of Gadya 1'}
 ];
 
-// Practice Papers
-const PRACTICE_PAPERS = [
-  {
-    title: 'Model Paper 1 — APBIE Pattern',
-    meta: '100 Marks · 3 Hours · All Sections',
-    icon: '📄',
-    badge: 'Start Here',
-    badgeClass: 'badge-new',
-    questions: [
-      { num: 'Q1(a)', text: 'Answer the following questions on Padya (Poetry):', dev: 'हनुमदुपदेशः का केन्द्रीय भावः कः?', marks: '4 Marks', answer: 'The central theme of Hanumad-Upadesha is Bhakti (devotion) to Lord Rama and the importance of righteous company. Hanuman advises Vibhishana to leave Ravana and seek Rama\'s shelter. The poem teaches that surrendering to God is the highest wisdom, and keeping company with evil leads to destruction.' },
-      { num: 'Q1(b)', text: 'Write the summary of Raghu\'s Digvijaya:', dev: 'रघोः दिग्विजयस्य वर्णनं कुरुत', marks: '4 Marks', answer: 'After performing the Vishvajit Yajna and donating everything, Raghu found his treasury empty. When a student came seeking fees, Raghu attacked Kubera (north direction) to get wealth. He then conducted Digvijaya — conquered all four directions. He defeated eastern kings, then southern, western (Parasika/Persian), and northern kings. He thus earned the title of Digvijeta and his glory spread across the world.' },
-      { num: 'Q2', text: 'Write short notes (any two):', dev: 'विनयः विधेयता च — संक्षिप्त टिप्पणी', marks: '2×2=4 Marks', answer: 'Vinaya means humility — not considering oneself superior. Vidheyata means obedience to rightful authority. Together they form ideal character: humble internally, disciplined externally. The text teaches these as the twin pillars of success and good character in a student.' },
-      { num: 'Q3 (Grammar)', text: 'Write Ram Shabda declensions (all 8 Vibhaktis, 3 numbers):', dev: 'राम शब्दस्य रूपाणि लिखत', marks: '8 Marks', answer: 'See Vyakarana tab → शब्दरूपाणि for complete Ram Shabda table with all 8 cases × 3 numbers.' },
-      { num: 'Q4 (Translation)', text: 'Translate into Sanskrit:', dev: null, marks: '5 Marks', answer: '1. "Knowledge is the greatest wealth" → विद्या परमं धनम्\n2. "Rama is a good king" → रामः सत्राजा अस्ति\n3. "Students should study daily" → छात्राः प्रतिदिनं पठेयुः\n4. "The teacher teaches" → आचार्यः पाठयति\n5. "Truth is God" → सत्यं परमं देवता' },
-      { num: 'Q5 (Letter)', text: 'Write a formal letter in Sanskrit to your college principal requesting a day off:', dev: 'संस्कृत-पत्रलेखनम्', marks: '5 Marks', answer: 'सेवायाम्,\nश्रीमान् प्राचार्यमहोदयः,\nनारायण-विद्यालयः, निदमनूरु\n\nविषयः: अवकाशप्रार्थना\n\nमान्यमहोदय,\nसविनयं निवेदयामि यत् अहम् [नाम] प्रथमवर्षे छात्रः। अद्य दिनाङ्के [date] मम स्वास्थ्यं न अस्ति। अतः एकदिवसस्य अवकाशं दातुम् अनुग्रहं कुर्वन्तु।\n\nआज्ञाकारी शिष्यः,\nचरण सुकुमार\nI Yr, [Section]' }
-    ]
-  },
-  {
-    title: 'Past Paper — March 2024',
-    meta: 'APBIE Official Paper · 100 Marks',
-    icon: '🗂',
-    badge: 'Important',
-    badgeClass: 'badge-hard',
-    questions: [
-      { num: 'Q1', text: 'Write the character of Viravara from Shudraka-Veeravara-Katha:', dev: 'वीरवरस्य चरित्रं वर्णयत', marks: '4 Marks', answer: 'Viravara was an extraordinary loyal soldier. Though he received 500 gold coins daily, he never revealed his duty. When the kingdom was in danger, he sacrificed his son, daughter, and wife without hesitation. He represents the ideal of Swami-bhakti (devotion to master) carried to the extreme. His character teaches us that true loyalty means prioritizing another\'s welfare above even family.' },
-      { num: 'Q2', text: 'What is the moral of Moorkhapandita-Katha? Relate it to modern education:', dev: null, marks: '4 Marks', answer: 'Moral: Book learning without practical wisdom is dangerous. In modern context: students who memorize facts but cannot apply them face similar failure. Education must combine Shastra-jnana (theoretical knowledge) with Viveka (judgment) and Vyavaharika-jnana (practical wisdom). The fourth scholar represents common sense — which is often undervalued in our examination-focused system.' },
-      { num: 'Q3', text: 'Write Patla-Lekhanam (Letter) in Sanskrit to your friend about the importance of studying Sanskrit:', dev: 'मित्राय संस्कृत-महत्त्व-विषये पत्रं लिखत', marks: '5 Marks', answer: 'प्रिय मित्र [Name],\nनमस्ते!\nसाधु भवान् / भवती। अहम् अत्र कुशली। भवतः / भवत्याः विषये सर्वदा चिन्तयामि।\n\nमित्र, संस्कृतभाषा अस्माकं भारतस्य आत्मा। एतां भाषां पठित्वा अस्माकं सांस्कृतिक-विरासतं ज्ञातुं शक्यते। संस्कृतं पठेत् — स बुद्धिमान् भवति। अतः त्वम् अपि संस्कृतम् अभ्यसस्व।\n\nइति विरमामि।\nतव सुहृत्,\nचरणः' }
-    ]
-  }
+const PAPERS=[
+  {title:'Model Paper I — Narayana Material',meta:'100 Marks · 3 Hours · All Sections',icon:'📄',badge:'Start Here',bc:'bdgb',qs:[
+    {num:'Q.1(a) [4M]',txt:'रावणं प्रति हनुमता कृतम् उपदेशं सङ्क्षेण लिखत।',dv:'हनुमदुपदेशः',mk:'4 Marks',
+     ans:`Hanuman's advice to Ravana:\n1. Told about Rama's power — killed Vali with single arrow (स तेन निहतः सङ्ख्ये शरेणैकेन वानरः।)\n2. Warned: acts against Dharma lead to swift punishment (फलमस्याप्यधर्मस्य क्षिप्रमेव प्रपत्यसे।)\n3. Core message: Return Sita to Rama (नरदेवाय जानकीं प्रतिदीयताम्।)\n4. Final warning: Sita = Kalaratri for Lanka (कालरात्रीति तां विद्धि सर्वलङ्काविनाशिनीम्।)\n"I am Rama's servant — came only as mediator to advise you sincerely."`},
+    {num:'Q.1(b) [4M]',txt:'युवराजस्य रघोः शौर्यं विवृणुत।',dv:'रघोः शौर्यम्',mk:'4 Marks',
+     ans:`Dileepa crowned son Raghu. Indra stole the 100th yajna horse (धनुर्भृतामग्रत एव रक्षिणां जहार शक्रः।). Raghu confronted Indra boldly: "How can you obstruct my father's ritual? (क्रिया विघाताय कथं प्रवर्तसे।)" Raghu stood firm with divine physique (वपुः प्रकर्षेण विडम्बितेश्वरः।). Even Brahmastra failed. Indra gave a boon — Raghu asked only for his father's yajna completion (क्रतोरशेषेण फलेन युज्यताम्।). Dileepa honored Raghu with title "Sethakrathu."`},
+    {num:'Q.2 [4M]',txt:'Write Sandarbha Vakya (all 4 parts) for: धर्मार्थं सहितं वाक्यमिह चामुत्र च क्षमम्',dv:'सन्दर्भ वाक्यानि',mk:'4 Marks',
+     ans:`कविपरिचयः: इदं वाक्यं हनुमदुपदेशः इति पाठात् स्वीकृतम्।\nकविः: वाल्मीकिमहर्षिः | ग्रन्थः: श्रीमद्रामायणम्\nसन्दर्भः: आञ्चनेयः रावणं प्रति एवम् अवदत्।\nभावः: धर्मेण सहितं वाक्यम् इह लोके परलोके च हितकरम् — A word accompanied by Dharma is beneficial in this world and the next.`},
+    {num:'Q.3 [8M]',txt:'Write Ram Shabda — all 8 vibhaktis × 3 numbers',dv:'शब्दरूपाणि',mk:'8 Marks',
+     ans:`राम शब्द (अकारान्त पुल्लिंग):\nप्रथमा: रामः / रामौ / रामाः\nद्वितीया: रामम् / रामौ / रामान्\nतृतीया: रामेण / रामाभ्याम् / रामैः\nचतुर्थी: रामाय / रामाभ्याम् / रामेभ्यः\nपञ्चमी: रामात् / रामाभ्याम् / रामेभ्यः\nषष्ठी: रामस्य / रामयोः / रामाणाम्\nसप्तमी: रामे / रामयोः / रामेषु\nसम्बोधन: हे राम! / हे रामौ! / हे रामाः!`},
+    {num:'Q.4 [5M]',txt:'Letter to father asking money for educational tour',dv:'पत्रलेखनम् — पुत्रेण पितरं प्रति पत्रम्',mk:'5 Marks',
+     ans:`अत्रवरम्,\nदिनाङ्कः ०३-१०-२०२५\n\nसविधे -\nश्री एन् रविकान्तः,\nगृहसङ्ख्या ३-२-१९, गान्धीवीथी, कडप।\n\nपरमपूज्यानां पितृपादानां प्रणामाः। अहम् अत्र कुशली। भवन्तः सर्वे कुशलिनः इति मन्ये। अत्र मम पठनं सम्यक् चलति। आगामिमासे अध्यापकैः सह मम कलाशालातः छात्राः उञ्जयीनगरं प्रति विज्ञानयात्रायै गमिष्यन्ति। मम कृते अनुमत्या सह व्ययार्थं सहस्ररूप्यकाणि प्रेषयन्तु इति प्रार्थयामि। मातृचरणयोः मम वन्दनानि सूचयन्तु।\n\nइति\nभवदीय पुत्रः\n(चरण सुकुमार)`},
+    {num:'Q.5 [5M]',txt:'अनुवादाभ्यासः — Translate into Sanskrit:',dv:'वर्तमान / भूत / भविष्यत् काल',mk:'5 Marks',
+     ans:`1. सः देवं नमति। (He salutes God.) — वर्तमानकालः\n2. ते परीक्षां लिखन्ति। (They write the examination.) — वर्तमानकालः\n3. सः क्षीरम् अपिबत्। (He drank milk.) — भूतकालः\n4. ते पाठम् अपठन्। (They read a lesson.) — भूतकालः\n5. सः नगरं गमिष्यति। (He will go to city.) — भविष्यत्कालः\n6. त्वं देवालयं गमिष्यसि। (You will go to temple.) — भविष्यत्कालः\n⭐ सुभाषितवाक्यम्: सत्यमेव जयते। — Truth alone triumphs.`}
+  ]},
+  {title:'Model Paper II — Previous Year Pattern',meta:'March 2024 APBIE Style · 100 Marks',icon:'🗂',badge:'Important',bc:'bdgr',qs:[
+    {num:'Q.1 [4M]',txt:'जरद्वनो नाम गृध्रः पक्षिभिः कथं व्यापादितः?',dv:'अज्ञातस्य वासो न देयः',mk:'4 Marks',
+     ans:`Eagle Jaradgava (old, claws fallen off) lived on Gridhrakuta mountain. Cat Dheergakarna came claiming to follow Chandrayana Vrata and non-violence (अहिंसो परमो धर्मः।). Cat argued: "Even enemies should be welcomed as guests (अरावप्युचितं कार्यमातिथ्यं गृहमागते।)." Eagle allowed cat to stay. Cat secretly ate chicks. Birds returned, found remains, wrongly blamed eagle — killed him.\n⭐ MORAL: अज्ञातकुलशीलस्य वासो देयो न कस्यचित्`},
+    {num:'Q.2 [4M]',txt:'दयारामस्य दयागुणं परोपकारं च विवृणुत।',dv:'दयावान् राक्षसः',mk:'4 Marks',
+     ans:`Dayaram's compassion:\n1. Protected bird chicks — broke hunter's leg (अस्मान् मा पीडय। त्वं गच्छ अन्यत्र।)\n2. Carried another hunter far away to protect animals\n3. During drought — brought clouds from far away with his power, saved the forest\n4. Protected trees from wood-cutters (तक्षकाः कुठारैः वने प्रविश्य वृक्षाणां विनाशं कर्तुम् ऐच्छन्।)\n5. Fought monster with 17 horns and 9 heads — risked his life\n⭐ MORAL: परोपकारः पुण्याय पापाय परपीडनम्।`},
+    {num:'Q.3 [4M]',txt:'Write Sandarbha Vakya for 3 vakyas from रघोः शौर्यम्',dv:'सन्दर्भ वाक्यानि',mk:'4 Marks',
+     ans:`1. वपुः प्रकर्षेण विडम्बितेश्वरः ।\nकविः: कालिदासः | ग्रन्थः: रघुवंशः\nसन्दर्भः: रघुदेवेन्द्रयोः युद्धारम्भ सन्दर्भे कविः एवम् अवदत्।\nभावः: रघुः शरीर प्रकर्षेण ईश्वर इव अतिष्ठत्।\n\n2. क्रिया विघाताय कथं प्रवर्तसे ।\nकविः: कालिदासः | ग्रन्थः: रघुवंशः\nसन्दर्भः: रघुमहाराजः इन्द्रं प्रति।\nभावः: हे देवेन्द्र! मम पितुः यज्ञविनाशाय कथं प्रवर्तसे।\n\n3. क्रतोरशेषेण फलेन युज्यताम् ।\nकविः: कालिदासः | ग्रन्थः: रघुवंशः\nसन्दर्भः: रघुमहाराजः इन्द्रं प्रति।\nभावः: क्रतोः फलम् अशेषेण युज्यताम्।`},
+    {num:'Q.4 [8M]',txt:'Write Lata Shabda + Phala Shabda (all vibhaktis)',dv:'शब्दरूपाणि',mk:'8 Marks',
+     ans:`लता शब्द (आकारान्त स्त्रीलिंग):\nप्रथमा: लता/लते/लताः | द्वितीया: लताम्/लते/लताः\nतृतीया: लतया/लताभ्याम्/लताभिः | चतुर्थी: लतायै/लताभ्याम्/लताभ्यः\nपञ्चमी: लतायाः/लताभ्याम्/लताभ्यः | षष्ठी: लतायाः/लतयोः/लतानाम्\nसप्तमी: लतायाम्/लतयोः/लतासु | सम्बोधन: हे लते!/हे लते!/हे लताः!\n\nफल शब्द (अकारान्त नपुंसकलिंग):\nप्रथमा: फलम्/फले/फलानि | द्वितीया: फलम्/फले/फलानि\nतृतीया: फलेन/फलाभ्याम्/फलैः | चतुर्थी: फलाय/फलाभ्याम्/फलेभ्यः\nपञ्चमी: फलात्/फलाभ्याम्/फलेभ्यः | षष्ठी: फलस्य/फलयोः/फलानाम्\nसप्तमी: फले/फलयोः/फलेषु | सम्बोधन: हे फल!/हे फले!/हे फलानि!`},
+    {num:'Q.5 [5M]',txt:'Letter to principal requesting sick leave:',dv:'ज्वरार्तस्य विरामग्रहणाय अभ्यर्थनपत्रम्',mk:'5 Marks',
+     ans:`तेनालि,\nदिनाङ्कः १०-१२-२०२५\n\nसेवायाम् -\nप्रधानाध्यापकः / प्रांशुपालः,\nप्रमुत्व (जूनियर) उच्चमाध्यमिक कलाशाला, तेनालि।\n\nमान्याः!\nविषयः: विरामस्य कृते अभ्यर्थनम्\nअहम् अस्यां कलाशालायां प्रथमसंवत्सरं पठामि। मम स्वास्थ्यं सम्यक् नास्ति। अहं ज्वरेण पीडितो भवामि। अतः विश्रान्तिं स्वीकर्तुं मह्यं दिनत्रयं १०-१२-२०२५ तः १२-१२-२०२५ पर्यन्तं विरामं यच्छन्तु। मम अनुपस्थितिसमये पाठ्यमानान् पाठान् मित्रसकाशात् ज्ञात्वा अहं पठिष्यामि।\nसधन्यवादम्।\nभवतां विधेयः छात्रः\nचरण सुकुमार, अनुक्रमसंख्या ××\nप्रमुत्व (जूनियर) उच्चमाध्यमिक कलाशाला, तेनालि।`}
+  ]}
 ];
 
-// ─── STATE ─────────────────────────────────────────────
-let progress = JSON.parse(localStorage.getItem('charan_sanskrit_progress') || '{}');
-let currentDrillIdx = 0;
-let drillScore = { correct: 0, total: 0 };
-let aiHistory = [];
+// ═══ STATE ═══
+let prog = JSON.parse(localStorage.getItem('charan_sk_prog')||'{}');
+if(window._prog) prog = {...prog,...window._prog};
+let dIdx=0,dCor=0,dTot=0,aiHist=[];
 
-// ─── SLOKA ROTATION ──────────────────────────────────
-const todaySloka = SLOKAS[new Date().getDay() % SLOKAS.length];
-document.getElementById('slokaText').textContent = todaySloka.dev;
-document.getElementById('slokaMeaning').textContent = todaySloka.meaning;
+// ═══ INIT ═══
+const day=new Date().getDay();
+document.getElementById('slokaText').textContent=SDAY[day%SDAY.length].d;
+document.getElementById('slokaMean').textContent=SDAY[day%SDAY.length].m;
 
-// ─── TAB SWITCHING ─────────────────────────────────
-function switchTab(id, btn) {
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
 }
-window.switchTab = switchTab;
+window.switchTab=switchTab;
 
-// ─── RENDER CHAPTER LIST ─────────────────────────────
-function renderChapters(data, containerId, sectionLabel) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = data.map((ch, i) => `
-    <div class="chapter-card" id="ch-${ch.id}">
-      <div class="chapter-header" onclick="toggleChapter('${ch.id}')">
-        <div class="chapter-num">${ch.num}</div>
-        <div class="chapter-info">
-          <div class="chapter-title-dev">${ch.devTitle}</div>
-          <div class="chapter-title-en">${ch.enTitle}</div>
-          <div class="chapter-author">— ${ch.author}</div>
+// ═══ RENDER CHAPTERS ═══
+function renderChs(data,cid){
+  const c=document.getElementById(cid);
+  c.innerHTML=data.map(ch=>`
+    <div class="ch-card" id="ch-${ch.id}">
+      <div class="ch-hdr" onclick="togCh('${ch.id}')">
+        <div class="ch-num">${ch.num}</div>
+        <div class="ch-info">
+          <div class="ch-tdev">${ch.dt}</div>
+          <div class="ch-ten">${ch.et}</div>
+          <div class="ch-auth">— ${ch.auth}</div>
         </div>
-        <div class="chapter-score">
-          <div class="score-circle ${getScoreClass(ch.id)}" id="score-${ch.id}">
-            ${getScore(ch.id)}
-          </div>
-          <div style="font-size:9px;color:#aaa">Progress</div>
-        </div>
-        <span class="chapter-expand-icon">▾</span>
+        <div class="ch-score"><div class="spill ${gScCls(ch.id)}" id="sp-${ch.id}">${gSc(ch.id)}</div><div style="font-size:9px;color:#bbb;margin-top:2px">progress</div></div>
+        <span class="ch-exp">▾</span>
       </div>
-      <div class="chapter-body">
-        <div class="mini-tabs">
-          <div class="mini-tab active" onclick="switchMini(this,'summary-${ch.id}','${ch.id}')">📋 Summary</div>
-          <div class="mini-tab" onclick="switchMini(this,'qa-${ch.id}','${ch.id}')">❓ Q&A</div>
-          <div class="mini-tab" onclick="switchMini(this,'vocab-${ch.id}','${ch.id}')">🔤 Key Words</div>
+      <div class="ch-body">
+        <div class="mt">
+          <div class="mtab active" onclick="swM(this,'ab-${ch.id}','${ch.id}')">📋 About</div>
+          ${ch.sl?`<div class="mtab" onclick="swM(this,'sl-${ch.id}','${ch.id}')">📿 Slokas</div>`:''}
+          <div class="mtab" onclick="swM(this,'qa-${ch.id}','${ch.id}')">❓ Q&A</div>
+          ${ch.san?`<div class="mtab" onclick="swM(this,'sn-${ch.id}','${ch.id}')">📌 सन्दर्भ</div>`:''}
+          <div class="mtab" onclick="swM(this,'kw-${ch.id}','${ch.id}')">🔤 Words</div>
         </div>
-        
-        <div class="mini-panel active" id="summary-${ch.id}">
-          <div style="font-size:13px;line-height:1.8;color:var(--ink)">${ch.summary.replace(/\n/g,'<br>')}</div>
+        <div class="mpanel active" id="ab-${ch.id}">
+          <div class="hbox"><div class="hbox-title">कविपरिचयः (About the Poet)</div>
+          <div style="font-size:12px;line-height:1.8;white-space:pre-line">${ch.kp}</div></div>
+          <div style="font-size:12px;line-height:1.8;color:var(--ink)">${ch.intro||''}</div>
         </div>
-        
-        <div class="mini-panel" id="qa-${ch.id}">
-          ${ch.questions.map((q,qi) => `
-            <div class="qa-card" id="qa-${ch.id}-${qi}">
-              <div class="qa-question" onclick="toggleQA('qa-${ch.id}-${qi}','${ch.id}')">
-                <span>${q.q}</span>
-                <span class="qa-mark">${q.marks}</span>
-              </div>
-              <div class="qa-answer">
-                ${q.a.includes('\n') ? q.a.replace(/\n/g,'<br>') : q.a}
-              </div>
+        ${ch.sl?`<div class="mpanel" id="sl-${ch.id}">
+          <div class="hbox"><div class="hbox-title">⭐ Memorise ALL slokas with meanings for exam!</div></div>
+          ${ch.sl.map(s=>`<div class="scard"><div class="sdev">${s.d}</div><div class="sen">${s.e}</div><div class="smn"><strong>Meaning/Bhav:</strong> ${s.m}</div></div>`).join('')}
+        </div>`:''}
+        <div class="mpanel" id="qa-${ch.id}">
+          <div class="hbox"><div class="hbox-title">💡 Click each question to reveal model answer</div></div>
+          ${ch.qa.map((q,i)=>`<div class="qacard" id="qc-${ch.id}-${i}">
+            <div class="qaq" onclick="togQA('qc-${ch.id}-${i}','${ch.id}')"><span>${q.q}</span><span class="qamk">${q.m}</span></div>
+            <div class="qaa">${q.a.replace(/\n/g,'<br>')}</div>
+          </div>`).join('')}
+        </div>
+        ${ch.san?`<div class="mpanel" id="sn-${ch.id}">
+          <div class="hbox"><div class="hbox-title">📌 Format: कविपरिचयः + कविः/ग्रन्थः + सन्दर्भः + भावः = 4 Marks each!</div></div>
+          ${ch.san.map(s=>`<div class="sancard">
+            <div class="sandev">${s.v}</div>
+            <div style="font-size:12px;line-height:2">
+              <strong>कविपरिचयः:</strong> इदं वाक्यं ${ch.dt} इति पाठात् स्वीकृतम्।<br>
+              <strong>कविः:</strong> ${s.k} | <strong>ग्रन्थः:</strong> ${s.g}<br>
+              <strong>सन्दर्भः:</strong> ${s.s}<br>
+              <strong>भावः:</strong> ${s.b}
             </div>
-          `).join('')}
-        </div>
-        
-        <div class="mini-panel" id="vocab-${ch.id}">
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px">
-            ${ch.keyWords.map(w => `
-              <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:10px">
-                <div class="dev" style="font-size:16px">${w.dev}</div>
-                <div style="font-size:11px;color:var(--ochre);margin-top:3px">${w.en}</div>
-              </div>
-            `).join('')}
-          </div>
+          </div>`).join('')}
+        </div>`:''}
+        <div class="mpanel" id="kw-${ch.id}">
+          <div class="vgrid">${ch.kw.map(w=>`<div class="vcard"><div class="vdev">${w.d}</div><div class="ven">${w.e}</div></div>`).join('')}</div>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-function toggleChapter(id) {
-  const card = document.getElementById('ch-' + id);
-  card.classList.toggle('open');
-}
-
-function switchMini(btn, panelId, chId) {
-  const card = document.getElementById('ch-' + chId);
-  card.querySelectorAll('.mini-tab').forEach(t => t.classList.remove('active'));
-  card.querySelectorAll('.mini-panel').forEach(p => p.classList.remove('active'));
+function togCh(id){document.getElementById('ch-'+id).classList.toggle('open');}
+function swM(btn,pid,chId){
+  const card=document.getElementById('ch-'+chId);
+  card.querySelectorAll('.mtab').forEach(t=>t.classList.remove('active'));
+  card.querySelectorAll('.mpanel').forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById(panelId).classList.add('active');
+  document.getElementById(pid).classList.add('active');
 }
-
-function toggleQA(cardId, chId) {
-  const card = document.getElementById(cardId);
-  card.classList.toggle('open');
-  // Track progress
-  if (card.classList.contains('open')) {
-    progress[chId] = (progress[chId] || 0) + 1;
-    saveProgress();
-    updateScoreDisplay(chId);
-  }
+function togQA(id,chId){
+  document.getElementById(id).classList.toggle('open');
+  prog[chId]=(prog[chId]||0)+1;
+  saveP();
 }
+window.togCh=togCh;window.swM=swM;window.togQA=togQA;
 
-function getScore(chId) {
-  const n = progress[chId] || 0;
-  if (!n) return '—';
-  return Math.min(n * 20, 100) + '%';
+// ═══ PROGRESS ═══
+function gSc(id){const n=prog[id]||0;return n===0?'—':Math.min(n*15,100)+'%';}
+function gScCls(id){const n=prog[id]||0;return n>=5?'good':'';}
+function saveP(){
+  localStorage.setItem('charan_sk_prog',JSON.stringify(prog));
+  if(window._db){window._set(window._doc(window._db,'students','charan'),prog).catch(()=>{});}
+  updDash();
 }
+function updSp(id){const el=document.getElementById('sp-'+id);if(el){el.textContent=gSc(id);el.className='spill '+gScCls(id);}}
 
-function getScoreClass(chId) {
-  const n = progress[chId] || 0;
-  if (n >= 4) return 'good';
-  if (n >= 2) return 'mid';
-  return '';
-}
-
-function updateScoreDisplay(chId) {
-  const el = document.getElementById('score-' + chId);
-  if (el) {
-    el.textContent = getScore(chId);
-    el.className = 'score-circle ' + getScoreClass(chId);
-  }
-}
-
-function saveProgress() {
-  localStorage.setItem('charan_sanskrit_progress', JSON.stringify(progress));
-  updateDashboard();
-}
-
-// ─── DASHBOARD ───────────────────────────────────────
-function updateDashboard() {
-  const allChapters = [...PADYA_DATA, ...GADYA_DATA, ...UPAVACHAKAM_DATA];
-  const attempted = Object.keys(progress).length;
-  const totalPct = attempted === 0 ? 0 : Math.round(
-    Object.values(progress).reduce((s, n) => s + Math.min(n * 20, 100), 0) / (allChapters.length * 100) * 100
-  );
-  
-  document.getElementById('totalScore').textContent = totalPct + '%';
-  document.getElementById('questionsAttempted').textContent = Object.values(progress).reduce((s,n)=>s+n,0);
-  
-  // Progress grid
-  const grid = document.getElementById('progressGrid');
-  grid.innerHTML = allChapters.map(ch => {
-    const pct = Math.min((progress[ch.id] || 0) * 20, 100);
-    return `
-      <div class="prog-card" onclick="jumpToChapter('${ch.id}')">
-        <div class="prog-section-tag">${ch.id.startsWith('padya')?'पद्य':ch.id.startsWith('gadya')?'गद्य':'उपवाचक'}</div>
-        <div class="prog-title">${ch.devTitle}</div>
-        <div class="prog-bar-wrap"><div class="prog-bar" style="width:${pct}%"></div></div>
-        <div class="prog-pct">${pct}% complete</div>
-      </div>
-    `;
+function updDash(){
+  const all=[...PD,...GD,...UD];
+  const tot=Object.values(prog).reduce((s,n)=>s+n,0);
+  const pct=Math.round(Math.min(tot/(all.length*7)*100,100));
+  document.getElementById('totPct').textContent=pct+'%';
+  document.getElementById('totQ').textContent=tot;
+  document.getElementById('drillSc').textContent=dTot>0?dCor+'/'+dTot:'—';
+  document.getElementById('pgrid').innerHTML=all.map(ch=>{
+    const p=Math.min((prog[ch.id]||0)*15,100);
+    const tag=ch.id.startsWith('p')?'पद्य':ch.id.startsWith('g')?'गद्य':'उपवाचक';
+    return `<div class="pcard" onclick="jumpTo('${ch.id}')">
+      <div class="ptag">${tag}</div>
+      <div class="ptitle">${ch.dt}</div>
+      <div class="pbar-w"><div class="pbar" style="width:${p}%"></div></div>
+      <div class="ppct">${p}% done</div>
+    </div>`;
   }).join('');
 }
 
-function jumpToChapter(chId) {
-  const tab = chId.startsWith('padya') ? 'padya' : chId.startsWith('gadya') ? 'gadya' : 'upavachakam';
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  const tabIdx = ['dashboard','padya','gadya','upavachakam','vyakarana','papers','aiTutor'].indexOf(tab);
-  switchTab(tab, tabBtns[tabIdx]);
-  setTimeout(() => {
-    const el = document.getElementById('ch-' + chId);
-    if (el) { el.scrollIntoView({behavior:'smooth'}); el.classList.add('open'); }
-  }, 100);
+function jumpTo(id){
+  const tab=id.startsWith('p')?'padya':id.startsWith('g')?'gadya':'upa';
+  const idx=['dash','padya','gadya','upa','vya','papers','ai'].indexOf(tab);
+  switchTab(tab,document.querySelectorAll('.tab-btn')[idx]);
+  setTimeout(()=>{const el=document.getElementById('ch-'+id);if(el){el.scrollIntoView({behavior:'smooth'});el.classList.add('open');}},150);
 }
-window.jumpToChapter = jumpToChapter;
+window.jumpTo=jumpTo;
 
-// ─── HEATMAP ─────────────────────────────────────────
-function renderHeatmap() {
-  const grid = document.getElementById('heatmapGrid');
-  const cells = Array.from({length: 84}, (_, i) => {
-    const heat = Math.random() < 0.3 ? ['','h1','h2','h3','h4'][Math.floor(Math.random()*5)] : '';
-    const isToday = i === 83;
-    return `<div class="heatmap-cell ${heat} ${isToday?'today':''}" title="Day ${i+1}"></div>`;
-  });
-  grid.innerHTML = cells.join('');
-}
-
-// ─── GRAMMAR ─────────────────────────────────────────
-function showGrammar(type) {
-  const content = document.getElementById('grammarContent');
-  const drill = document.getElementById('drillArea');
-  
-  let html = '';
-  
-  if (type === 'sandhi') {
-    html = `
-      <div class="section-title">सन्धि नियमाः — Sandhi Rules</div>
-      <div class="sandhi-table-wrap">
-        <table class="sandhi-table">
-          <tr><th>Type</th><th>Rule</th><th>Example</th><th>Name</th></tr>
-          ${SANDHI_RULES.map(r => `
-            <tr>
-              <td><span class="dev">${r.type}</span></td>
-              <td><span class="dev">${r.rule}</span></td>
-              <td><span class="dev">${r.example}</span></td>
-              <td>${r.name}</td>
-            </tr>
-          `).join('')}
-        </table>
-      </div>
-      <button class="drill-next-btn" onclick="startDrill()">🎯 Start Sandhi Drill Quiz</button>
-    `;
-  } else if (type === 'shabda') {
-    html = `
-      <div class="section-title">राम शब्द विभक्ति — Noun Declensions</div>
-      <p style="font-size:12px;color:var(--ochre);margin-bottom:12px">${SHABDA_RAM.name}</p>
-      <div class="sandhi-table-wrap">
-        <table class="conj-table">
-          <tr>
-            <th>विभक्ति</th>
-            <th>एकवचन (Singular)</th>
-            <th>द्विवचन (Dual)</th>
-            <th>बहुवचन (Plural)</th>
-          </tr>
-          ${SHABDA_RAM.cases.map((c, i) => `
-            <tr>
-              <td class="conj-row-label">${c}</td>
-              <td>${SHABDA_RAM.singular[i]}</td>
-              <td>${SHABDA_RAM.dual[i]}</td>
-              <td>${SHABDA_RAM.plural[i]}</td>
-            </tr>
-          `).join('')}
-        </table>
-      </div>
-      <button class="drill-next-btn" onclick="startDrill()">🎯 Start Shabdarupa Quiz</button>
-    `;
-  } else if (type === 'dhatu') {
-    html = `
-      <div class="section-title">पठ् धातु — Verb Conjugations</div>
-      <p style="font-size:12px;color:var(--ochre);margin-bottom:12px">${DHATU_PATH.name}</p>
-      <div class="sandhi-table-wrap">
-        <table class="conj-table">
-          <tr>
-            <th>Person</th>
-            <th>एकवचन</th>
-            <th>द्विवचन</th>
-            <th>बहुवचन</th>
-          </tr>
-          ${DHATU_PATH.persons.map((p, i) => `
-            <tr>
-              <td class="conj-row-label">${p}</td>
-              <td>${DHATU_PATH.present.singular[i]}</td>
-              <td>${DHATU_PATH.present.dual[i]}</td>
-              <td>${DHATU_PATH.present.plural[i]}</td>
-            </tr>
-          `).join('')}
-        </table>
-      </div>
-      <p style="font-size:11px;color:var(--ochre);margin:8px 0">Also learn: गम् (to go), कृ (to do), भू (to be), दृश् (to see)</p>
-      <button class="drill-next-btn" onclick="startDrill()">🎯 Start Dhaturupa Quiz</button>
-    `;
-  } else if (type === 'patra') {
-    html = `
-      <div class="section-title">पत्रलेखनम् — Sanskrit Letter Writing</div>
-      <div class="drill-box" style="background:var(--amber)">
-        <div style="font-family:'Noto Serif Devanagari',serif;font-size:14px;line-height:2;color:var(--ink)">
-          <strong>Formal Letter Format:</strong><br><br>
-          सेवायाम्,<br>
-          श्रीमान् [Receiver's Title + Name],<br>
-          [Institution Name]<br><br>
-          विषयः: [Subject in Sanskrit]<br><br>
-          मान्यमहोदय,<br>
-          सविनयं निवेदयामि यत् अहम् [your name] [class] छात्रः।<br>
-          [Main content — 2-3 sentences]<br>
-          अतः [Your request]. अनुग्रहं कुर्वन्तु।<br><br>
-          आज्ञाकारी शिष्यः,<br>
-          [Your Name]<br>
-          [Class and Section]<br><br>
-          <strong>Key Phrases:</strong><br>
-          सविनयं निवेदयामि = I humbly submit<br>
-          अनुग्रहं कुर्वन्तु = Please be kind enough<br>
-          आज्ञाकारी = obedient/yours obediently
-        </div>
-      </div>
-    `;
-  } else if (type === 'anuvaad') {
-    html = `
-      <div class="section-title">अनुवादाभ्यासः — Translation Practice</div>
-      <div class="qa-card">
-        <div class="qa-question" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display?'':'block'">
-          Translate: "Knowledge is the greatest wealth" <span class="qa-mark">Common</span>
-        </div>
-        <div class="qa-answer">विद्या एव परमं धनम् अस्ति ।</div>
-      </div>
-      <div class="qa-card">
-        <div class="qa-question" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display?'':'block'">
-          Translate: "Students should study Sanskrit" <span class="qa-mark">Common</span>
-        </div>
-        <div class="qa-answer">छात्राः संस्कृतं पठेयुः ।</div>
-      </div>
-      <div class="qa-card">
-        <div class="qa-question" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display?'':'block'">
-          Translate: "Rama is a great king" <span class="qa-mark">Common</span>
-        </div>
-        <div class="qa-answer">रामः महान् राजा अस्ति ।</div>
-      </div>
-      <div class="qa-card">
-        <div class="qa-question" onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display?'':'block'">
-          Translate: "The teacher teaches in the school" <span class="qa-mark">Common</span>
-        </div>
-        <div class="qa-answer">आचार्यः विद्यालये पाठयति ।</div>
-      </div>
-      <button class="drill-next-btn" onclick="startDrill()">🎯 Start Translation Quiz</button>
-    `;
-  } else if (type === 'sankhya') {
-    const nums = [['१','एकम्','One'],['२','द्वे','Two'],['३','त्रीणि','Three'],['४','चत्वारि','Four'],['५','पञ्च','Five'],['६','षट्','Six'],['७','सप्त','Seven'],['८','अष्ट','Eight'],['९','नव','Nine'],['१०','दश','Ten'],['२०','विंशतिः','Twenty'],['५०','पञ्चाशत्','Fifty'],['१००','शतम्','Hundred']];
-    html = `
-      <div class="section-title">सङ्ख्याः — Sanskrit Numbers</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px">
-        ${nums.map(n=>`
-          <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center">
-            <div style="font-size:24px;color:var(--saffron)">${n[0]}</div>
-            <div style="font-family:'Noto Serif Devanagari',serif;font-size:14px;color:var(--ink);margin:4px 0">${n[1]}</div>
-            <div style="font-size:10px;color:var(--ochre)">${n[2]}</div>
-          </div>
-        `).join('')}
-      </div>
-    `;
+// ═══ GRAMMAR ═══
+function showG(type,cardEl){
+  document.querySelectorAll('.gcard').forEach(c=>c.classList.remove('active'));
+  if(cardEl)cardEl.classList.add('active');
+  const div=document.getElementById('gcontent');
+  if(type==='sandhi'){
+    div.innerHTML=`<div class="sec-title">सन्धि नियमाः — 8 Types (4M in exam)</div>
+      <div class="hbox"><div class="hbox-title">⭐ Memorise: Name + Rule + Example for each type</div></div>
+      <div class="tw"><table class="snd">
+        <tr><th>Name</th><th>Rule</th><th>Example</th></tr>
+        ${SANDHI.map(r=>`<tr><td>${r.nm}</td><td style="font-family:'Noto Serif Devanagari',serif;font-size:14px;color:var(--saffron)">${r.rule}</td><td style="font-family:'Noto Serif Devanagari',serif;font-size:14px">${r.ex}</td></tr>`).join('')}
+      </table></div>
+      <button class="dnext" style="display:block" onclick="showG('drill',null)">🎯 Start Grammar Drill Quiz</button>`;
+  }else if(type==='ram'){
+    div.innerHTML=`<div class="sec-title">राम शब्द — अकारान्त पुल्लिंग (8 Marks!)</div>
+      <div class="tw"><table class="skt">
+        <tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr>
+        ${RAM.cases.map((c,i)=>`<tr><td class="rl">${c}</td><td>${RAM.sg[i]}</td><td>${RAM.du[i]}</td><td>${RAM.pl[i]}</td></tr>`).join('')}
+      </table></div>
+      <button class="dnext" style="display:block" onclick="showG('drill',null)">🎯 Start Drill Quiz</button>`;
+  }else if(type==='lata'){
+    div.innerHTML=`<div class="sec-title">लता शब्द — आकारान्त स्त्रीलिंग</div>
+      <div class="tw"><table class="skt">
+        <tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr>
+        ${LATA.cases.map((c,i)=>`<tr><td class="rl">${c}</td><td>${LATA.sg[i]}</td><td>${LATA.du[i]}</td><td>${LATA.pl[i]}</td></tr>`).join('')}
+      </table></div>`;
+  }else if(type==='phala'){
+    div.innerHTML=`<div class="sec-title">फल शब्द — अकारान्त नपुंसकलिंग</div>
+      <div class="tw"><table class="skt">
+        <tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr>
+        ${PHALA.cases.map((c,i)=>`<tr><td class="rl">${c}</td><td>${PHALA.sg[i]}</td><td>${PHALA.du[i]}</td><td>${PHALA.pl[i]}</td></tr>`).join('')}
+      </table></div>`;
+  }else if(type==='dhatu'){
+    div.innerHTML=`<div class="sec-title">पठ् धातु — परस्मैपदी (Present/Past/Future)</div>
+      <div class="tw"><table class="skt">
+        <tr><th>Tense</th><th>3rd Sg</th><th>3rd Du</th><th>3rd Pl</th><th>2nd Sg</th><th>1st Sg</th></tr>
+        <tr><td class="rl">लट् (Present)</td><td>पठति</td><td>पठतः</td><td>पठन्ति</td><td>पठसि</td><td>पठामि</td></tr>
+        <tr><td class="rl">लङ् (Past)</td><td>अपठत्</td><td>अपठताम्</td><td>अपठन्</td><td>अपठः</td><td>अपठम्</td></tr>
+        <tr><td class="rl">लृट् (Future)</td><td>पठिष्यति</td><td>पठिष्यतः</td><td>पठिष्यन्ति</td><td>पठिष्यसि</td><td>पठिष्यामि</td></tr>
+      </table></div>
+      <div class="hbox"><div class="hbox-title">Translation Examples (from your PDF अनुवादाभ्यासः):</div>
+      <div style="font-family:'Noto Serif Devanagari',serif;font-size:14px;line-height:2.2">
+        सः देवं नमति। — He salutes God. (Present)<br>
+        ते परीक्षां लिखन्ति। — They write exam. (Present)<br>
+        सः क्षीरम् अपिबत्। — He drank milk. (Past)<br>
+        सः नगरं गमिष्यति। — He will go to city. (Future)<br>
+        सत्यमेव जयते। — Truth alone triumphs. (सुभाषितवाक्यम्)
+      </div></div>`;
+  }else if(type==='patra'){
+    div.innerHTML=`<div class="sec-title">पत्रलेखनम् — 4 Model Letters (5M each)</div>
+      <div class="hbox"><div class="hbox-title">Format (memorise this structure!):</div>
+      <div style="font-family:'Noto Serif Devanagari',serif;font-size:13px;line-height:2.2">
+        [Place], दिनाङ्कः [Date]<br>
+        सेवायाम् / सविधे -<br>
+        [Receiver Title + Name],<br>
+        [Address]<br><br>
+        मान्याः! / परमपूज्यानां प्रणामाः।<br>
+        विषयः: [Subject]<br>
+        [Main Content — 2-3 sentences]<br>
+        [Request + सधन्यवादम् / इति]<br><br>
+        भवदीय पुत्रः / भवतां विधेयः छात्रः<br>
+        [Name + Roll No.]
+      </div></div>
+      <div class="hbox"><div class="hbox-title">Key Phrases to Memorise:</div>
+      <div style="font-family:'Noto Serif Devanagari',serif;font-size:13px;line-height:2.2">
+        सविनयं निवेदयामि यत् = I humbly submit that<br>
+        अनुग्रहं कुर्वन्तु = Please be kind enough to<br>
+        सादरप्रणामपूर्वकं विज्ञापयामि = I inform with respectful greetings<br>
+        मम अनुपस्थितिसमये पाठान् मित्रसकाशात् ज्ञात्वा पठिष्यामि = During absence I will learn lessons from friends<br>
+        सधन्यवादम् = With thanks
+      </div></div>`;
+  }else if(type==='anuvaad'){
+    div.innerHTML=`<div class="sec-title">अनुवादाभ्यासः — Translation (from your PDF)</div>
+      <div class="hbox"><div class="hbox-title">All 15 sentences from your Narayana material:</div></div>
+      ${[
+        ['वर्तमानकालः (Present):',''],
+        ['सः देवं नमति।','He salutes God.'],
+        ['ते परीक्षां लिखन्ति।','They write the examination.'],
+        ['त्वं जलं पिवसि।','You are drinking water.'],
+        ['अहं ग्रामं गच्छामि।','I am going to the village.'],
+        ['वयं पाठं पठामः।','We are reading a lesson.'],
+        ['भूतकालः (Past):',''],
+        ['सः क्षीरम् अपिबत्।','He drank milk.'],
+        ['ते पाठम् अपठन्।','They read a lesson.'],
+        ['सीता अत्र अखादत्।','Sita ate rice here.'],
+        ['हरिः समाधानम् अलिखत्।','Hari wrote the answer.'],
+        ['अहं परीक्षाम् अलिखम्।','I wrote the examination.'],
+        ['भविष्यत्कालः (Future):',''],
+        ['सः नगरं गमिष्यति।','He will go to city.'],
+        ['ते पाठं पठिष्यन्ति।','They will read lesson.'],
+        ['त्वं देवालयं गमिष्यसि।','You will go to the temple.'],
+        ['अहं समाधानं वदिष्यामि।','I will tell the answer.'],
+        ['⭐ सुभाषितवाक्यम्: सत्यमेव जयते।','Truth alone triumphs!']
+      ].map(([s,e])=>s.startsWith('⭐')||s.includes(':')?
+        `<div class="hbox" style="margin-bottom:6px"><div class="hbox-title">${s}</div>${e?'<div style="font-size:13px;color:var(--success);font-weight:700">'+e+'</div>':''}</div>`:
+        `<div class="qacard"><div style="padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
+          <span style="font-family:'Noto Serif Devanagari',serif;font-size:14px;color:var(--ink)">${s}</span>
+          <span style="font-size:11px;color:var(--ochre);font-style:italic">${e}</span>
+        </div></div>`
+      ).join('')}`;
+  }else if(type==='drill'){
+    dIdx=0;dCor=0;dTot=0;renderDrill();
   }
-  
-  content.innerHTML = html;
-  content.scrollIntoView({behavior:'smooth', block:'start'});
+  div.scrollIntoView({behavior:'smooth',block:'start'});
 }
-window.showGrammar = showGrammar;
+window.showG=showG;
 
-// ─── GRAMMAR DRILL ──────────────────────────────────
-function startDrill() {
-  currentDrillIdx = 0;
-  drillScore = { correct: 0, total: 0 };
-  renderDrill();
-}
-window.startDrill = startDrill;
-
-function renderDrill() {
-  const drill = document.getElementById('drillArea');
-  if (currentDrillIdx >= DRILL_QUESTIONS.length) {
-    drill.innerHTML = `
-      <div class="drill-box" style="text-align:center">
-        <div style="font-size:40px;margin-bottom:10px">${drillScore.correct >= 6 ? '🏆' : drillScore.correct >= 4 ? '👍' : '💪'}</div>
-        <div style="font-size:22px;font-weight:700;color:var(--ink)">Quiz Complete!</div>
-        <div style="font-size:16px;color:var(--ochre);margin:8px 0">Score: ${drillScore.correct}/${drillScore.total}</div>
-        <div style="font-size:13px;color:var(--ochre);margin-bottom:16px">${drillScore.correct >= 6 ? 'Excellent! वाह! शाबाश Charan!' : drillScore.correct >= 4 ? 'Good progress! Keep practicing!' : 'Review the grammar tables above and try again!'}</div>
-        <button class="drill-next-btn" onclick="startDrill()">🔄 Retry Quiz</button>
+function renderDrill(){
+  const div=document.getElementById('gcontent');
+  if(dIdx>=DRILLQS.length){
+    div.innerHTML=`<div class="dw" style="text-align:center;padding:24px">
+      <div style="font-size:40px">${dCor>=9?'🏆':dCor>=7?'⭐':'💪'}</div>
+      <div style="font-size:22px;font-weight:700;margin:10px 0">Score: ${dCor}/${dTot}</div>
+      <div style="font-size:13px;color:var(--ochre);margin-bottom:16px">
+        ${dCor>=9?'🎉 शाबाश Charan! Excellent! 90+ is definitely yours!':dCor>=7?'Good! Review tables and retry!':'Review all grammar tables first, then retry.'}
       </div>
-    `;
-    return;
+      <button class="dnext" style="display:block" onclick="showG('drill',null)">🔄 Retry Drill (${DRILLQS.length} Questions)</button>
+    </div>`;
+    prog['drill']=(prog['drill']||0)+1;saveP();return;
   }
-  
-  const q = DRILL_QUESTIONS[currentDrillIdx];
-  drill.innerHTML = `
-    <div class="section-title">Grammar Quiz (${currentDrillIdx+1}/${DRILL_QUESTIONS.length})</div>
-    <div class="drill-box">
-      <div class="drill-question-dev">${q.q_dev}</div>
-      <div class="drill-question-en">${q.q_en}</div>
-      <div class="drill-options">
-        ${q.options.map((opt,i) => `
-          <div class="drill-opt" onclick="checkAnswer(${i},${q.correct},'${q.explanation.replace(/'/g,"\\'")}')">
-            <span style="font-family:'Noto Serif Devanagari',serif">${opt}</span>
-          </div>
-        `).join('')}
+  const q=DRILLQS[dIdx];
+  div.innerHTML=`<div class="dw">
+    <div class="dbar"><div class="dbar-f" style="width:${dIdx/DRILLQS.length*100}%"></div></div>
+    <div style="font-size:10px;color:var(--ochre);text-align:right;margin-bottom:10px">Q${dIdx+1} of ${DRILLQS.length} | Score: ${dCor}/${dTot}</div>
+    <div class="dqdev">${q.dv}</div>
+    <div class="dqen">${q.en}</div>
+    <div class="dopts">${q.opts.map((o,i)=>`<div class="dopt" onclick="chkAns(${i},${q.c},'${q.fb.replace(/'/g,"\\'")}')">${o}</div>`).join('')}</div>
+    <div class="dfb" id="dfb"></div>
+    <button class="dnext" id="dnxt" onclick="dIdx++;renderDrill()">Next Question →</button>
+  </div>`;
+}
+
+function chkAns(sel,cor,fb){
+  document.querySelectorAll('.dopt').forEach(o=>o.style.pointerEvents='none');
+  document.querySelectorAll('.dopt')[cor].classList.add('correct');
+  const ok=sel===cor;if(!ok)document.querySelectorAll('.dopt')[sel].classList.add('wrong');
+  dTot++;if(ok)dCor++;
+  const f=document.getElementById('dfb');
+  f.className='dfb '+(ok?'correct':'wrong')+' show';
+  f.innerHTML=(ok?'✅ Correct! ':'❌ Wrong. ')+fb;
+  document.getElementById('dnxt').style.display='block';
+  updDash();
+}
+window.chkAns=chkAns;
+
+// ═══ PAPERS ═══
+function renderPapers(){
+  document.getElementById('papersList').innerHTML=PAPERS.map((p,pi)=>`
+    <div class="ppr" id="pp-${pi}">
+      <div class="pprhdr" onclick="togPP(${pi})">
+        <div class="pprico">${p.icon}</div>
+        <div><div class="pprtitle">${p.title}</div><div class="pprmeta">${p.meta}</div></div>
+        <span class="pprbdg ${p.bc}">${p.badge}</span>
       </div>
-      <div class="drill-feedback" id="drillFeedback"></div>
-      <button class="drill-next-btn" id="drillNextBtn" style="display:none" onclick="nextDrill()">Next Question →</button>
-    </div>
-  `;
-}
-
-function checkAnswer(selected, correct, explanation) {
-  const opts = document.querySelectorAll('.drill-opt');
-  opts.forEach(o => o.style.pointerEvents = 'none');
-  opts[correct].classList.add('correct');
-  
-  const isCorrect = selected === correct;
-  if (!isCorrect) opts[selected].classList.add('wrong');
-  
-  drillScore.total++;
-  if (isCorrect) drillScore.correct++;
-  
-  const fb = document.getElementById('drillFeedback');
-  fb.className = 'drill-feedback ' + (isCorrect ? 'correct' : 'wrong') + ' show';
-  fb.innerHTML = (isCorrect ? '✅ Correct! ' : '❌ Incorrect. ') + explanation;
-  
-  document.getElementById('drillNextBtn').style.display = 'block';
-  
-  progress['drill'] = (progress['drill'] || 0) + 1;
-  saveProgress();
-}
-window.checkAnswer = checkAnswer;
-
-function nextDrill() { currentDrillIdx++; renderDrill(); }
-window.nextDrill = nextDrill;
-
-// ─── PAPERS ──────────────────────────────────────────
-function renderPapers() {
-  const container = document.getElementById('papersList');
-  container.innerHTML = PRACTICE_PAPERS.map((p, pi) => `
-    <div class="paper-card" id="paper-${pi}">
-      <div class="paper-header" onclick="togglePaper(${pi})">
-        <div class="paper-icon">${p.icon}</div>
-        <div>
-          <div class="paper-title">${p.title}</div>
-          <div class="paper-meta">${p.meta}</div>
-        </div>
-        <span class="paper-badge ${p.badgeClass}">${p.badge}</span>
+      <div class="pprbody">
+        ${p.qs.map((q,qi)=>`
+          <div class="eq">
+            <div class="eqnum">${q.num} <span class="eqmk">${q.mk}</span></div>
+            <div class="eqtxt">${q.dv?`<span style="font-family:'Noto Serif Devanagari',serif;font-size:15px;color:var(--saffron);display:block;margin-bottom:4px">${q.dv}</span>`:''} ${q.txt}</div>
+            <button class="showbtn" onclick="togAns(this)">Show Model Answer ▾</button>
+            <div class="ansbox">${q.ans.replace(/\n/g,'<br>')}</div>
+          </div>`).join('')}
       </div>
-      <div class="paper-body">
-        ${p.questions.map((q,qi) => `
-          <div class="exam-question">
-            <div class="q-num">${q.num} <span class="q-marks">${q.marks}</span></div>
-            <div class="q-text">
-              ${q.dev ? `<span class="q-text-dev">${q.dev}</span>` : ''}
-              ${q.text}
-            </div>
-            <button class="show-answer-btn" onclick="toggleAnswer(this)">Show Model Answer ▾</button>
-            <div class="q-answer-box">${q.answer.replace(/\n/g,'<br>')}</div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
+function togPP(i){document.getElementById('pp-'+i).classList.toggle('open');}
+function togAns(btn){const b=btn.nextElementSibling;b.style.display=b.style.display==='block'?'none':'block';btn.textContent=b.style.display==='block'?'Hide Answer ▲':'Show Model Answer ▾';}
+window.togPP=togPP;window.togAns=togAns;
 
-function togglePaper(idx) {
-  document.getElementById('paper-' + idx).classList.toggle('open');
+// ═══ AI TUTOR ═══
+async function sendAI(){
+  const inp=document.getElementById('aiInp');
+  const msg=inp.value.trim();if(!msg)return;
+  inp.value='';
+  addMsg(msg,'user');
+  document.getElementById('aiBtn').disabled=true;
+  const ldg=addMsg('<div class="ldots"><span></span><span></span><span></span></div>','ai',true);
+  const sys=`You are an expert Sanskrit teacher for AP Intermediate 1st Year students at Narayana Junior College, Nidamanuru, Andhra Pradesh. Student name: Charan. Target: 90%+ marks in APBIE exam.
+
+EXACT SYLLABUS from Narayana study material:
+POETRY (पद्यभागः):
+1. हनुमदुपदेशः — वाल्मीकि, Sundarakanda 51st canto. Key slokas: धर्मार्थं सहितं वाक्यम्, कालरात्रीति तां विद्धि, नरदेवाय जानकीं प्रतिदीयताम्
+2. रघोः शौर्यम् — कालिदास, Raghuvamsha 3rd canto. Key: क्रिया विघाताय कथं, वपुः प्रकर्षेण, क्रतोरशेषेण फलेन
+3. नीतिश्लोकाः — विविधकवयः. 8 slokas: नास्ति विद्यासमं, मातृवत् परदारेषु, यौवनं धनसम्पत्तिः, अतिदानात् बलिर्बद्धः, सत्यं ब्रूयात्, परोपकारः कर्तव्यः, अभिवादनशीलस्य, यथा चित्तं तथा वाचः
+4. जनादरः — पट्टाभिरामारावु, Kathapanchakam. Key: साध्ये स्वकार्ये श्रम एव युक्तिः, दैवस्वरूपो ह्यातिथिर्महात्मन्, गृहिणे तन्वन्ति लक्ष्मीः सदा
+5. प्रतिश्रुतिः — डा. दीवि नरसिंह दीक्षित, Vasantatilaka. Vivekananda's message. Key: भवाम नित्यं वदाम सत्यम्, विवेकपूर्णाः भवाम नित्यम्, विजेतृशोभां वहाम सततम्
+
+PROSE (गद्यभागः):
+1. अज्ञातस्य वासो न देयः — नारायण पण्डित, Hitopadesha. Eagle Jaradgava + Cat Dheergakarna. MORAL: अज्ञातकुलशीलस्य वासो देयो न कस्यचित्
+2. शूद्रक वीरवर कथा — जम्भालदत्त, Vetala Panchavimshati. King Sudraka + loyal soldier Veeravara's sacrifice
+3. मूर्खपण्डित कथा — विष्णुशर्मा, Panchatantra Apariksitakaraka
+4. दयावान् राक्षसः — हर्षदेव माधव, Kathasankalanam. Demon Dayaram's compassion. MORAL: परोपकारः पुण्याय पापाय परपीडनम्
+5. जीर्णच्छत्रम् — पुल्लेल श्रीरामचन्द्र. Vijayasimha + old umbrella
+
+GRAMMAR: राम/लता/फल शब्दरूपाणि, पठ् धातुरूपाणि (3 tenses), Sandhi rules (8 types), पत्रलेखनम् (4 model letters), अनुवादाभ्यासः (15 sentences)
+
+EXAM FORMAT: सन्दर्भ वाक्यानि = कविपरिचयः + कविः/ग्रन्थः + सन्दर्भः + भावः (4 parts = 4 marks)
+
+Respond in English or Hindi (NOT Telugu). Be exam-focused, concise. Give exact Sanskrit text with meanings. Max 350 words.`;
+  aiHist.push({role:'user',content:msg});
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,system:sys,messages:aiHist.slice(-10)})});
+    const d=await r.json();
+    const reply=d.content?.[0]?.text||'Sorry, could not get response. Please try again.';
+    aiHist.push({role:'assistant',content:reply});
+    ldg.remove();addMsg(reply,'ai');
+  }catch(e){ldg.remove();addMsg('Network error. Check connection and try again.','ai');}
+  document.getElementById('aiBtn').disabled=false;
 }
-window.togglePaper = togglePaper;
-
-function toggleAnswer(btn) {
-  const box = btn.nextElementSibling;
-  box.style.display = box.style.display === 'block' ? 'none' : 'block';
-  btn.textContent = box.style.display === 'block' ? 'Hide Answer ▲' : 'Show Model Answer ▾';
+function addMsg(t,role,raw=false){
+  const c=document.getElementById('aiMsgs');
+  const d=document.createElement('div');d.className='msg '+role;
+  if(raw)d.innerHTML=t;
+  else d.innerHTML=t.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+  c.appendChild(d);c.scrollTop=c.scrollHeight;return d;
 }
-window.toggleAnswer = toggleAnswer;
+function askQ(q){document.getElementById('aiInp').value=q;sendAI();}
+window.sendAI=sendAI;window.askQ=askQ;
+document.getElementById('aiInp').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendAI();}});
 
-// ─── AI TUTOR ────────────────────────────────────────
-async function sendAIMessage() {
-  const input = document.getElementById('aiInput');
-  const msg = input.value.trim();
-  if (!msg) return;
-  
-  input.value = '';
-  addMessage(msg, 'user');
-  
-  document.getElementById('aiSendBtn').disabled = true;
-  const loadingMsg = addMessage('<div class="ai-loading"><span></span><span></span><span></span></div>', 'ai', true);
-  
-  const systemPrompt = `You are an expert Sanskrit teacher for AP Intermediate 1st Year (APBIE/BIEAP board). The student's name is Charan, studying at Narayana Junior College, Nidamanuru. He is in English medium and can write in English or Hindi.
-
-The syllabus is:
-POEMS (पद्यभागः): 1) हनुमदुपदेशः (Valmiki), 2) रघोः शौर्यम् (Kalidasa), 3) नीतिश्लोकाः (Various), 4) जनादरः (Pattabhirama Rao), 5) प्रतिश्रुतिः (Dixi)
-PROSE (गद्यभागः): 1) अज्ञातस्य वासो न देयः (Hitopadesha), 2) शूद्रक-वीरवरकथा (Vetala Panchavimshati), 3) मूर्खपण्डितकथा (Panchatantra), 4) दयावान् राक्षसः, 5) जीर्णच्छत्रम् (Pullela)
-UPAVACHAKAM: 1) विनयः विधेयता च, 2) मित्ररत्नम्, 3) पापस्य फलम्, 4) दानशूरः शिबिः, 5) मैत्री
-GRAMMAR: शब्दरूपाणि, धातुरूपाणि, सन्धयः, पत्रलेखनम्, अनुवादाभ्यासः
-
-Respond in a friendly, clear, educational style. Use Devanagari script for Sanskrit words. Give practical exam-oriented answers. Keep responses focused and exam-relevant. Max 300 words. Use English or Hindi for explanations (not Telugu).`;
-
-  aiHistory.push({ role: 'user', content: msg });
-  
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 1000,
-        system: systemPrompt,
-        messages: aiHistory.slice(-10)
-      })
-    });
-    
-    const data = await response.json();
-    const reply = data.content?.[0]?.text || 'Sorry, I could not get a response. Please try again.';
-    
-    aiHistory.push({ role: 'assistant', content: reply });
-    loadingMsg.remove();
-    addMessage(reply, 'ai');
-  } catch (err) {
-    loadingMsg.remove();
-    addMessage('Network error. Please check your connection and try again.', 'ai');
-  }
-  
-  document.getElementById('aiSendBtn').disabled = false;
-}
-
-function addMessage(text, role, isRaw = false) {
-  const container = document.getElementById('aiMessages');
-  const div = document.createElement('div');
-  div.className = 'msg ' + role;
-  if (isRaw) div.innerHTML = text;
-  else div.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>');
-  container.appendChild(div);
-  container.scrollTop = container.scrollHeight;
-  return div;
-}
-
-function askQuick(q) {
-  document.getElementById('aiInput').value = q;
-  sendAIMessage();
-}
-window.askQuick = askQuick;
-window.sendAIMessage = sendAIMessage;
-
-// Enter key to send
-document.getElementById('aiInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendAIMessage(); }
-});
-
-// ─── INIT ─────────────────────────────────────────────
-renderChapters(PADYA_DATA, 'padyaList', 'padya');
-renderChapters(GADYA_DATA, 'gadyaList', 'gadya');
-renderChapters(UPAVACHAKAM_DATA, 'upavachakamList', 'upavachakam');
+// ═══ BOOT ═══
+renderChs(PD,'padyaList');
+renderChs(GD,'gadyaList');
+renderChs(UD,'upaList');
 renderPapers();
-renderHeatmap();
-updateDashboard();
+updDash();
 </script>
 </body>
 </html>
