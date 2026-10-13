@@ -1,1055 +1,1622 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sa">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>संस्कृतम् | Charan — Score 90%+</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Sanskrit AP Inter - Charan's Study App</title>
 <style>
-:root{--saffron:#C45E00;--sl:#F07020;--parch:#FAF6EE;--ink:#1A2E1A;--gold:#D4A017;--ochre:#8B6914;--teal:#1B5563;--amber:#FFF3D4;--ambd:#F5E6B0;--success:#2D6A4F;--error:#9B1B1B;--card:#FFF;--border:#E8DFC8}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:var(--parch);color:var(--ink);min-height:100vh}
-.dev{font-family:'Noto Serif Devanagari',serif;color:var(--saffron)}
-
-/* HEADER */
-.hdr{background:linear-gradient(135deg,var(--ink) 0%,#2D4A2D 60%,#1B5563 100%);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.3)}
-.hdr-top{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid rgba(212,160,23,.3)}
-.brand-dev{font-family:'Noto Serif Devanagari',serif;font-size:24px;color:var(--gold)}
-.brand-name{font-size:13px;font-weight:600}.brand-sub{font-size:10px;color:rgba(255,255,255,.6)}
-.badge-hdr{background:rgba(212,160,23,.2);border:1px solid var(--gold);color:var(--gold);padding:3px 9px;border-radius:16px;font-size:10px;font-weight:600}
-.sloka-bar{background:rgba(0,0,0,.2);padding:8px 16px;cursor:pointer}
-.sloka-lbl{font-size:9px;letter-spacing:2px;color:var(--gold);text-transform:uppercase}
-.sloka-txt{font-family:'Noto Serif Devanagari',serif;font-size:14px;color:rgba(255,255,255,.95);line-height:1.5}
-.sloka-mn{font-size:11px;color:rgba(255,255,255,.55);display:none;font-style:italic;margin-top:2px}
-.sloka-bar.open .sloka-mn{display:block}
-.nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 16px;background:rgba(0,0,0,.15)}
-.nav-tabs::-webkit-scrollbar{display:none}
-.tab-btn{flex:none;background:none;border:none;color:rgba(255,255,255,.55);padding:9px 12px;font-size:11px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
-.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(212,160,23,.08)}
-
-/* MAIN */
-.main{max-width:900px;margin:0 auto;padding:16px 14px 80px}
-.tab-panel{display:none}.tab-panel.active{display:block}
-.sec-title{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--ochre);margin:20px 0 10px;display:flex;align-items:center;gap:8px}
-.sec-title::after{content:'';flex:1;height:1px;background:var(--border)}
-
-/* WELCOME */
-.welcome{background:linear-gradient(135deg,var(--saffron),#A04A00);border-radius:14px;padding:20px;color:#fff;margin-bottom:16px;position:relative;overflow:hidden}
-.welcome::before{content:'ॐ';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-family:'Noto Serif Devanagari',serif;font-size:70px;opacity:.1}
-.wstats{display:flex;gap:12px;margin-top:14px}
-.wstat{background:rgba(255,255,255,.15);border-radius:10px;padding:8px 14px;text-align:center}
-.wstat-num{font-size:22px;font-weight:700}.wstat-lbl{font-size:9px;opacity:.75;text-transform:uppercase}
-
-/* TIPS */
-.tips{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:14px}
-.tips-title{font-size:13px;font-weight:700;color:var(--saffron);margin-bottom:10px}
-.tip{display:flex;gap:8px;margin-bottom:8px;font-size:12px;line-height:1.5;align-items:flex-start}
-.tip::before{content:'✅';flex-shrink:0}
-
-/* QUICKGRID */
-.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.qbtn{padding:14px;border:none;border-radius:12px;font-size:12px;font-weight:600;cursor:pointer;color:#fff;text-align:left;transition:opacity .15s}
-.qbtn:hover{opacity:.85}
-.qbtn-icon{font-size:20px;display:block;margin-bottom:4px}
-.qbtn-sub{display:block;font-size:10px;opacity:.8;margin-top:2px}
-
-/* PROGRESS */
-.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
-.pcard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;cursor:pointer;transition:all .2s}
-.pcard:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
-.ptag{font-size:9px;text-transform:uppercase;letter-spacing:.5px;color:var(--ochre);margin-bottom:3px}
-.ptitle{font-family:'Noto Serif Devanagari',serif;font-size:12px;color:var(--ink);margin-bottom:6px;line-height:1.3}
-.pbar-w{background:var(--ambd);border-radius:4px;height:5px;overflow:hidden}
-.pbar{height:100%;background:linear-gradient(90deg,var(--saffron),var(--gold));border-radius:4px;transition:width .8s ease}
-.ppct{font-size:9px;color:var(--ochre);margin-top:3px;font-weight:600}
-
-/* CHAPTERS */
-.ch-list{display:flex;flex-direction:column;gap:10px}
-.ch-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.ch-hdr{display:flex;align-items:center;padding:12px 14px;cursor:pointer;gap:10px}
-.ch-num{width:34px;height:34px;border-radius:8px;background:var(--amber);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Noto Serif Devanagari',serif;font-size:15px;color:var(--saffron);flex-shrink:0}
-.ch-info{flex:1}
-.ch-tdev{font-family:'Noto Serif Devanagari',serif;font-size:15px;color:var(--ink);font-weight:600}
-.ch-ten{font-size:11px;color:var(--ochre)}.ch-auth{font-size:10px;color:#bbb;font-style:italic}
-.ch-score{text-align:right;flex-shrink:0}
-.spill{padding:3px 8px;border-radius:12px;font-size:10px;font-weight:700;background:var(--amber);color:var(--ochre);border:1px solid var(--border)}
-.spill.good{background:#E8F5EE;color:var(--success);border-color:#A8D5BC}
-.ch-exp{font-size:14px;color:#ccc;margin-left:4px;transition:transform .2s}
-.ch-card.open .ch-exp{transform:rotate(180deg)}
-.ch-body{display:none;border-top:1px solid var(--border);background:#FDFAF4}
-.ch-card.open .ch-body{display:block}
-.mt{display:flex;gap:4px;padding:10px 12px 0;flex-wrap:wrap}
-.mtab{padding:5px 10px;border:1px solid var(--border);border-radius:16px;font-size:11px;cursor:pointer;background:#fff;color:var(--ochre);transition:all .15s}
-.mtab.active{background:var(--saffron);color:#fff;border-color:var(--saffron)}
-.mpanel{display:none;padding:12px}.mpanel.active{display:block}
-
-/* HIGHLIGHT */
-.hbox{background:linear-gradient(135deg,var(--amber),#FFF8E0);border:1px solid var(--gold);border-radius:10px;padding:12px;margin-bottom:10px}
-.hbox-title{font-size:11px;font-weight:700;color:var(--saffron);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
-
-/* SLOKAS */
-.scard{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px}
-.sdev{font-family:'Noto Serif Devanagari',serif;font-size:16px;color:var(--saffron);line-height:1.7;margin-bottom:6px}
-.sen{font-size:12px;color:var(--ochre);line-height:1.6;font-style:italic;border-top:1px solid var(--ambd);padding-top:6px}
-.smn{font-size:12px;color:var(--ink);line-height:1.6;padding-top:6px;border-top:1px solid var(--ambd);margin-top:6px}
-
-/* Q&A */
-.qacard{background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden}
-.qaq{padding:10px 12px;cursor:pointer;font-size:12px;font-weight:600;color:var(--ink);display:flex;justify-content:space-between;align-items:flex-start;gap:8px;line-height:1.5}
-.qamk{font-size:9px;background:var(--amber);border:1px solid var(--border);color:var(--ochre);padding:2px 6px;border-radius:8px;white-space:nowrap;flex-shrink:0;font-weight:700}
-.qaa{display:none;padding:10px 12px;border-top:1px solid var(--ambd);background:var(--amber);font-size:12px;line-height:1.7;color:var(--ink)}
-.qacard.open .qaa{display:block}
-
-/* VOCAB */
-.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
-.vcard{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px}
-.vdev{font-family:'Noto Serif Devanagari',serif;font-size:15px;color:var(--saffron)}
-.ven{font-size:10px;color:var(--ochre);margin-top:2px}
-
-/* GRAMMAR */
-.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:16px}
-.gcard{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 10px;cursor:pointer;text-align:center;transition:all .2s}
-.gcard:hover,.gcard.active{background:var(--teal);color:#fff;border-color:var(--teal);transform:translateY(-2px)}
-.gcard:hover .gname,.gcard.active .gname{color:#fff}
-.gcard:hover .gsub,.gcard.active .gsub{color:rgba(255,255,255,.7)}
-.gicon{font-size:22px;margin-bottom:6px}
-.gname{font-family:'Noto Serif Devanagari',serif;font-size:14px;color:var(--ink);font-weight:600}
-.gsub{font-size:10px;color:var(--ochre);margin-top:2px}
-
-/* TABLES */
-.tw{overflow-x:auto;margin-bottom:12px}
-table.skt{width:100%;border-collapse:collapse;font-size:11px}
-table.skt th{background:var(--teal);color:#fff;padding:7px 8px;text-align:center;font-family:'Noto Serif Devanagari',serif;font-size:12px}
-table.skt td{padding:7px 8px;border:1px solid var(--border);text-align:center;font-family:'Noto Serif Devanagari',serif;font-size:13px}
-table.skt tr:nth-child(even) td{background:var(--amber)}
-table.skt .rl{font-family:'Inter',sans-serif;font-size:9px;color:var(--ochre);font-weight:600;text-align:left}
-table.snd{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:10px}
-table.snd th{background:var(--ink);color:var(--gold);padding:7px 8px;text-align:left;font-size:11px}
-table.snd td{padding:7px 8px;border-bottom:1px solid var(--border);vertical-align:top;font-size:11px}
-table.snd tr:nth-child(even) td{background:var(--amber)}
-
-/* DRILL */
-.dw{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px}
-.dbar{height:4px;background:var(--ambd);border-radius:4px;margin-bottom:14px;overflow:hidden}
-.dbar-f{height:100%;background:var(--gold);transition:width .3s}
-.dqdev{font-family:'Noto Serif Devanagari',serif;font-size:20px;color:var(--saffron);text-align:center;margin-bottom:4px;line-height:1.5}
-.dqen{font-size:12px;color:var(--ochre);text-align:center;margin-bottom:16px}
-.dopts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.dopt{padding:10px;border:2px solid var(--border);border-radius:10px;cursor:pointer;text-align:center;background:#fff;font-family:'Noto Serif Devanagari',serif;font-size:13px;line-height:1.4;transition:all .15s}
-.dopt:hover{border-color:var(--saffron);background:var(--amber)}
-.dopt.correct{border-color:var(--success);background:#E8F5EE;color:var(--success)}
-.dopt.wrong{border-color:var(--error);background:#FDE8E8;color:var(--error)}
-.dfb{margin-top:12px;padding:10px 12px;border-radius:10px;font-size:12px;line-height:1.6;display:none}
-.dfb.correct{background:#E8F5EE;color:var(--success);border:1px solid #A8D5BC}
-.dfb.wrong{background:#FDE8E8;color:var(--error);border:1px solid #F5B5B5}
-.dfb.show{display:block}
-.dnext{display:none;width:100%;margin-top:10px;padding:11px;background:var(--saffron);color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer}
-
-/* PAPERS */
-.ppr{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden}
-.pprhdr{display:flex;align-items:center;padding:14px;gap:12px;cursor:pointer}
-.pprico{width:42px;height:42px;border-radius:10px;background:var(--amber);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.pprtitle{font-size:14px;font-weight:600;color:var(--ink)}.pprmeta{font-size:11px;color:var(--ochre)}
-.pprbdg{margin-left:auto;padding:3px 9px;border-radius:16px;font-size:9px;font-weight:700}
-.bdgb{background:#E8F0FE;color:#1a56db}.bdgr{background:#FDE8E8;color:var(--error)}
-.pprbody{display:none;border-top:1px solid var(--border);padding:14px}
-.ppr.open .pprbody{display:block}
-.eq{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px}
-.eqnum{font-size:10px;font-weight:700;color:var(--saffron);margin-bottom:4px}
-.eqtxt{font-size:12px;line-height:1.6;margin-bottom:6px}
-.eqmk{font-size:9px;color:var(--ochre);background:var(--amber);padding:2px 7px;border-radius:8px;display:inline-block}
-.showbtn{margin-top:8px;padding:6px 12px;background:none;border:1px solid var(--border);border-radius:8px;font-size:11px;color:var(--ochre);cursor:pointer}
-.showbtn:hover{background:var(--amber);border-color:var(--gold)}
-.ansbox{display:none;margin-top:8px;padding:10px;background:var(--amber);border-radius:8px;font-size:12px;line-height:1.7;border:1px solid var(--ambd)}
-
-/* AI */
-.aiw{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;height:480px}
-.aihdr{background:linear-gradient(135deg,var(--teal),#153D48);padding:12px 14px;color:#fff}
-.ainame{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
-.aidev{font-family:'Noto Serif Devanagari',serif;font-size:17px;color:var(--gold)}
-.aisub{font-size:10px;opacity:.7;margin-top:2px}
-.aimsgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
-.msg{max-width:85%;padding:10px 13px;border-radius:13px;font-size:12px;line-height:1.6}
-.msg.ai{background:var(--amber);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:3px}
-.msg.user{background:var(--teal);color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
-.aiqp{display:flex;flex-wrap:wrap;gap:5px;padding:0 12px 10px}
-.qp{padding:4px 9px;border:1px solid var(--border);border-radius:16px;font-size:10px;cursor:pointer;background:#fff;color:var(--teal)}
-.qp:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
-.aiarea{padding:10px;border-top:1px solid var(--border);display:flex;gap:8px}
-.aiinp{flex:1;padding:9px 12px;border:1px solid var(--border);border-radius:10px;font-size:12px;font-family:'Inter',sans-serif;resize:none;outline:none;background:var(--parch)}
-.aiinp:focus{border-color:var(--teal)}
-.aisend{padding:9px 14px;background:var(--teal);color:#fff;border:none;border-radius:10px;cursor:pointer;font-size:15px}
-.aisend:disabled{opacity:.5;cursor:not-allowed}
-.ldots{display:flex;gap:4px;align-items:center}
-.ldots span{width:6px;height:6px;background:var(--ochre);border-radius:50%;animation:bounce 1s infinite}
-.ldots span:nth-child(2){animation-delay:.15s}.ldots span:nth-child(3){animation-delay:.3s}
-@keyframes bounce{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-5px);opacity:1}}
-
-/* SANDARBHA */
-.sancard{background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:10px;padding:12px}
-.sandev{font-family:'Noto Serif Devanagari',serif;font-size:16px;color:var(--saffron);margin-bottom:8px;line-height:1.6}
-
-/* SYNC */
-.syncdot{width:7px;height:7px;border-radius:50%;background:#4CAF50;display:inline-block;animation:pg 2s infinite}
-@keyframes pg{0%,100%{opacity:1}50%{opacity:.3}}
-
-/* LETTER */
-.ltrbox{background:#fff;border:2px solid var(--border);border-radius:12px;padding:16px;font-family:'Noto Serif Devanagari',serif;font-size:14px;line-height:2.2;color:var(--ink);margin-bottom:12px}
-
-@media(max-width:600px){.pgrid{grid-template-columns:repeat(2,1fr)}.dopts{grid-template-columns:1fr}.ggrid{grid-template-columns:repeat(2,1fr)}.wstats{gap:8px}}
+:root {
+  --saffron: #FF6B00;
+  --deep-red: #C0392B;
+  --gold: #F39C12;
+  --cream: #FFF8E7;
+  --dark-bg: #1A0A00;
+  --card-bg: #2D1500;
+  --text: #FFF3DC;
+  --muted: #C4A882;
+  --success: #27AE60;
+  --blue: #2980B9;
+  --purple: #8E44AD;
+  --teal: #16A085;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: var(--dark-bg); color: var(--text); font-family: 'Segoe UI', sans-serif; min-height:100vh; }
+header { background: linear-gradient(135deg, #4A1900, #8B2500, #4A1900); padding: 16px 20px; text-align:center; border-bottom: 3px solid var(--saffron); position:sticky; top:0; z-index:100; }
+header h1 { font-size: 1.4rem; color: var(--gold); }
+header p { font-size: 0.8rem; color: var(--muted); margin-top:3px; }
+.tab-bar { display:flex; overflow-x:auto; background:#2A0D00; border-bottom: 2px solid #5A2500; scrollbar-width:none; }
+.tab-bar::-webkit-scrollbar { display:none; }
+.tab { flex:0 0 auto; padding:10px 16px; font-size:0.78rem; cursor:pointer; color:var(--muted); border-bottom:3px solid transparent; transition:all 0.2s; white-space:nowrap; }
+.tab.active { color:var(--gold); border-bottom-color:var(--saffron); background:#3A1500; }
+.tab:hover { color:var(--text); background:#3A1500; }
+.page { display:none; padding:16px; max-width:900px; margin:0 auto; }
+.page.active { display:block; }
+.section-title { font-size:1.2rem; color:var(--gold); margin-bottom:12px; padding-bottom:6px; border-bottom:1px solid #5A2500; }
+.card { background:var(--card-bg); border:1px solid #5A2500; border-radius:10px; padding:14px; margin-bottom:12px; }
+.card-title { font-size:1rem; color:var(--saffron); font-weight:600; margin-bottom:8px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.card-body { display:none; }
+.card-body.open { display:block; }
+.shloka { background:#1A0800; border-left:3px solid var(--saffron); padding:10px; margin:8px 0; border-radius:0 6px 6px 0; font-size:0.9rem; line-height:1.8; }
+.shloka-num { color:var(--gold); font-size:0.75rem; font-weight:600; margin-bottom:4px; }
+.meaning { background:#0D1A0D; border-left:3px solid var(--success); padding:8px 10px; margin:6px 0; border-radius:0 6px 6px 0; font-size:0.85rem; line-height:1.6; color:#B8E6B8; }
+.meaning-label { font-size:0.7rem; color:var(--success); font-weight:600; margin-bottom:3px; }
+.qa-item { background:#0A1520; border-left:3px solid var(--blue); padding:10px; margin:8px 0; border-radius:0 6px 6px 0; }
+.question { color:#7EC8E3; font-weight:600; font-size:0.88rem; margin-bottom:5px; }
+.answer { font-size:0.85rem; line-height:1.6; color:#C8E6F0; }
+.marks-badge { background:var(--deep-red); color:white; font-size:0.65rem; padding:2px 7px; border-radius:10px; }
+.highlight { background:#3A2800; border:1px solid var(--gold); border-radius:6px; padding:10px; margin:8px 0; }
+.highlight-label { color:var(--gold); font-size:0.7rem; font-weight:600; margin-bottom:4px; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.stat-box { background:#1A0800; border:1px solid #5A2500; border-radius:8px; padding:10px; text-align:center; }
+.stat-num { font-size:1.8rem; font-weight:700; color:var(--saffron); }
+.stat-label { font-size:0.7rem; color:var(--muted); margin-top:2px; }
+.tag { display:inline-block; background:#3A1500; color:var(--gold); font-size:0.7rem; padding:2px 8px; border-radius:10px; margin:2px; }
+.progress-bar { height:6px; background:#3A1500; border-radius:3px; margin:6px 0; }
+.progress-fill { height:100%; background:var(--saffron); border-radius:3px; transition:width 0.3s; }
+table { width:100%; border-collapse:collapse; font-size:0.82rem; margin:8px 0; }
+th { background:#3A1500; color:var(--gold); padding:7px; text-align:left; }
+td { padding:7px; border-bottom:1px solid #3A1500; }
+tr:hover td { background:#1A0800; }
+.btn { padding:8px 16px; border-radius:20px; border:none; cursor:pointer; font-size:0.82rem; font-weight:600; transition:all 0.2s; }
+.btn-primary { background:var(--saffron); color:white; }
+.btn-primary:hover { background:#E05A00; }
+.btn-outline { background:transparent; border:1px solid var(--saffron); color:var(--saffron); }
+.sub-tabs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+.sub-tab { padding:6px 12px; border-radius:16px; font-size:0.78rem; cursor:pointer; background:#3A1500; color:var(--muted); border:1px solid #5A2500; transition:all 0.2s; }
+.sub-tab.active { background:var(--saffron); color:white; border-color:var(--saffron); }
+.sub-page { display:none; }
+.sub-page.active { display:block; }
+.exam-pattern { background: linear-gradient(135deg, #1A0800, #2D1000); border:1px solid var(--gold); border-radius:10px; padding:14px; margin-bottom:14px; }
+.alert { background:#1A0A00; border:1px solid var(--saffron); border-radius:8px; padding:10px; margin:8px 0; font-size:0.85rem; }
+.alert-icon { color:var(--saffron); margin-right:6px; }
+@media(max-width:600px) { .grid-2 { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
-<header class="hdr">
-  <div class="hdr-top">
-    <div style="display:flex;align-items:center;gap:10px">
-      <div class="brand-dev">संस्कृतम्</div>
-      <div><div class="brand-name">Charan's Sanskrit — Target 90%+</div>
-      <div class="brand-sub">AP Jr. Inter · Narayana Jr. College, Nidamanuru · 2026-27</div></div>
-    </div>
-    <div style="display:flex;align-items:center;gap:8px">
-      <span class="syncdot" id="syncDot"></span>
-      <span class="badge-hdr">APBIE 2026-27</span>
-    </div>
-  </div>
-  <div class="sloka-bar" onclick="this.classList.toggle('open')">
-    <div class="sloka-lbl">📿 Sloka of the Day — tap to reveal meaning</div>
-    <div class="sloka-txt" id="slokaText"></div>
-    <div class="sloka-mn" id="slokaMean"></div>
-  </div>
-  <nav class="nav-tabs">
-    <button class="tab-btn active" onclick="switchTab('dash',this)">📊 Dashboard</button>
-    <button class="tab-btn" onclick="switchTab('padya',this)">📜 पद्य</button>
-    <button class="tab-btn" onclick="switchTab('gadya',this)">📖 गद्य</button>
-    <button class="tab-btn" onclick="switchTab('upa',this)">📚 उपवाचकम्</button>
-    <button class="tab-btn" onclick="switchTab('vya',this)">🔤 व्याकरणम्</button>
-    <button class="tab-btn" onclick="switchTab('papers',this)">📝 Papers</button>
-    <button class="tab-btn" onclick="switchTab('ai',this)">🤖 AI Guru</button>
-  </nav>
+<header>
+  <h1>📚 संस्कृत अध्ययन — सुरभाषासुषमा</h1>
+  <p>AP Intermediate 1st Year | Charan's Exam Prep 2026-27</p>
 </header>
+<div class="tab-bar">
+  <div class="tab active" onclick="showTab('home')">🏠 Home</div>
+  <div class="tab" onclick="showTab('poetry')">📜 पद्यभागः</div>
+  <div class="tab" onclick="showTab('prose')">📖 गद्यभागः</div>
+  <div class="tab" onclick="showTab('grammar')">📝 व्याकरणम्</div>
+  <div class="tab" onclick="showTab('writing')">✍️ लेखनम्</div>
+  <div class="tab" onclick="showTab('upavachakam')">📚 उपवाचकम्</div>
+  <div class="tab" onclick="showTab('model')">📋 Model Papers</div>
+  <div class="tab" onclick="showTab('quiz')">🎯 Quiz</div>
+</div>
 
-<main class="main">
-
-<!-- DASHBOARD -->
-<div class="tab-panel active" id="tab-dash">
-  <div class="welcome">
-    <div style="font-size:20px;font-weight:700">🙏 नमस्ते, Charan!</div>
-    <div style="font-size:12px;opacity:.8;margin-top:2px">Narayana Junior College, Nidamanuru · Score 90%+ in Sanskrit</div>
-    <div class="wstats">
-      <div class="wstat"><div class="wstat-num" id="totPct">0%</div><div class="wstat-lbl">Overall</div></div>
-      <div class="wstat"><div class="wstat-num" id="totQ">0</div><div class="wstat-lbl">Q's Done</div></div>
-      <div class="wstat"><div class="wstat-num" id="drillSc">—</div><div class="wstat-lbl">Drill Score</div></div>
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+  <div class="exam-pattern">
+    <div class="section-title" style="border:none;margin-bottom:8px;">🎯 APBIE Exam Pattern — 100 Marks, 3 Hours</div>
+    <div class="grid-2">
+      <div>
+        <table>
+          <tr><th>Section</th><th>Marks</th></tr>
+          <tr><td>📜 Poetry (पद्यभागः)</td><td style="color:var(--gold)">28</td></tr>
+          <tr><td>📖 Prose (गद्यभागः)</td><td style="color:var(--gold)">28</td></tr>
+          <tr><td>📝 Grammar (व्याकरणम्)</td><td style="color:var(--gold)">16</td></tr>
+          <tr><td>✍️ Writing (लेखनम्)</td><td style="color:var(--gold)">18</td></tr>
+          <tr><td>📚 Upavachakam</td><td style="color:var(--gold)">10</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="stat-box" style="margin-bottom:8px;"><div class="stat-num">6+6</div><div class="stat-label">Poetry + Prose Chapters</div></div>
+        <div class="stat-box"><div class="stat-num">100</div><div class="stat-label">Total Marks</div></div>
+      </div>
     </div>
   </div>
-  <div class="tips">
-    <div class="tips-title">🎯 90%+ Strategy — From Your Narayana Study Material (PDF)</div>
-    <div class="tip">For <strong>सन्दर्भ वाक्यानि (4M each)</strong>: always write 4 parts — <strong>कविपरिचयः + कविः/ग्रन्थः + सन्दर्भः + भावः</strong></div>
-    <div class="tip">Memorise <strong>कविपरिचयः</strong> for ALL 10 chapters (5 padya + 5 gadya) — appears in almost every question</div>
-    <div class="tip"><strong>नीतिश्लोकाः</strong> — memorise all 8 slokas with word meanings — guaranteed 4-8 marks</div>
-    <div class="tip">Grammar: <strong>राम + लता + फल शब्दरूप</strong> (all 8 vibhaktis × 3 numbers) = 8 marks alone</div>
-    <div class="tip">Learn all <strong>4 model letters</strong> from पत्रलेखनम् — at least 1 letter = 5 marks in every paper</div>
-    <div class="tip">Translate 15 sentences from <strong>अनुवादाभ्यासः</strong> — present, past, future tenses (वर्तमान/भूत/भविष्यत्)</div>
-    <div class="tip"><strong>एकपद समाधान प्रश्नाः (1M)</strong> — practice all single-word answers from each chapter</div>
-  </div>
-  <div class="sec-title">⚡ Quick Jump</div>
-  <div class="qgrid">
-    <button class="qbtn" style="background:var(--saffron)" onclick="switchTab('padya',document.querySelectorAll('.tab-btn')[1])">
-      <span class="qbtn-icon">📜</span>पद्यभागः — 5 Poems<span class="qbtn-sub">Slokas + Meanings + Sandarbha</span></button>
-    <button class="qbtn" style="background:var(--teal)" onclick="switchTab('vya',document.querySelectorAll('.tab-btn')[4])">
-      <span class="qbtn-icon">🔤</span>व्याकरणम् + Drill<span class="qbtn-sub">Sandhi · Shabda · Dhatu</span></button>
-    <button class="qbtn" style="background:var(--success)" onclick="switchTab('gadya',document.querySelectorAll('.tab-btn')[2])">
-      <span class="qbtn-icon">📖</span>गद्यभागः — 5 Chapters<span class="qbtn-sub">Stories + Q&A + Sandarbha</span></button>
-    <button class="qbtn" style="background:#7B3F00" onclick="switchTab('papers',document.querySelectorAll('.tab-btn')[5])">
-      <span class="qbtn-icon">📝</span>Model Papers<span class="qbtn-sub">APBIE Pattern · Full Answers</span></button>
-  </div>
-  <div class="sec-title">📋 Chapter Progress</div>
-  <div class="pgrid" id="pgrid"></div>
-</div>
-
-<!-- PADYA -->
-<div class="tab-panel" id="tab-padya">
-  <div class="sec-title">पद्यभागः — 5 Poems (from your Narayana material)</div>
-  <div class="ch-list" id="padyaList"></div>
-</div>
-
-<!-- GADYA -->
-<div class="tab-panel" id="tab-gadya">
-  <div class="sec-title">गद्यभागः — 5 Prose Chapters</div>
-  <div class="ch-list" id="gadyaList"></div>
-</div>
-
-<!-- UPAVACHAKAM -->
-<div class="tab-panel" id="tab-upa">
-  <div class="sec-title">उपवाचकम् — 5 Non-Detailed Chapters</div>
-  <div class="ch-list" id="upaList"></div>
-</div>
-
-<!-- VYAKARANA -->
-<div class="tab-panel" id="tab-vya">
-  <div class="sec-title">व्याकरणम् — Grammar</div>
-  <div class="ggrid">
-    <div class="gcard" onclick="showG('sandhi',this)"><div class="gicon">⚡</div><div class="gname">सन्धयः</div><div class="gsub">Sandhi Rules</div></div>
-    <div class="gcard" onclick="showG('ram',this)"><div class="gicon">🏛</div><div class="gname">राम शब्द</div><div class="gsub">Masculine Noun</div></div>
-    <div class="gcard" onclick="showG('lata',this)"><div class="gicon">🌿</div><div class="gname">लता शब्द</div><div class="gsub">Feminine Noun</div></div>
-    <div class="gcard" onclick="showG('phala',this)"><div class="gicon">🍎</div><div class="gname">फल शब्द</div><div class="gsub">Neuter Noun</div></div>
-    <div class="gcard" onclick="showG('dhatu',this)"><div class="gicon">🔄</div><div class="gname">धातुरूपाणि</div><div class="gsub">पठ् Verb Tables</div></div>
-    <div class="gcard" onclick="showG('patra',this)"><div class="gicon">✉️</div><div class="gname">पत्रलेखनम्</div><div class="gsub">Letter Writing</div></div>
-    <div class="gcard" onclick="showG('anuvaad',this)"><div class="gicon">🔁</div><div class="gname">अनुवादाभ्यासः</div><div class="gsub">Translation</div></div>
-    <div class="gcard" onclick="showG('drill',this)"><div class="gicon">🎯</div><div class="gname">Quick Drill</div><div class="gsub">Test Yourself!</div></div>
-  </div>
-  <div id="gcontent"></div>
-</div>
-
-<!-- PAPERS -->
-<div class="tab-panel" id="tab-papers">
-  <div class="sec-title">📝 Practice Papers — APBIE Pattern (100 Marks · 3 Hours)</div>
-  <div class="hbox">
-    <div class="hbox-title">📊 Marks Distribution</div>
-    <div style="font-size:12px;line-height:1.9">
-      <strong>Poetry Section:</strong> निबन्ध 4M×2 + लघु 2M×4 + एकपद 1M×4 + सन्दर्भ 4M×2 = 28M<br>
-      <strong>Prose Section:</strong> निबन्ध 4M×2 + लघु 2M×4 + एकपद 1M×4 + सन्दर्भ 4M×2 = 28M<br>
-      <strong>Grammar:</strong> शब्दरूप 8M + धातुरूप 4M + सन्धि 4M = 16M<br>
-      <strong>Writing:</strong> पत्रलेखनम् 5M + अनुवाद 8M + निबन्ध 5M = 18M<br>
-      <strong>उपवाचकम्:</strong> 10M
+  <div class="section-title">📚 Chapters — Official Textbook (सुरभाषासुषमा)</div>
+  <div class="card">
+    <div class="card-title" onclick="toggleCard(this)">📜 पद्यभागः — Poetry Chapters <span>▼</span></div>
+    <div class="card-body open">
+      <table>
+        <tr><th>#</th><th>Chapter</th><th>Author</th><th>Source</th></tr>
+        <tr><td>1</td><td>दशरथस्य पश्चातापः</td><td>वाल्मीकि</td><td>Ayodhya Kanda</td></tr>
+        <tr><td>2</td><td>मायावटुः</td><td>कालिदास</td><td>Kumarasambhava 5</td></tr>
+        <tr><td>3</td><td>भर्तृहरिसुभाषितानि</td><td>भर्तृहरि</td><td>Niti/Vairagya Shataka</td></tr>
+        <tr><td>4</td><td>नीतिश्लोकाः</td><td>Various</td><td>Various texts</td></tr>
+        <tr><td>5</td><td>अमरवाणीप्रशस्तिः</td><td>E. Shankaracharya</td><td>Kavyasangraha</td></tr>
+        <tr><td>6</td><td>कपीनामुपवासः</td><td>Shrishailam Tatacharyya</td><td>Kavyasangraha</td></tr>
+      </table>
     </div>
   </div>
-  <div id="papersList"></div>
-</div>
-
-<!-- AI GURU -->
-<div class="tab-panel" id="tab-ai">
-  <div class="sec-title">🤖 AI Sanskrit Guru — Your Personal Tutor</div>
-  <p style="font-size:11px;color:var(--ochre);margin-bottom:12px">Ask anything about your Narayana study material — I know your exact syllabus and PDF content!</p>
-  <div class="aiw">
-    <div class="aihdr">
-      <div class="ainame"><span class="aidev">गुरुः</span> AI Sanskrit Guru</div>
-      <div class="aisub">Powered by Claude · Narayana Jr. Inter Specialist · Target 90%+</div>
-    </div>
-    <div class="aimsgs" id="aiMsgs">
-      <div class="msg ai">🙏 <strong>नमस्ते Charan!</strong> I am your personal Sanskrit Guru!<br><br>
-      I know your <strong>exact Narayana study material</strong>. Ask me:<br>
-      • सन्दर्भ वाक्यानि for any sloka (all 4 parts)<br>
-      • Summary/कविपरिचय of any chapter<br>
-      • Grammar — Sandhi rules, Shabdarupa tables, Dhaturupa<br>
-      • Model letters in Sanskrit<br>
-      • Translation practice<br><br>
-      <strong>Together we'll score 90+! 💪</strong></div>
-    </div>
-    <div class="aiqp">
-      <div class="qp" onclick="askQ('Write complete sandarbha vakya for: धर्मार्थं सहितं वाक्यमिह चामुत्र च क्षमम् — from हनुमदुपदेशः with all 4 parts')">सन्दर्भ: हनुमदुपदेशः</div>
-      <div class="qp" onclick="askQ('Give me all 8 Niti-shlokas with complete word meanings and summaries for exam')">नीतिश्लोकाः all 8</div>
-      <div class="qp" onclick="askQ('Write kaviparichy for all 5 poems — I need to memorise them for APBIE exam')">All कविपरिचयः</div>
-      <div class="qp" onclick="askQ('Write a model letter in Sanskrit from a student to principal requesting leave for illness — ज्वरार्तस्य विरामग्रहणाय')">पत्रलेखनम् example</div>
-      <div class="qp" onclick="askQ('Translate these sentences into Sanskrit with tense identification: 1) He reads a book 2) They went to school 3) She will eat rice 4) We are studying Sanskrit 5) Truth always wins')">अनुवाद practice</div>
-      <div class="qp" onclick="askQ('What are the most important questions from gadya section that definitely come in APBIE exam?')">Important Qs — Gadya</div>
-    </div>
-    <div class="aiarea">
-      <textarea class="aiinp" id="aiInp" rows="2" placeholder="Ask in English or Hindi..."></textarea>
-      <button class="aisend" id="aiBtn" onclick="sendAI()">➤</button>
+  <div class="card">
+    <div class="card-title" onclick="toggleCard(this)">📖 गद्यभागः — Prose Chapters <span>▼</span></div>
+    <div class="card-body open">
+      <table>
+        <tr><th>#</th><th>Chapter</th><th>Author</th><th>Source</th></tr>
+        <tr><td>1</td><td>कपिञ्जलोपदेशः</td><td>बाणभट्ट</td><td>Kadambari</td></tr>
+        <tr><td>2</td><td>भोजस्य औदार्यम्</td><td>Ballal</td><td>Bhoja Prabandha</td></tr>
+        <tr><td>3</td><td>शश-कपिञ्जलकथा</td><td>विष्णुशर्मा</td><td>Panchatantra</td></tr>
+        <tr><td>4</td><td>श्रीमलयालस्वामी</td><td>Samudralakshmana</td><td>—</td></tr>
+        <tr><td>5</td><td>स्वदेस्य पुष्पाणि</td><td>Dr. Madhavi Joshi</td><td>—</td></tr>
+        <tr><td>6</td><td>वर्षापरिदेवनम्</td><td>M.M. Acharya Gupti</td><td>—</td></tr>
+      </table>
     </div>
   </div>
 </div>
-</main>
 
-<script type="module">
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
-import { getFirestore, doc, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
-const cfg = {
-  apiKey:"AIzaSyDc9owVM5iEkDoO1ZjEbL8yqzOd7CLoJmM",
-  authDomain:"charan-apbie-sanskrit.firebaseapp.com",
-  projectId:"charan-apbie-sanskrit",
-  storageBucket:"charan-apbie-sanskrit.firebasestorage.app",
-  messagingSenderId:"73369212961",
-  appId:"1:73369212961:web:4945cbe8b36fdddced2b60"
-};
-try {
-  const app = initializeApp(cfg);
-  const db = getFirestore(app);
-  window._db=db; window._doc=doc; window._set=setDoc; window._get=getDoc;
-  document.getElementById('syncDot').style.background='#4CAF50';
-  const snap = await getDoc(doc(db,'students','charan'));
-  if(snap.exists()){ window._prog = snap.data(); }
-} catch(e){ document.getElementById('syncDot').style.background='#FFA500'; }
-</script>
+<!-- POETRY PAGE -->
+<div id="poetry" class="page">
+  <div class="sub-tabs">
+    <div class="sub-tab active" onclick="showSubTab('poetry','p1')">1. दशरथ</div>
+    <div class="sub-tab" onclick="showSubTab('poetry','p2')">2. मायावटुः</div>
+    <div class="sub-tab" onclick="showSubTab('poetry','p3')">3. भर्तृहरि</div>
+    <div class="sub-tab" onclick="showSubTab('poetry','p4')">4. नीतिश्लोकाः</div>
+    <div class="sub-tab" onclick="showSubTab('poetry','p5')">5. अमरवाणी</div>
+    <div class="sub-tab" onclick="showSubTab('poetry','p6')">6. कपीनाम्</div>
+  </div>
+
+  <!-- P1: Dasharatha -->
+  <div id="p1" class="sub-page active">
+    <div class="section-title">दशरथस्य पश्चातापः <span class="marks-badge">Ch.1</span></div>
+    <div class="highlight">
+      <div class="highlight-label">📌 KEY FACTS</div>
+      <b>Author:</b> वाल्मीकि | <b>Source:</b> रामायणम् — अयोध्याकाण्डम् (63rd/64th cantos)<br>
+      <b>Content:</b> King Dasharatha's remorse after banishing Rama — confesses to Kaushalya about accidentally killing Shravana Kumar (a blind boy's son) with a sound-targeted arrow (Shabdabhedi Bana), causing curse from the blind parents that he too will die of son-grief.
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📖 Key Shlokas for Exam <span>▼</span></div>
+      <div class="card-body">
+        <div class="shloka">
+          <div class="shloka-num">Shloka 1</div>
+          अपापां पापसंकाशां कौसल्यां देवि मैथिली।<br>
+          कृतघ्नः पापकर्माहं राघवं नानुगाम्यहम्॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          O Devi Maithili! Though Kaushalya is without sin, I resemble a sinner. I, who am ungrateful and have done evil deeds, did not accompany Raghava (Rama).</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Shloka 2 — Shabdabhedi Bana incident</div>
+          शृणोम्यहं शब्दमिमं सरस्याः पूर्णे निशीथे न च किञ्चिद्विजानामि।<br>
+          गजो नु सिंहो नु नरो नु कश्चिद् इत्यहमाशंसमनार्यकर्मा॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          I heard this sound from the lake at midnight. I did not recognize what it was — an elephant? a lion? some person? Thinking thus, I, the doer of ignoble deeds, (shot my arrow).</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Shloka 3 — The Curse</div>
+          पुत्रवत्स! किमर्थं त्वं मां हंसि विनाकृतम्।<br>
+          पुत्रशोकेन मे प्राणास्त्यक्ष्यन्ते इति शापितः॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          "O one who loves his son! Why do you kill me who am helpless?" The blind father cursed me: "Your life too will end due to grief for your son."</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Shloka 4 — Dasharatha's lament to Kaushalya</div>
+          स्मरामि ते कौसल्ये कर्म पापं कृतं मया।<br>
+          राघवं नानुगच्छन्तीं धर्मपत्नीं त्वजिह्वया॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          O Kaushalya! I remember the sinful deed done by me with a treacherous tongue — not accompanying Raghava along with his lawful wife.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">❓ Expected Q&A (Exam Questions) <span>▼</span></div>
+      <div class="card-body">
+        <div class="qa-item">
+          <div class="question">Q1. Who is the author of "दशरथस्य पश्चातापः"? From which text is it taken? (2M)</div>
+          <div class="answer">Author: Valmiki (वाल्मीकि). Taken from Ramayana's Ayodhya Kanda (63rd and 64th cantos). It describes King Dasharatha's remorse to Queen Kaushalya on the night of Rama's exile.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q2. What is Shabdabhedi Bana (शब्दभेदी बाण)? (2M)</div>
+          <div class="answer">It is an arrow aimed by sound alone (without seeing the target). Dasharatha possessed this skill. Hearing a sound at the lake at night (which was the blind sage's son Shravana filling water), he mistook it for an elephant and shot him dead.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q3. What curse did Dasharatha receive and from whom? (4M)</div>
+          <div class="answer">After accidentally killing Shravana Kumar (the blind sage's water-carrying son), the blind parents cursed Dasharatha: "Just as we are dying in grief for our son, you too shall die in grief for your son (पुत्रशोकेन)." This curse was fulfilled when Rama was exiled and Dasharatha died of grief.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q4. Why does Dasharatha call himself कृतघ्न (ungrateful)? (2M)</div>
+          <div class="answer">Dasharatha feels he is ungrateful because he failed to accompany Rama to the forest, did not protect his virtuous wife Sita and his innocent son, and broke the promise-bound dharma of a father and king — hence he calls himself पापकर्मा and कृतघ्न.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q5. Explain the Sandhi: "पुत्रशोकेन" (2M)</div>
+          <div class="answer">पुत्र + शोकेन — No sandhi change (both end/start with consonants). पुत्रशोकेन = "by grief for son." Samasa: पुत्रस्य शोकः = पुत्रशोकः (Shashthi Tatpurusha Samasa), then in instrumental case = पुत्रशोकेन.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">🔤 Key Sandhi & Samasa <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Word</th><th>Split</th><th>Type</th></tr>
+          <tr><td>पापसंकाशाम्</td><td>पाप + संकाशाम्</td><td>Karmadharaya</td></tr>
+          <tr><td>शब्दभेदी</td><td>शब्दं भेदयति</td><td>Upapadatatpurusha</td></tr>
+          <tr><td>निशीथे</td><td>निशायाः मध्ये</td><td>Saptami Tatpurusha</td></tr>
+          <tr><td>पुत्रशोकेन</td><td>पुत्रस्य शोकः</td><td>Shashthi Tatpurusha</td></tr>
+          <tr><td>अनार्यकर्मा</td><td>न आर्यस्य कर्म यस्य</td><td>Bahuvrihi</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- P2: Mayavatu -->
+  <div id="p2" class="sub-page">
+    <div class="section-title">मायावटुः <span class="marks-badge">Ch.2</span></div>
+    <div class="highlight">
+      <div class="highlight-label">📌 KEY FACTS</div>
+      <b>Author:</b> कालिदास | <b>Source:</b> कुमारसम्भवम् — 5th Canto<br>
+      <b>Content:</b> Shiva tests Parvati's love/devotion by appearing as a young brahmin boy (Mayavatu/disguised brahmin). He criticizes Shiva to her — calls him a beggar, ascetic, homeless, wearing snakes. Parvati steadfastly defends Shiva, proving her true devotion. Shiva is pleased and reveals his true form.
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📖 Key Shlokas <span>▼</span></div>
+      <div class="card-body">
+        <div class="shloka">
+          <div class="shloka-num">Shloka 1 — Parvati's steadfastness</div>
+          स त्वं समाधेः प्रतिबोधितेव व्रीडावती वाक्यमिदं जगाद।<br>
+          क्व वा मदीया विगुणा प्रवृत्तिः क्व चानुकम्पा तव देवि! पूर्वम्॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          She, as if awakened from meditation, bashfully spoke these words: "Where is my faulty conduct, O Devi? And where is your earlier compassion?"</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Shloka 2 — The Brahmin boy criticizes Shiva</div>
+          स्मशानभूमिः शयनं महेश्वरस्य चर्मावसानं वसनं गजाजिनम्।<br>
+          भुजङ्गभूषा विषमश्च दर्शनः स्त्रीणां प्रियः कः पशुपस्तवानघे॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          The cremation ground is Maheshvara's bed, elephant skin is his garment/clothing, serpents are his ornaments, his appearance is asymmetric — O sinless one! How can such a Pashupatinath be dear to women?</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Shloka 3 — Parvati's defense of Shiva</div>
+          अपभाषसे यदि हरं तदा त्वयि कोपिता स्मि किल।<br>
+          इति वक्तुमुद्यतकरा प्रतस्थे वल्लकीधरा॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          "If you speak ill of Hara (Shiva), then I am indeed angry at you." — Having started to say this, she (Parvati) rose to leave, with her hand raised.</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Shloka 4 — Shiva reveals himself</div>
+          इत्युक्त्वा सोऽन्तरधीयत तत्र तस्मिन् देशे महेश्वरः।<br>
+          प्रकाशमागाद्भगवान् साक्षात् पार्वत्यभीप्सितः॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          Having said this, Maheshvara disappeared from that place and appeared as the glorious Lord himself — the one desired by Parvati.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">❓ Expected Q&A <span>▼</span></div>
+      <div class="card-body">
+        <div class="qa-item">
+          <div class="question">Q1. Who is the author of 'मायावटुः'? From which work is it? (2M)</div>
+          <div class="answer">Author: Kalidasa (कालिदास). Taken from Kumarasambhava (कुमारसम्भवम्), 5th Canto. Kalidasa is one of the greatest Sanskrit poets (Mahakavi), known for Abhijnanashakuntalam, Meghadutam, Raghuvamsham.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q2. Why did Shiva disguise himself as a brahmin boy (मायावटु)? (4M)</div>
+          <div class="answer">Shiva wanted to test the sincerity and depth of Parvati's love and devotion for him. The divine plan (देवसम्मेलन) was that Parvati must earn Shiva through her own tapas. By criticizing himself in disguise and watching her reaction — whether she got angry and abandoned her love, or defended him firmly — Shiva tested whether her love was genuine and unshakeable.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q3. What did the Mayavatu say against Shiva? How did Parvati respond? (4M)</div>
+          <div class="answer">The Mayavatu (Shiva in disguise) criticized Shiva: sleeps in a cremation ground, wears elephant hide, adorned with snakes, body smeared with ash, has no wealth, goes begging. Parvati defended Shiva saying all these are signs of his greatness — he is beyond worldly things. When the Mayavatu persisted, Parvati rose to leave angrily, saying "If you criticize Hara, I will not stay to listen." This proved her devotion, and Shiva revealed himself.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q4. Explain Sandhi: "स्मशानभूमिः" (2M)</div>
+          <div class="answer">स्मशान + भूमिः — No vowel sandhi as 'न' ends with consonant and 'भ' starts with consonant. It is a Samasa: स्मशानस्य भूमिः = स्मशानभूमिः (Shashthi Tatpurusha), meaning "the ground/place of the cremation ground."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P3: Bhartrhari -->
+  <div id="p3" class="sub-page">
+    <div class="section-title">भर्तृहरिसुभाषितानि <span class="marks-badge">Ch.3</span></div>
+    <div class="highlight">
+      <div class="highlight-label">📌 KEY FACTS</div>
+      <b>Author:</b> भर्तृहरि | <b>Works:</b> Nitishatakam, Shringarashatakam, Vairagyashatakam<br>
+      <b>Content:</b> 25 independent moral verses (Subhashitas) on wisdom, friendship, knowledge, virtue, and life.
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📖 Key Subhashitas (★ = Important for exam) <span>▼</span></div>
+      <div class="card-body">
+        <div class="shloka">
+          <div class="shloka-num">★ Subhashita 1 — Knowledge is true wealth</div>
+          विद्या नाम नरस्य रूपमधिकं प्रच्छन्नगुप्तं धनम्।<br>
+          विद्या भोगकरी यशःसुखकरी विद्या गुरूणां गुरुः॥<br>
+          विद्या बन्धुजनो विदेशगमने विद्या परा देवता।<br>
+          विद्या राजसु पूज्यते न हि धनं विद्याविहीनः पशुः॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          Knowledge is a person's best form — hidden and secret wealth. Knowledge gives enjoyment, fame, and happiness; knowledge is the teacher of teachers. Knowledge is a friend in foreign lands; knowledge is the highest deity. Knowledge is honored among kings, not wealth. One without knowledge is an animal.</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">★ Subhashita 2 — Characteristics of good people</div>
+          पापान्निवारयति योजयते हिताय गुह्यं निगूहति गुणान्प्रकटीकरोति।<br>
+          आपद्गतं च न जहाति ददाति काले सन्मित्रलक्षणमिदं प्रवदन्ति सन्तः॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          He prevents (you) from sin, connects (you) to good things, hides secrets, reveals your virtues, does not abandon you in danger, and gives at the right time — the wise declare these to be the characteristics of a true friend.</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">★ Subhashita 3 — Quality of greatness</div>
+          उदये सविता रक्तो रक्तश्चास्तमये तथा।<br>
+          सम्पत्तौ च विपत्तौ च महतामेकरूपता॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          The sun is red at rising and equally red at setting. Similarly, great people are the same in prosperity and adversity (unshaken by fortune or misfortune).</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">★ Subhashita 4 — Right knowledge vs wrong</div>
+          अज्ञः सुखमाराध्यः सुखतरमाराध्यते विशेषज्ञः।<br>
+          ज्ञानलवदुर्विदग्धं ब्रह्मापि तं नरं न रञ्जयति॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          An ignorant person is easily pleased; a knowledgeable person is even more easily pleased. But one who is arrogant with a little knowledge — even Brahma (the creator) cannot please such a person.</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Subhashita 5 — Determination</div>
+          प्रारभ्यते न खलु विघ्नभयेन नीचैः प्रारभ्य विघ्नविहता विरमन्ति मध्याः।<br>
+          विघ्नैः पुनः पुनरपि प्रतिहन्यमानाः प्रारब्धमुत्तमजना न परित्यजन्ति॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          Low people do not begin (anything) out of fear of obstacles. Middle-class people begin but stop when faced with obstacles. But noble people, even when struck again and again by obstacles, do not abandon what they have begun.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">❓ Expected Q&A <span>▼</span></div>
+      <div class="card-body">
+        <div class="qa-item">
+          <div class="question">Q1. Who is Bhartrhari? Name his three Shatakas. (2M)</div>
+          <div class="answer">Bhartrhari is a Sanskrit poet-king who renounced his kingdom. He wrote three Shatakas (century of verses): Nitishatakam (moral wisdom), Shringarashatakam (love poetry), and Vairagyashatakam (renunciation). Each has ~100 verses.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q2. What does Bhartrhari say about विद्या (knowledge)? (4M)</div>
+          <div class="answer">Bhartrhari praises knowledge (Vidya) in one of his most famous subhashitas: Vidya is a person's supreme beauty; it is hidden wealth that cannot be stolen; it gives enjoyment, fame, and happiness; it is the guru of gurus; it becomes a relative/friend in foreign lands; it is the highest deity; it is honored by kings. He concludes powerfully: "One without knowledge is an animal" (विद्याविहीनः पशुः).</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q3. What are the six characteristics of a true friend (सन्मित्र) according to Bhartrhari? (4M)</div>
+          <div class="answer">(1) Prevents you from sin (पापान्निवारयति), (2) Connects you to good/beneficial things (योजयते हिताय), (3) Keeps your secrets (गुह्यं निगूहति), (4) Reveals/publicizes your virtues (गुणान् प्रकटीकरोति), (5) Does not abandon you in adversity/danger (आपद्गतं न जहाति), (6) Gives (help) at the right time (ददाति काले).</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q4. Explain Sandhi in "सन्मित्रलक्षणम्" (2M)</div>
+          <div class="answer">सत् + मित्र — Visarga/final consonant sandhi: त् before म् → न् (by rule: त् + म् → न्म्). सन्मित्रम् = good friend. लक्षणम् = characteristics. Full compound: सन्मित्रस्य लक्षणम् (Shashthi Tatpurusha).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P4: Niti Shlokas -->
+  <div id="p4" class="sub-page">
+    <div class="section-title">नीतिश्लोकाः <span class="marks-badge">Ch.4</span></div>
+    <div class="highlight">
+      <div class="highlight-label">📌 KEY FACTS</div>
+      <b>Authors:</b> Various (Chanakya, Subhashita collections, etc.)<br>
+      <b>Content:</b> 23 niti (moral/political wisdom) shlokas from various Sanskrit texts. ★-marked ones are specifically required for memorization.
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📖 Key Niti Shlokas (★ = Memorize for exam) <span>▼</span></div>
+      <div class="card-body">
+        <div class="shloka">
+          <div class="shloka-num">★ Shloka 1 — Dharma protects</div>
+          धर्मो रक्षति रक्षितः।
+          <div class="meaning"><div class="meaning-label">Meaning</div>Dharma protects those who protect dharma. (One who upholds righteousness is protected by righteousness.)</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">★ Shloka 2 — True knowledge</div>
+          सा विद्या या विमुक्तये।
+          <div class="meaning"><div class="meaning-label">Meaning</div>That is true knowledge which leads to liberation (moksha/freedom).</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">★ Shloka 3 — One earth, one family</div>
+          अयं निजः परो वेति गणना लघुचेतसाम्।<br>
+          उदारचरितानां तु वसुधैव कुटुम्बकम्॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>"This is mine, that is another's" — such calculation is for small minds. For those of noble character, the whole earth is one family (Vasudhaiva Kutumbakam).</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">★ Shloka 4 — Power of unity</div>
+          संघे शक्तिः कलौयुगे।
+          <div class="meaning"><div class="meaning-label">Meaning</div>In the Kali age, strength lies in unity/organization.</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">★ Shloka 5 — Speech</div>
+          अनृतं न वद। सत्यं वद।<br>
+          प्रियं च नानृतं वदेत्।
+          <div class="meaning"><div class="meaning-label">Meaning</div>Do not speak falsehood. Speak truth. But do not speak an unpleasant truth. (Speak the pleasant truth, not an unpleasant falsehood.)</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">★ Shloka 6 — Health</div>
+          पहले स्वास्थ्यं द्वितीयं धनम्। (variant)<br>
+          शरीरमाद्यं खलु धर्मसाधनम्।
+          <div class="meaning"><div class="meaning-label">Meaning</div>The body is indeed the primary instrument of dharma. (Good health is the foundation of all achievement.)</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">★ Shloka 7 — Humility</div>
+          विद्यां ददाति विनयं विनयाद् याति पात्रताम्।<br>
+          पात्रत्वाद् धनमाप्नोति धनाद् धर्मं ततः सुखम्॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>Knowledge gives humility; from humility comes worthiness; from worthiness comes wealth; from wealth comes dharma; from dharma comes happiness.</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">★ Shloka 8 — India's glory</div>
+          जननी जन्मभूमिश्च स्वर्गादपि गरीयसी।
+          <div class="meaning"><div class="meaning-label">Meaning</div>Mother and motherland are greater than heaven itself. (from Ramayana — Rama's words)</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">★ Shloka 9 — Work and worship</div>
+          काव्यशास्त्रविनोदेन कालो गच्छति धीमताम्।<br>
+          व्यसनेन च मूर्खाणां निद्रया कलहेन वा॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>For the wise, time passes in the enjoyment of poetry and learning. For fools, time passes in vices, sleep, or quarreling.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">❓ Expected Q&A <span>▼</span></div>
+      <div class="card-body">
+        <div class="qa-item">
+          <div class="question">Q1. Explain "वसुधैव कुटुम्बकम्" — context and meaning (4M)</div>
+          <div class="answer">This famous saying means "The whole world is one family." It appears in the Niti Shlokas chapter. The full verse says: Small-minded people think "this is mine, that is another's" (this is my nation, that is a foreign nation). But for noble-hearted people (उदारचरित), the entire earth (वसुधा) is one family (कुटुम्बम्). This is the ideal of universal brotherhood. It is India's national motto spirit and appears in Maha Upanishad.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q2. What is the chain of wisdom in "विद्यां ददाति विनयम्"? (4M)</div>
+          <div class="answer">The shloka describes a virtuous cycle: Vidya (knowledge) → Vinaya (humility/discipline) → Patrata (worthiness/merit) → Dhanam (wealth) → Dharma (righteousness) → Sukham (happiness). This shows that true education leads to humility first, not arrogance, and the chain ultimately results in genuine happiness.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q3. What does "धर्मो रक्षति रक्षितः" mean? (2M)</div>
+          <div class="answer">"Dharma protects one who protects dharma." This is a famous niti verse meaning that righteousness/moral law itself protects a person who upholds it. If you live by dharma, dharma will shield you. It is also sometimes cited as "Dharmo rakshati rakshitah" — the principle of reciprocal protection between man and dharma.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P5: Amaravani -->
+  <div id="p5" class="sub-page">
+    <div class="section-title">अमरवाणीप्रशस्तिः <span class="marks-badge">Ch.5</span></div>
+    <div class="highlight">
+      <div class="highlight-label">📌 KEY FACTS</div>
+      <b>Author:</b> E. Shankaracharya (ई. शङ्कराचार्यः)<br>
+      <b>Source:</b> Kavyasangraha (काव्यसंग्रहः)<br>
+      <b>Content:</b> 11 shlokas praising Sanskrit language (संस्कृतभाषा) as अमरवाणी (immortal/divine language). Celebrates Sanskrit's antiquity, its role as mother of all languages, its grammar, and its spiritual-cultural importance.
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📖 Key Shlokas <span>▼</span></div>
+      <div class="card-body">
+        <div class="shloka">
+          <div class="shloka-num">Shloka 1 — Sanskrit is divine language</div>
+          देवानां प्रियभाषेयं सुरवाणी सनातनी।<br>
+          अमरत्वं गता भाषा संस्कृतं परमं स्मृतम्॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          This beloved language of the gods, the eternal divine speech, has attained immortality — this language called Sanskrit is remembered as the highest.</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Shloka 2 — Sanskrit as mother</div>
+          सर्वासां भाषाणां माता संस्कृतभाषा।<br>
+          जगतः सर्वत्र विस्तृता सुरभारती॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          Sanskrit is the mother of all languages. Surabharati (the auspicious language) has spread everywhere in the world.</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Shloka 3 — Power of Sanskrit grammar</div>
+          पाणिनिना व्याकरणं सूत्रितं यत् सुचिन्तितम्।<br>
+          तेन वाग्विभवः सर्वः संस्कृते परिरक्षितः॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          The grammar composed by Panini with such careful thought — through it, all the richness of speech has been preserved in Sanskrit.</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Shloka 4 — Vedas are in Sanskrit</div>
+          वेदाः संस्कृतमाश्रित्य स्थिताः सर्वज्ञवाग्मयाः।<br>
+          ऋग्यजुःसामनामानः अथर्वाख्यश्च चतुर्थकः॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          The all-knowing Vedas — Rig, Yajur, Sama, and the fourth called Atharva — are all preserved through Sanskrit language.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">❓ Expected Q&A <span>▼</span></div>
+      <div class="card-body">
+        <div class="qa-item">
+          <div class="question">Q1. Who wrote 'अमरवाणीप्रशस्तिः'? What is its theme? (2M)</div>
+          <div class="answer">Author: E. Shankaracharya. Taken from Kavyasangraha. Theme: Praise of Sanskrit language as अमरवाणी (immortal language/divine speech). The poem celebrates Sanskrit as the mother of all languages, the language of the Vedas, governed by Panini's grammar, and the vehicle of Indian civilization.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q2. Why is Sanskrit called अमरवाणी? (4M)</div>
+          <div class="answer">Sanskrit is called अमरवाणी (immortal speech) because: (1) It is the language of the gods (देवभाषा), spoken since time immemorial (सनातनी), (2) It is the mother of all Indian and many world languages, (3) The Vedas, Upanishads, epics (Ramayana, Mahabharata), Puranas, and entire Indian philosophy are preserved in it, (4) Its grammar (Panini's Ashtadhyayi) is so perfect that the language remains pure and unchanged over millennia, (5) Even today Sanskrit is used in temples, rituals, and scholarship — so it never died and became truly immortal.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q3. Name the four Vedas mentioned in this chapter. (2M)</div>
+          <div class="answer">The four Vedas are: (1) Rigveda (ऋग्वेदः), (2) Yajurveda (यजुर्वेदः), (3) Samaveda (सामवेदः), and (4) Atharvaveda (अथर्ववेदः). All four are preserved in Sanskrit.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P6: Kapinam -->
+  <div id="p6" class="sub-page">
+    <div class="section-title">कपीनामुपवासः <span class="marks-badge">Ch.6</span></div>
+    <div class="highlight">
+      <div class="highlight-label">📌 KEY FACTS</div>
+      <b>Author:</b> Shrishailam Tatacharyya (श्रीशैलम् तातचार्यः)<br>
+      <b>Source:</b> Kavyasangraha (काव्यसंग्रहः)<br>
+      <b>Content:</b> 27 humorous shlokas about monkeys (कपि) who "observe a fast" (उपवास) — but actually they are starving because there are no fruits left, and they pretend this is religious fasting! A satirical poem using the monkeys' situation to comment on self-deception and making virtue of necessity.
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📖 Key Shlokas <span>▼</span></div>
+      <div class="card-body">
+        <div class="shloka">
+          <div class="shloka-num">Shloka 1 — Setting the scene</div>
+          वने कपयः सर्वे फलाभावात्तु कर्शिताः।<br>
+          अहोरात्रं क्षुधार्ताश्च किन्त्वुपोष्यत्वमावहन्॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          In the forest, all the monkeys became thin due to lack of fruits. Though suffering from hunger day and night, they pretended (said) that they were "fasting" (observing a religious fast).</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Shloka 2 — The chief monkey's declaration</div>
+          वयं वानरराजस्य वचनात् तपसि स्थिताः।<br>
+          उपवासः कृतोऽस्माभिः पुण्यं लभ्यते महत्॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          "We are engaged in austerities as per the king of monkeys' words. We have observed a fast — great religious merit (punya) is obtained by us!"</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Shloka 3 — Humorous comparison</div>
+          गजानां गमनं स्वामी वानराणां तु वृक्षगः।<br>
+          उपवासेन पुण्यं च लभ्यते पशुभिरपि॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          Elephants walk on the ground, monkeys live in trees — thus even animals obtain religious merit through fasting!</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Shloka 4 — The satire revealed</div>
+          फलाभावादुपोषणं नाम्ना पुण्यमिति ब्रुवन्।<br>
+          एवं स्वार्थं परार्थं च कुर्वन्ति कपयः सदा॥
+          <div class="meaning"><div class="meaning-label">Meaning</div>
+          Calling starvation (due to lack of fruits) as "religious fasting" and declaring it "meritorious" — thus monkeys always make their self-interest look like virtue for others!</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">❓ Expected Q&A <span>▼</span></div>
+      <div class="card-body">
+        <div class="qa-item">
+          <div class="question">Q1. Who wrote 'कपीनामुपवासः'? What is its central humor? (4M)</div>
+          <div class="answer">Author: Shrishailam Tatacharyya. From Kavyasangraha. Central humor: The monkeys in the forest are starving because there are no fruits. Instead of admitting they are simply hungry, they call their hunger a "religious fast" (उपवास) and claim to be earning spiritual merit (पुण्य). The poem satirizes the human tendency to justify unavoidable suffering as voluntary virtue, or to make necessity look like choice. The poet uses monkeys as a mirror for human self-deception.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q2. What is the moral/message of 'कपीनामुपवासः'? (2M)</div>
+          <div class="answer">The poem satirically exposes how beings (here, monkeys — but symbolically humans too) rationalize their compulsions as virtues. When there is no food, calling it a fast and claiming religious merit is self-deception. True virtue is voluntary, not forced. The poem teaches discrimination between genuine virtue and mere pretense.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q3. From which collection is this poem? Who compiled it? (2M)</div>
+          <div class="answer">It is from Kavyasangraha (काव्यसंग्रहः), which is a collection/anthology of Sanskrit poems. The author Shrishailam Tatacharyya composed this humorous poem about monkeys observing a fast involuntarily.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- PROSE PAGE -->
+<div id="prose" class="page">
+  <div class="sub-tabs">
+    <div class="sub-tab active" onclick="showSubTab('prose','g1')">1. कपिञ्जलः</div>
+    <div class="sub-tab" onclick="showSubTab('prose','g2')">2. भोजस्य</div>
+    <div class="sub-tab" onclick="showSubTab('prose','g3')">3. शश-कपिञ्जल</div>
+    <div class="sub-tab" onclick="showSubTab('prose','g4')">4. मलयालस्वामी</div>
+    <div class="sub-tab" onclick="showSubTab('prose','g5')">5. स्वदेस्य</div>
+    <div class="sub-tab" onclick="showSubTab('prose','g6')">6. वर्षापरिदेवनम्</div>
+  </div>
+
+  <!-- G1: Kapinjala -->
+  <div id="g1" class="sub-page active">
+    <div class="section-title">कपिञ्जलोपदेशः <span class="marks-badge">Ch.1</span></div>
+    <div class="highlight">
+      <div class="highlight-label">📌 KEY FACTS</div>
+      <b>Author:</b> बाणभट्ट (7th century CE) | <b>Source:</b> कादम्बरी (Kadambari — Sanskrit prose novel)<br>
+      <b>Characters:</b> Kapinjala (partridge bird) advises his friend Pundarika (a young brahmin) who is infatuated with Mahasweta (a beautiful woman).<br>
+      <b>Theme:</b> A wise friend's advice against blind love; superiority of dharma and friendship over infatuation.
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📖 Story Summary <span>▼</span></div>
+      <div class="card-body">
+        <div class="meaning">
+          <div class="meaning-label">Detailed Plot</div>
+          Pundarika, a young brahmin, sees Mahasweta — a beautiful woman devoted to the god of love (Manmatha) — and becomes completely infatuated. His bird-friend Kapinjala sees this and tries to warn him. Kapinjala gives a long, wise speech:<br><br>
+          1. Don't be enslaved by beauty — it is impermanent.<br>
+          2. A woman devoted to Manmatha's worship is not appropriate for you.<br>
+          3. True friendship (मैत्री) is more valuable than romantic love.<br>
+          4. Dharma (righteousness) must guide all relationships.<br>
+          5. Infatuation leads to loss of discrimination, then fall from dharma.<br><br>
+          Pundarika doesn't listen and eventually meets a tragic end due to his obsession. The story illustrates the importance of heeding wise counsel.
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📝 Key Passages <span>▼</span></div>
+      <div class="card-body">
+        <div class="shloka">
+          <div class="shloka-num">Passage 1 — Kapinjala's warning</div>
+          "किमर्थं मित्र! त्वमिमां कामिनीं दृष्ट्वा मुग्धो जातोऽसि? सौन्दर्यमात्रेण मोहः न युक्तः। रूपं नाम क्षणिकम्। धर्म एव परमः।"
+          <div class="meaning"><div class="meaning-label">Translation</div>
+          "Why, my friend, have you become infatuated just by seeing this woman? Infatuation for mere beauty is not proper. Beauty is momentary. Dharma alone is supreme."</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Passage 2 — On true friendship</div>
+          "मैत्री नाम दुर्लभा। सुहृदः सन्तः सदा हितं वदन्ति। यो मित्रवाक्यं न शृणोति स आपदं प्राप्नोति।"
+          <div class="meaning"><div class="meaning-label">Translation</div>
+          "True friendship is rare. Good friends always speak what is beneficial. One who does not listen to a friend's words meets with calamity."</div>
+        </div>
+        <div class="shloka">
+          <div class="shloka-num">Passage 3 — Kapinjala on love and dharma</div>
+          "कामः न धर्मोपेतः सुखं न ददाति। कामवशगो नरः नष्टो भवति।"
+          <div class="meaning"><div class="meaning-label">Translation</div>
+          "Desire not accompanied by dharma does not give happiness. A man who becomes subject to desire is ruined."</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">❓ Expected Q&A <span>▼</span></div>
+      <div class="card-body">
+        <div class="qa-item">
+          <div class="question">Q1. Who is Banabhatta? What is Kadambari? (2M)</div>
+          <div class="answer">Banabhatta (बाणभट्ट) was a 7th-century Sanskrit prose writer, court poet of Emperor Harshavardhana. Kadambari is his famous Sanskrit prose novel (गद्यकाव्य) — the first major novel in Sanskrit. It is named after its heroine Kadambari and is known for its ornate and elaborate prose style (Vaidarbhi style mixed with complex compounds).</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q2. Who are Kapinjala and Pundarika? What is their relationship? (2M)</div>
+          <div class="answer">Kapinjala (कपिञ्जलः) is a partridge bird who is the wise friend of Pundarika (पुण्डरीकः), a young brahmin boy. They are best friends (मित्र). Kapinjala represents wisdom and dharma, while Pundarika represents youth overcome by infatuation.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q3. What advice does Kapinjala give Pundarika? (4M)</div>
+          <div class="answer">Kapinjala advises Pundarika: (1) Do not be infatuated by physical beauty — it is temporary (क्षणिक). (2) Dharma is supreme and must guide all relationships. (3) A woman who is devoted to the worship of Manmatha (god of love) is not the right pursuit for a dharmic brahmin. (4) True friendship is rare and precious — listen to your friend's wise words. (5) Desire without dharma destroys a person. Despite this wise counsel, Pundarika does not heed the advice, foreshadowing his tragedy.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q4. What is the main message of 'कपिञ्जलोपदेशः'? (4M)</div>
+          <div class="answer">The chapter's main message is the superiority of dharma over kama (desire/love), and the value of heeding a true friend's wise counsel. Beauty is impermanent; dharma is eternal. Wise friends speak the truth even when it is unpleasant, and their words should be respected. Blind infatuation leads to loss of discrimination and ultimately to ruin. The chapter also shows the depth of true friendship — a friend who warns you is more valuable than one who flatters you.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- G2: Bhoja -->
+  <div id="g2" class="sub-page">
+    <div class="section-title">भोजस्य औदार्यम् <span class="marks-badge">Ch.2</span></div>
+    <div class="highlight">
+      <div class="highlight-label">📌 KEY FACTS</div>
+      <b>Author:</b> Ballal (बल्लाल) | <b>Source:</b> भोजप्रबन्धः (Bhoja Prabandha)<br>
+      <b>Character:</b> King Bhoja of Dhara (11th century) — famous for his learning, generosity, and patronage of Sanskrit poets.<br>
+      <b>Theme:</b> King Bhoja's extraordinary generosity (औदार्य) toward a poor poet.
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📖 Story Summary <span>▼</span></div>
+      <div class="card-body">
+        <div class="meaning">
+          <div class="meaning-label">Detailed Story</div>
+          A poor Sanskrit poet comes to King Bhoja's court hoping to receive patronage. He recites a Sanskrit verse he has composed. King Bhoja, being himself a great poet and lover of learning, is extremely pleased.<br><br>
+          However, instead of just giving gold or silver, King Bhoja shows a different kind of generosity — he not only praises the poet's skill publicly (making his reputation), but also gives generously from the royal treasury. The story describes various anecdotes of Bhoja's liberal gifting to poets and scholars.<br><br>
+          Key themes: A king's duty to patronize learning; the value of knowledge over wealth; how a truly great king supports Sanskrit scholarship; the bond between poets and their royal patrons (आश्रयदाता).
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">❓ Expected Q&A <span>▼</span></div>
+      <div class="card-body">
+        <div class="qa-item">
+          <div class="question">Q1. Who was King Bhoja? Why is he famous? (2M)</div>
+          <div class="answer">King Bhoja (भोजराजः) was a Paramara dynasty king who ruled from Dhara (धारा, in present-day Madhya Pradesh) in the 11th century CE. He is famous for: (1) being a great Sanskrit scholar himself, (2) extraordinary generosity toward Sanskrit poets and scholars (औदार्य), (3) establishing Dhara as a center of Sanskrit learning. The Bhoja Prabandha is a collection of anecdotes about his generosity.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q2. Who wrote Bhoja Prabandha? (2M)</div>
+          <div class="answer">Bhoja Prabandha was written by Ballal (बल्लाल). It is a prose work (गद्यकाव्य) that collects stories about King Bhoja's court life, his generosity, and his patronage of Sanskrit learning and poets.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q3. What does 'औदार्य' mean? How does King Bhoja demonstrate it? (4M)</div>
+          <div class="answer">औदार्य means generosity, liberality, magnanimity — giving freely and abundantly. King Bhoja demonstrates औदार्य by: (1) welcoming Sanskrit poets warmly to his court, (2) listening to their compositions with genuine appreciation, (3) publicly praising their skill, thereby giving them reputation and honor (which is more valuable than gold), (4) rewarding them generously from the treasury, (5) treating scholars as honored guests — not as servants seeking alms. His generosity elevates both the poet and the king.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- G3: Shasha-Kapinjala -->
+  <div id="g3" class="sub-page">
+    <div class="section-title">शश-कपिञ्जलकथा <span class="marks-badge">Ch.3</span></div>
+    <div class="highlight">
+      <div class="highlight-label">📌 KEY FACTS</div>
+      <b>Author:</b> विष्णुशर्मा (Vishnusharma) | <b>Source:</b> पञ्चतन्त्रम् — काकोलूकीयम् (3rd Tantra)<br>
+      <b>Characters:</b> Shasha (शश = rabbit/hare), Kapinjala (कपिञ्जल = dove/partridge), Monkey as judge<br>
+      <b>Theme:</b> The danger of inviting a third party (a stranger/outsider) to settle disputes between friends; the outsider cheats both.
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📖 Story Summary <span>▼</span></div>
+      <div class="card-body">
+        <div class="meaning">
+          <div class="meaning-label">Detailed Story</div>
+          A rabbit (Shasha) and a dove (Kapinjala) are friends sharing a tree hole. The dove goes out at dawn and returns to find the rabbit has occupied the hole. They argue about ownership.<br><br>
+          Neither can settle the dispute, so they agree to ask a wise monkey (Marmara the old monkey) to judge. The monkey pretends to be deaf and old and makes them both come close to hear him. When they come close, he kills/eats them both — gaining from their dispute.<br><br>
+          <b>Moral:</b> Never take a dispute to a stranger/outsider. The one who does not have any stake in your quarrel will exploit both sides. Settle disputes among yourselves. "विवादं मा कुरु परैः सह" (Don't quarrel before strangers).
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">❓ Expected Q&A <span>▼</span></div>
+      <div class="card-body">
+        <div class="qa-item">
+          <div class="question">Q1. Who wrote Panchatantra? How many Tantras does it have? (2M)</div>
+          <div class="answer">Panchatantra was written by Vishnusharma (विष्णुशर्मा) to teach political wisdom (niti) to young princes through animal fables. It has 5 Tantras (books): (1) Mitrabheda (separation of friends), (2) Mitralabha (gaining friends), (3) Kakolukiyam (crows and owls), (4) Labdhapranasham (loss of gains), (5) Aparikshitakaraka (hasty action). "शश-कपिञ्जलकथा" is from the 3rd Tantra (Kakolukiyam).</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q2. Who are Shasha and Kapinjala? What is their dispute? (2M)</div>
+          <div class="answer">Shasha (शश) is a rabbit and Kapinjala (कपिञ्जल) is a dove. They are co-occupants of the same tree hole. The dove goes out and during its absence, the rabbit occupies the hole. When the dove returns, both claim ownership — the rabbit by current possession, the dove by prior ownership. This leads to their dispute.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q3. What is the moral of शश-कपिञ्जलकथा? (4M)</div>
+          <div class="answer">The moral is: Do not take your disputes to outsiders/strangers, for they will exploit both parties. When Shasha and Kapinjala bring their quarrel to the monkey-judge (Marmara), the monkey has no loyalty to either of them. He pretends to be old and deaf, gets them both to come close, and then kills/cheats them both. The story teaches: (1) Resolve disputes between yourselves, (2) Strangers who offer to "help" in disputes often profit from your conflict, (3) Friends should not let small quarrels grow into litigation before outsiders.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- G4: Malayala Swami -->
+  <div id="g4" class="sub-page">
+    <div class="section-title">श्रीमलयालस्वामी — संस्कृतभाषासेवा <span class="marks-badge">Ch.4</span></div>
+    <div class="highlight">
+      <div class="highlight-label">📌 KEY FACTS</div>
+      <b>Author:</b> Samudralakshmana (समुद्रलक्ष्मण)<br>
+      <b>Content:</b> Life and service to Sanskrit language by Sri Malayala Swami — a modern Sanskrit scholar-saint who dedicated his life to promoting Sanskrit in AP/Telangana region.<br>
+      <b>Theme:</b> Devotion to Sanskrit language as a form of worship; modern Sanskrit revival.
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📖 Content Summary <span>▼</span></div>
+      <div class="card-body">
+        <div class="meaning">
+          <div class="meaning-label">About Sri Malayala Swami</div>
+          Sri Malayala Swami was a revered Sanskrit scholar-saint from Andhra Pradesh who lived in recent centuries. He dedicated his entire life to the service and propagation of Sanskrit language:<br><br>
+          1. <b>Sanskrit Education:</b> Established Sanskrit pathshalas (schools) to teach Sanskrit to students from all backgrounds, not just brahmin community.<br>
+          2. <b>Writing:</b> Composed Sanskrit texts, commentaries, and devotional literature in Sanskrit.<br>
+          3. <b>Teaching:</b> Taught Sanskrit to hundreds of students, inspiring them to love the language.<br>
+          4. <b>Social inclusion:</b> Broke barriers by teaching Sanskrit to all castes — believed Sanskrit is everyone's heritage.<br>
+          5. <b>Inspiration:</b> His life is an example of how one person's dedication can revive a classical language.<br><br>
+          The lesson portrays how service to language (भाषासेवा) is itself a form of spiritual and national service.
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">❓ Expected Q&A <span>▼</span></div>
+      <div class="card-body">
+        <div class="qa-item">
+          <div class="question">Q1. Who was Sri Malayala Swami? What was his contribution to Sanskrit? (4M)</div>
+          <div class="answer">Sri Malayala Swami was a Sanskrit scholar-saint from Andhra Pradesh who dedicated his life to Sanskrit language service (संस्कृतभाषासेवा). His contributions: (1) Established Sanskrit schools (पाठशालाः) and made Sanskrit education accessible to all, (2) Composed Sanskrit texts and commentaries, (3) Taught Sanskrit to hundreds of students across all communities, (4) Promoted the idea that Sanskrit is not just a religious language but India's cultural treasure, (5) His selfless service (निःस्वार्थसेवा) inspired many to take up Sanskrit learning.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q2. What is the lesson of this chapter for students? (2M)</div>
+          <div class="answer">The lesson teaches that service to one's language and culture is as sacred as service to God. Sri Malayala Swami shows that one person with dedication can make a huge difference — he revived Sanskrit learning in his region through sheer selfless service. Students should respect and learn Sanskrit as their cultural heritage.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q3. What does संस्कृतभाषासेवा mean? (2M)</div>
+          <div class="answer">संस्कृतभाषासेवा means "service to the Sanskrit language" — actively working for Sanskrit's preservation, promotion, teaching, and use. For Sri Malayala Swami, it meant teaching Sanskrit, writing in Sanskrit, establishing schools, and inspiring others to love the language. He treated this service as his life's mission (जीवनव्रतम्).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- G5: Swadeshya Pushpani -->
+  <div id="g5" class="sub-page">
+    <div class="section-title">स्वदेस्य पुष्पाणि <span class="marks-badge">Ch.5</span></div>
+    <div class="highlight">
+      <div class="highlight-label">📌 KEY FACTS</div>
+      <b>Author:</b> Dr. Madhavi Joshi (डॉ. माधवी जोशी)<br>
+      <b>Content:</b> "Indigenous Flowers" — a descriptive prose about various Indian flowers, their beauty, cultural significance, and their role in Indian tradition/worship.<br>
+      <b>Theme:</b> Celebration of Indian nature; environmental awareness; flowers as part of Indian cultural identity.
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📖 Content Summary <span>▼</span></div>
+      <div class="card-body">
+        <div class="meaning">
+          <div class="meaning-label">Key Content</div>
+          The prose celebrates various native Indian flowers and their importance:<br><br>
+          <b>Flowers mentioned:</b><br>
+          • <b>Lotus (पद्म/कमल)</b> — national flower; symbol of purity, associated with Lakshmi and Brahma; grows in mud but remains pure<br>
+          • <b>Jasmine (जाति/मल्लिका)</b> — fragrant; used in worship and hair decoration; symbol of purity<br>
+          • <b>Champaka (चम्पक)</b> — golden fragrant flower; beloved of gods<br>
+          • <b>Ashoka (अशोक)</b> — "without sorrow"; blooms when touched by a woman's foot<br>
+          • <b>Kadamba (कदम्ब)</b> — associated with Krishna; blooms in rain season<br><br>
+          The author emphasizes: These flowers are not just beautiful but carry deep cultural, religious, and environmental significance. They connect us to our roots (स्वदेश). We should protect native flowers and plants.
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">❓ Expected Q&A <span>▼</span></div>
+      <div class="card-body">
+        <div class="qa-item">
+          <div class="question">Q1. What is the theme of 'स्वदेस्य पुष्पाणि'? (2M)</div>
+          <div class="answer">Theme: Celebration of India's indigenous flowers (स्वदेश्यपुष्पाणि) — their beauty, fragrance, cultural and religious significance. The prose also carries an environmental message about protecting native plants. Dr. Madhavi Joshi uses Sanskrit prose to highlight the deep connection between Indian flowers and Indian civilization.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q2. What is the significance of the Lotus (पद्म) in Indian culture? (2M)</div>
+          <div class="answer">The Lotus (पद्म/कमलम्) is India's national flower. Spiritually: it is the seat of Goddess Lakshmi and Lord Brahma; it symbolizes divine purity and prosperity. Philosophically: it grows in mud (like hardship) but blooms above water unstained — symbolizing detachment and purity of heart. In Sanskrit poetry, eyes are compared to lotus petals (kamaldala-lochana).</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q3. Which flowers are mentioned in this chapter? Give their cultural significance. (4M)</div>
+          <div class="answer">(1) Lotus (कमल) — national flower, symbol of purity and divine grace; (2) Jasmine (मल्लिका) — fragrant, used in worship and hair decoration, symbol of women's beauty in Sanskrit poetry; (3) Champaka (चम्पक) — golden fragrant flower, loved by gods, associated with Vishnu worship; (4) Ashoka (अशोक) — meaning "without sorrow," blooms when touched by a woman's foot according to tradition; (5) Kadamba (कदम्ब) — blooms in the rainy season, associated with Lord Krishna's flute-playing in Vrindavan.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- G6: Varsha Paridevana -->
+  <div id="g6" class="sub-page">
+    <div class="section-title">वर्षापरिदेवनम् <span class="marks-badge">Ch.6</span></div>
+    <div class="highlight">
+      <div class="highlight-label">📌 KEY FACTS</div>
+      <b>Author:</b> M.M. Acharya Gupti, Sri Ramakrishnamurti<br>
+      <b>Content:</b> "Lament of the Rainy Season" — a humorous/satirical prose describing the complaints and troubles caused by the rainy season; personification of rain as a villain that disrupts daily life.<br>
+      <b>Theme:</b> Humorous description of monsoon troubles; satire; personification (मानवीकरण) of rain.
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📖 Content Summary <span>▼</span></div>
+      <div class="card-body">
+        <div class="meaning">
+          <div class="meaning-label">Key Content</div>
+          This is a humorous prose work describing how the rainy season (वर्षाकालः) causes various troubles:<br><br>
+          • Roads become muddy and impassable<br>
+          • Clothes don't dry; wet clothes cause discomfort<br>
+          • Mosquitoes (मशकाः) breed in standing water<br>
+          • Frogs (मण्डूकाः) croak all night, disturbing sleep<br>
+          • Fields flood; farmers' crops at risk<br>
+          • Roofs leak; homes become damp<br>
+          • People cannot go out; life is disrupted<br><br>
+          The author uses परिदेवनम् (lamentation/complaint) format — writing as if on behalf of those who suffer from rain. The humor comes from over-dramatizing ordinary monsoon troubles. The author acknowledges rain is necessary but cannot help complaining about the disruption!
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">❓ Expected Q&A <span>▼</span></div>
+      <div class="card-body">
+        <div class="qa-item">
+          <div class="question">Q1. What does वर्षापरिदेवनम् mean? What is the genre of this piece? (2M)</div>
+          <div class="answer">वर्षापरिदेवनम् means "Lament of/about the Rainy Season" (वर्षा = rain, परिदेवनम् = lamentation, complaint). Genre: Humorous/satirical prose (हास्यव्यङ्ग्यगद्यम्). The author humorously describes all the troubles caused by monsoon rains, as if the rainy season is a troublemaker who disrupts peaceful life.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q2. What troubles are described in this chapter? (4M)</div>
+          <div class="answer">The rainy season causes: (1) Roads become muddy and difficult to walk on, (2) Wet clothes cannot dry, causing discomfort, (3) Mosquitoes (मशकाः) multiply in stagnant water, causing illness, (4) Frogs (मण्डूकाः) croak all night disturbing sleep, (5) Houses become damp and roofs leak, (6) People cannot step outside; normal activities are disrupted, (7) Farmers worry about flooding and crop damage. All these are described with humor and exaggeration for effect.</div>
+        </div>
+        <div class="qa-item">
+          <div class="question">Q3. What literary devices are used in 'वर्षापरिदेवनम्'? (2M)</div>
+          <div class="answer">Key literary devices: (1) Personification (मानवीकरण) — rain is treated as a conscious villain causing trouble; (2) Humor and exaggeration (अतिशयोक्ति) — ordinary monsoon inconveniences are dramatically over-stated; (3) Paradox — rain is life-giving but also trouble-causing; (4) Satire (व्यङ्ग्य) — underneath the humor is commentary on how humans both need rain and complain about it.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GRAMMAR PAGE -->
+<div id="grammar" class="page">
+  <div class="sub-tabs">
+    <div class="sub-tab active" onclick="showSubTab('grammar','gr1')">शब्दाः (Nouns)</div>
+    <div class="sub-tab" onclick="showSubTab('grammar','gr2')">धातुरूपाणि (Verbs)</div>
+    <div class="sub-tab" onclick="showSubTab('grammar','gr3')">संधयः (Sandhi)</div>
+    <div class="sub-tab" onclick="showSubTab('grammar','gr4')">समासाः (Samasa)</div>
+  </div>
+
+  <!-- Nouns -->
+  <div id="gr1" class="sub-page active">
+    <div class="section-title">शब्दाः — Noun Declensions <span class="marks-badge">pp. 107-117</span></div>
+    <div class="alert"><span class="alert-icon">⚠️</span> These noun tables appear directly in the exam. Know all cases (विभक्तयः) for at least the key nouns below.</div>
+
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📊 रामः (Masculine a-stem) — राम Declension <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Vibhakti</th><th>Singular (एकवचन)</th><th>Dual (द्विवचन)</th><th>Plural (बहुवचन)</th></tr>
+          <tr><td>प्रथमा (Nom)</td><td>रामः</td><td>रामौ</td><td>रामाः</td></tr>
+          <tr><td>द्वितीया (Acc)</td><td>रामम्</td><td>रामौ</td><td>रामान्</td></tr>
+          <tr><td>तृतीया (Ins)</td><td>रामेण</td><td>रामाभ्याम्</td><td>रामैः</td></tr>
+          <tr><td>चतुर्थी (Dat)</td><td>रामाय</td><td>रामाभ्याम्</td><td>रामेभ्यः</td></tr>
+          <tr><td>पञ्चमी (Abl)</td><td>रामात्</td><td>रामाभ्याम्</td><td>रामेभ्यः</td></tr>
+          <tr><td>षष्ठी (Gen)</td><td>रामस्य</td><td>रामयोः</td><td>रामाणाम्</td></tr>
+          <tr><td>सप्तमी (Loc)</td><td>रामे</td><td>रामयोः</td><td>रामेषु</td></tr>
+          <tr><td>सम्बोधन (Voc)</td><td>हे राम!</td><td>हे रामौ!</td><td>हे रामाः!</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📊 लता (Feminine ā-stem) — लता Declension <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Vibhakti</th><th>Singular</th><th>Dual</th><th>Plural</th></tr>
+          <tr><td>प्रथमा</td><td>लता</td><td>लते</td><td>लताः</td></tr>
+          <tr><td>द्वितीया</td><td>लताम्</td><td>लते</td><td>लताः</td></tr>
+          <tr><td>तृतीया</td><td>लतया</td><td>लताभ्याम्</td><td>लताभिः</td></tr>
+          <tr><td>चतुर्थी</td><td>लतायै</td><td>लताभ्याम्</td><td>लताभ्यः</td></tr>
+          <tr><td>पञ्चमी</td><td>लतायाः</td><td>लताभ्याम्</td><td>लताभ्यः</td></tr>
+          <tr><td>षष्ठी</td><td>लतायाः</td><td>लतयोः</td><td>लतानाम्</td></tr>
+          <tr><td>सप्तमी</td><td>लतायाम्</td><td>लतयोः</td><td>लतासु</td></tr>
+          <tr><td>सम्बोधन</td><td>हे लते!</td><td>हे लते!</td><td>हे लताः!</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📊 फलम् (Neuter a-stem) — फल Declension <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Vibhakti</th><th>Singular</th><th>Dual</th><th>Plural</th></tr>
+          <tr><td>प्रथमा</td><td>फलम्</td><td>फले</td><td>फलानि</td></tr>
+          <tr><td>द्वितीया</td><td>फलम्</td><td>फले</td><td>फलानि</td></tr>
+          <tr><td>तृतीया</td><td>फलेन</td><td>फलाभ्याम्</td><td>फलैः</td></tr>
+          <tr><td>चतुर्थी</td><td>फलाय</td><td>फलाभ्याम्</td><td>फलेभ्यः</td></tr>
+          <tr><td>पञ्चमी</td><td>फलात्</td><td>फलाभ्याम्</td><td>फलेभ्यः</td></tr>
+          <tr><td>षष्ठी</td><td>फलस्य</td><td>फलयोः</td><td>फलानाम्</td></tr>
+          <tr><td>सप्तमी</td><td>फले</td><td>फलयोः</td><td>फलेषु</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📊 Key Pronouns — अस्मद् (I/We) & युष्मद् (You) <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Case</th><th>अस्मद् (1st Person)</th><th></th><th>युष्मद् (2nd Person)</th><th></th></tr>
+          <tr><th></th><th>Sg</th><th>Pl</th><th>Sg</th><th>Pl</th></tr>
+          <tr><td>Nom</td><td>अहम्</td><td>वयम्</td><td>त्वम्</td><td>यूयम्</td></tr>
+          <tr><td>Acc</td><td>माम्/मा</td><td>अस्मान्/नः</td><td>त्वाम्/त्वा</td><td>युष्मान्/वः</td></tr>
+          <tr><td>Ins</td><td>मया</td><td>अस्माभिः</td><td>त्वया</td><td>युष्माभिः</td></tr>
+          <tr><td>Dat</td><td>मह्यम्/मे</td><td>अस्मभ्यम्/नः</td><td>तुभ्यम्/ते</td><td>युष्मभ्यम्/वः</td></tr>
+          <tr><td>Gen</td><td>मम/मे</td><td>अस्माकम्/नः</td><td>तव/ते</td><td>युष्माकम्/वः</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Verbs -->
+  <div id="gr2" class="sub-page">
+    <div class="section-title">धातुरूपाणि — Verb Conjugations <span class="marks-badge">pp. 118-133</span></div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📊 भू (to be) — लट् लकार (Present Tense) <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Person</th><th>Singular</th><th>Dual</th><th>Plural</th></tr>
+          <tr><td>3rd (प्र.पु.)</td><td>भवति</td><td>भवतः</td><td>भवन्ति</td></tr>
+          <tr><td>2nd (म.पु.)</td><td>भवसि</td><td>भवथः</td><td>भवथ</td></tr>
+          <tr><td>1st (उ.पु.)</td><td>भवामि</td><td>भवावः</td><td>भवामः</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📊 पठ् (to read) — All Lakaras <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Lakara</th><th>Meaning</th><th>3rd Sg</th><th>3rd Pl</th></tr>
+          <tr><td>लट्</td><td>Present</td><td>पठति</td><td>पठन्ति</td></tr>
+          <tr><td>लिट्</td><td>Perfect</td><td>पपाठ</td><td>पेठुः</td></tr>
+          <tr><td>लुट्</td><td>Periphrastic Future</td><td>पठिता</td><td>पठितारः</td></tr>
+          <tr><td>लृट्</td><td>Future</td><td>पठिष्यति</td><td>पठिष्यन्ति</td></tr>
+          <tr><td>लोट्</td><td>Imperative</td><td>पठतु</td><td>पठन्तु</td></tr>
+          <tr><td>लङ्</td><td>Imperfect/Past</td><td>अपठत्</td><td>अपठन्</td></tr>
+          <tr><td>विधिलिङ्</td><td>Potential/Should</td><td>पठेत्</td><td>पठेयुः</td></tr>
+          <tr><td>आशीर्लिङ्</td><td>Benedictive</td><td>पठ्यात्</td><td>पठ्यासुः</td></tr>
+          <tr><td>लुङ्</td><td>Aorist</td><td>अपाठीत्</td><td>अपाठिषुः</td></tr>
+          <tr><td>लृङ्</td><td>Conditional</td><td>अपठिष्यत्</td><td>अपठिष्यन्</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📊 Key Verbs — 3rd Person Singular Present <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Dhatu</th><th>Meaning</th><th>Present 3rd Sg</th><th>Past (लङ्)</th></tr>
+          <tr><td>गम् (गच्छ्)</td><td>to go</td><td>गच्छति</td><td>अगच्छत्</td></tr>
+          <tr><td>दृश् (पश्य)</td><td>to see</td><td>पश्यति</td><td>अपश्यत्</td></tr>
+          <tr><td>वद्</td><td>to speak</td><td>वदति</td><td>अवदत्</td></tr>
+          <tr><td>कृ (कर्)</td><td>to do</td><td>करोति</td><td>अकरोत्</td></tr>
+          <tr><td>हस्</td><td>to laugh</td><td>हसति</td><td>अहसत्</td></tr>
+          <tr><td>रक्ष्</td><td>to protect</td><td>रक्षति</td><td>अरक्षत्</td></tr>
+          <tr><td>जीव्</td><td>to live</td><td>जीवति</td><td>अजीवत्</td></tr>
+          <tr><td>स्था (तिष्ठ्)</td><td>to stand</td><td>तिष्ठति</td><td>अतिष्ठत्</td></tr>
+          <tr><td>खाद्</td><td>to eat</td><td>खादति</td><td>अखादत्</td></tr>
+          <tr><td>नी (नय्)</td><td>to lead</td><td>नयति</td><td>अनयत्</td></tr>
+          <tr><td>लिख्</td><td>to write</td><td>लिखति</td><td>अलिखत्</td></tr>
+          <tr><td>श्रु (शृणु)</td><td>to hear</td><td>शृणोति</td><td>अशृणोत्</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sandhi -->
+  <div id="gr3" class="sub-page">
+    <div class="section-title">संधयः — Sandhi Rules <span class="marks-badge">pp. 134-136</span></div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📊 स्वरसन्धिः — Vowel Sandhi <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Rule</th><th>Condition</th><th>Result</th><th>Example</th></tr>
+          <tr><td>दीर्घसन्धि</td><td>a/ā + a/ā</td><td>→ ā</td><td>राम + अयन = रामायण</td></tr>
+          <tr><td>दीर्घसन्धि</td><td>i/ī + i/ī</td><td>→ ī</td><td>गिरि + ईश = गिरीश</td></tr>
+          <tr><td>दीर्घसन्धि</td><td>u/ū + u/ū</td><td>→ ū</td><td>भानु + उदय = भानूदय</td></tr>
+          <tr><td>गुणसन्धि</td><td>a/ā + i/ī</td><td>→ e</td><td>देव + इन्द्र = देवेन्द्र</td></tr>
+          <tr><td>गुणसन्धि</td><td>a/ā + u/ū</td><td>→ o</td><td>सूर्य + उदय = सूर्योदय</td></tr>
+          <tr><td>गुणसन्धि</td><td>a/ā + ṛ</td><td>→ ar</td><td>महा + ऋषि = महर्षि</td></tr>
+          <tr><td>वृद्धिसन्धि</td><td>a/ā + e/ai</td><td>→ ai</td><td>एक + एक = एकैक</td></tr>
+          <tr><td>वृद्धिसन्धि</td><td>a/ā + o/au</td><td>→ au</td><td>वन + औषधि = वनौषधि</td></tr>
+          <tr><td>यणसन्धि</td><td>i/ī + non-i vowel</td><td>→ y</td><td>यदि + अपि = यद्यपि</td></tr>
+          <tr><td>यणसन्धि</td><td>u/ū + non-u vowel</td><td>→ v</td><td>अनु + अय = अन्वय</td></tr>
+          <tr><td>अयादि</td><td>e + vowel</td><td>→ ay</td><td>ने + अन = नयन</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📊 व्यञ्जनसन्धि & विसर्गसन्धि <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Rule</th><th>Condition</th><th>Example</th></tr>
+          <tr><td>Visarga + a → o</td><td>ः + a</td><td>रामः + अयन → रामोऽयन</td></tr>
+          <tr><td>Visarga + vowel → r</td><td>ः + vowel</td><td>पुनः + आगत → पुनरागत</td></tr>
+          <tr><td>Visarga → s before c/ch</td><td>ः + च/छ</td><td>रामः + च → रामश्च</td></tr>
+          <tr><td>त् + ज् → ज्ज्</td><td>t + j</td><td>सत् + जन → सज्जन</td></tr>
+          <tr><td>त् + श् → च्छ</td><td>t + ś</td><td>सत् + शास्त्र → सच्छास्त्र</td></tr>
+          <tr><td>न् → ण् (after ṛ/r/ṣ)</td><td>Retroflex rule</td><td>रामस्य + नाम → (no change)</td></tr>
+          <tr><td>म् + consonant → anusvara</td><td>म् + C</td><td>सम् + कल्प → संकल्प</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">🔤 Practice: Identify Sandhi Type <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Combined Form</th><th>Split</th><th>Rule</th></tr>
+          <tr><td>महर्षिः</td><td>महा + ऋषिः</td><td>गुण (ā+ṛ→ar)</td></tr>
+          <tr><td>देवेन्द्रः</td><td>देव + इन्द्रः</td><td>गुण (a+i→e)</td></tr>
+          <tr><td>सूर्योदयः</td><td>सूर्य + उदयः</td><td>गुण (a+u→o)</td></tr>
+          <tr><td>यद्यपि</td><td>यदि + अपि</td><td>यण् (i+a→ya)</td></tr>
+          <tr><td>परमात्मा</td><td>परम + आत्मा</td><td>दीर्घ (a+ā→ā)</td></tr>
+          <tr><td>रामश्च</td><td>रामः + च</td><td>विसर्ग (ः+c→ś)</td></tr>
+          <tr><td>सज्जनः</td><td>सत् + जनः</td><td>व्यञ्जन (t+j→jj)</td></tr>
+          <tr><td>वाग्देवी</td><td>वाक् + देवी</td><td>व्यञ्जन (k+d→gd)</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Samasa -->
+  <div id="gr4" class="sub-page">
+    <div class="section-title">समासाः — Compound Words</div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📊 Six Types of Samasa with Examples <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Type</th><th>Definition</th><th>Example</th><th>Vigrah</th></tr>
+          <tr><td>अव्ययीभाव</td><td>First member is indeclinable (avyaya); whole is adverb</td><td>यथाशक्ति</td><td>शक्तिम् अनतिक्रम्य</td></tr>
+          <tr><td>तत्पुरुष (षष्ठी)</td><td>Second member is head; first shows genitive relation</td><td>राजपुत्रः</td><td>राज्ञः पुत्रः</td></tr>
+          <tr><td>तत्पुरुष (द्वितीया)</td><td>First member in accusative relation</td><td>देशगतः</td><td>देशं गतः</td></tr>
+          <tr><td>कर्मधारय</td><td>Adjective + Noun; both refer to same</td><td>नीलोत्पलम्</td><td>नीलं उत्पलम्</td></tr>
+          <tr><td>द्विगु</td><td>First member is a numeral</td><td>त्रिलोकम्</td><td>त्रयाणां लोकानां समाहारः</td></tr>
+          <tr><td>द्वन्द्व</td><td>Two equal members joined (and)</td><td>रामलक्ष्मणौ</td><td>रामश्च लक्ष्मणश्च</td></tr>
+          <tr><td>बहुव्रीहि</td><td>Both refer to a third entity; whole is adjective</td><td>चतुर्भुजः</td><td>चत्वारि भुजानि यस्य सः</td></tr>
+        </table>
+        <div class="alert" style="margin-top:10px;"><span class="alert-icon">💡</span> Key test: In Bahuvrihi, the compound describes something NOT either of its parts. "चतुर्भुजः" = not "four arms" but "one who has four arms" = Vishnu!</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">🔤 Practice: Identify Samasa Type <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Word</th><th>Type</th><th>Vigrah</th></tr>
+          <tr><td>पञ्चवटी</td><td>द्विगु</td><td>पञ्चानां वटानां समाहारः</td></tr>
+          <tr><td>पीताम्बरः</td><td>बहुव्रीहि</td><td>पीतम् अम्बरं यस्य सः (Vishnu)</td></tr>
+          <tr><td>महाकविः</td><td>कर्मधारय</td><td>महान् कविः</td></tr>
+          <tr><td>गङ्गातटम्</td><td>षष्ठी तत्पुरुष</td><td>गङ्गायाः तटम्</td></tr>
+          <tr><td>सीतारामौ</td><td>द्वन्द्व</td><td>सीता च रामश्च</td></tr>
+          <tr><td>उपकूलम्</td><td>अव्ययीभाव</td><td>कूलस्य समीपम्</td></tr>
+          <tr><td>नृपकन्या</td><td>षष्ठी तत्पुरुष</td><td>नृपस्य कन्या</td></tr>
+          <tr><td>दशरथः</td><td>बहुव्रीहि</td><td>दश रथाः यस्य सः</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- WRITING PAGE -->
+<div id="writing" class="page">
+  <div class="sub-tabs">
+    <div class="sub-tab active" onclick="showSubTab('writing','wr1')">पत्रलेखनम्</div>
+    <div class="sub-tab" onclick="showSubTab('writing','wr2')">अनुवादः</div>
+    <div class="sub-tab" onclick="showSubTab('writing','wr3')">संख्याः</div>
+  </div>
+
+  <div id="wr1" class="sub-page active">
+    <div class="section-title">पत्रलेखनम् — Letter Writing <span class="marks-badge">pp. 137-140 | 10M</span></div>
+    <div class="alert"><span class="alert-icon">⚠️</span> Letter writing typically carries 8-10 marks in the exam. Learn the format thoroughly!</div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📝 Standard Letter Format <span>▼</span></div>
+      <div class="card-body">
+        <div class="shloka" style="font-size:0.85rem;">
+          <b>Date:</b> दिनाङ्कः: ......................<br><br>
+          <b>From:</b> प्रेषकस्य नाम/पता<br>
+          (Sender's name and address)<br><br>
+          <b>To:</b> प्राप्तकर्तुः नाम/पता<br>
+          (Recipient's name and address)<br><br>
+          <b>Subject:</b> विषयः: .......................<br><br>
+          <b>Greeting:</b><br>
+          • पूज्यपादेभ्यः (To respected elders — parents, teachers)<br>
+          • प्रिय मित्र/प्रिय महोदय (To friends/formal)<br>
+          • मान्यमहाभागाय (To officials)<br><br>
+          <b>Body:</b> (सविनयं निवेदयामि...)<br>
+          ...........................<br>
+          ...........................<br><br>
+          <b>Closing:</b><br>
+          • भवदीयः/भवदीया (formal)<br>
+          • आपका आज्ञाकारी शिष्यः (student to teacher)<br>
+          • इति / तव मित्रम् (friend to friend)<br><br>
+          <b>Name:</b> .....................
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📝 Sample Letter 1 — To Father (Asking for Money) <span>▼</span></div>
+      <div class="card-body">
+        <div class="shloka" style="font-size:0.85rem; line-height:2;">
+          दिनाङ्कः: ................<br><br>
+          नन्दनिवास, हैदराबादतः<br><br>
+          पूज्यपादेभ्यः<br>
+          पितृमहोदय!<br><br>
+          सादरं प्रणामाः।<br><br>
+          अत्र सर्वं कुशलम्। तत्र भवतां कुशलं जानातुम् इच्छामि।<br><br>
+          पितृमहोदय! अहं विद्यालये सम्यक् पठामि। अस्मिन् मासे परीक्षाः सन्ति। पुस्तकानि क्रेतुं धनम् आवश्यकम् अस्ति। अतः पञ्चशत रूप्यकाणि प्रेषयन्तु इति विनयेन निवेदयामि।<br><br>
+          मात्रे च प्रणामाः।<br><br>
+          भवदीयः पुत्रः<br>
+          ...............
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📝 Sample Letter 2 — To Principal (Sick Leave) <span>▼</span></div>
+      <div class="card-body">
+        <div class="shloka" style="font-size:0.85rem; line-height:2;">
+          दिनाङ्कः: ................<br><br>
+          सेवायाम्,<br>
+          श्रीमान् प्रधानाचार्यमहोदयः<br>
+          ...........(विद्यालयस्य नाम)...........<br><br>
+          मान्यमहाभाग!<br><br>
+          सविनयं निवेदयामि यत् अहम् ....दिनाङ्कतः ज्वरपीडितः अस्मि। अतः विद्यालयम् आगन्तुम् असमर्थः अस्मि।<br><br>
+          मम पितृमहोदयः वैद्यमहोदयात् चिकित्सां करयति। अहं शीघ्रमेव स्वस्थः भविष्यामि इति मन्ये।<br><br>
+          अतः ..... दिनानाम् अवकाशम् अनुग्रहपूर्वकं प्रदातुम् प्रार्थये।<br><br>
+          भवतः विनयशीलः छात्रः<br>
+          नाम: ...............<br>
+          वर्गः: ..............
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📝 Sample Letter 3 — To Friend (Inviting to a festival) <span>▼</span></div>
+      <div class="card-body">
+        <div class="shloka" style="font-size:0.85rem; line-height:2;">
+          दिनाङ्कः: ................<br><br>
+          प्रिय मित्र ...........!<br><br>
+          चिरञ्जीव।<br><br>
+          अत्र सर्वं कुशलम्। त्वं कुशली भव इति इच्छामि।<br><br>
+          मित्र! अस्मिन् माले दशमीपर्व भवति। अस्माकं गृहे विशेषोत्सवः भविष्यति। त्वं अवश्यम् आगन्तव्यम् इति आग्रहं करोमि। सम्मिलितं मिलित्वा आनन्देन उत्सवं मनुयाव।<br><br>
+          तव मित्रम्<br>
+          ..............
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📝 Key Useful Phrases for Letter Writing <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Situation</th><th>Sanskrit Phrase</th></tr>
+          <tr><td>Respectful greeting</td><td>सादरं प्रणामाः / सादरम् अभिवादनम्</td></tr>
+          <tr><td>I am well here</td><td>अत्र सर्वं कुशलम्</td></tr>
+          <tr><td>Humbly submitting</td><td>सविनयं निवेदयामि</td></tr>
+          <tr><td>Please send money</td><td>धनं प्रेषयन्तु</td></tr>
+          <tr><td>Kindly grant leave</td><td>अवकाशं प्रदातुं प्रार्थये</td></tr>
+          <tr><td>Your obedient student</td><td>भवतः आज्ञाकारी शिष्यः</td></tr>
+          <tr><td>Your loving son</td><td>भवदीयः प्रियपुत्रः</td></tr>
+          <tr><td>Greetings to mother</td><td>मात्रे च प्रणामाः</td></tr>
+          <tr><td>Please come</td><td>अवश्यम् आगन्तव्यम्</td></tr>
+          <tr><td>I am not well</td><td>अहं पीडितः / रुग्णः अस्मि</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="wr2" class="sub-page">
+    <div class="section-title">अनुवादाभ्यासः — Translation Practice <span class="marks-badge">pp. 141-142 | 8M</span></div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📝 English to Sanskrit — Common Sentences <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>English</th><th>Sanskrit</th></tr>
+          <tr><td>The boy reads a book.</td><td>बालकः पुस्तकम् पठति।</td></tr>
+          <tr><td>The girl sings a song.</td><td>बालिका गीतं गायति।</td></tr>
+          <tr><td>The teacher teaches Sanskrit.</td><td>आचार्यः संस्कृतं पाठयति।</td></tr>
+          <tr><td>Rama goes to the forest.</td><td>रामः वनं गच्छति।</td></tr>
+          <tr><td>The cow eats grass.</td><td>गौः तृणं खादति।</td></tr>
+          <tr><td>We all study together.</td><td>वयं सर्वे मिलित्वा पठामः।</td></tr>
+          <tr><td>God protects the world.</td><td>ईश्वरः जगत् रक्षति।</td></tr>
+          <tr><td>Knowledge is the best wealth.</td><td>विद्या एव परमं धनम्।</td></tr>
+          <tr><td>The sun rises in the east.</td><td>सूर्यः पूर्वस्याम् उदयति।</td></tr>
+          <tr><td>Water is life.</td><td>जलम् एव जीवनम्।</td></tr>
+          <tr><td>I love my mother.</td><td>अहं मातरं स्नेहामि / मम मातरि स्नेहः अस्ति।</td></tr>
+          <tr><td>India is a great country.</td><td>भारतम् महत् देशम् अस्ति।</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📝 Telugu/Hindi to Sanskrit — Practice <span>▼</span></div>
+      <div class="card-body">
+        <table>
+          <tr><th>Telugu/English</th><th>Sanskrit</th></tr>
+          <tr><td>రాముడు అయోధ్యకు వెళ్తాడు</td><td>रामः अयोध्यां गच्छति।</td></tr>
+          <tr><td>నేను సంస్కృతం నేర్చుకుంటున్నాను</td><td>अहं संस्कृतं पठामि।</td></tr>
+          <tr><td>ఆ విద్యార్థి తెలివైనవాడు</td><td>सः छात्रः मेधावी अस్ति।</td></tr>
+          <tr><td>నదులు సముద్రంలో కలుస్తాయి</td><td>नद्यः सागरे मिलन्ति।</td></tr>
+          <tr><td>పూలు సుగంధభరితంగా ఉంటాయి</td><td>पुष्पाणि सुगन्धितानि भवन्ति।</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="wr3" class="sub-page">
+    <div class="section-title">संख्याः — Sanskrit Numbers <span class="marks-badge">pp. 143-145</span></div>
+    <div class="card">
+      <div class="card-title" onclick="toggleCard(this)">📊 1-50 Sanskrit Numbers <span>▼</span></div>
+      <div class="card-body">
+        <div class="grid-2">
+          <table>
+            <tr><th>No.</th><th>Sanskrit</th><th>Transliteration</th></tr>
+            <tr><td>1</td><td>एकः</td><td>ekah</td></tr>
+            <tr><td>2</td><td>द्वौ/द्वे</td><td>dvau/dve</td></tr>
+            <tr><td>3</td><td>त्रयः/तिस्रः</td><td>trayah/tisrah</td></tr>
+            <tr><td>4</td><td>चत्वारः/चतस्रः</td><td>chatvarah</td></tr>
+            <tr><td>5</td><td>पञ्च</td><td>pancha</td></tr>
+            <tr><td>6</td><td>षट्</td><td>shat</td></tr>
+            <tr><td>7</td><td>सप्त</td><td>sapta</td></tr>
+            <tr><td>8</td><td>अष्ट</td><td>ashta</td></tr>
+            <tr><td>9</td><td>नव</td><td>nava</td></tr>
+            <tr><td>10</td><td>दश</td><td>dasha</td></tr>
+            <tr><td>11</td><td>एकादश</td><td>ekadasha</td></tr>
+            <tr><td>12</td><td>द्वादश</td><td>dvadasha</td></tr>
+            <tr><td>13</td><td>त्रयोदश</td><td>trayodasha</td></tr>
+            <tr><td>14</td><td>चतुर्दश</td><td>chaturdasha</td></tr>
+            <tr><td>15</td><td>पञ्चदश</td><td>panchadasha</td></tr>
+            <tr><td>16</td><td>षोडश</td><td>shodasha</td></tr>
+            <tr><td>17</td><td>सप्तदश</td><td>saptadasha</td></tr>
+            <tr><td>18</td><td>अष्टादश</td><td>ashtadasha</td></tr>
+            <tr><td>19</td><td>नवदश/ऊनविंशति</td><td>navadasha</td></tr>
+            <tr><td>20</td><td>विंशतिः</td><td>vimshatih</td></tr>
+          </table>
+          <table>
+            <tr><th>No.</th><th>Sanskrit</th><th>Note</th></tr>
+            <tr><td>21</td><td>एकविंशतिः</td><td>21+</td></tr>
+            <tr><td>25</td><td>पञ्चविंशतिः</td><td>25</td></tr>
+            <tr><td>30</td><td>त्रिंशत्</td><td>30</td></tr>
+            <tr><td>40</td><td>चत्वारिंशत्</td><td>40</td></tr>
+            <tr><td>50</td><td>पञ्चाशत्</td><td>50</td></tr>
+            <tr><td>60</td><td>षष्टिः</td><td>60</td></tr>
+            <tr><td>70</td><td>सप्ततिः</td><td>70</td></tr>
+            <tr><td>80</td><td>अशीतिः</td><td>80</td></tr>
+            <tr><td>90</td><td>नवतिः</td><td>90</td></tr>
+            <tr><td>100</td><td>शतम्</td><td>100</td></tr>
+            <tr><td>1000</td><td>सहस्रम्</td><td>1000</td></tr>
+            <tr><td>100000</td><td>लक्षम्</td><td>lakh</td></tr>
+            <tr><td>Ordinals:</td><td></td><td></td></tr>
+            <tr><td>1st</td><td>प्रथमः</td><td>first</td></tr>
+            <tr><td>2nd</td><td>द्वितीयः</td><td>second</td></tr>
+            <tr><td>3rd</td><td>तृतीयः</td><td>third</td></tr>
+            <tr><td>4th</td><td>चतुर्थः</td><td>fourth</td></tr>
+            <tr><td>5th</td><td>पञ्चमः</td><td>fifth</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- UPAVACHAKAM PAGE -->
+<div id="upavachakam" class="page">
+  <div class="section-title">उपवाचकम् — Supplementary Reader <span class="marks-badge">10 Marks</span></div>
+  <div class="alert"><span class="alert-icon">⚠️</span> Upavachakam questions are usually short Q&A (2-4M each). Focus on understanding the story and moral.</div>
+  <div class="card">
+    <div class="card-title" onclick="toggleCard(this)">📚 Important Upavachakam Stories & Q&A <span>▼</span></div>
+    <div class="card-body">
+      <div class="qa-item">
+        <div class="question">Story 1: About Harishchandra (हरिश्चन्द्रः)</div>
+        <div class="answer">
+          <b>Theme:</b> King Harishchandra's unwavering commitment to truth (सत्य).<br>
+          <b>Summary:</b> Harishchandra is tested by Sage Vishwamitra who takes away his kingdom, makes him sell his wife and son, and forces him to work in a cremation ground. Despite all these hardships, Harishchandra never speaks a lie. Finally, the gods appear and restore everything to him.<br>
+          <b>Moral:</b> Truth (सत्यम्) is the highest dharma. One who follows truth is ultimately protected and rewarded.
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="question">Story 2: Story of Nachiketa (नचिकेतः)</div>
+        <div class="answer">
+          <b>Theme:</b> Quest for knowledge of death and the soul; from Kathopanishad.<br>
+          <b>Summary:</b> Young Nachiketa goes to Yama (god of death) to ask about the secret of the soul (atman). Yama tries to dissuade him with offers of wealth and pleasure. Nachiketa refuses all and insists on knowledge of the self. Yama is pleased and teaches him about the immortal soul.<br>
+          <b>Moral:</b> Spiritual knowledge is greater than all material wealth; a determined seeker of truth succeeds.
+        </div>
+      </div>
+      <div class="qa-item">
+        <div class="question">Story 3: Importance of Sanskrit (संस्कृतस्य महत्त्वम्)</div>
+        <div class="answer">
+          <b>Theme:</b> Why Sanskrit is important for India and the world.<br>
+          <b>Key points:</b><br>
+          1. Sanskrit is the oldest systematic language with Panini's perfect grammar<br>
+          2. All Indian languages are derived from or influenced by Sanskrit<br>
+          3. India's entire philosophy, science, mathematics, and literature was written in Sanskrit<br>
+          4. Sanskrit is also a computer-friendly language (mentioned in modern context)<br>
+          5. Learning Sanskrit connects us to our roots and cultural heritage
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title" onclick="toggleCard(this)">❓ Likely Exam Questions from Upavachakam <span>▼</span></div>
+    <div class="card-body">
+      <div class="qa-item">
+        <div class="question">Q1. What qualities of Harishchandra made him famous? (4M)</div>
+        <div class="answer">King Harishchandra was famous for his three great qualities: (1) <b>Satyam (सत्यम्)</b> — he never spoke a lie even under the most severe hardships. (2) <b>Dana (दानम्)</b> — he was a great giver; he gave away his entire kingdom when asked. (3) <b>Dharma (धर्मः)</b> — he upheld righteousness in every situation. Even when he lost his kingdom, his wife, his son, and was forced to work in a cremation ground — he maintained his dharma. The gods tested him to prove that he is the most truthful king in the world.</div>
+      </div>
+      <div class="qa-item">
+        <div class="question">Q2. What did Nachiketa ask from Yama? What did Yama offer instead? (4M)</div>
+        <div class="answer">Nachiketa asked Yama: "What happens after death? What is the truth about the soul (atman)? Please teach me the secret of death and the undying self." Yama tried to dissuade him with three boons: (1) grant of sons and grandsons who would live for a hundred years, (2) cows, horses, elephants, and gold, (3) all the pleasures of the earth and beautiful women. Nachiketa refused all these saying: "O Yama! All these things last only till death. I want to know the eternal truth of the soul. Please teach me that."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODEL PAPERS PAGE -->
+<div id="model" class="page">
+  <div class="section-title">📋 Model Papers — APBIE Sanskrit 2026-27</div>
+  <div class="exam-pattern">
+    <div class="section-title" style="border:none;margin-bottom:8px;">📊 Question Paper Structure</div>
+    <table>
+      <tr><th>Section</th><th>Questions</th><th>Marks Each</th><th>Total</th></tr>
+      <tr><td>पद्यभागः (Poetry)</td><td>7 (choose 4×4M + short Q)</td><td>4+2</td><td>28</td></tr>
+      <tr><td>गद्यभागः (Prose)</td><td>7 (choose 4×4M + short Q)</td><td>4+2</td><td>28</td></tr>
+      <tr><td>व्याकरणम् (Grammar)</td><td>8 (various)</td><td>1-4</td><td>16</td></tr>
+      <tr><td>लेखनम् (Writing)</td><td>2 (letter + translation)</td><td>8+10</td><td>18</td></tr>
+      <tr><td>उपवाचकम्</td><td>3 (choose 2)</td><td>5</td><td>10</td></tr>
+      <tr><td colspan="3"><b>Total</b></td><td><b>100</b></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title" onclick="toggleCard(this)">📝 Model Paper 1 — Full Practice Test <span>▼</span></div>
+    <div class="card-body">
+      <div class="highlight">
+        <div class="highlight-label">SECTION A — पद्यभागः (28 Marks)</div>
+        <b>Q1.</b> Who is the author of "दशरथस्य पश्चातापः"? From which text is this lesson taken? What is the Shabdabhedi Bana incident? (4M)<br><br>
+        <b>Q2.</b> What did Shiva (Mayavatu) say against Shiva to Parvati? How did Parvati react? (4M)<br><br>
+        <b>Q3.</b> What are the six characteristics of a true friend (सन्मित्र) according to Bhartrhari? (4M)<br><br>
+        <b>Q4.</b> Explain the famous shloka "विद्यां ददाति विनयम्..." and describe the chain of virtues. (4M)<br><br>
+        <b>Q5.</b> Who wrote "अमरवाणीप्रशस्तिः"? Why is Sanskrit called अमरवाणी? (4M)<br><br>
+        <b>Q6.</b> What is the central humor/satire in "कपीनामुपवासः"? (4M)<br><br>
+        <b>Short Q (2M each — Answer any 4):</b><br>
+        a. What is the meaning of "वसुधैव कुटुम्बकम्"?<br>
+        b. Name the three Shatakas of Bhartrhari.<br>
+        c. Name the four Vedas mentioned in "अमरवाणीप्रशस्तिः".<br>
+        d. What curse did Dasharatha receive?
+      </div>
+      <div class="highlight">
+        <div class="highlight-label">SECTION B — गद्यभागः (28 Marks)</div>
+        <b>Q1.</b> Who is Banabhatta? Who are Kapinjala and Pundarika? What advice does Kapinjala give? (4M)<br><br>
+        <b>Q2.</b> Who was King Bhoja? What does औदार्य mean? How did Bhoja demonstrate it? (4M)<br><br>
+        <b>Q3.</b> Who are Shasha and Kapinjala in Panchatantra? What is their dispute and what is the moral? (4M)<br><br>
+        <b>Q4.</b> What is the contribution of Sri Malayala Swami to Sanskrit? (4M)<br><br>
+        <b>Q5.</b> What indigenous flowers are described in "स्वदेस्य पुष्पाणि"? Give significance of any two. (4M)<br><br>
+        <b>Q6.</b> What literary devices are used in "वर्षापरिदेवनम्"? What troubles are described? (4M)<br><br>
+        <b>Short Q (2M each):</b><br>
+        a. What is Kadambari?<br>
+        b. Who wrote Panchatantra? How many Tantras?<br>
+        c. What does "परिदेवनम्" mean?
+      </div>
+      <div class="highlight">
+        <div class="highlight-label">SECTION C — व्याकरणम् (16 Marks)</div>
+        <b>Q1.</b> Decline "रामः" in all cases (Prathama to Saptami, all three numbers). (4M)<br>
+        <b>Q2.</b> Identify Sandhi and split: महर्षिः, देवेन्द्रः, यद्यपि, सज्जनः (4M)<br>
+        <b>Q3.</b> Identify Samasa type and give Vigrah: पञ्चवटी, पीताम्बरः, महाकविः (3M)<br>
+        <b>Q4.</b> Write the verb forms of "पठ्" in Lat Lakar (all persons and numbers) (3M)<br>
+        <b>Q5.</b> Translate to Sanskrit (any 2): The boy reads books. / God protects the world. / Water is life. (2M)
+      </div>
+      <div class="highlight">
+        <div class="highlight-label">SECTION D — लेखनम् (18 Marks)</div>
+        <b>Q1.</b> Write a letter in Sanskrit to your father asking for money to buy books for exam. (8M)<br>
+        <b>Q2.</b> Translate into Sanskrit (5 sentences): (10M)<br>
+        1. The teacher teaches students.<br>
+        2. Rama goes to the forest with Sita.<br>
+        3. India is a great country.<br>
+        4. We all study Sanskrit.<br>
+        5. Knowledge is the best wealth.
+      </div>
+      <div class="highlight">
+        <div class="highlight-label">SECTION E — उपवाचकम् (10 Marks)</div>
+        <b>Q1.</b> What three great qualities made Harishchandra famous? (5M)<br>
+        <b>Q2.</b> What did Nachiketa ask from Yama? What did Yama offer and why did Nachiketa refuse? (5M)<br>
+        <b>Q3.</b> Write briefly about the importance of Sanskrit language. (5M)<br>
+        (Answer any 2)
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" onclick="toggleCard(this)">📝 Model Paper 2 — Full Practice Test <span>▼</span></div>
+    <div class="card-body">
+      <div class="highlight">
+        <div class="highlight-label">पद्यभागः (28M)</div>
+        <b>Q1.</b> Describe the night of Dasharatha accidentally killing Shravana. How did the blind parents react? (4M)<br>
+        <b>Q2.</b> Why did Shiva test Parvati? Describe the test and its result. (4M)<br>
+        <b>Q3.</b> What does Bhartrhari say about "knowledge" (विद्या)? Quote the shloka and explain. (4M)<br>
+        <b>Q4.</b> Explain "उदये सविता रक्तो..." shloka. What does it teach about great people? (4M)<br>
+        <b>Q5.</b> Who compiled Kavyasangraha? Which two chapters in your syllabus are from it? (4M)<br>
+        <b>Q6.</b> What is the difference between "true fasting" and what the monkeys do in "कपीनामुपवासः"? (4M)<br>
+        Short Qs (any 4 × 2M):<br>
+        a. What does "सा विद्या या विमुक्तये" mean?<br>
+        b. What is "धर्मो रक्षति रक्षितः"?<br>
+        c. From which canto of Kumarasambhava is "मायावटुः"?<br>
+        d. Who was Shravana Kumar?
+      </div>
+      <div class="highlight">
+        <div class="highlight-label">गद्यभागः (28M)</div>
+        <b>Q1.</b> What is the main message of "कपिञ्जलोपदेशः"? Why didn't Pundarika listen? (4M)<br>
+        <b>Q2.</b> Why did a poor poet come to King Bhoja? How did Bhoja receive him? (4M)<br>
+        <b>Q3.</b> Who is Vishnusharma? From which tantra of Panchatantra is the Shasha-Kapinjala story? (4M)<br>
+        <b>Q4.</b> What does "संस्कृतभाषासेवा" mean? Give examples from Sri Malayala Swami's life. (4M)<br>
+        <b>Q5.</b> What is the significance of the Lotus (कमल) in Indian culture? (4M)<br>
+        <b>Q6.</b> Describe the troubles caused by the rainy season as described in "वर्षापरिदेवनम्". (4M)
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" onclick="toggleCard(this)">⚡ Quick Revision — High-Frequency Exam Points <span>▼</span></div>
+    <div class="card-body">
+      <table>
+        <tr><th>Topic</th><th>Key Point to Remember</th></tr>
+        <tr><td>दशरथस्य पश्चातापः</td><td>Shabdabhedi Bana → killed Shravana → curse: die of son-grief. Author: Valmiki, Ayodhya Kanda</td></tr>
+        <tr><td>मायावटुः</td><td>Shiva tests Parvati by disguising as brahmin boy, criticizing Shiva. Parvati defends him. From Kumarasambhava Ch.5, Kalidasa</td></tr>
+        <tr><td>भर्तृहरि</td><td>3 Shatakas: Niti, Shringar, Vairagya. विद्याविहीनः पशुः. 6 qualities of सन्मित्र</td></tr>
+        <tr><td>नीतिश्लोकाः</td><td>वसुधैव कुटुम्बकम् | धर्मो रक्षति | विद्यां ददाति विनयम् | जननी जन्मभूमिश्च</td></tr>
+        <tr><td>अमरवाणी</td><td>Author: E. Shankaracharya. Sanskrit = mother of all languages, Panini's grammar, Vedas in Sanskrit</td></tr>
+        <tr><td>कपीनाम्</td><td>Author: Shrishailam Tatacharyya. Satire: monkeys call starvation as fasting. From Kavyasangraha</td></tr>
+        <tr><td>कपिञ्जलः</td><td>Banabhatta, Kadambari. Kapinjala (partridge) warns Pundarika (brahmin) against infatuation with Mahasweta</td></tr>
+        <tr><td>भोजस्य औदार्यम्</td><td>Ballal, Bhoja Prabandha. King Bhoja of Dhara — generous patron of Sanskrit poets</td></tr>
+        <tr><td>शश-कपिञ्जल</td><td>Vishnusharma, Panchatantra Ch.3. Rabbit + dove quarrel → monkey judge cheats both. Don't take disputes to outsiders</td></tr>
+        <tr><td>Sandhi types</td><td>Dirgha (aa+aa), Guna (a+i=e), Vriddhi, Yan (i→y), Ayadi. Visarga (h→s/r)</td></tr>
+        <tr><td>Samasa types</td><td>Avyayibhav, Tatpurusha (6 types), Karmadharaya, Dvigу, Dvandva, Bahuvrihi</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ PAGE -->
+<div id="quiz" class="page">
+  <div class="section-title">🎯 Practice Quiz</div>
+  <div id="quiz-container"></div>
+  <div id="quiz-result" style="display:none;" class="card">
+    <div class="card-title">📊 Your Score</div>
+    <div id="score-display" style="text-align:center;padding:20px;">
+      <div id="score-text" style="font-size:2rem;font-weight:700;color:var(--gold);"></div>
+      <div style="color:var(--muted);margin-top:8px;">Tap "New Quiz" to try again</div>
+      <button class="btn btn-primary" style="margin-top:12px;" onclick="loadQuiz()">New Quiz</button>
+    </div>
+  </div>
+</div>
 
 <script>
-// ═══ SLOKAS OF DAY ═══
-const SDAY=[
-  {d:"धर्मार्थं सहितं वाक्यमिह चामुत्र च क्षमम् ।",m:"A word accompanied by Dharma is beneficial in this world and the next. (हनुमदुपदेशः)"},
-  {d:"न हि धर्मविरुद्धेषु बह्वपायेषु कर्मसु । मूलघातिषु सज्जन्ते बुद्धिमन्तो भवद्विधाः ॥",m:"The wise do not engage in acts against Dharma. (हनुमदुपदेशः)"},
-  {d:"वपुः प्रकर्षेण विडम्बितेश्वरः ।",m:"With his superb physique, Raghu appeared like a God himself. (रघोः शौर्यम्)"},
-  {d:"नास्ति विद्यासमं चक्षुः नास्ति सत्यसमं तपः ।",m:"No eye equals education; no penance equals truth. (नीतिश्लोकाः)"},
-  {d:"परोपकारः कर्तव्यः प्राणैरपि धनैरपि ।",m:"Helping others is duty — even at the cost of life and wealth. (नीतिश्लोकाः)"},
-  {d:"अज्ञातकुलशीलस्य वासो देयो न कस्यचित् ।",m:"Never give shelter to one of unknown character. (अज्ञातस्य वासो न देयः — MORAL)"},
-  {d:"परोपकारः पुण्याय पापाय परपीडनम् ।",m:"Helping others is merit; harming others is sin. (दयावान् राक्षसः — MORAL)"}
-];
-
-// ═══ PADYA DATA (from Narayana PDF) ═══
-const PD=[
-  {id:'p1',num:'१',dt:'हनुमदुपदेशः',et:'Instructions of Hanuman',auth:'वाल्मीकिमहर्षिः — श्रीमद्रामायणे सुन्दरकाण्डात् (51वाँ सर्ग)',
-   kp:`इति पाठ्यभागः वाल्मीकि महर्षिणा विरचित श्रीमद्रामायणे सुन्दरकाण्डस्य "एकपञ्चाशत्तमसर्गात्" संगृहीतः।\nSource: 51st canto of Sundarakanda of Srimad Ramayana by Maharshi Valmiki.`,
-   intro:'After destroying Ashokavana, Hanuman was imprisoned and brought before Ravana. As Sugriva\'s messenger (दूत), Hanuman gave his diplomatic advice.',
-   sl:[
-     {d:"स तेन निहतः सङ्ख्ये शरेणैकेन वानरः ।",e:"That monkey (Vali) was killed in battle by Rama with a single arrow.",m:"Showing Rama's extraordinary power — he killed mighty Vali with just one arrow."},
-     {d:"धर्मार्थं सहितं वाक्यमिह चामुत्र च क्षमम् ।",e:"A word rooted in Dharma is beneficial both in this world and the next.",m:"Hanuman's advice to Ravana — listen to words of Dharma for eternal benefit."},
-     {d:"न हि धर्मविरुद्धेषु बह्वपायेषु कर्मसु । मूलघातिषु सज्जन्ते बुद्धिमन्तो भवद्विधाः ॥",e:"The wise do not engage in acts against Dharma that cause widespread harm.",m:"Hanuman warns that wise people like Ravana should not commit adharma."},
-     {d:"फलमस्याप्यधर्मस्य क्षिप्रमेव प्रपत्यसे ।",e:"You will quickly receive the fruit of this unrighteousness.",m:"Warning: punishment for sin and adharma comes swiftly."},
-     {d:"नरदेवाय जानकीं प्रतिदीयताम् ।",e:"Return Janaki (Sita) to the divine king Rama.",m:"Core message: Hanuman urges Ravana to return Sita and save himself."},
-     {d:"कालरात्रीति तां विद्धि सर्वलङ्काविनाशिनीम् ।",e:"Know Sita as Kalaratri — the night of destruction of all Lanka.",m:"Final warning: Sita's captivity will cause complete destruction of Lanka."}
-   ],
-   qa:[
-     {q:"रावणं प्रति हनुमता कृतम् उपदेशं सङ्क्षेण लिखत।",m:"4M",a:`Hanuman advised Ravana:\n1. Told him about Rama's power — killed Vali with single arrow (स तेन निहतः सङ्ख्ये शरेणैकेन वानरः।)\n2. Warned: Acts against Dharma lead to swift punishment (फलमस्याप्यधर्मस्य क्षिप्रमेव प्रपत्यसे।)\n3. Core message: Return Sita to Rama (नरदेवाय जानकीं प्रतिदीयताम्।)\n4. Final warning: Sita will destroy Lanka (कालरात्रीति तां विद्धि सर्वलङ्काविनाशिनीम्।)\nConclusion: "I am Rama's servant — came as mediator to advise you sincerely."`},
-     {q:"\"हनुमदुपदेशः\" इति पाठ्यभागस्य सारं समालिखत।",m:"4M",a:`SUMMARY: After destroying Ashokavana, Hanuman was brought before Ravana as a prisoner. As Sugriva's messenger, he delivered his diplomatic message. He told Ravana about:\n• Rama's divine power and his mission to find Sita\n• The warning: Sita is like Kalaratri for Lanka (कालरात्रीति तां विद्धि सर्वलङ्काविनाशिनीम्।)\n• Dharmic advice: words rooted in Dharma benefit in both worlds\nMain message: "Return Sita (नरदेवाय जानकीं प्रतिदीयताम्।) — or Lanka will be completely destroyed."`},
-     {q:"हनुमदुपदेशः इति पाठ्यांशः कस्मात् संगृहीतः?",m:"1M",a:"हनुमदुपदेशः इति पाठ्यांशः वाल्मीकि रामायणे सुन्दरकाण्डात् संगृहीतः।"},
-     {q:"सुग्रीवेण किं प्रतिज्ञातम्?",m:"1M",a:"सुग्रीवेण सीतायाः परिमार्गणं इति प्रतिज्ञातम्।"},
-     {q:"बुद्धिमन्तः कीदृशेषु कर्मसु न सज्जन्ते?",m:"1M",a:"बुद्धिमन्तः धर्मविरुद्धेषु कर्मसु न सज्जन्ते।"},
-     {q:"शरेणैकेन रामेण निहतः वानरः कः?",m:"1M",a:"वालिः।"}
-   ],
-   san:[
-     {v:"धर्मार्थं सहितं वाक्यमिह चामुत्र च क्षमम् ।",k:"वाल्मीकिमहर्षिः",g:"श्रीमद्रामायणम्",s:"आञ्चनेयः रावणं प्रति एवम् अवदत्।",b:"धर्मेण सहितं वाक्यम् इह लोके परलोके च हितकरम्।"},
-     {v:"न हि धर्मविरुद्धेषु बह्वपायेषु कर्मसु ।",k:"वाल्मीकिमहर्षिः",g:"श्रीमद्रामायणम्",s:"आञ्चनेयः रावणं प्रति एवम् अवदत्।",b:"बुद्धिमन्तः धर्मविरुद्धेषु कर्मसु न प्रवर्तन्ते।"},
-     {v:"फलमस्याप्यधर्मस्य क्षिप्रमेव प्रपत्यसे ।",k:"वाल्मीकिमहर्षिः",g:"श्रीमद्रामायणम्",s:"आञ्चनेयः रावणं प्रति एवम् अवदत्।",b:"अधर्मस्य फलं शीघ्रमेव प्राप्यते।"},
-     {v:"कालरात्रीति तां विद्धि सर्वलङ्काविनाशिनीम् ।",k:"वाल्मीकिमहर्षिः",g:"श्रीमद्रामायणम्",s:"आञ्चनेयः रावणं प्रति एवम् अवदत्।",b:"सीता सर्वलङ्का विनाशिनी कालरात्रिः इति जानतु।"}
-   ],
-   kw:[{d:"उपदेशः",e:"advice"},{d:"दूतः",e:"messenger"},{d:"धर्मः",e:"righteousness"},{d:"कालरात्री",e:"night of destruction"},{d:"प्रतिदीयताम्",e:"let it be returned"},{d:"वानरः",e:"monkey"}]
-  },
-  {id:'p2',num:'२',dt:'रघोः शौर्यम्',et:'The Valour of Raghu',auth:'महाकविकालिदासः — रघुवंशमहाकाव्ये तृतीयसर्गात्',
-   kp:`"रघोः शौर्यम्" इति पाठ्यभागः महाकवि कालिदासेन विरचित रघुवंशमहाकाव्ये तृतीयसर्गात् संगृहीतः।\nKalidasa is the greatest classical Sanskrit poet (5th century CE). Raghuvamsha has 19 cantos about ancestors of Rama.`,
-   intro:'King Dileepa handed kingdom to son Raghu. For 100th yajna (Ashvamedha), Indra stole the sacred horse. Raghu confronted Indra and defeated him. Impressed Indra granted a boon — Raghu asked only for his father\'s yajna to be completed.',
-   sl:[
-     {d:"धनुर्भृतामग्रत एव रक्षिणां जहार शक्रः किल गूढ विग्रहः ।",e:"Indra, with hidden form, stole the horse right in front of the armed guards.",m:"Shows Indra's cunning — stole the sacrificial horse despite armed protection."},
-     {d:"क्रिया विघाताय कथं प्रवर्तसे ।",e:"How can you act to obstruct this righteous deed (yajna)?",m:"Raghu boldly confronts Indra — questions how Indra, guardian of Dharma, can obstruct a sacred sacrifice."},
-     {d:"वपुः प्रकर्षेण विडम्बितेश्वरः ।",e:"With his superb physique, Raghu appeared like God himself (rivaling Indra).",m:"Description of Raghu's divine appearance in battle — even making Indra feel humbled."},
-     {d:"क्रतोरशेषेण फलेन युज्यताम् ।",e:"May (my father) receive the complete fruit of the sacrifice.",m:"Raghu's noble boon — instead of personal gain, asks only for father's yajna to be fulfilled. Shows ultimate filial devotion."}
-   ],
-   qa:[
-     {q:"रघोः शौर्यम् इति पाठ्यभागस्य सारांशं लिखत। / युवराजस्य रघोः शौर्यं विवृणुत।",m:"4M",a:`King Dileepa handed his kingdom to young son Raghu. For completing his 100th Ashvamedha Yajna, a sacred horse was released. Indra, fearing loss of his title "Shatakrathu" (100-yajna-completer), stole the horse while hidden (धनुर्भृतामग्रत एव रक्षिणां जहार शक्रः किल गूढ विग्रहः।).\n\nRaghu spotted the horse tied to Indra's chariot and boldly confronted him: "How can you obstruct my father's sacred ritual? (क्रिया विघाताय कथं प्रवर्तसे।)"\n\nThough gods and demons trembled, Raghu stood firm with divine physique (वपुः प्रकर्षेण विडम्बितेश्वरः।). Even Brahmastra couldn't harm him. Impressed, Indra granted a boon. Raghu humbly asked: "Let my father receive the complete fruit of the yajna (क्रतोरशेषेण फलेन युज्यताम्।)." Dileepa rejoiced and honored Raghu with the title "Sethakrathu."`},
-     {q:"रघुः केन सह युद्धं कृतवान्?",m:"1M",a:"रघुः इन्द्रेण सह युद्धं कृतवान्।"},
-     {q:"यज्ञना दिलीपेन कः उत्सृष्टः?",m:"1M",a:"यज्ञना दिलीपेन तुरङ्गम् उत्सृष्टः।"},
-     {q:"कालिदासस्य महाकाव्ये के?",m:"1M",a:"कालिदासस्य महाकाव्ये कुमारसम्भवम्, रघुवंशश्च।"},
-     {q:"सुदक्षिणासूनुः कः?",m:"1M",a:"रघुमहाराजः।"},
-     {q:"दिवौकसाम् अधिपतिः कः?",m:"1M",a:"इन्द्रः (देवेन्द्रः)।"},
-     {q:"रघोः शौर्यम् इति पाठ्यभागः कस्मात् स्वीकृतः?",m:"1M",a:"रघुवंशमहाकाव्यात्।"}
-   ],
-   san:[
-     {v:"क्रिया विघाताय कथं प्रवर्तसे ।",k:"कालिदासः",g:"रघुवंशः",s:"रघुमहाराजः इन्द्रं प्रति सन्दर्भे कविः एवम् अवदत्।",b:"हे देवेन्द्र! मम (अस्मत्) पितुः यज्ञविनाशाय कथं प्रवर्तसे।"},
-     {v:"वपुः प्रकर्षेण विडम्बितेश्वरः ।",k:"कालिदासः",g:"रघुवंशः",s:"रघुदेवेन्द्रयोः युद्धारम्भ सन्दर्भे कविः एवम् अवदत्।",b:"रघुः शरीर प्रकर्षेण अनुसृत्येन ईश्वर इव अतिष्ठत्।"},
-     {v:"क्रतोरशेषेण फलेन युज्यताम् ।",k:"कालिदासः",g:"रघुवंशः",s:"रघुमहाराजः इन्द्रं प्रति एवम् अवदत्।",b:"क्रतोः फलम् अशेषेण युज्यताम्।"}
-   ],
-   kw:[{d:"शौर्यम्",e:"valour"},{d:"दिग्विजयः",e:"conquest of all directions"},{d:"तुरङ्गः",e:"horse"},{d:"यज्ञः",e:"sacrifice"},{d:"विडम्बित",e:"rivaling/resembling"}]
-  },
-  {id:'p3',num:'३',dt:'नीतिश्लोकाः',et:'Ethical Verses (8 Slokas)',auth:'विविधकवयः — Various Poets',
-   kp:`"नीतिश्लोकाः" इति पाठ्यभागः विविध कविभिः विरचित नीतिशलोकाः इति पाठात् स्वीकृतः।\n⭐ EXAM IMPORTANCE: Memorise ALL 8 slokas with meanings — carries maximum marks!`,
-   intro:'8 key ethical slokas from various Sanskrit poets. These teach universal values: knowledge, truth, service, humility, integrity.',
-   sl:[
-     {d:"नास्ति विद्यासमं चक्षुः नास्ति सत्यसमं तपः । नास्ति रागसमं दुःखं नास्ति त्यागसमं सुखम् ॥",e:"No eye equals education; no penance equals truth; no sorrow equals desire; no happiness equals sacrifice.",m:"The 4 supreme values: Vidya (knowledge), Satya (truth), Non-desire, Sacrifice."},
-     {d:"मातृवत् परदारेषु परद्रव्येषु लोष्ठवत् । आत्मवत् सर्वभूतेषु यः पश्यति स पण्डितः ॥",e:"One who sees others' wives as mother, others' wealth as dirt, all beings as self — he is a true scholar.",m:"True scholarship = universal respect and selfless vision."},
-     {d:"यौवनं धनसम्पत्तिः प्रभुत्वमविवेकिता । एकैकमप्यनर्थाय किमु यत्र चतुष्टयम् ॥",e:"Youth, wealth, power, and foolishness — even one is enough for ruin; what then if all four combine?",m:"Warning against the 4 dangerous combinations."},
-     {d:"अतिदानात् बलिर्बद्धः अतिमानात् सुयोधनः । अतिरूपात् हता सीता अति सर्वत्र वर्जयेत् ॥",e:"Bali fell from excess charity; Duryodhana perished from excess pride; Sita was abducted for excess beauty — avoid all extremes.",m:"Famous examples from Indian epics — the danger of excess in anything."},
-     {d:"सत्यं ब्रूयात् प्रियं ब्रूयात् न ब्रूयात् सत्यमप्रियम् । प्रियं च नानृतं ब्रूयात् एष धर्मः सनातनः ॥",e:"Speak truth; speak what is pleasant; don't speak unpleasant truth; don't speak pleasant falsehood — this is eternal Dharma.",m:"Golden rule of speech: truth + pleasantness. Never speak pleasant lies."},
-     {d:"परोपकारः कर्तव्यः प्राणैरपि धनैरपि । परोपकारजं पुण्यं न स्यात् क्रतुशतैरपि ॥",e:"Helping others is duty even at the cost of life and wealth. Merit of helping others > 100 yagnas.",m:"Highest virtue = selfless service (Seva). Even life should be sacrificed for others' welfare."},
-     {d:"अभिवादनशीलस्य नित्यं वृद्धोपसेविनः । चत्वारि तस्य वर्धन्ते आयुर्विद्या यशोबलम् ॥",e:"One who bows respectfully and serves elders always — 4 things grow: longevity, knowledge, fame, strength.",m:"Practical benefit of respecting elders — 4 guaranteed rewards."},
-     {d:"यथा चित्तं तथा वाचः यथा वाचः तथा क्रियाः । चित्ते वाचि क्रियायां च महतामेकरूपता ॥",e:"As the mind, so the words; as the words, so the actions — great people have unity of thought, word, and deed.",m:"Integrity = alignment of thought, word, action. True greatness."}
-   ],
-   qa:[
-     {q:"नीतिश्लोकाः पाठे विद्यायाः महत्त्वं वर्णयत।",m:"4M",a:`The Niti-shlokas declare Vidya (knowledge) as supreme:\n1. "नास्ति विद्यासमं चक्षुः" — No eye equals education. Knowledge shows us truth just as eyes show us the world.\n2. A truly educated person sees others' wives as mothers, others' wealth as dirt, all beings as self (मातृवत् परदारेषु...)\n3. Only through knowledge does one develop Viveka (discernment) — the 4th dangerous element is Avivekita (foolishness)\nConclusion: Vidya not only gives knowledge but transforms character — making one humble, respectful, and wise. It is the greatest eye (चक्षुः).`},
-     {q:"Write any TWO Niti-slokas with meanings:",m:"4M",a:`1. नास्ति विद्यासमं चक्षुः नास्ति सत्यसमं तपः ।\n   नास्ति रागसमं दुःखं नास्ति त्यागसमं सुखम् ॥\n   Meaning: There is no eye equal to education, no penance equal to truth, no sorrow equal to desire, no happiness equal to sacrifice.\n\n2. परोपकारः कर्तव्यः प्राणैरपि धनैरपि ।\n   परोपकारजं पुण्यं न स्यात् क्रतुशतैरपि ॥\n   Meaning: Helping others is duty even with life and wealth. The merit gained by helping others cannot be gained even by 100 yagnas.`},
-     {q:"केषां वाचः अर्थः अनुधावति?",m:"1M",a:"ऋषीणां वाचः अर्थः अनुधावति।"},
-     {q:"केन विना दैवं न सिद्ध्यति?",m:"1M",a:"पुरुषकारेण विना दैवं न सिद्ध्यति।"},
-     {q:"कथं धर्मम् आचरेत्?",m:"1M",a:"मृत्युना केशेषु गृहीत इव धर्माचरेत्।"},
-     {q:"कीशं वस्तु तथैव तिष्ठति?",m:"1M",a:"हुतं च दत्तं च वस्तु तथैव तिष्ठति।"}
-   ],
-   san:[
-     {v:"नास्ति विद्यासमं चक्षुः नास्ति सत्यसमं तपः ।",k:"विविधकवयः",g:"नीतिशास्त्रम्",s:"अयं श्लोकः विविध कविभिः विरचित नीतिशलोकाः इति पाठात् स्वीकृतम्।",b:"विद्यतः समानं चक्षुः नास्ति; सत्यतः समानं तपः नास्ति।"},
-     {v:"परोपकारः कर्तव्यः प्राणैरपि धनैरपि ।",k:"विविधकवयः",g:"नीतिशास्त्रम्",s:"अयं श्लोकः विविध कविभिः विरचित नीतिशलोकाः इति पाठात् स्वीकृतम्।",b:"प्राणमुलतोनైనసా, ధనముతో నైనను పరులకు ఉపకారము చేయవలెను।"}
-   ],
-   kw:[{d:"नीतिः",e:"ethics/conduct"},{d:"विद्या",e:"knowledge"},{d:"त्यागः",e:"sacrifice"},{d:"परोपकारः",e:"helping others"},{d:"सनातनः",e:"eternal"},{d:"पण्डितः",e:"true scholar"}]
-  },
-  {id:'p4',num:'४',dt:'जनादरः',et:'Respect of the People',auth:'श्री पि. पट्टाभिरामारावु — कथापञ्चकात्',
-   kp:`"जनादरः" इति प्रस्तुत पाठ्यभागः पि. पट्टाभिरामारावु महोदयेन विरचित कथापञ्चकात् संगृहीतः।\nSri Pattabhirama Rao is a noted 20th-century Telugu modern poet.`,
-   intro:'King disguised himself to understand his people\'s lives. He visited villages, saw a farmer Susharma, his wife, village women, and experienced real hospitality.',
-   sl:[
-     {d:"साध्ये स्वकार्ये श्रम एव युक्तिः ।",e:"For achievable goals, hard work alone is the strategy.",m:"King saw a farmer's wife efficiently managing house and field — effort = success."},
-     {d:"दैवस्वरूपो ह्यातिथिर्महात्मन् ।",e:"O great soul! A guest is truly a form of God.",m:"Villager Susharma welcomes the disguised king with this traditional Indian value."},
-     {d:"गृहिणे तन्वन्ति लक्ष्मीः सदा ।",e:"Women who manage the household always bring Lakshmi (prosperity).",m:"King praises Susharma's wife — a good homemaker is a form of Goddess Lakshmi."}
-   ],
-   qa:[
-     {q:"जनादरः इति पाठ्यभागस्य सारांशं संग्रहेण लिखत।",m:"4M",a:`SUMMARY: King disguised himself (नववेषधारी) to observe his people's lives. He visited a village and saw:\n1. A young woman working efficiently in her field (साध्ये स्वकार्ये श्रम एव युक्तिः।)\n2. Village women singing devotional songs around rangoli\n3. An old woman asking daughter-in-law to recite a poem about salvation (दैवस्वरूपो ह्यातिथिर्महात्मन्।)\n4. Villager Susharma hosted him with a 6-taste meal — "Guest is God"\nThe king returned with pure heart saying: a good homemaker brings Lakshmi (गृहिणे तन्वन्ति लक्ष्मीः सदा।). He praised the virtues of family life, service, and gratitude.`},
-     {q:"नृपः कथं प्रतस्थे?",m:"1M",a:"नृपः नववेषधारी प्रतस्थे।"},
-     {q:"गृहिणी किं गायति?",m:"1M",a:"गृहिणी कृष्णकीर्तनम् गायति।"},
-     {q:"वृद्धा कथं वन्दनम् अकरोत्?",m:"1M",a:"वृद्धा मुकुलितकरा वन्दनम् अकरोत्।"},
-     {q:"काना कीशी?",m:"1M",a:"विमलहृदया।"},
-     {q:"जनादरस्य कर्ता कः?",m:"1M",a:"श्री पि. पट्टाभिरामारावु।"}
-   ],
-   san:[
-     {v:"साध्ये स्वकार्ये श्रम एव युक्तिः ।",k:"श्री पि. पट्टाभिरामारावु",g:"कथापञ्चकात्",s:"राजा मन्त्री प्रति एवम् अवदत्।",b:"स्वकार्ये श्रम युक्तिरेव सिद्धति।"},
-     {v:"दैवस्वरूपो ह्यातिथिर्महात्मन् ।",k:"श्री पि. पट्टाभिरामारावु",g:"कथापञ्चकात्",s:"सुशर्मा राजानम् प्रति एवम् अवदत्।",b:"हे महात्मन् अतिथिः दैवस्वरूपः।"},
-     {v:"गृहिणे तन्वन्ति लक्ष्मीः सदा ।",k:"श्री पि. पट्टाभिरामारावु",g:"कथापञ्चकात्",s:"सुशर्मा राजानम् प्रति एवम् अवदत्।",b:"या गृहिणी तन्वति सा सदा लक्ष्मीः।"}
-   ],
-   kw:[{d:"जनादरः",e:"respect of people"},{d:"नववेषधारी",e:"in disguise"},{d:"अतिथिः",e:"guest"},{d:"गृहिणी",e:"homemaker"},{d:"लक्ष्मीः",e:"prosperity/Lakshmi"}]
-  },
-  {id:'p5',num:'५',dt:'प्रतिश्रुतिः',et:'The Pledge',auth:'डा. दीवि नरसिंह दीक्षितः — वसन्ततिलकात्',
-   kp:`"प्रतिश्रुतिः" इति प्रस्तुत पाठ्यभागः डा. दीवि नरसिंह दीक्षित महोदयेन विरचित वसन्ततिलकात् संगृहीतः।\nPresent text is taken from Vasantatilaka written by Dr. Deevi Narasimha Dikshitulu.`,
-   intro:'Poem contains Swami Vivekananda\'s inspiring message to youth of India — urging them to walk the path of wisdom, serve the nation, grow strong in mind and character.',
-   sl:[
-     {d:"भवाम नित्यं वदाम सत्यम् ।",e:"Let us always speak truth.",m:"Core pledge of the poem — commit to truth as a permanent way of life."},
-     {d:"सतां हि सुप्थे समाजहितदे ।",e:"The path of the righteous leads to welfare of society.",m:"Walking on the path of goodness benefits not just oneself but all of society."},
-     {d:"विवेकपूर्णाः भवाम नित्यम् ।",e:"Let us always be full of wisdom/discernment.",m:"Vivekananda's message: develop Viveka (discriminating intelligence) constantly."},
-     {d:"विजेतृशोभां वहाम सततम् ।",e:"Let us always carry the glory of victors.",m:"March forward with confidence and pride of those who conquer life's challenges."},
-     {d:"चराचराणां श्रेयस्कामाः ।",e:"We who desire the welfare of all moving and unmoving beings.",m:"Universal welfare — caring for all creation, not just humans. True compassion."}
-   ],
-   qa:[
-     {q:"प्रतिश्रुतिः इति पाठ्यभागस्य सारांशं लिखत।",m:"4M",a:`SUMMARY: This poem contains Swami Vivekananda's inspiring message (Pratishruti = pledge) to the youth of India:\n1. Speak truth always (भवाम नित्यं वदाम सत्यम्।)\n2. Walk with determination on the righteous path (सतां हि सुप्थे समाजहितदे।)\n3. Build wisdom: always be full of Viveka (विवेकपूर्णाः भवाम नित्यम्।)\n4. Unite: Set aside differences, embrace unity, have one compassionate mind\n5. March forward: Carry the glory of victors (विजेतृशोभां वहाम सततम्।)\n6. Serve elders; wish welfare of all beings (चराचराणां श्रेयस्कामाः।)`},
-     {q:"नित्यं कीदृशाः भवाम?",m:"1M",a:"नित्यं विवेकपूर्णाः भवाम।"},
-     {q:"दुष्करकार्यं कथं समापयाम?",m:"1M",a:"दुष्करकार्यं सुशीलवृत्या समापयाम।"},
-     {q:"प्रतिश्रुतिः रचयिता कः?",m:"1M",a:"डा. दीवि नरसिंह दीक्षितः।"},
-     {q:"प्रतिश्रुतिः इति पदस्य अर्थः कः?",m:"1M",a:"प्रतिज्ञा।"},
-     {q:"किमर्थं मिलिताः प्रयाम?",m:"1M",a:"पुरोगमार्थम्।"}
-   ],
-   san:[
-     {v:"चराचराणां श्रेयस्कामाः ।",k:"डा. दीवि नरसिंह दीक्षितः",g:"वसन्ततिलका",s:"विवेकानन्दः जनानां प्रति एवम् अवदत्।",b:"यथा वदामः - तथा चरामः चराचराणां श्रेयः कामाः।"},
-     {v:"सदुद्यमेन हि भजाम सिद्धिम् ।",k:"डा. दीवि नरसिंह दीक्षितः",g:"वसन्ततिलका",s:"विवेकानन्दः जनानां प्रति एवम् अवदत्।",b:"सुप्तिकाले जागरणेऽपि उद्यमेन सिद्ध्यति।"},
-     {v:"विजेतृशोभां वहाम सततम् ।",k:"डा. दीवि नरसिंह दीक्षितः",g:"वसन्ततिलका",s:"विवेकानन्दः जनानां प्रति एवम् अवदत्।",b:"सततम् विजेतृशोभां वहाम।"}
-   ],
-   kw:[{d:"प्रतिश्रुतिः",e:"pledge/promise"},{d:"विवेकः",e:"discernment"},{d:"सत्यम्",e:"truth"},{d:"श्रेयस्कामाः",e:"wishing welfare"},{d:"विजेतृशोभा",e:"glory of victors"}]
-  }
-];
-
-// ═══ GADYA DATA (from PDF) ═══
-const GD=[
-  {id:'g1',num:'१',dt:'अज्ञातस्य वासो न देयः',et:'Do Not Shelter an Unknown Person',auth:'श्री नारायण पण्डितः — हितोपदेशः मित्रलाभात्',
-   kp:`"अज्ञातस्य वासो न देयः" इत्यं पाठ्यांशः श्री नारायण पण्डितेन विरचित हितोपदेशे मित्रलाभात् संगृहीतः। Hitopadesha has 4 parts: Mitralabha, Mitrabhedha, Vigraha, Sandhi.`,
-   intro:'On Mount Gridhrakuta by the Ganges stood a large fig tree. Eagle Jaradgava lived there — old, claws fallen off. Birds fed him; he guarded their chicks. One day cat Dheergakarna came claiming to follow Chandrayana Vrata and non-violence...',
-   qa:[
-     {q:"जरद्वनो नाम गृध्रः पक्षिभिः कथं व्यापादितः? / अज्ञातस्य वासो न देयः इति पाठ्यभागसारांशं लिखत।",m:"4M",a:`On Gridhrakuta mountain lived old eagle Jaradgava (claws fallen off, vision dimmed). Birds fed him; he guarded their chicks.\n\nCat Dheergakarna came and claimed to follow Chandrayana Vrata, practice non-violence (अहिंसो परमो धर्मः।). Cat argued for hospitality: "Even enemies should be welcomed as guests — अरावप्युचितं कार्यमातिथ्यं गृहमागते।"\n\nEagle allowed cat to stay in tree hollow. But the cat secretly ate the chicks. When parent birds returned and found remains, they wrongly blamed the eagle and killed him.\n\n⭐ MORAL: अज्ञातकुलशीलस्य वासो देयो न कस्यचित् — Never give shelter to one of unknown character and background.`},
-     {q:"माजारिकः किं व्रतम् आचरति?",m:"1M",a:"माजारिकः चान्द्रायण व्रतम् आचरति।"},
-     {q:"शावकास्थीनि कुत्र प्राप्तानि?",m:"1M",a:"शावकास्थीनि वृक्षस्य कोटरे प्राप्तानि।"},
-     {q:"कस्य वासो न देयः?",m:"1M",a:"अज्ञातस्य वासो न देयः।"},
-     {q:"माजारिस्य नाम किम्?",m:"1M",a:"दीर्घकर्णः।"},
-     {q:"परमो धर्मः कः?",m:"1M",a:"अहिंसा।"}
-   ],
-   san:[
-     {v:"अरावप्युचितं कार्यमातिथ्यं गृहमागते ।",k:"श्रीनारायण पण्डितः",g:"हितोपदेशः भागः मित्रलाभः",s:"दीर्घकर्णः जरद्वं प्रति एवम् अवदत्।",b:"गृहमागते शत्रु अपि आतिथ्यकार्यं उचितम्।"},
-     {v:"अहिंसो परमो धर्मः ।",k:"श्रीनारायण पण्डितः",g:"हितोपदेशः भागः मित्रलाभः",s:"दीर्घकर्णः जरद्वं प्रति एवम् अवदत्।",b:"अहिंसा एव परमः धर्मः।"},
-     {v:"अस्य दग्धोदरस्यार्थे कः कुर्यात् पातकं महत् ।",k:"श्रीनारायण पण्डितः",g:"हितोपदेशः भागः मित्रलाभः",s:"दीर्घकर्णः जरद्वं प्रति एवम् अवदत्।",b:"उदरार्थः कः महत् पातकं करोति।"}
-   ],
-   kw:[{d:"अज्ञातः",e:"unknown"},{d:"गृध्रः",e:"eagle"},{d:"माजारिकः",e:"cat"},{d:"शावकाः",e:"chicks"},{d:"कोटरम्",e:"hollow of tree"},{d:"अहिंसा",e:"non-violence"}]
-  },
-  {id:'g2',num:'२',dt:'शूद्रक वीरवर कथा',et:'King Sudraka and Veeravara',auth:'जम्भालदत्तः — वेतालपञ्चविंशतिः (16वीं शताब्दी)',
-   kp:`"शूद्रक वीरवरकथा" जम्भालदत्तेन विरचित वेतालपञ्चविंशतिः इति ग्रन्थात् संगृहीतः। Written by Jambala Datta, 16th-century scholar. Also called Chaturdha Vethala Katha Prabandham.`,
-   intro:'King Sudraka had loyal soldier Veeravara who received 1500 gold coins daily — used half for Brahmins, rest for poor and himself. One night the king heard a woman crying and secretly followed Veeravara to investigate...',
-   qa:[
-     {q:"शूद्रक - वीरवर कथासारं विशदयत।",m:"4M",a:`King Sudraka had loyal soldier Veeravara (received 1500 gold coins daily, used wisely). One night: King heard crying, Veeravara went to investigate.\n\nHe found Goddess of Sudraka's Kingdom crying, about to abandon it. Veeravara said: "मातः यत्र अपायः अस्ति तत्र उपायः अपि अस्ति।"\n\nGoddess demanded sacrifice of his son Shaktivara. Veeravara told his family — ALL agreed! He beheaded his son (shouting "Hail King Sudraka!" — वीरवरो सपरिवारं जीवतु।), then himself. Wife and daughter followed.\n\nKing prepared to kill himself in grief. Goddess appeared, blessed them — brought all back to life! Next day, Sudraka crowned Veeravara King of Shekaradesa.\n\n⭐ MORAL: True service (सेवकधर्मः) = प्रभुकार्ये प्राण त्यागएव — giving one's life for master's welfare.`},
-     {q:"वीरवरः वेतनस्यार्धं केभ्यः दत्तवान्?",m:"1M",a:"वीरवरः वेतनस्यार्धं ब्राह्मणानां दत्तवान्।"},
-     {q:"शूद्रकः वीरवरं कस्य देशस्य राजानं कृतवान्?",m:"1M",a:"शूद्रकः वीरवरं शेखरदेशस्य राजानं कृतवान्।"},
-     {q:"सेवकधर्मः कः?",m:"1M",a:"सेवकधर्मः प्रभुकार्ये प्राण त्यागएव।"},
-     {q:"वेताल पञ्चविंशतिः केन विरचिता?",m:"1M",a:"जम्भालदत्तेन।"},
-     {q:"वीरवरस्य पुत्रः कः?",m:"1M",a:"शक्तिवरः।"},
-     {q:"राजः का प्रसन्ना अभवत्?",m:"1M",a:"काञ्चयानी।"}
-   ],
-   san:[
-     {v:"किं जीवनं कर्तव्यं तद्वद् ।",k:"जम्भालदत्तः",g:"वेतालपञ्चविंशतिः",s:"राजा शूद्रकः वीरवरं प्रति एवम् अवदत्।",b:"राजा शूद्रकः वीरवरेण भवतां जीवनं कृते किम् आवश्यकम्।"},
-     {v:"तां निश्चित्य मां ज्ञापय ।",k:"जम्भालदत्तः",g:"वेतालपञ्चविंशतिः",s:"राजा शूद्रकः वीरवरं प्रति एवम् अवदत्।",b:"श्री रोदनं श्रुत्वा शूद्रकः वीरवरेण तद् विषयं ज्ञात्वा मां बोधय।"},
-     {v:"वीरवरो सपरिवारं जीवतु ।",k:"जम्भालदत्तः",g:"वेतालपञ्चविंशतिः",s:"राजा शूद्रकः काञ्चयानी प्रति एवम् अवदत्।",b:"वीरवरो भार्यापुत्र समेतं जीवतु इति शूद्रकः काञ्चयानी प्रार्थयामास।"}
-   ],
-   kw:[{d:"वीरवरः",e:"the brave one"},{d:"स्वामिभक्तिः",e:"loyalty to master"},{d:"बलिदानम्",e:"sacrifice"},{d:"आक्रन्दनम्",e:"crying/wailing"}]
-  },
-  {id:'g3',num:'३',dt:'मूर्खपण्डित कथा',et:'Foolish Scholars Story',auth:'विष्णुशर्मा — पञ्चतन्त्रे अपरीक्षितकारकात्',
-   kp:`"मूर्खपण्डितकथा" पञ्चतन्त्रे अपरीक्षितकारकात् स्वीकृता। Panchatantra written by Vishnusharma for education of princes. 'Apariksitakaraka' = acting without testing/thinking.`,
-   intro:'4 Brahmin scholars studied at Kanyakubja for 12 years. 3 had mastered scriptures but had no common sense. The 4th had only common sense. In the forest they found a lion\'s skeleton and decided to demonstrate their knowledge...',
-   qa:[
-     {q:"ब्राह्मणाः विद्योपार्जनार्थं कुत्र गतवन्तः?",m:"1M",a:"ब्राह्मणाः विद्योपार्जनार्थं काण्यकुब्जं गतवन्तः।"},
-     {q:"ब्राह्मणाः कति अब्दानि पठितवन्तः?",m:"1M",a:"ब्राह्मणाः द्वादश अब्दानि पठितवन्तः।"},
-     {q:"पञ्चतन्त्रं केन विरचितम्?",m:"1M",a:"पञ्चतन्त्रं विष्णुशर्मणा विरचितम्।"},
-     {q:"मूर्खपण्डितकथा कस्मात् स्वीकृता?",m:"1M",a:"मूर्खपण्डितकथा पञ्चतन्त्रे अपरीक्षितकारकात् स्वीकृता।"},
-     {q:"अमरशक्तेः पुत्राः कीदृशाः?",m:"1M",a:"अमरशक्तेः पुत्राः परमदुर्मेधसः।"},
-     {q:"पण्डिताः शमशाने कं दृष्टवन्तः?",m:"1M",a:"पण्डिताः शमशाने रासभं दृष्टवन्तः।"}
-   ],
-   san:[{v:"राक्षसेषु दया न भवति। त्वं सत्यं वद।",k:"विष्णुशर्मा",g:"पञ्चतन्त्रम्",s:"विहगाः राक्षसं प्रति एवम् वदन्ति।",b:"राक्षसेषु दया न भवति। सत्यं वद इति विहगाः वदन्ति।"}],
-   kw:[{d:"मूर्खः",e:"foolish"},{d:"पण्डितः",e:"scholar"},{d:"विवेकः",e:"common sense"},{d:"अपरीक्षितकारकम्",e:"acting without testing"}]
-  },
-  {id:'g4',num:'४',dt:'दयावान् राक्षसः',et:'The Compassionate Demon Dayaram',auth:'आचार्य हर्षदेव माधवः — कथासङ्कलनम्',
-   kp:`"दयावान् राक्षसः" आचार्य हर्षदेव माधवेन विरचित कथासङ्कलनम् इति ग्रन्थात् संगृहीतः। Harshadev Madhav is Sanskrit professor at HK University Ahmedabad.`,
-   intro:'Near Ujjayini city there was a big forest with a large banyan tree. A monster named DAYARAM lived there. Unlike typical demons, he protected all birds and animals from hunters, wood-cutters, and natural calamities.',
-   qa:[
-     {q:"दयावान् राक्षसः इति पाठ्यांशस्य सारांशं संक्षेपेण लिखत।",m:"4M",a:`Near Ujjayini, demon DAYARAM lived in a forest. He was changed from cruel to kind when sage Sumathi sprinkled holy water on him. He lived on fruits/water, protected all creatures.\n\nHis compassion (दयागुणः):\n• Broke a hunter's leg to protect birds (अस्मान् मा पीडय। त्वं गच्छ अन्यत्र।)\n• Carried another hunter far away to protect animals\n• During drought — brought clouds from far away (तक्षकाः कुठारैः वने प्रविश्य वृक्षाणां विनाशं कर्तुम् ऐच्छन्।) — he protected trees\n• Fought monster with 17 horns and 9 heads — fell unconscious. Animals prayed to Shiva.\n• Shiva appeared: "You are no longer a demon — I grant you divinity" (अहं तुभ्य:देवत्वं ददामि।)\n\n⭐ MORAL: परोपकारः पुण्याय पापाय परपीडनम् — Helping others is virtue; harming others is sin.`},
-     {q:"दयारामः नमसि कान् अपश्यत्?",m:"1M",a:"दयारामः नमसि श्यामान् मेघान् अपश्यत्।"},
-     {q:"तक्षकाः कुठारैः वने प्रविश्य किं कर्तुम् ऐच्छन्?",m:"1M",a:"तक्षकाः कुठारैः वने प्रविश्य वृक्षाणां विनाशं कर्तुम् ऐच्छन्।"},
-     {q:"राक्षसस्य नाम किम्?",m:"1M",a:"दयारामः।"},
-     {q:"कः मेघान् सर्वत्र नयति?",m:"1M",a:"पवनः।"},
-     {q:"कस्य पादस्य अस्थिभङ्गः अभवत्?",m:"1M",a:"शाकुनिकस्य पादस्य अस्थिभङ्गः अभवत्।"}
-   ],
-   san:[
-     {v:"अस्मान् मा पीडय। त्वं गच्छ अन्यत्र।",k:"आचार्य हर्षदेव माधवः",g:"कथासङ्कलनम्",s:"विहगाः राक्षसं प्रति एवम् वदन्ति।",b:"विहगाः राक्षसं प्रति कृपया अस्मान् मा पीडय।"},
-     {v:"राक्षसेषु दया न भवति। त्वं सत्यं वद।",k:"आचार्य हर्षदेव माधवः",g:"कथासङ्कलनम्",s:"विहगाः राक्षसं प्रति एवम् वदन्ति।",b:"राक्षसेषु दया न भवति। सत्यं वद इति विहगाः वदन्ति।"},
-     {v:"अहं विनाकारणं प्राणिनां घातम् अकरवम्।",k:"आचार्य हर्षदेव माधवः",g:"कथासङ्कलनम्",s:"राक्षसः पक्षिणाम् मुखि एवम् वदति।",b:"पूर्वम् अहम् विनाकारणेण प्राणिनां घातम् अकरवम्।"}
-   ],
-   kw:[{d:"दयावान्",e:"compassionate"},{d:"राक्षसः",e:"demon"},{d:"करुणा",e:"compassion"},{d:"देवत्वम्",e:"divinity"},{d:"परोपकारः",e:"helping others"}]
-  },
-  {id:'g5',num:'५',dt:'जीर्णच्छत्रम्',et:'The Old Umbrella',auth:'पुल्लेल श्रीरामचन्द्रः — श्रीरामचन्द्र लघुकाव्य संग्रहः',
-   kp:`"जीर्णच्छत्रम्" पुल्लेल श्रीरामचन्द्रेण विरचित श्रीरामचन्द्र लघुकाव्य सङ्ग्रहः इति ग्रन्थात् संगृहीतः। Pullela Sri Ramachandrudu was Mahamahopadhyaya — highest title for Sanskrit scholars.`,
-   intro:'Vijayasimha\'s father Dhanasimha, a great warrior, died in battle. Mother raised him in fear. One day she gave him one rupee to repair their old umbrella (किमनेन जीर्णच्छत्रेण प्रयोजनम्? — what use is this old umbrella?)...',
-   qa:[
-     {q:"जीर्णच्छत्रम् इति पाठ्यभागस्य सङ्क्षेपेण लिखत। / जीर्णच्छत्रकारणेण विजयसिंहस्य कीर्तिः कथं व्याप्ता?",m:"4M",a:`STORY: Vijayasimha's father Dhanasimha died in battle. Mother raised him in poverty and fear. One day she gave one rupee to repair their old umbrella (किमनेन जीर्णच्छत्रेण प्रयोजनम्।).\n\nOn the train back (unable to get it repaired), Vijayasimha accidentally saved a rich old man and his daughter from thieves by pulling the emergency chain (न मया आकृष्टा।) — causing the train to stop. Thieves were caught.\n\nThe grateful old man praised his bravery, offered him a job, and later made him his son-in-law. Vijayasimha received the title "Raja Bahadur."\n\nHe continued to cherish the old umbrella — it had become the symbol of his transformation (इदं गतं दण्डदरिद्रभावम्।).\n\n⭐ KEY: A single moment can reveal a person's hidden potential — like air inflating a balloon.`},
-     {q:"धनसिंहः कां ररक्ष?",m:"1M",a:"धनसिंहः वृद्धामवलां ररक्ष।"},
-     {q:"पितुः मरण समये विजयसिंहः कति वर्षीयः?",m:"1M",a:"पितुः मरण समये विजयसिंहः पञ्च वर्षीयः।"},
-     {q:"जीर्णच्छत्रम् इति पाठ्यभागस्य कर्ता कः?",m:"1M",a:"पुल्लेल श्रीरामचन्द्रः।"},
-     {q:"विजयसिंहस्य पितुः नाम किम्?",m:"1M",a:"धनसिंहः।"},
-     {q:"छत्रं कीदृशम्?",m:"1M",a:"जीर्णम्।"}
-   ],
-   san:[
-     {v:"इदं गतं दण्डदरिद्रभावम् ।",k:"पुल्लेल श्रीरामचन्द्रः",g:"श्रीरामचन्द्र लघुकाव्य सङ्ग्रहः",s:"विजयसिंहः स्वमनसि एवम् अचिन्तयत्।",b:"मम दरिद्रनाशाय इदमेव कारणम्।"},
-     {v:"किमनेन जीर्णच्छत्रेण प्रयोजनम् ।",k:"पुल्लेल श्रीरामचन्द्रः",g:"श्रीरामचन्द्र लघुकाव्य सङ्ग्रहः",s:"विजयसिंहः मातारं प्रति एवम् अवदत्।",b:"अनेन जीर्णच्छत्रेण किम् प्रयोजनम्।"},
-     {v:"न मया आकृष्टा ।",k:"पुल्लेल श्रीरामचन्द्रः",g:"श्रीरामचन्द्र लघुकाव्य सङ्ग्रहः",s:"विजयसिंहः रक्षकभटान् प्रति एवम् अवदत्।",b:"शृङ्खला मम न आकृष्टा।"}
-   ],
-   kw:[{d:"जीर्णम्",e:"old/worn"},{d:"छत्रम्",e:"umbrella"},{d:"दरिद्रः",e:"poor"},{d:"आकृष्टा",e:"pulled"},{d:"साहसम्",e:"bravery"}]
-  }
-];
-
-// ═══ UPAVACHAKAM ═══
-const UD=[
-  {id:'u1',num:'१',dt:'विनयः विधेयता च',et:'Humility and Obedience',auth:'श्री जनार्दन हेगडे',kp:'Non-detailed text about Vinaya (humility) and Vidheyata (obedience) as foundations of character.',
-   qa:[{q:"विनयः विधेयता च — संक्षिप्त टिप्पणी",m:"2M",a:"Vinaya (विनयः) = inner humility — not considering oneself superior despite achievements. Vidheyata (विधेयता) = external obedience — following rightful authority and dharmic rules. Together = ideal student character: internally humble, externally disciplined."}],
-   kw:[{d:"विनयः",e:"humility"},{d:"विधेयता",e:"obedience"}]},
-  {id:'u2',num:'२',dt:'मित्ररत्नम्',et:'Jewel of Friendship',auth:'डा. पूजा उपाध्याया',kp:'A text about qualities of a true friend.',
-   qa:[{q:"मित्ररत्नम् — संक्षिप्त टिप्पणी",m:"2M",a:"A true friend (मित्र-रत्नम्): speaks truth even if unpleasant, stands by you in difficulty not just prosperity, keeps your secrets, guides away from wrong. Contrast: मुखमित्र = false friend — sweet words, selfish deeds."}],
-   kw:[{d:"मित्रम्",e:"friend"},{d:"रत्नम्",e:"jewel"},{d:"मुखमित्रम्",e:"false friend"}]},
-  {id:'u3',num:'३',dt:'पापस्य फलम्',et:'Fruit of Sin',auth:'डा. सञ्जीवः',kp:'Story illustrating that sinful actions inevitably lead to suffering — karma theory.',
-   qa:[{q:"पापस्य फलम् — संक्षिप्त टिप्पणी",m:"2M",a:"Sinful actions inevitably bear consequences — like a tree bearing fruit with time. Avoid wrongdoing not just from fear of punishment, but because dharma is the only sustainable path. Every action has consequences (karma)."}],
-   kw:[{d:"पापम्",e:"sin"},{d:"फलम्",e:"consequence"},{d:"कर्म",e:"action/karma"}]},
-  {id:'u4',num:'४',dt:'दानशूरः शिबिः',et:'Shibi — Champion of Charity',auth:'डा. उदयन हेगडे',kp:'Famous story of King Shibi from Mahabharata — ultimate test of shelter and sacrifice.',
-   qa:[{q:"दानशूरः शिबिः — सारांशं लिखत।",m:"4M",a:"King Shibi was famous for generosity. A dove (Indra disguised) flew to his lap seeking protection from a pursuing hawk (Agni disguised). Hawk demanded equal flesh weight. Shibi cut his own flesh — no matter how much he placed, dove's side was always heavier. Shibi placed his whole body on scale. Gods revealed themselves and blessed him.\n⭐ MORAL: A righteous king protects those who seek shelter (शरणागत-रक्षणम्) even at the cost of his own life."}],
-   kw:[{d:"दानशूरः",e:"champion of charity"},{d:"शरणागतः",e:"one who seeks refuge"},{d:"बलिदानम्",e:"sacrifice"}]},
-  {id:'u5',num:'५',dt:'मैत्री',et:'Loving-Kindness',auth:'सुगन्धः',kp:'About Maitri — one of 4 Brahmaviharas (divine states of mind).',
-   qa:[{q:"मैत्री — संक्षिप्त टिप्पणी",m:"2M",a:"Maitri = universal goodwill/loving-kindness toward ALL beings — friends, strangers, even enemies. Unlike ordinary friendship (selective, personal benefit), Maitri is boundless. 4 Brahmaviharas: Maitri (goodwill), Karuna (compassion), Mudita (sympathetic joy), Upekkha (equanimity)."}],
-   kw:[{d:"मैत्री",e:"goodwill/loving-kindness"},{d:"ब्रह्मविहारः",e:"divine state of mind"},{d:"करुणा",e:"compassion"}]}
-];
-
-// ═══ GRAMMAR ═══
-const RAM={cases:['प्रथमा (Nominative)','द्वितीया (Accusative)','तृतीया (Instrumental)','चतुर्थी (Dative)','पञ्चमी (Ablative)','षष्ठी (Genitive)','सप्तमी (Locative)','सम्बोधन (Vocative)'],
-  sg:['रामः','रामम्','रामेण','रामाय','रामात्','रामस्य','रामे','हे राम !'],
-  du:['रामौ','रामौ','रामाभ्याम्','रामाभ्याम्','रामाभ्याम्','रामयोः','रामयोः','हे रामौ !'],
-  pl:['रामाः','रामान्','रामैः','रामेभ्यः','रामेभ्यः','रामाणाम्','रामेषु','हे रामाः !']};
-const LATA={cases:['प्रथमा','द्वितीया','तृतीया','चतुर्थी','पञ्चमी','षष्ठी','सप्तमी','सम्बोधन'],
-  sg:['लता','लताम्','लतया','लतायै','लतायाः','लतायाः','लतायाम्','हे लते !'],
-  du:['लते','लते','लताभ्याम्','लताभ्याम्','लताभ्याम्','लतयोः','लतयोः','हे लते !'],
-  pl:['लताः','लताः','लताभिः','लताभ्यः','लताभ्यः','लतानाम्','लतासु','हे लताः !']};
-const PHALA={cases:['प्रथमा','द्वितीया','तृतीया','चतुर्थी','पञ्चमी','षष्ठी','सप्तमी','सम्बोधन'],
-  sg:['फलम्','फलम्','फलेन','फलाय','फलात्','फलस्य','फले','हे फल !'],
-  du:['फले','फले','फलाभ्याम्','फलाभ्याम्','फलाभ्याम्','फलयोः','फलयोः','हे फले !'],
-  pl:['फलानि','फलानि','फलैः','फलेभ्यः','फलेभ्यः','फलानाम्','फलेषु','हे फलानि !']};
-
-const SANDHI=[
-  {nm:'दीर्घ सन्धि',rule:'अ/आ + अ/आ = आ',ex:'राम + अयन = रामायण'},
-  {nm:'गुण सन्धि',rule:'अ/आ + इ/ई = ए',ex:'देव + इन्द्र = देवेन्द्र'},
-  {nm:'गुण सन्धि',rule:'अ/आ + उ/ऊ = ओ',ex:'महा + उत्सव = महोत्सव'},
-  {nm:'वृद्धि सन्धि',rule:'अ/आ + ए/ऐ = ऐ',ex:'मत + ऐक्य = मतैक्य'},
-  {nm:'वृद्धि सन्धि',rule:'अ/आ + ओ/औ = औ',ex:'महा + ओजः = महौजः'},
-  {nm:'यण् सन्धि',rule:'इ/ई + vowel = य्',ex:'प्रति + एक = प्रत्येक'},
-  {nm:'विसर्ग सन्धि',rule:'अः + अ = ओऽ',ex:'रामः + अत्र = रामोऽत्र'},
-  {nm:'श्चुत्व सन्धि',rule:'त् + ज = ज्ज',ex:'सत् + जनः = सज्जनः'}
-];
-
-const DRILLQS=[
-  {dv:'अ + इ = ?',en:'What Sandhi?',opts:['ए — गुण सन्धि','आ — दीर्घ','ओ — गुण','ऐ — वृद्धि'],c:0,fb:'✅ अ+इ=ए (Guna Sandhi). Example: देव+इन्द्र=देवेन्द्र'},
-  {dv:'महा + उत्सव = ?',en:'Apply Sandhi:',opts:['महोत्सव','महाउत्सव','महैत्सव','महौत्सव'],c:0,fb:'✅ आ+उ=ओ (Guna Sandhi). महा+उत्सव=महोत्सव = great festival'},
-  {dv:'सत् + जनः = ?',en:'Consonant Sandhi:',opts:['सज्जनः','सत्जनः','साजनः','सत्सनः'],c:0,fb:'✅ त्+ज=ज्ज (Shchutva Sandhi). सज्जनः = good person'},
-  {dv:'रामः — Vibhakti?',en:'Case:',opts:['प्रथमा (Nominative)','द्वितीया (Accusative)','षष्ठी (Genitive)','सप्तमी (Locative)'],c:0,fb:'✅ रामः (-ः suffix) = Prathama Vibhakti Singular = Nominative case'},
-  {dv:'रामाय — Vibhakti?',en:'Case:',opts:['चतुर्थी (Dative)','तृतीया (Instrumental)','पञ्चमी (Ablative)','षष्ठी (Genitive)'],c:0,fb:'✅ रामाय (-आय suffix) = Chaturthi = Dative (for Rama / to Rama)'},
-  {dv:'पठति = ?',en:'Translate:',opts:['He/She reads','You read','I read','They read'],c:0,fb:'✅ पठति = 3rd person singular present (Lat Lakar) = He/She reads'},
-  {dv:'हनुमदुपदेशः — source?',en:'From which text?',opts:['सुन्दरकाण्डः — वाल्मीकि','किष्किन्धाकाण्डः','युद्धकाण्डः','बालकाण्डः'],c:0,fb:'✅ हनुमदुपदेशः is from सुन्दरकाण्ड (51st canto) of Valmiki\'s Ramayana'},
-  {dv:'नास्ति विद्यासमं ___',en:'Complete:',opts:['चक्षुः','तपः','सुखम्','धनम्'],c:0,fb:'✅ नास्ति विद्यासमं चक्षुः — No eye equals education. (Niti-shloka 1)'},
-  {dv:'रघोः शौर्यम् — source?',en:'From which text?',opts:['रघुवंशमहाकाव्यम् — कालिदासः','कुमारसम्भवम्','मेघदूतम्','अभिज्ञानशाकुन्तलम्'],c:0,fb:'✅ रघोः शौर्यम् is from Raghuvamsha 3rd canto by Kalidasa'},
-  {dv:'अज्ञातकुलशीलस्य ___',en:'Complete the moral:',opts:['वासो देयो न कस्यचित्','वासो देयः सर्वदा','धनं देयम्','मित्रं देयम्'],c:0,fb:'✅ अज्ञातकुलशीलस्य वासो देयो न कस्यचित् — Main moral of Gadya 1'}
-];
-
-const PAPERS=[
-  {title:'Model Paper I — Narayana Material',meta:'100 Marks · 3 Hours · All Sections',icon:'📄',badge:'Start Here',bc:'bdgb',qs:[
-    {num:'Q.1(a) [4M]',txt:'रावणं प्रति हनुमता कृतम् उपदेशं सङ्क्षेण लिखत।',dv:'हनुमदुपदेशः',mk:'4 Marks',
-     ans:`Hanuman's advice to Ravana:\n1. Told about Rama's power — killed Vali with single arrow (स तेन निहतः सङ्ख्ये शरेणैकेन वानरः।)\n2. Warned: acts against Dharma lead to swift punishment (फलमस्याप्यधर्मस्य क्षिप्रमेव प्रपत्यसे।)\n3. Core message: Return Sita to Rama (नरदेवाय जानकीं प्रतिदीयताम्।)\n4. Final warning: Sita = Kalaratri for Lanka (कालरात्रीति तां विद्धि सर्वलङ्काविनाशिनीम्।)\n"I am Rama's servant — came only as mediator to advise you sincerely."`},
-    {num:'Q.1(b) [4M]',txt:'युवराजस्य रघोः शौर्यं विवृणुत।',dv:'रघोः शौर्यम्',mk:'4 Marks',
-     ans:`Dileepa crowned son Raghu. Indra stole the 100th yajna horse (धनुर्भृतामग्रत एव रक्षिणां जहार शक्रः।). Raghu confronted Indra boldly: "How can you obstruct my father's ritual? (क्रिया विघाताय कथं प्रवर्तसे।)" Raghu stood firm with divine physique (वपुः प्रकर्षेण विडम्बितेश्वरः।). Even Brahmastra failed. Indra gave a boon — Raghu asked only for his father's yajna completion (क्रतोरशेषेण फलेन युज्यताम्।). Dileepa honored Raghu with title "Sethakrathu."`},
-    {num:'Q.2 [4M]',txt:'Write Sandarbha Vakya (all 4 parts) for: धर्मार्थं सहितं वाक्यमिह चामुत्र च क्षमम्',dv:'सन्दर्भ वाक्यानि',mk:'4 Marks',
-     ans:`कविपरिचयः: इदं वाक्यं हनुमदुपदेशः इति पाठात् स्वीकृतम्।\nकविः: वाल्मीकिमहर्षिः | ग्रन्थः: श्रीमद्रामायणम्\nसन्दर्भः: आञ्चनेयः रावणं प्रति एवम् अवदत्।\nभावः: धर्मेण सहितं वाक्यम् इह लोके परलोके च हितकरम् — A word accompanied by Dharma is beneficial in this world and the next.`},
-    {num:'Q.3 [8M]',txt:'Write Ram Shabda — all 8 vibhaktis × 3 numbers',dv:'शब्दरूपाणि',mk:'8 Marks',
-     ans:`राम शब्द (अकारान्त पुल्लिंग):\nप्रथमा: रामः / रामौ / रामाः\nद्वितीया: रामम् / रामौ / रामान्\nतृतीया: रामेण / रामाभ्याम् / रामैः\nचतुर्थी: रामाय / रामाभ्याम् / रामेभ्यः\nपञ्चमी: रामात् / रामाभ्याम् / रामेभ्यः\nषष्ठी: रामस्य / रामयोः / रामाणाम्\nसप्तमी: रामे / रामयोः / रामेषु\nसम्बोधन: हे राम! / हे रामौ! / हे रामाः!`},
-    {num:'Q.4 [5M]',txt:'Letter to father asking money for educational tour',dv:'पत्रलेखनम् — पुत्रेण पितरं प्रति पत्रम्',mk:'5 Marks',
-     ans:`अत्रवरम्,\nदिनाङ्कः ०३-१०-२०२५\n\nसविधे -\nश्री एन् रविकान्तः,\nगृहसङ्ख्या ३-२-१९, गान्धीवीथी, कडप।\n\nपरमपूज्यानां पितृपादानां प्रणामाः। अहम् अत्र कुशली। भवन्तः सर्वे कुशलिनः इति मन्ये। अत्र मम पठनं सम्यक् चलति। आगामिमासे अध्यापकैः सह मम कलाशालातः छात्राः उञ्जयीनगरं प्रति विज्ञानयात्रायै गमिष्यन्ति। मम कृते अनुमत्या सह व्ययार्थं सहस्ररूप्यकाणि प्रेषयन्तु इति प्रार्थयामि। मातृचरणयोः मम वन्दनानि सूचयन्तु।\n\nइति\nभवदीय पुत्रः\n(चरण सुकुमार)`},
-    {num:'Q.5 [5M]',txt:'अनुवादाभ्यासः — Translate into Sanskrit:',dv:'वर्तमान / भूत / भविष्यत् काल',mk:'5 Marks',
-     ans:`1. सः देवं नमति। (He salutes God.) — वर्तमानकालः\n2. ते परीक्षां लिखन्ति। (They write the examination.) — वर्तमानकालः\n3. सः क्षीरम् अपिबत्। (He drank milk.) — भूतकालः\n4. ते पाठम् अपठन्। (They read a lesson.) — भूतकालः\n5. सः नगरं गमिष्यति। (He will go to city.) — भविष्यत्कालः\n6. त्वं देवालयं गमिष्यसि। (You will go to temple.) — भविष्यत्कालः\n⭐ सुभाषितवाक्यम्: सत्यमेव जयते। — Truth alone triumphs.`}
-  ]},
-  {title:'Model Paper II — Previous Year Pattern',meta:'March 2024 APBIE Style · 100 Marks',icon:'🗂',badge:'Important',bc:'bdgr',qs:[
-    {num:'Q.1 [4M]',txt:'जरद्वनो नाम गृध्रः पक्षिभिः कथं व्यापादितः?',dv:'अज्ञातस्य वासो न देयः',mk:'4 Marks',
-     ans:`Eagle Jaradgava (old, claws fallen off) lived on Gridhrakuta mountain. Cat Dheergakarna came claiming to follow Chandrayana Vrata and non-violence (अहिंसो परमो धर्मः।). Cat argued: "Even enemies should be welcomed as guests (अरावप्युचितं कार्यमातिथ्यं गृहमागते।)." Eagle allowed cat to stay. Cat secretly ate chicks. Birds returned, found remains, wrongly blamed eagle — killed him.\n⭐ MORAL: अज्ञातकुलशीलस्य वासो देयो न कस्यचित्`},
-    {num:'Q.2 [4M]',txt:'दयारामस्य दयागुणं परोपकारं च विवृणुत।',dv:'दयावान् राक्षसः',mk:'4 Marks',
-     ans:`Dayaram's compassion:\n1. Protected bird chicks — broke hunter's leg (अस्मान् मा पीडय। त्वं गच्छ अन्यत्र।)\n2. Carried another hunter far away to protect animals\n3. During drought — brought clouds from far away with his power, saved the forest\n4. Protected trees from wood-cutters (तक्षकाः कुठारैः वने प्रविश्य वृक्षाणां विनाशं कर्तुम् ऐच्छन्।)\n5. Fought monster with 17 horns and 9 heads — risked his life\n⭐ MORAL: परोपकारः पुण्याय पापाय परपीडनम्।`},
-    {num:'Q.3 [4M]',txt:'Write Sandarbha Vakya for 3 vakyas from रघोः शौर्यम्',dv:'सन्दर्भ वाक्यानि',mk:'4 Marks',
-     ans:`1. वपुः प्रकर्षेण विडम्बितेश्वरः ।\nकविः: कालिदासः | ग्रन्थः: रघुवंशः\nसन्दर्भः: रघुदेवेन्द्रयोः युद्धारम्भ सन्दर्भे कविः एवम् अवदत्।\nभावः: रघुः शरीर प्रकर्षेण ईश्वर इव अतिष्ठत्।\n\n2. क्रिया विघाताय कथं प्रवर्तसे ।\nकविः: कालिदासः | ग्रन्थः: रघुवंशः\nसन्दर्भः: रघुमहाराजः इन्द्रं प्रति।\nभावः: हे देवेन्द्र! मम पितुः यज्ञविनाशाय कथं प्रवर्तसे।\n\n3. क्रतोरशेषेण फलेन युज्यताम् ।\nकविः: कालिदासः | ग्रन्थः: रघुवंशः\nसन्दर्भः: रघुमहाराजः इन्द्रं प्रति।\nभावः: क्रतोः फलम् अशेषेण युज्यताम्।`},
-    {num:'Q.4 [8M]',txt:'Write Lata Shabda + Phala Shabda (all vibhaktis)',dv:'शब्दरूपाणि',mk:'8 Marks',
-     ans:`लता शब्द (आकारान्त स्त्रीलिंग):\nप्रथमा: लता/लते/लताः | द्वितीया: लताम्/लते/लताः\nतृतीया: लतया/लताभ्याम्/लताभिः | चतुर्थी: लतायै/लताभ्याम्/लताभ्यः\nपञ्चमी: लतायाः/लताभ्याम्/लताभ्यः | षष्ठी: लतायाः/लतयोः/लतानाम्\nसप्तमी: लतायाम्/लतयोः/लतासु | सम्बोधन: हे लते!/हे लते!/हे लताः!\n\nफल शब्द (अकारान्त नपुंसकलिंग):\nप्रथमा: फलम्/फले/फलानि | द्वितीया: फलम्/फले/फलानि\nतृतीया: फलेन/फलाभ्याम्/फलैः | चतुर्थी: फलाय/फलाभ्याम्/फलेभ्यः\nपञ्चमी: फलात्/फलाभ्याम्/फलेभ्यः | षष्ठी: फलस्य/फलयोः/फलानाम्\nसप्तमी: फले/फलयोः/फलेषु | सम्बोधन: हे फल!/हे फले!/हे फलानि!`},
-    {num:'Q.5 [5M]',txt:'Letter to principal requesting sick leave:',dv:'ज्वरार्तस्य विरामग्रहणाय अभ्यर्थनपत्रम्',mk:'5 Marks',
-     ans:`तेनालि,\nदिनाङ्कः १०-१२-२०२५\n\nसेवायाम् -\nप्रधानाध्यापकः / प्रांशुपालः,\nप्रमुत्व (जूनियर) उच्चमाध्यमिक कलाशाला, तेनालि।\n\nमान्याः!\nविषयः: विरामस्य कृते अभ्यर्थनम्\nअहम् अस्यां कलाशालायां प्रथमसंवत्सरं पठामि। मम स्वास्थ्यं सम्यक् नास्ति। अहं ज्वरेण पीडितो भवामि। अतः विश्रान्तिं स्वीकर्तुं मह्यं दिनत्रयं १०-१२-२०२५ तः १२-१२-२०२५ पर्यन्तं विरामं यच्छन्तु। मम अनुपस्थितिसमये पाठ्यमानान् पाठान् मित्रसकाशात् ज्ञात्वा अहं पठिष्यामि।\nसधन्यवादम्।\nभवतां विधेयः छात्रः\nचरण सुकुमार, अनुक्रमसंख्या ××\nप्रमुत्व (जूनियर) उच्चमाध्यमिक कलाशाला, तेनालि।`}
-  ]}
-];
-
-// ═══ STATE ═══
-let prog = JSON.parse(localStorage.getItem('charan_sk_prog')||'{}');
-if(window._prog) prog = {...prog,...window._prog};
-let dIdx=0,dCor=0,dTot=0,aiHist=[];
-
-// ═══ INIT ═══
-const day=new Date().getDay();
-document.getElementById('slokaText').textContent=SDAY[day%SDAY.length].d;
-document.getElementById('slokaMean').textContent=SDAY[day%SDAY.length].m;
-
-function switchTab(id,btn){
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
-  btn.classList.add('active');
+// Tab navigation
+function showTab(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  // Reset sub-tabs
+  const firstSubTab = document.getElementById(id).querySelector('.sub-tab');
+  if (firstSubTab) { showSubTabFromEl(id, firstSubTab); }
 }
-window.switchTab=switchTab;
 
-// ═══ RENDER CHAPTERS ═══
-function renderChs(data,cid){
-  const c=document.getElementById(cid);
-  c.innerHTML=data.map(ch=>`
-    <div class="ch-card" id="ch-${ch.id}">
-      <div class="ch-hdr" onclick="togCh('${ch.id}')">
-        <div class="ch-num">${ch.num}</div>
-        <div class="ch-info">
-          <div class="ch-tdev">${ch.dt}</div>
-          <div class="ch-ten">${ch.et}</div>
-          <div class="ch-auth">— ${ch.auth}</div>
-        </div>
-        <div class="ch-score"><div class="spill ${gScCls(ch.id)}" id="sp-${ch.id}">${gSc(ch.id)}</div><div style="font-size:9px;color:#bbb;margin-top:2px">progress</div></div>
-        <span class="ch-exp">▾</span>
+function showSubTab(pageId, subId) {
+  const page = document.getElementById(pageId);
+  page.querySelectorAll('.sub-page').forEach(p => p.classList.remove('active'));
+  page.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(subId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function showSubTabFromEl(pageId, el) {
+  const page = document.getElementById(pageId);
+  page.querySelectorAll('.sub-page').forEach(p => p.classList.remove('active'));
+  page.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+  const subId = el.getAttribute('onclick').match(/'([^']+)'\s*\)/)[1];
+  document.getElementById(subId).classList.add('active');
+  el.classList.add('active');
+}
+
+function toggleCard(el) {
+  const body = el.nextElementSibling;
+  const arrow = el.querySelector('span:last-child');
+  body.classList.toggle('open');
+  if (arrow) arrow.textContent = body.classList.contains('open') ? '▲' : '▼';
+}
+
+// Quiz
+const questions = [
+  { q: "Who is the author of 'दशरथस्य पश्चातापः'?", opts: ["कालिदास","वाल्मीकि","भर्तृहरि","विष्णुशर्मा"], ans: 1 },
+  { q: "What is Shabdabhedi Bana?", opts: ["A type of sword","Arrow aimed by sound alone","A magic spell","A type of bow"], ans: 1 },
+  { q: "'मायावटुः' is from which text?", opts: ["रामायण","महाभारत","कुमारसम्भवम्","कादम्बरी"], ans: 2 },
+  { q: "Who wrote Kadambari?", opts: ["कालिदास","भर्तृहरि","बाणभट्ट","वाल्मीकि"], ans: 2 },
+  { q: "How many Shatakas did Bhartrhari write?", opts: ["2","3","4","5"], ans: 1 },
+  { q: "'वसुधैव कुटुम्बकम्' means:", opts: ["India is great","The world is one family","Knowledge is wealth","Truth is god"], ans: 1 },
+  { q: "Who wrote 'कपीनामुपवासः'?", opts: ["E. Shankaracharya","Ballal","Shrishailam Tatacharyya","Samudralakshmana"], ans: 2 },
+  { q: "Panchatantra was written by:", opts: ["बाणभट्ट","विष्णुशर्मा","Ballal","कालिदास"], ans: 1 },
+  { q: "The Guna Sandhi rule: a + i = ?", opts: ["ai","e","o","a"], ans: 1 },
+  { q: "'विद्याविहीनः पशुः' means:", opts: ["Knowledge is power","One without knowledge is an animal","Knowledge gives freedom","Learning never ends"], ans: 1 },
+  { q: "Bhoja Prabandha was written by:", opts: ["Vishnusharma","Banabhatta","Ballal","Valmiki"], ans: 2 },
+  { q: "From which Tantra of Panchatantra is 'शश-कपिञ्जलकथा'?", opts: ["1st","2nd","3rd","5th"], ans: 2 },
+  { q: "What is the moral of शश-कपिञ्जलकथा?", opts: ["Be kind to animals","Don't take disputes to outsiders","Friends should share","Trust everyone"], ans: 1 },
+  { q: "In Sanskrit: 'रामः वनं गच्छति' means:", opts: ["Rama comes from forest","Rama is in forest","Rama goes to forest","Rama left forest"], ans: 2 },
+  { q: "पद्यभागः carries how many marks?", opts: ["20","25","28","30"], ans: 2 },
+  { q: "Which Samasa is 'पीताम्बरः' (refers to Vishnu)?", opts: ["द्वन्द्व","बहुव्रीहि","कर्मधारय","तत्पुरुष"], ans: 1 },
+  { q: "Author of 'अमरवाणीप्रशस्तिः':", opts: ["Ballal","E. Shankaracharya","Dr. Madhavi Joshi","Samudralakshmana"], ans: 1 },
+  { q: "'महर्षिः' is Sandhi of:", opts: ["महा+ऋषिः","मह+ऋषिः","महे+ऋषिः","महो+ऋषिः"], ans: 0 },
+  { q: "How many shlokas does 'मायावटुः' chapter have approximately?", opts: ["10","20","32+","50"], ans: 2 },
+  { q: "In the letter format, 'सविनयं निवेदयामि' means:", opts: ["I humbly submit","I respectfully greet","Thank you","With blessings"], ans: 0 },
+];
+
+let current = [], userAns = [], qIdx = 0;
+
+function loadQuiz() {
+  const shuffled = [...questions].sort(() => Math.random() - 0.5);
+  current = shuffled.slice(0, 10);
+  userAns = new Array(10).fill(-1);
+  qIdx = 0;
+  document.getElementById('quiz-result').style.display = 'none';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = current[qIdx];
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = `
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <span style="color:var(--gold);font-weight:700;">Question ${qIdx+1}/10</span>
+        <span style="color:var(--muted);font-size:0.8rem;">Score: ${userAns.filter((a,i)=>a===current[i]?.ans).length}</span>
       </div>
-      <div class="ch-body">
-        <div class="mt">
-          <div class="mtab active" onclick="swM(this,'ab-${ch.id}','${ch.id}')">📋 About</div>
-          ${ch.sl?`<div class="mtab" onclick="swM(this,'sl-${ch.id}','${ch.id}')">📿 Slokas</div>`:''}
-          <div class="mtab" onclick="swM(this,'qa-${ch.id}','${ch.id}')">❓ Q&A</div>
-          ${ch.san?`<div class="mtab" onclick="swM(this,'sn-${ch.id}','${ch.id}')">📌 सन्दर्भ</div>`:''}
-          <div class="mtab" onclick="swM(this,'kw-${ch.id}','${ch.id}')">🔤 Words</div>
-        </div>
-        <div class="mpanel active" id="ab-${ch.id}">
-          <div class="hbox"><div class="hbox-title">कविपरिचयः (About the Poet)</div>
-          <div style="font-size:12px;line-height:1.8;white-space:pre-line">${ch.kp}</div></div>
-          <div style="font-size:12px;line-height:1.8;color:var(--ink)">${ch.intro||''}</div>
-        </div>
-        ${ch.sl?`<div class="mpanel" id="sl-${ch.id}">
-          <div class="hbox"><div class="hbox-title">⭐ Memorise ALL slokas with meanings for exam!</div></div>
-          ${ch.sl.map(s=>`<div class="scard"><div class="sdev">${s.d}</div><div class="sen">${s.e}</div><div class="smn"><strong>Meaning/Bhav:</strong> ${s.m}</div></div>`).join('')}
-        </div>`:''}
-        <div class="mpanel" id="qa-${ch.id}">
-          <div class="hbox"><div class="hbox-title">💡 Click each question to reveal model answer</div></div>
-          ${ch.qa.map((q,i)=>`<div class="qacard" id="qc-${ch.id}-${i}">
-            <div class="qaq" onclick="togQA('qc-${ch.id}-${i}','${ch.id}')"><span>${q.q}</span><span class="qamk">${q.m}</span></div>
-            <div class="qaa">${q.a.replace(/\n/g,'<br>')}</div>
-          </div>`).join('')}
-        </div>
-        ${ch.san?`<div class="mpanel" id="sn-${ch.id}">
-          <div class="hbox"><div class="hbox-title">📌 Format: कविपरिचयः + कविः/ग्रन्थः + सन्दर्भः + भावः = 4 Marks each!</div></div>
-          ${ch.san.map(s=>`<div class="sancard">
-            <div class="sandev">${s.v}</div>
-            <div style="font-size:12px;line-height:2">
-              <strong>कविपरिचयः:</strong> इदं वाक्यं ${ch.dt} इति पाठात् स्वीकृतम्।<br>
-              <strong>कविः:</strong> ${s.k} | <strong>ग्रन्थः:</strong> ${s.g}<br>
-              <strong>सन्दर्भः:</strong> ${s.s}<br>
-              <strong>भावः:</strong> ${s.b}
-            </div>
-          </div>`).join('')}
-        </div>`:''}
-        <div class="mpanel" id="kw-${ch.id}">
-          <div class="vgrid">${ch.kw.map(w=>`<div class="vcard"><div class="vdev">${w.d}</div><div class="ven">${w.e}</div></div>`).join('')}</div>
-        </div>
-      </div>
-    </div>`).join('');
-}
-
-function togCh(id){document.getElementById('ch-'+id).classList.toggle('open');}
-function swM(btn,pid,chId){
-  const card=document.getElementById('ch-'+chId);
-  card.querySelectorAll('.mtab').forEach(t=>t.classList.remove('active'));
-  card.querySelectorAll('.mpanel').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(pid).classList.add('active');
-}
-function togQA(id,chId){
-  document.getElementById(id).classList.toggle('open');
-  prog[chId]=(prog[chId]||0)+1;
-  saveP();
-}
-window.togCh=togCh;window.swM=swM;window.togQA=togQA;
-
-// ═══ PROGRESS ═══
-function gSc(id){const n=prog[id]||0;return n===0?'—':Math.min(n*15,100)+'%';}
-function gScCls(id){const n=prog[id]||0;return n>=5?'good':'';}
-function saveP(){
-  localStorage.setItem('charan_sk_prog',JSON.stringify(prog));
-  if(window._db){window._set(window._doc(window._db,'students','charan'),prog).catch(()=>{});}
-  updDash();
-}
-function updSp(id){const el=document.getElementById('sp-'+id);if(el){el.textContent=gSc(id);el.className='spill '+gScCls(id);}}
-
-function updDash(){
-  const all=[...PD,...GD,...UD];
-  const tot=Object.values(prog).reduce((s,n)=>s+n,0);
-  const pct=Math.round(Math.min(tot/(all.length*7)*100,100));
-  document.getElementById('totPct').textContent=pct+'%';
-  document.getElementById('totQ').textContent=tot;
-  document.getElementById('drillSc').textContent=dTot>0?dCor+'/'+dTot:'—';
-  document.getElementById('pgrid').innerHTML=all.map(ch=>{
-    const p=Math.min((prog[ch.id]||0)*15,100);
-    const tag=ch.id.startsWith('p')?'पद्य':ch.id.startsWith('g')?'गद्य':'उपवाचक';
-    return `<div class="pcard" onclick="jumpTo('${ch.id}')">
-      <div class="ptag">${tag}</div>
-      <div class="ptitle">${ch.dt}</div>
-      <div class="pbar-w"><div class="pbar" style="width:${p}%"></div></div>
-      <div class="ppct">${p}% done</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${(qIdx/10)*100}%"></div></div>
+      <div style="margin:14px 0;font-size:0.95rem;font-weight:600;">${q.q}</div>
+      <div id="opts"></div>
+      <div id="feedback" style="margin-top:10px;"></div>
+      <button class="btn btn-primary" id="next-btn" style="margin-top:12px;display:none;" onclick="nextQ()">
+        ${qIdx < 9 ? 'Next →' : 'See Results'}
+      </button>
     </div>`;
-  }).join('');
+  const opts = document.getElementById('opts');
+  q.opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-outline';
+    btn.style.cssText = 'display:block;width:100%;margin:6px 0;text-align:left;';
+    btn.textContent = `${['A','B','C','D'][i]}. ${o}`;
+    btn.onclick = () => selectAns(i, btn);
+    opts.appendChild(btn);
+  });
 }
 
-function jumpTo(id){
-  const tab=id.startsWith('p')?'padya':id.startsWith('g')?'gadya':'upa';
-  const idx=['dash','padya','gadya','upa','vya','papers','ai'].indexOf(tab);
-  switchTab(tab,document.querySelectorAll('.tab-btn')[idx]);
-  setTimeout(()=>{const el=document.getElementById('ch-'+id);if(el){el.scrollIntoView({behavior:'smooth'});el.classList.add('open');}},150);
-}
-window.jumpTo=jumpTo;
-
-// ═══ GRAMMAR ═══
-function showG(type,cardEl){
-  document.querySelectorAll('.gcard').forEach(c=>c.classList.remove('active'));
-  if(cardEl)cardEl.classList.add('active');
-  const div=document.getElementById('gcontent');
-  if(type==='sandhi'){
-    div.innerHTML=`<div class="sec-title">सन्धि नियमाः — 8 Types (4M in exam)</div>
-      <div class="hbox"><div class="hbox-title">⭐ Memorise: Name + Rule + Example for each type</div></div>
-      <div class="tw"><table class="snd">
-        <tr><th>Name</th><th>Rule</th><th>Example</th></tr>
-        ${SANDHI.map(r=>`<tr><td>${r.nm}</td><td style="font-family:'Noto Serif Devanagari',serif;font-size:14px;color:var(--saffron)">${r.rule}</td><td style="font-family:'Noto Serif Devanagari',serif;font-size:14px">${r.ex}</td></tr>`).join('')}
-      </table></div>
-      <button class="dnext" style="display:block" onclick="showG('drill',null)">🎯 Start Grammar Drill Quiz</button>`;
-  }else if(type==='ram'){
-    div.innerHTML=`<div class="sec-title">राम शब्द — अकारान्त पुल्लिंग (8 Marks!)</div>
-      <div class="tw"><table class="skt">
-        <tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr>
-        ${RAM.cases.map((c,i)=>`<tr><td class="rl">${c}</td><td>${RAM.sg[i]}</td><td>${RAM.du[i]}</td><td>${RAM.pl[i]}</td></tr>`).join('')}
-      </table></div>
-      <button class="dnext" style="display:block" onclick="showG('drill',null)">🎯 Start Drill Quiz</button>`;
-  }else if(type==='lata'){
-    div.innerHTML=`<div class="sec-title">लता शब्द — आकारान्त स्त्रीलिंग</div>
-      <div class="tw"><table class="skt">
-        <tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr>
-        ${LATA.cases.map((c,i)=>`<tr><td class="rl">${c}</td><td>${LATA.sg[i]}</td><td>${LATA.du[i]}</td><td>${LATA.pl[i]}</td></tr>`).join('')}
-      </table></div>`;
-  }else if(type==='phala'){
-    div.innerHTML=`<div class="sec-title">फल शब्द — अकारान्त नपुंसकलिंग</div>
-      <div class="tw"><table class="skt">
-        <tr><th>विभक्ति</th><th>एकवचन</th><th>द्विवचन</th><th>बहुवचन</th></tr>
-        ${PHALA.cases.map((c,i)=>`<tr><td class="rl">${c}</td><td>${PHALA.sg[i]}</td><td>${PHALA.du[i]}</td><td>${PHALA.pl[i]}</td></tr>`).join('')}
-      </table></div>`;
-  }else if(type==='dhatu'){
-    div.innerHTML=`<div class="sec-title">पठ् धातु — परस्मैपदी (Present/Past/Future)</div>
-      <div class="tw"><table class="skt">
-        <tr><th>Tense</th><th>3rd Sg</th><th>3rd Du</th><th>3rd Pl</th><th>2nd Sg</th><th>1st Sg</th></tr>
-        <tr><td class="rl">लट् (Present)</td><td>पठति</td><td>पठतः</td><td>पठन्ति</td><td>पठसि</td><td>पठामि</td></tr>
-        <tr><td class="rl">लङ् (Past)</td><td>अपठत्</td><td>अपठताम्</td><td>अपठन्</td><td>अपठः</td><td>अपठम्</td></tr>
-        <tr><td class="rl">लृट् (Future)</td><td>पठिष्यति</td><td>पठिष्यतः</td><td>पठिष्यन्ति</td><td>पठिष्यसि</td><td>पठिष्यामि</td></tr>
-      </table></div>
-      <div class="hbox"><div class="hbox-title">Translation Examples (from your PDF अनुवादाभ्यासः):</div>
-      <div style="font-family:'Noto Serif Devanagari',serif;font-size:14px;line-height:2.2">
-        सः देवं नमति। — He salutes God. (Present)<br>
-        ते परीक्षां लिखन्ति। — They write exam. (Present)<br>
-        सः क्षीरम् अपिबत्। — He drank milk. (Past)<br>
-        सः नगरं गमिष्यति। — He will go to city. (Future)<br>
-        सत्यमेव जयते। — Truth alone triumphs. (सुभाषितवाक्यम्)
-      </div></div>`;
-  }else if(type==='patra'){
-    div.innerHTML=`<div class="sec-title">पत्रलेखनम् — 4 Model Letters (5M each)</div>
-      <div class="hbox"><div class="hbox-title">Format (memorise this structure!):</div>
-      <div style="font-family:'Noto Serif Devanagari',serif;font-size:13px;line-height:2.2">
-        [Place], दिनाङ्कः [Date]<br>
-        सेवायाम् / सविधे -<br>
-        [Receiver Title + Name],<br>
-        [Address]<br><br>
-        मान्याः! / परमपूज्यानां प्रणामाः।<br>
-        विषयः: [Subject]<br>
-        [Main Content — 2-3 sentences]<br>
-        [Request + सधन्यवादम् / इति]<br><br>
-        भवदीय पुत्रः / भवतां विधेयः छात्रः<br>
-        [Name + Roll No.]
-      </div></div>
-      <div class="hbox"><div class="hbox-title">Key Phrases to Memorise:</div>
-      <div style="font-family:'Noto Serif Devanagari',serif;font-size:13px;line-height:2.2">
-        सविनयं निवेदयामि यत् = I humbly submit that<br>
-        अनुग्रहं कुर्वन्तु = Please be kind enough to<br>
-        सादरप्रणामपूर्वकं विज्ञापयामि = I inform with respectful greetings<br>
-        मम अनुपस्थितिसमये पाठान् मित्रसकाशात् ज्ञात्वा पठिष्यामि = During absence I will learn lessons from friends<br>
-        सधन्यवादम् = With thanks
-      </div></div>`;
-  }else if(type==='anuvaad'){
-    div.innerHTML=`<div class="sec-title">अनुवादाभ्यासः — Translation (from your PDF)</div>
-      <div class="hbox"><div class="hbox-title">All 15 sentences from your Narayana material:</div></div>
-      ${[
-        ['वर्तमानकालः (Present):',''],
-        ['सः देवं नमति।','He salutes God.'],
-        ['ते परीक्षां लिखन्ति।','They write the examination.'],
-        ['त्वं जलं पिवसि।','You are drinking water.'],
-        ['अहं ग्रामं गच्छामि।','I am going to the village.'],
-        ['वयं पाठं पठामः।','We are reading a lesson.'],
-        ['भूतकालः (Past):',''],
-        ['सः क्षीरम् अपिबत्।','He drank milk.'],
-        ['ते पाठम् अपठन्।','They read a lesson.'],
-        ['सीता अत्र अखादत्।','Sita ate rice here.'],
-        ['हरिः समाधानम् अलिखत्।','Hari wrote the answer.'],
-        ['अहं परीक्षाम् अलिखम्।','I wrote the examination.'],
-        ['भविष्यत्कालः (Future):',''],
-        ['सः नगरं गमिष्यति।','He will go to city.'],
-        ['ते पाठं पठिष्यन्ति।','They will read lesson.'],
-        ['त्वं देवालयं गमिष्यसि।','You will go to the temple.'],
-        ['अहं समाधानं वदिष्यामि।','I will tell the answer.'],
-        ['⭐ सुभाषितवाक्यम्: सत्यमेव जयते।','Truth alone triumphs!']
-      ].map(([s,e])=>s.startsWith('⭐')||s.includes(':')?
-        `<div class="hbox" style="margin-bottom:6px"><div class="hbox-title">${s}</div>${e?'<div style="font-size:13px;color:var(--success);font-weight:700">'+e+'</div>':''}</div>`:
-        `<div class="qacard"><div style="padding:10px 12px;display:flex;justify-content:space-between;align-items:center">
-          <span style="font-family:'Noto Serif Devanagari',serif;font-size:14px;color:var(--ink)">${s}</span>
-          <span style="font-size:11px;color:var(--ochre);font-style:italic">${e}</span>
-        </div></div>`
-      ).join('')}`;
-  }else if(type==='drill'){
-    dIdx=0;dCor=0;dTot=0;renderDrill();
+function selectAns(i, btn) {
+  if (userAns[qIdx] !== -1) return;
+  userAns[qIdx] = i;
+  const q = current[qIdx];
+  document.querySelectorAll('#opts button').forEach((b, idx) => {
+    b.disabled = true;
+    if (idx === q.ans) b.style.background = '#1a4a1a';
+    if (idx === i && i !== q.ans) b.style.background = '#4a1a1a';
+  });
+  const fb = document.getElementById('feedback');
+  if (i === q.ans) {
+    fb.innerHTML = '<span style="color:var(--success)">✅ Correct!</span>';
+  } else {
+    fb.innerHTML = `<span style="color:var(--deep-red)">❌ Incorrect.</span> Correct: <b>${q.opts[q.ans]}</b>`;
   }
-  div.scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('next-btn').style.display = 'inline-block';
 }
-window.showG=showG;
 
-function renderDrill(){
-  const div=document.getElementById('gcontent');
-  if(dIdx>=DRILLQS.length){
-    div.innerHTML=`<div class="dw" style="text-align:center;padding:24px">
-      <div style="font-size:40px">${dCor>=9?'🏆':dCor>=7?'⭐':'💪'}</div>
-      <div style="font-size:22px;font-weight:700;margin:10px 0">Score: ${dCor}/${dTot}</div>
-      <div style="font-size:13px;color:var(--ochre);margin-bottom:16px">
-        ${dCor>=9?'🎉 शाबाश Charan! Excellent! 90+ is definitely yours!':dCor>=7?'Good! Review tables and retry!':'Review all grammar tables first, then retry.'}
-      </div>
-      <button class="dnext" style="display:block" onclick="showG('drill',null)">🔄 Retry Drill (${DRILLQS.length} Questions)</button>
-    </div>`;
-    prog['drill']=(prog['drill']||0)+1;saveP();return;
+function nextQ() {
+  qIdx++;
+  if (qIdx >= 10) {
+    showResult();
+  } else {
+    renderQuestion();
   }
-  const q=DRILLQS[dIdx];
-  div.innerHTML=`<div class="dw">
-    <div class="dbar"><div class="dbar-f" style="width:${dIdx/DRILLQS.length*100}%"></div></div>
-    <div style="font-size:10px;color:var(--ochre);text-align:right;margin-bottom:10px">Q${dIdx+1} of ${DRILLQS.length} | Score: ${dCor}/${dTot}</div>
-    <div class="dqdev">${q.dv}</div>
-    <div class="dqen">${q.en}</div>
-    <div class="dopts">${q.opts.map((o,i)=>`<div class="dopt" onclick="chkAns(${i},${q.c},'${q.fb.replace(/'/g,"\\'")}')">${o}</div>`).join('')}</div>
-    <div class="dfb" id="dfb"></div>
-    <button class="dnext" id="dnxt" onclick="dIdx++;renderDrill()">Next Question →</button>
-  </div>`;
 }
 
-function chkAns(sel,cor,fb){
-  document.querySelectorAll('.dopt').forEach(o=>o.style.pointerEvents='none');
-  document.querySelectorAll('.dopt')[cor].classList.add('correct');
-  const ok=sel===cor;if(!ok)document.querySelectorAll('.dopt')[sel].classList.add('wrong');
-  dTot++;if(ok)dCor++;
-  const f=document.getElementById('dfb');
-  f.className='dfb '+(ok?'correct':'wrong')+' show';
-  f.innerHTML=(ok?'✅ Correct! ':'❌ Wrong. ')+fb;
-  document.getElementById('dnxt').style.display='block';
-  updDash();
+function showResult() {
+  const score = userAns.filter((a, i) => a === current[i]?.ans).length;
+  document.getElementById('quiz-container').innerHTML = '';
+  const res = document.getElementById('quiz-result');
+  res.style.display = 'block';
+  const pct = Math.round((score/10)*100);
+  let emoji = pct >= 80 ? '🎉' : pct >= 60 ? '👍' : '📚';
+  document.getElementById('score-text').innerHTML = `${emoji} ${score}/10 (${pct}%)`;
 }
-window.chkAns=chkAns;
 
-// ═══ PAPERS ═══
-function renderPapers(){
-  document.getElementById('papersList').innerHTML=PAPERS.map((p,pi)=>`
-    <div class="ppr" id="pp-${pi}">
-      <div class="pprhdr" onclick="togPP(${pi})">
-        <div class="pprico">${p.icon}</div>
-        <div><div class="pprtitle">${p.title}</div><div class="pprmeta">${p.meta}</div></div>
-        <span class="pprbdg ${p.bc}">${p.badge}</span>
-      </div>
-      <div class="pprbody">
-        ${p.qs.map((q,qi)=>`
-          <div class="eq">
-            <div class="eqnum">${q.num} <span class="eqmk">${q.mk}</span></div>
-            <div class="eqtxt">${q.dv?`<span style="font-family:'Noto Serif Devanagari',serif;font-size:15px;color:var(--saffron);display:block;margin-bottom:4px">${q.dv}</span>`:''} ${q.txt}</div>
-            <button class="showbtn" onclick="togAns(this)">Show Model Answer ▾</button>
-            <div class="ansbox">${q.ans.replace(/\n/g,'<br>')}</div>
-          </div>`).join('')}
-      </div>
-    </div>`).join('');
-}
-function togPP(i){document.getElementById('pp-'+i).classList.toggle('open');}
-function togAns(btn){const b=btn.nextElementSibling;b.style.display=b.style.display==='block'?'none':'block';btn.textContent=b.style.display==='block'?'Hide Answer ▲':'Show Model Answer ▾';}
-window.togPP=togPP;window.togAns=togAns;
-
-// ═══ AI TUTOR ═══
-async function sendAI(){
-  const inp=document.getElementById('aiInp');
-  const msg=inp.value.trim();if(!msg)return;
-  inp.value='';
-  addMsg(msg,'user');
-  document.getElementById('aiBtn').disabled=true;
-  const ldg=addMsg('<div class="ldots"><span></span><span></span><span></span></div>','ai',true);
-  const sys=`You are an expert Sanskrit teacher for AP Intermediate 1st Year students at Narayana Junior College, Nidamanuru, Andhra Pradesh. Student name: Charan. Target: 90%+ marks in APBIE exam.
-
-EXACT SYLLABUS from Narayana study material:
-POETRY (पद्यभागः):
-1. हनुमदुपदेशः — वाल्मीकि, Sundarakanda 51st canto. Key slokas: धर्मार्थं सहितं वाक्यम्, कालरात्रीति तां विद्धि, नरदेवाय जानकीं प्रतिदीयताम्
-2. रघोः शौर्यम् — कालिदास, Raghuvamsha 3rd canto. Key: क्रिया विघाताय कथं, वपुः प्रकर्षेण, क्रतोरशेषेण फलेन
-3. नीतिश्लोकाः — विविधकवयः. 8 slokas: नास्ति विद्यासमं, मातृवत् परदारेषु, यौवनं धनसम्पत्तिः, अतिदानात् बलिर्बद्धः, सत्यं ब्रूयात्, परोपकारः कर्तव्यः, अभिवादनशीलस्य, यथा चित्तं तथा वाचः
-4. जनादरः — पट्टाभिरामारावु, Kathapanchakam. Key: साध्ये स्वकार्ये श्रम एव युक्तिः, दैवस्वरूपो ह्यातिथिर्महात्मन्, गृहिणे तन्वन्ति लक्ष्मीः सदा
-5. प्रतिश्रुतिः — डा. दीवि नरसिंह दीक्षित, Vasantatilaka. Vivekananda's message. Key: भवाम नित्यं वदाम सत्यम्, विवेकपूर्णाः भवाम नित्यम्, विजेतृशोभां वहाम सततम्
-
-PROSE (गद्यभागः):
-1. अज्ञातस्य वासो न देयः — नारायण पण्डित, Hitopadesha. Eagle Jaradgava + Cat Dheergakarna. MORAL: अज्ञातकुलशीलस्य वासो देयो न कस्यचित्
-2. शूद्रक वीरवर कथा — जम्भालदत्त, Vetala Panchavimshati. King Sudraka + loyal soldier Veeravara's sacrifice
-3. मूर्खपण्डित कथा — विष्णुशर्मा, Panchatantra Apariksitakaraka
-4. दयावान् राक्षसः — हर्षदेव माधव, Kathasankalanam. Demon Dayaram's compassion. MORAL: परोपकारः पुण्याय पापाय परपीडनम्
-5. जीर्णच्छत्रम् — पुल्लेल श्रीरामचन्द्र. Vijayasimha + old umbrella
-
-GRAMMAR: राम/लता/फल शब्दरूपाणि, पठ् धातुरूपाणि (3 tenses), Sandhi rules (8 types), पत्रलेखनम् (4 model letters), अनुवादाभ्यासः (15 sentences)
-
-EXAM FORMAT: सन्दर्भ वाक्यानि = कविपरिचयः + कविः/ग्रन्थः + सन्दर्भः + भावः (4 parts = 4 marks)
-
-Respond in English or Hindi (NOT Telugu). Be exam-focused, concise. Give exact Sanskrit text with meanings. Max 350 words.`;
-  aiHist.push({role:'user',content:msg});
-  try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,system:sys,messages:aiHist.slice(-10)})});
-    const d=await r.json();
-    const reply=d.content?.[0]?.text||'Sorry, could not get response. Please try again.';
-    aiHist.push({role:'assistant',content:reply});
-    ldg.remove();addMsg(reply,'ai');
-  }catch(e){ldg.remove();addMsg('Network error. Check connection and try again.','ai');}
-  document.getElementById('aiBtn').disabled=false;
-}
-function addMsg(t,role,raw=false){
-  const c=document.getElementById('aiMsgs');
-  const d=document.createElement('div');d.className='msg '+role;
-  if(raw)d.innerHTML=t;
-  else d.innerHTML=t.replace(/\n/g,'<br>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
-  c.appendChild(d);c.scrollTop=c.scrollHeight;return d;
-}
-function askQ(q){document.getElementById('aiInp').value=q;sendAI();}
-window.sendAI=sendAI;window.askQ=askQ;
-document.getElementById('aiInp').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendAI();}});
-
-// ═══ BOOT ═══
-renderChs(PD,'padyaList');
-renderChs(GD,'gadyaList');
-renderChs(UD,'upaList');
-renderPapers();
-updDash();
+// Initialize
+loadQuiz();
 </script>
 </body>
 </html>
-
-
-<!-- gh-sync-v2 -->
