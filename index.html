@@ -6,71 +6,103 @@
 <title>Sanskrit AP Inter - Charan's Study App</title>
 <style>
 :root {
-  --accent: #6B8CBA;
-  --accent2: #5A7A9E;
-  --gold: #A8C0D8;
-  --dark-bg: #0D0D0F;
-  --card-bg: #141417;
-  --card-border: #222228;
-  --text: #D4D8E0;
-  --muted: #6B6F7A;
-  --success: #4A8A5C;
-  --success-text: #8EC9A0;
-  --blue: #3A6080;
-  --blue-text: #8AB4CC;
-  --deep-red: #7A3A3A;
-  --header-bg: #0A0A0C;
+  --accent: #C4935A;        /* warm amber — Sanskrit/parchment feel */
+  --accent2: #B07C42;       /* deeper amber for borders */
+  --teal: #5A9E8C;          /* soft teal for meanings/success */
+  --teal-text: #8ECFBE;
+  --blue: #5A7EA0;          /* muted indigo-blue for Q&A */
+  --blue-text: #9ABFD8;
+  --dark-bg: #10100E;       /* warm near-black, not cold grey */
+  --card-bg: #181714;       /* warm dark card */
+  --card-border: #2A2822;   /* subtle warm border */
+  --text: #D8D2C8;          /* warm off-white */
+  --muted: #706A60;         /* warm muted */
+  --deep-red: #8A4040;
+  --header-bg: #0C0C0A;
+  --gold: #D4A862;          /* readable warm gold for scores */
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 body { background: var(--dark-bg); color: var(--text); font-family: 'Segoe UI', sans-serif; min-height:100vh; }
-header { background: var(--header-bg); padding: 14px 20px; text-align:center; border-bottom: 1px solid var(--card-border); position:sticky; top:0; z-index:100; }
-header h1 { font-size: 1.3rem; color: #C0CDD8; font-weight: 500; }
+
+/* ── Header ──────────────────────────────────────── */
+header {
+  background: linear-gradient(135deg, #18140A, #201A0E, #18140A);
+  padding: 14px 20px; text-align:center;
+  border-bottom: 1px solid #3A3020;
+  position:sticky; top:0; z-index:100;
+}
+header h1 { font-size: 1.35rem; color: #D4B87A; font-weight: 500; letter-spacing:0.01em; }
 header p { font-size: 0.78rem; color: var(--muted); margin-top:3px; }
-.tab-bar { display:flex; overflow-x:auto; background:var(--header-bg); border-bottom: 1px solid var(--card-border); scrollbar-width:none; }
+
+/* ── Tabs ────────────────────────────────────────── */
+.tab-bar { display:flex; overflow-x:auto; background:#14120E; border-bottom: 1px solid #2A2418; scrollbar-width:none; }
 .tab-bar::-webkit-scrollbar { display:none; }
 .tab { flex:0 0 auto; padding:10px 16px; font-size:0.78rem; cursor:pointer; color:var(--muted); border-bottom:2px solid transparent; transition:all 0.2s; white-space:nowrap; }
-.tab.active { color:#B8C8D8; border-bottom-color:var(--accent); background:#111114; }
-.tab:hover { color:var(--text); background:#111114; }
+.tab.active { color:var(--accent); border-bottom-color:var(--accent); background:#1C1812; }
+.tab:hover { color:var(--text); background:#1C1812; }
+
+/* ── Layout ──────────────────────────────────────── */
 .page { display:none; padding:16px; max-width:900px; margin:0 auto; }
 .page.active { display:block; }
-.section-title { font-size:1.1rem; color:#A8B8C8; margin-bottom:12px; padding-bottom:6px; border-bottom:1px solid var(--card-border); font-weight:500; }
+.section-title { font-size:1.1rem; color:var(--accent); margin-bottom:12px; padding-bottom:6px; border-bottom:1px solid var(--card-border); font-weight:500; }
 .card { background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px; padding:14px; margin-bottom:10px; }
-.card-title { font-size:0.95rem; color:#A0B4C8; font-weight:500; margin-bottom:8px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
+.card-title { font-size:0.95rem; color:#C8B890; font-weight:500; margin-bottom:8px; cursor:pointer; display:flex; justify-content:space-between; align-items:center; }
 .card-body { display:none; }
 .card-body.open { display:block; }
-.shloka { background:#0A0A0C; border-left:2px solid var(--accent2); padding:10px; margin:8px 0; border-radius:0 6px 6px 0; font-size:0.9rem; line-height:1.9; }
+
+/* ── Content blocks ──────────────────────────────── */
+.shloka { background:#0C0B08; border-left:2px solid var(--accent2); padding:10px; margin:8px 0; border-radius:0 6px 6px 0; font-size:0.9rem; line-height:1.9; }
 .shloka-num { color:var(--muted); font-size:0.72rem; font-weight:600; margin-bottom:4px; letter-spacing:0.03em; }
-.meaning { background:#0C110C; border-left:2px solid var(--success); padding:8px 10px; margin:6px 0; border-radius:0 6px 6px 0; font-size:0.84rem; line-height:1.65; color:var(--success-text); }
-.meaning-label { font-size:0.68rem; color:var(--success); font-weight:600; margin-bottom:3px; letter-spacing:0.04em; }
-.qa-item { background:#0C0F14; border-left:2px solid var(--blue); padding:10px; margin:8px 0; border-radius:0 6px 6px 0; }
+.meaning { background:#0A100E; border-left:2px solid var(--teal); padding:8px 10px; margin:6px 0; border-radius:0 6px 6px 0; font-size:0.84rem; line-height:1.65; color:var(--teal-text); }
+.meaning-label { font-size:0.68rem; color:var(--teal); font-weight:600; margin-bottom:3px; letter-spacing:0.04em; }
+.qa-item { background:#0A0E14; border-left:2px solid var(--blue); padding:10px; margin:8px 0; border-radius:0 6px 6px 0; }
 .question { color:var(--blue-text); font-weight:600; font-size:0.86rem; margin-bottom:5px; }
-.answer { font-size:0.84rem; line-height:1.65; color:#B0C0CC; }
-.marks-badge { background:#3A2A2A; color:#B09090; font-size:0.65rem; padding:2px 7px; border-radius:10px; }
-.highlight { background:#101214; border:1px solid #2A3040; border-radius:6px; padding:10px; margin:8px 0; }
-.highlight-label { color:#7A9AB8; font-size:0.68rem; font-weight:600; margin-bottom:4px; letter-spacing:0.05em; }
+.answer { font-size:0.84rem; line-height:1.65; color:#B0BCC8; }
+.marks-badge { background:#302010; color:#C4944A; font-size:0.65rem; padding:2px 8px; border-radius:10px; border:1px solid #4A3010; }
+.highlight { background:#141210; border:1px solid #3A2E18; border-radius:6px; padding:10px; margin:8px 0; }
+.highlight-label { color:var(--accent); font-size:0.68rem; font-weight:600; margin-bottom:4px; letter-spacing:0.05em; }
+
+/* ── Grids & stat boxes ──────────────────────────── */
 .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
-.stat-box { background:#0A0A0C; border:1px solid var(--card-border); border-radius:8px; padding:10px; text-align:center; }
-.stat-num { font-size:1.8rem; font-weight:600; color:#8AAAC0; }
+.stat-box { background:#0C0B08; border:1px solid #2E2820; border-radius:8px; padding:10px; text-align:center; }
+.stat-num { font-size:1.8rem; font-weight:600; color:var(--accent); }
 .stat-label { font-size:0.68rem; color:var(--muted); margin-top:2px; }
-.tag { display:inline-block; background:#1A1A20; color:#7A8A9A; font-size:0.7rem; padding:2px 8px; border-radius:10px; margin:2px; }
-.progress-bar { height:4px; background:#1A1A20; border-radius:2px; margin:6px 0; }
-.progress-fill { height:100%; background:var(--accent2); border-radius:2px; transition:width 0.3s; }
+.tag { display:inline-block; background:#1E1C16; color:#9A8A70; font-size:0.7rem; padding:2px 8px; border-radius:10px; margin:2px; }
+.progress-bar { height:4px; background:#222018; border-radius:2px; margin:6px 0; }
+.progress-fill { height:100%; background:var(--accent); border-radius:2px; transition:width 0.4s ease; }
+
+/* ── Tables ──────────────────────────────────────── */
 table { width:100%; border-collapse:collapse; font-size:0.82rem; margin:8px 0; }
-th { background:#111114; color:#8A9AAA; padding:7px; text-align:left; font-weight:500; border-bottom:1px solid var(--card-border); }
-td { padding:7px; border-bottom:1px solid #1A1A20; color:#B8C0CC; }
-tr:hover td { background:#111114; }
+th { background:#1C1810; color:var(--accent); padding:8px; text-align:left; font-weight:500; border-bottom:1px solid #3A2E18; }
+td { padding:7px 8px; border-bottom:1px solid #201E18; color:#C4BCAC; }
+tr:hover td { background:#1A1810; }
+
+/* ── Buttons ─────────────────────────────────────── */
 .btn { padding:8px 16px; border-radius:6px; border:none; cursor:pointer; font-size:0.82rem; font-weight:500; transition:all 0.2s; }
-.btn-primary { background:var(--accent2); color:#E8EEF4; }
+.btn-primary { background:var(--accent2); color:#F0E8D8; }
 .btn-primary:hover { background:var(--accent); }
-.btn-outline { background:transparent; border:1px solid #2A3A4A; color:#8AAAC0; }
+.btn-outline { background:transparent; border:1px solid #3A3020; color:#C4B08A; }
+.btn-outline:hover { background:#1E1C14; }
+
+/* ── Sub-tabs ────────────────────────────────────── */
 .sub-tabs { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
-.sub-tab { padding:5px 12px; border-radius:5px; font-size:0.76rem; cursor:pointer; background:#111114; color:var(--muted); border:1px solid var(--card-border); transition:all 0.2s; }
-.sub-tab.active { background:#1A2530; color:#8AAAC0; border-color:#3A5060; }
+.sub-tab { padding:5px 12px; border-radius:5px; font-size:0.76rem; cursor:pointer; background:#161410; color:var(--muted); border:1px solid #2A2418; transition:all 0.2s; }
+.sub-tab.active { background:#28200E; color:var(--accent); border-color:var(--accent2); }
+
+/* ── Misc ────────────────────────────────────────── */
 .sub-page { display:none; }
 .sub-page.active { display:block; }
-.exam-pattern { background:#0E1014; border:1px solid #2A3040; border-radius:8px; padding:14px; margin-bottom:14px; }
-.alert { background:#0C0E12; border:1px solid #2A3040; border-radius:6px; padding:10px; margin:8px 0; font-size:0.84rem; color:#8A9AAA; }
-.alert-icon { color:#6A8AA8; margin-right:6px; }
+.exam-pattern { background:#141210; border:1px solid #30281A; border-radius:8px; padding:14px; margin-bottom:14px; }
+.alert { background:#0E0C08; border:1px solid #2E2818; border-radius:6px; padding:10px; margin:8px 0; font-size:0.84rem; color:#B0A890; }
+.alert-icon { color:var(--accent); margin-right:6px; }
+
+/* ── Quiz history ────────────────────────────────── */
+.history-row { display:flex; justify-content:space-between; align-items:center; padding:8px 10px; border-bottom:1px solid #201E18; font-size:0.82rem; }
+.history-row:last-child { border-bottom:none; }
+.history-score { font-weight:600; color:var(--accent); }
+.history-date { color:var(--muted); font-size:0.74rem; }
+.score-ring { display:inline-block; width:60px; height:60px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.1rem; font-weight:700; margin:0 auto 6px; }
+
 @media(max-width:600px) { .grid-2 { grid-template-columns:1fr; } }
 </style>
 </head>
@@ -1469,14 +1501,21 @@ tr:hover td { background:#111114; }
 
 <!-- QUIZ PAGE -->
 <div id="quiz" class="page">
-  <div class="section-title">🎯 Practice Quiz</div>
+  <div class="section-title">🎯 Practice Quiz — 25 Marks</div>
   <div id="quiz-container"></div>
   <div id="quiz-result" style="display:none;" class="card">
-    <div class="card-title">📊 Your Score</div>
-    <div id="score-display" style="text-align:center;padding:20px;">
-      <div id="score-text" style="font-size:2rem;font-weight:700;color:var(--gold);"></div>
-      <div style="color:var(--muted);margin-top:8px;">Tap "New Quiz" to try again</div>
-      <button class="btn btn-primary" style="margin-top:12px;" onclick="loadQuiz()">New Quiz</button>
+    <div class="card-title">📊 Session Result</div>
+    <div id="score-display" style="text-align:center;padding:16px 20px;">
+      <div id="score-ring" class="score-ring"></div>
+      <div id="score-text" style="font-size:1.8rem;font-weight:700;color:var(--gold);margin-bottom:4px;"></div>
+      <div id="score-label" style="color:var(--muted);font-size:0.85rem;margin-bottom:16px;"></div>
+      <button class="btn btn-primary" onclick="loadQuiz()">🔄 New Quiz</button>
+    </div>
+  </div>
+  <div class="card" id="history-card" style="margin-top:14px;">
+    <div class="card-title" onclick="toggleCard(this)">📈 Session History <span>▼</span></div>
+    <div class="card-body" id="history-body">
+      <div id="history-list"><p style="color:var(--muted);font-size:0.84rem;padding:8px 0;">No sessions yet. Complete a quiz to see history.</p></div>
     </div>
   </div>
 </div>
@@ -1517,36 +1556,102 @@ function toggleCard(el) {
   if (arrow) arrow.textContent = body.classList.contains('open') ? '▲' : '▼';
 }
 
-// Quiz
+// ─── Question Bank (25 questions) ───────────────────────────────────────────
 const questions = [
   { q: "Who is the author of 'दशरथस्य पश्चातापः'?", opts: ["कालिदास","वाल्मीकि","भर्तृहरि","विष्णुशर्मा"], ans: 1 },
   { q: "What is Shabdabhedi Bana?", opts: ["A type of sword","Arrow aimed by sound alone","A magic spell","A type of bow"], ans: 1 },
-  { q: "'मायावटुः' is from which text?", opts: ["रामायण","महाभारत","कुमारसम्भवम्","कादम्बरी"], ans: 2 },
+  { q: "'मायावटुः' is from which text?", opts: ["रामायण","महाभारत","कुमारसम्भवम्","कादम्बरी"], ans: 3 },
   { q: "Who wrote Kadambari?", opts: ["कालिदास","भर्तृहरि","बाणभट्ट","वाल्मीकि"], ans: 2 },
   { q: "How many Shatakas did Bhartrhari write?", opts: ["2","3","4","5"], ans: 1 },
   { q: "'वसुधैव कुटुम्बकम्' means:", opts: ["India is great","The world is one family","Knowledge is wealth","Truth is god"], ans: 1 },
   { q: "Who wrote 'कपीनामुपवासः'?", opts: ["E. Shankaracharya","Ballal","Shrishailam Tatacharyya","Samudralakshmana"], ans: 2 },
   { q: "Panchatantra was written by:", opts: ["बाणभट्ट","विष्णुशर्मा","Ballal","कालिदास"], ans: 1 },
-  { q: "The Guna Sandhi rule: a + i = ?", opts: ["ai","e","o","a"], ans: 1 },
+  { q: "Guna Sandhi: a + i = ?", opts: ["ai","e","o","a"], ans: 1 },
   { q: "'विद्याविहीनः पशुः' means:", opts: ["Knowledge is power","One without knowledge is an animal","Knowledge gives freedom","Learning never ends"], ans: 1 },
   { q: "Bhoja Prabandha was written by:", opts: ["Vishnusharma","Banabhatta","Ballal","Valmiki"], ans: 2 },
   { q: "From which Tantra of Panchatantra is 'शश-कपिञ्जलकथा'?", opts: ["1st","2nd","3rd","5th"], ans: 2 },
-  { q: "What is the moral of शश-कपिञ्जलकथा?", opts: ["Be kind to animals","Don't take disputes to outsiders","Friends should share","Trust everyone"], ans: 1 },
-  { q: "In Sanskrit: 'रामः वनं गच्छति' means:", opts: ["Rama comes from forest","Rama is in forest","Rama goes to forest","Rama left forest"], ans: 2 },
+  { q: "Moral of शश-कपिञ्जलकथा:", opts: ["Be kind to animals","Don't take disputes to outsiders","Friends should share","Trust everyone"], ans: 1 },
+  { q: "'रामः वनं गच्छति' means:", opts: ["Rama comes from forest","Rama is in forest","Rama goes to forest","Rama left forest"], ans: 2 },
   { q: "पद्यभागः carries how many marks?", opts: ["20","25","28","30"], ans: 2 },
-  { q: "Which Samasa is 'पीताम्बरः' (refers to Vishnu)?", opts: ["द्वन्द्व","बहुव्रीहि","कर्मधारय","तत्पुरुष"], ans: 1 },
+  { q: "Which Samasa is 'पीताम्बरः' (Vishnu)?", opts: ["द्वन्द्व","बहुव्रीहि","कर्मधारय","तत्पुरुष"], ans: 1 },
   { q: "Author of 'अमरवाणीप्रशस्तिः':", opts: ["Ballal","E. Shankaracharya","Dr. Madhavi Joshi","Samudralakshmana"], ans: 1 },
   { q: "'महर्षिः' is Sandhi of:", opts: ["महा+ऋषिः","मह+ऋषिः","महे+ऋषिः","महो+ऋषिः"], ans: 0 },
-  { q: "How many shlokas does 'मायावटुः' chapter have approximately?", opts: ["10","20","32+","50"], ans: 2 },
   { q: "In the letter format, 'सविनयं निवेदयामि' means:", opts: ["I humbly submit","I respectfully greet","Thank you","With blessings"], ans: 0 },
+  { q: "Sanskrit word for 'river' (feminine):", opts: ["नदः","नदी","नदम्","नदाः"], ans: 1 },
+  { q: "Dasha-ratha's grief in 'दशरथस्य पश्चातापः' is due to:", opts: ["Loss of kingdom","Curse to a blind hermit he accidentally killed","War with Ravana","Sage Vishwamitra's anger"], ans: 1 },
+  { q: "Total marks in APBIE Sanskrit exam:", opts: ["75","80","100","90"], ans: 2 },
+  { q: "Which section of the exam is for 18 marks?", opts: ["Poetry","Grammar","Writing (लेखनम्)","Prose"], ans: 2 },
+  { q: "Upavachakam (उपवाचकम्) carries:", opts: ["5","8","10","12"], ans: 2 },
+  { q: "'राजपुरुषः' is which Samasa?", opts: ["द्वन्द्व","बहुव्रीहि","तत्पुरुष","कर्मधारय"], ans: 2 },
 ];
 
+const TOTAL_Q = 25;
 let current = [], userAns = [], qIdx = 0;
 
+// ─── Session History ─────────────────────────────────────────────────────────
+function getSessions() {
+  try { return JSON.parse(localStorage.getItem('sanskrit_quiz_sessions') || '[]'); }
+  catch(e) { return []; }
+}
+
+function saveSession(score) {
+  try {
+    const sessions = getSessions();
+    const now = new Date();
+    const label = now.toLocaleDateString('en-IN', {day:'2-digit', month:'short'}) +
+                  ' ' + now.toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'});
+    sessions.unshift({ score, total: TOTAL_Q, date: label, pct: Math.round((score/TOTAL_Q)*100) });
+    if (sessions.length > 20) sessions.splice(20); // keep last 20
+    localStorage.setItem('sanskrit_quiz_sessions', JSON.stringify(sessions));
+  } catch(e) {}
+}
+
+function renderHistory() {
+  const sessions = getSessions();
+  const el = document.getElementById('history-list');
+  if (!sessions.length) {
+    el.innerHTML = '<p style="color:var(--muted);font-size:0.84rem;padding:8px 0;">No sessions yet. Complete a quiz to see history.</p>';
+    return;
+  }
+  const best = Math.max(...sessions.map(s => s.pct));
+  const avg  = Math.round(sessions.reduce((a,s) => a + s.pct, 0) / sessions.length);
+  let html = `<div style="display:flex;gap:16px;padding:8px 0 12px;border-bottom:1px solid var(--card-border);margin-bottom:8px;">
+    <div style="text-align:center;flex:1"><div style="font-size:1.4rem;font-weight:700;color:var(--accent);">${best}%</div><div style="font-size:0.7rem;color:var(--muted);">Best</div></div>
+    <div style="text-align:center;flex:1"><div style="font-size:1.4rem;font-weight:700;color:var(--teal);">${avg}%</div><div style="font-size:0.7rem;color:var(--muted);">Average</div></div>
+    <div style="text-align:center;flex:1"><div style="font-size:1.4rem;font-weight:700;color:var(--blue-text);">${sessions.length}</div><div style="font-size:0.7rem;color:var(--muted);">Sessions</div></div>
+  </div>`;
+  sessions.forEach((s, i) => {
+    const bar = s.pct >= 80 ? '#5A9E6C' : s.pct >= 60 ? '#B07C42' : '#8A5050';
+    html += `<div class="history-row">
+      <span style="color:var(--muted);min-width:24px;">#${sessions.length - i}</span>
+      <span class="history-score">${s.score}/${s.total}</span>
+      <span style="flex:1;margin:0 10px;">
+        <div style="height:4px;background:#222;border-radius:2px;">
+          <div style="height:100%;width:${s.pct}%;background:${bar};border-radius:2px;"></div>
+        </div>
+      </span>
+      <span class="history-score" style="min-width:38px;text-align:right;">${s.pct}%</span>
+      <span class="history-date" style="margin-left:10px;min-width:72px;text-align:right;">${s.date}</span>
+    </div>`;
+  });
+  html += `<div style="text-align:center;margin-top:10px;">
+    <button class="btn btn-outline" style="font-size:0.74rem;padding:5px 12px;" onclick="clearHistory()">Clear History</button>
+  </div>`;
+  el.innerHTML = html;
+}
+
+function clearHistory() {
+  if (confirm('Clear all quiz history?')) {
+    try { localStorage.removeItem('sanskrit_quiz_sessions'); } catch(e) {}
+    renderHistory();
+  }
+}
+
+// ─── Quiz Engine ─────────────────────────────────────────────────────────────
 function loadQuiz() {
   const shuffled = [...questions].sort(() => Math.random() - 0.5);
-  current = shuffled.slice(0, 10);
-  userAns = new Array(10).fill(-1);
+  current = shuffled.slice(0, TOTAL_Q);
+  userAns = new Array(TOTAL_Q).fill(-1);
   qIdx = 0;
   document.getElementById('quiz-result').style.display = 'none';
   renderQuestion();
@@ -1554,26 +1659,27 @@ function loadQuiz() {
 
 function renderQuestion() {
   const q = current[qIdx];
+  const livScore = userAns.filter((a,i) => i < qIdx && a === current[i]?.ans).length;
   const container = document.getElementById('quiz-container');
   container.innerHTML = `
     <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <span style="color:var(--gold);font-weight:700;">Question ${qIdx+1}/10</span>
-        <span style="color:var(--muted);font-size:0.8rem;">Score: ${userAns.filter((a,i)=>a===current[i]?.ans).length}</span>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+        <span style="color:var(--accent);font-weight:700;font-size:0.9rem;">Q ${qIdx+1} / ${TOTAL_Q}</span>
+        <span style="color:var(--muted);font-size:0.8rem;">Score so far: <b style="color:var(--teal)">${livScore}</b></span>
       </div>
-      <div class="progress-bar"><div class="progress-fill" style="width:${(qIdx/10)*100}%"></div></div>
-      <div style="margin:14px 0;font-size:0.95rem;font-weight:600;">${q.q}</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${(qIdx/TOTAL_Q)*100}%"></div></div>
+      <div style="margin:14px 0;font-size:0.96rem;font-weight:600;line-height:1.5;">${q.q}</div>
       <div id="opts"></div>
-      <div id="feedback" style="margin-top:10px;"></div>
+      <div id="feedback" style="margin-top:10px;min-height:24px;"></div>
       <button class="btn btn-primary" id="next-btn" style="margin-top:12px;display:none;" onclick="nextQ()">
-        ${qIdx < 9 ? 'Next →' : 'See Results'}
+        ${qIdx < TOTAL_Q - 1 ? 'Next →' : '🏁 See Results'}
       </button>
     </div>`;
   const opts = document.getElementById('opts');
   q.opts.forEach((o, i) => {
     const btn = document.createElement('button');
     btn.className = 'btn btn-outline';
-    btn.style.cssText = 'display:block;width:100%;margin:6px 0;text-align:left;';
+    btn.style.cssText = 'display:block;width:100%;margin:6px 0;text-align:left;padding:9px 14px;';
     btn.textContent = `${['A','B','C','D'][i]}. ${o}`;
     btn.onclick = () => selectAns(i, btn);
     opts.appendChild(btn);
@@ -1586,38 +1692,49 @@ function selectAns(i, btn) {
   const q = current[qIdx];
   document.querySelectorAll('#opts button').forEach((b, idx) => {
     b.disabled = true;
-    if (idx === q.ans) b.style.background = '#1a4a1a';
-    if (idx === i && i !== q.ans) b.style.background = '#4a1a1a';
+    b.style.transition = 'background 0.3s';
+    if (idx === q.ans) { b.style.background = '#1A3A22'; b.style.borderColor = '#3A7A4A'; b.style.color = '#8ECFB0'; }
+    if (idx === i && i !== q.ans) { b.style.background = '#3A1A1A'; b.style.borderColor = '#7A3A3A'; b.style.color = '#D09090'; }
   });
   const fb = document.getElementById('feedback');
   if (i === q.ans) {
-    fb.innerHTML = '<span style="color:var(--success)">✅ Correct!</span>';
+    fb.innerHTML = '<span style="color:#6ECF90;font-size:0.88rem;">✅ Correct!</span>';
   } else {
-    fb.innerHTML = `<span style="color:var(--deep-red)">❌ Incorrect.</span> Correct: <b>${q.opts[q.ans]}</b>`;
+    fb.innerHTML = `<span style="color:#CF8080;font-size:0.88rem;">❌ Incorrect.</span> <span style="font-size:0.84rem;color:var(--text);">Correct: <b style="color:#8ECFB0">${q.opts[q.ans]}</b></span>`;
   }
   document.getElementById('next-btn').style.display = 'inline-block';
 }
 
 function nextQ() {
   qIdx++;
-  if (qIdx >= 10) {
-    showResult();
-  } else {
-    renderQuestion();
-  }
+  if (qIdx >= TOTAL_Q) showResult();
+  else renderQuestion();
 }
 
 function showResult() {
   const score = userAns.filter((a, i) => a === current[i]?.ans).length;
+  saveSession(score);
   document.getElementById('quiz-container').innerHTML = '';
   const res = document.getElementById('quiz-result');
   res.style.display = 'block';
-  const pct = Math.round((score/10)*100);
-  let emoji = pct >= 80 ? '🎉' : pct >= 60 ? '👍' : '📚';
-  document.getElementById('score-text').innerHTML = `${emoji} ${score}/10 (${pct}%)`;
+  const pct = Math.round((score/TOTAL_Q)*100);
+  const emoji = pct >= 84 ? '🎉' : pct >= 68 ? '👍' : pct >= 50 ? '💪' : '📚';
+  const label = pct >= 84 ? 'Excellent!' : pct >= 68 ? 'Good work!' : pct >= 50 ? 'Keep practising' : 'Review the chapters';
+  const ringColor = pct >= 80 ? '#3A7A4A' : pct >= 60 ? '#6A5020' : '#6A2020';
+  document.getElementById('score-ring').style.cssText = `width:72px;height:72px;border-radius:50%;background:${ringColor};display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto 8px;`;
+  document.getElementById('score-ring').textContent = emoji;
+  document.getElementById('score-text').textContent = `${score} / ${TOTAL_Q}`;
+  document.getElementById('score-label').textContent = `${pct}% — ${label}`;
+  // open history
+  const hb = document.getElementById('history-body');
+  hb.classList.add('open');
+  document.querySelector('#history-card .card-title span:last-child').textContent = '▲';
+  renderHistory();
+  res.scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
 
-// Initialize
+// ─── Initialize ───────────────────────────────────────────────────────────────
+renderHistory();
 loadQuiz();
 </script>
 </body>
