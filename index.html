@@ -1556,160 +1556,640 @@ function toggleCard(el) {
   if (arrow) arrow.textContent = body.classList.contains('open') ? '▲' : '▼';
 }
 
-// ─── Question Bank (100 questions) ──────────────────────────────────────────
+// ─── Question Bank (500 questions) ──────────────────────────────────────────
 const questions = [
 
-  // ══ POETRY Ch.1 — दशरथस्य पश्चातापः ══
+  // ══════════════════════════════════════════════════════════════════
+  // POETRY Ch.1 — दशरथस्य पश्चातापः (Valmiki / Ramayana)
+  // ══════════════════════════════════════════════════════════════════
   { q: "Author of 'दशरथस्य पश्चातापः'?", opts: ["कालिदास","वाल्मीकि","भर्तृहरि","विष्णुशर्मा"], ans: 1 },
-  { q: "'दशरथस्य पश्चातापः' is from which Kanda of Ramayana?", opts: ["Bala","Ayodhya","Kishkindha","Aranya"], ans: 1 },
-  { q: "What is Shabdabhedi Bana?", opts: ["A magic sword","Arrow aimed by sound alone","A royal bow","A type of shield"], ans: 1 },
-  { q: "Whom did Dasharatha accidentally kill?", opts: ["A sage","Shravana Kumar (blind hermit's son)","A deer","An elephant"], ans: 1 },
+  { q: "'दशरथस्य पश्चातापः' is from which Kanda of Ramayana?", opts: ["Bala Kanda","Ayodhya Kanda","Kishkindha Kanda","Aranya Kanda"], ans: 1 },
+  { q: "What is Shabdabhedi Bana?", opts: ["A type of sword","An arrow aimed by sound alone","A magic spell","A royal bow"], ans: 1 },
+  { q: "Whom did Dasharatha accidentally kill with his arrow?", opts: ["A sage in a forest","Shravana Kumar while he was drawing water","A deer on a hunt","An enemy soldier"], ans: 1 },
   { q: "To whom does Dasharatha confess his sin in this chapter?", opts: ["Rama","Kaushalya","Bharata","Sumitra"], ans: 1 },
-  { q: "The curse Dasharatha received was that he would die of:", opts: ["War","Illness","Son-grief (पुत्रशोकः)","Old age"], ans: 2 },
-  { q: "Who gave Dasharatha the death curse?", opts: ["Sage Vishwamitra","Sage Vasishtha","Blind hermit parents of Shravana","Kaikeyi"], ans: 2 },
-  { q: "Dasharatha calls himself 'कृतघ्न'. It means:", opts: ["Ungrateful","Brave","Sinful","Wise"], ans: 0 },
-  { q: "'पुत्रशोकेन' Samasa is:", opts: ["Dvandva","Bahuvrihi","Shashthi Tatpurusha","Karmadharaya"], ans: 2 },
-  { q: "Dasharatha shot his arrow after hearing a sound from:", opts: ["A forest","A riverside lake at midnight","A palace","A field"], ans: 1 },
+  { q: "The curse Dasharatha received was that he would die of:", opts: ["War wounds","Illness","Son-grief (पुत्रशोकः)","Old age"], ans: 2 },
+  { q: "Who gave Dasharatha the death-curse?", opts: ["Sage Vishwamitra","Sage Vasishtha","The blind hermit parents of Shravana Kumar","Kaikeyi"], ans: 2 },
+  { q: "Dasharatha calls himself 'कृतघ्न'. What does it mean?", opts: ["Ungrateful","Brave","Sinful","Wise"], ans: 0 },
+  { q: "'पुत्रशोकेन' — which Samasa?", opts: ["Dvandva","Bahuvrihi","Shashthi Tatpurusha","Karmadharaya"], ans: 2 },
+  { q: "Dasharatha shot his Shabdabhedi arrow after hearing a sound from:", opts: ["A forest at noon","A riverside lake at midnight","A palace courtyard","An open field"], ans: 1 },
+  { q: "What was Shravana Kumar doing when struck by the arrow?", opts: ["Sleeping","Meditating","Drawing water from a lake for his blind parents","Collecting firewood"], ans: 2 },
+  { q: "Valmiki is called 'आदिकविः'. It means:", opts: ["Greatest poet","First/original poet","Poet of gods","King of poets"], ans: 1 },
+  { q: "Ramayana has how many Kandas (sections)?", opts: ["5","6","7","8"], ans: 2 },
+  { q: "Dasharatha calls himself 'पापकर्मा' meaning:", opts: ["Doer of good deeds","Doer of sinful deeds","Ignorant person","Righteous king"], ans: 1 },
+  { q: "The expression 'पुत्रशोकेन मे प्राणाः त्यक्ष्यन्ते' means:", opts: ["I shall live for my son","My life will leave due to grief for a son","A son brings joy","May my son live long"], ans: 1 },
+  { q: "'पापसंकाशाम्' Samasa type is:", opts: ["Tatpurusha","Karmadharaya","Dvandva","Bahuvrihi"], ans: 1 },
+  { q: "Shravana Kumar was carrying his parents on a:", opts: ["Cart","Palanquin (kavadi/shoulder yoke)","Chariot","Horse"], ans: 1 },
+  { q: "Which weapon technique did Dasharatha pride himself on?", opts: ["Sword fighting","Shabdabhedi — shooting by sound alone","Archery on horseback","Javelin throwing"], ans: 1 },
+  { q: "After shooting the arrow, Dasharatha went to the lake and found:", opts: ["A dead deer","A young man (Shravana) dying","A sage meditating","An empty lake"], ans: 1 },
+  { q: "The title 'दशरथस्य पश्चातापः' means:", opts: ["Dasharatha's bravery","Dasharatha's remorse/regret","Dasharatha's victory","Dasharatha's exile"], ans: 1 },
 
-  // ══ POETRY Ch.2 — मायावटुः ══
+  // ══════════════════════════════════════════════════════════════════
+  // POETRY Ch.2 — मायावटुः (Kalidasa / Kumarasambhava)
+  // ══════════════════════════════════════════════════════════════════
   { q: "'मायावटुः' is from which work of Kalidasa?", opts: ["Raghuvamsham","Meghadutam","Kumarasambhava","Abhijnanashakuntalam"], ans: 2 },
   { q: "In 'मायावटुः', Shiva disguises himself as a:", opts: ["Sage","Merchant","Young brahmin boy","Hunter"], ans: 2 },
   { q: "Why did Shiva disguise as a brahmin boy in 'मायावटुः'?", opts: ["To beg food","To test Parvati's love and devotion","To teach the Vedas","To punish the gods"], ans: 1 },
-  { q: "What did the Mayavatu say about Shiva's bed?", opts: ["A golden throne","A cremation ground (स्मशान)","A lotus lake","A mountain peak"], ans: 1 },
-  { q: "Parvati's response when Mayavatu criticized Shiva:", opts: ["She agreed with him","She cried","She rose to leave angrily","She asked him to continue"], ans: 2 },
-  { q: "'मायावटुः' canto belongs to:", opts: ["3rd Canto","4th Canto","5th Canto","7th Canto"], ans: 2 },
-  { q: "Who is Kalidasa known as in Sanskrit literature?", opts: ["Adikavi","Mahakavi","Acharya","Suri"], ans: 1 },
-  { q: "Name one other work of Kalidasa besides Kumarasambhava:", opts: ["Kadambari","Panchatantra","Abhijnanashakuntalam","Bhoja Prabandha"], ans: 2 },
+  { q: "What did the Mayavatu criticize about Shiva's dwelling?", opts: ["He lives in a golden palace","He sleeps in a cremation ground (स्मशान)","He lives in a cave","He has no home"], ans: 1 },
+  { q: "What garment of Shiva did the Mayavatu mock?", opts: ["Golden robe","Silk clothes","Elephant skin (गजचर्म)","Tiger skin"], ans: 2 },
+  { q: "What ornaments did the Mayavatu criticize Shiva for wearing?", opts: ["Pearls and gold","Snakes as ornaments (सर्पाभरण)","Flower garlands","Precious gems"], ans: 1 },
+  { q: "Parvati's reaction when Mayavatu criticized Shiva:", opts: ["She agreed with him","She started crying","She rose to leave angrily","She asked him to stop"], ans: 2 },
+  { q: "'मायावटुः' belongs to which canto of Kumarasambhava?", opts: ["3rd Canto","4th Canto","5th Canto","7th Canto"], ans: 2 },
+  { q: "Kalidasa is known by which title in Sanskrit literature?", opts: ["Adikavi","Mahakavi","Acharya","Vyasa"], ans: 1 },
+  { q: "Which other play did Kalidasa write?", opts: ["Kadambari","Panchatantra","Abhijnanashakuntalam","Bhoja Prabandha"], ans: 2 },
+  { q: "The disguise (माया) technique in 'मायावटुः' tests Parvati's:", opts: ["Intelligence","Devotion and love for Shiva","Cooking skills","Power"], ans: 1 },
+  { q: "What did Shiva use as ash on his body?", opts: ["River sand","Funeral ash (भस्म)","White clay","Turmeric"], ans: 1 },
+  { q: "After Parvati turns to leave angrily, Shiva:", opts: ["Lets her go","Reveals his true form (दिव्यरूप)","Calls her back politely","Remains in disguise"], ans: 1 },
+  { q: "Kumarasambhava is an epic poem about the birth of:", opts: ["Rama","Kumara (Karthikeya / Muruga)","Krishna","Indra"], ans: 1 },
+  { q: "'स्मशानभूमिः' — Samasa type:", opts: ["Dvandva","Shashthi Tatpurusha","Karmadharaya","Bahuvrihi"], ans: 1 },
+  { q: "Kalidasa wrote how many major Sanskrit dramas?", opts: ["2","3","4","5"], ans: 1 },
+  { q: "Which of these is another epic (mahakavya) by Kalidasa?", opts: ["Kumarsambhava only","Meghadutam only","Raghuvamsham and Kumarasambhava","Nitishatakam"], ans: 2 },
+  { q: "The theme of 'मायावटुः' is ultimately about:", opts: ["The power of disguise","True devotion triumphs — love cannot be shaken by criticism","Shiva's anger","Brahmin boys and their wisdom"], ans: 1 },
 
-  // ══ POETRY Ch.3 — भर्तृहरिसुभाषितानि ══
-  { q: "How many Shatakas did Bhartrhari write?", opts: ["2","3","4","5"], ans: 1 },
-  { q: "Which Shataka contains moral wisdom?", opts: ["Shringarashatakam","Nitishatakam","Vairagyashatakam","Subhashitam"], ans: 1 },
-  { q: "'विद्याविहीनः पशुः' — what does it mean?", opts: ["Knowledge gives power","One without knowledge is an animal","A scholar is God","Education is free"], ans: 1 },
-  { q: "According to Bhartrhari, Vidya is 'गुरूणां गुरुः' means:", opts: ["Great wealth","Teacher of teachers","King of kings","Lord of gods"], ans: 1 },
-  { q: "The six qualities of a true friend (सन्मित्र) — which is NOT one?", opts: ["Prevents you from sin","Keeps your secrets","Takes your wealth","Does not abandon in danger"], ans: 2 },
-  { q: "Bhartrhari's verse on great people: They are like the sun because:", opts: ["They shine brightly","They are red at rising AND setting — same in joy and sorrow","They are distant","They burn others"], ans: 1 },
-  { q: "Who does NOT begin a task due to fear of obstacles — according to Bhartrhari?", opts: ["Uttama (noble)","Madhyama (middle)","Nicha (low people)","Vidwan (scholars)"], ans: 2 },
-  { q: "'ज्ञानलवदुर्विदग्धम्' describes:", opts: ["A wise man","One arrogant with little knowledge","A fool","A kind person"], ans: 1 },
-  { q: "Sandhi in 'सन्मित्रम्': सत् + मित्र gives 'सन्' because:", opts: ["Guna Sandhi","त् before म् → न् (consonant rule)","Vriddhi Sandhi","Visarga Sandhi"], ans: 1 },
+  // ══════════════════════════════════════════════════════════════════
+  // POETRY Ch.3 — भर्तृहरिसुभाषितानि (Bhartrhari Shatakas)
+  // ══════════════════════════════════════════════════════════════════
+  { q: "How many Shatakas (century-poems) did Bhartrhari write?", opts: ["2","3","4","5"], ans: 1 },
+  { q: "Name the three Shatakas of Bhartrhari:", opts: ["Niti, Shruti, Smriti","Niti, Shringara, Vairagya","Dharma, Artha, Kama","Vidya, Bhakti, Karma"], ans: 1 },
+  { q: "Which Shataka deals with moral/ethical wisdom?", opts: ["Shringarashatakam","Nitishatakam","Vairagyashatakam","Subhashitam"], ans: 1 },
+  { q: "'विद्याविहीनः पशुः' means:", opts: ["Knowledge gives power","One without knowledge is like an animal","A scholar is a god","Learning never ends"], ans: 1 },
+  { q: "Bhartrhari says Vidya is 'रूपयौवनसम्पन्नाः विद्याहीनाः' — what is incomplete without Vidya?", opts: ["Wealth","Beauty and youth (they are incomplete without knowledge)","Power","Fame"], ans: 1 },
+  { q: "According to Bhartrhari, Vidya is 'गुरूणां गुरुः'. It means:", opts: ["A great treasure","Teacher of teachers","King of kings","Highest honour"], ans: 1 },
+  { q: "Bhartrhari says knowledge is 'परं धनम्'. This means:", opts: ["A burden","The supreme wealth","A foreign treasure","A passing thing"], ans: 1 },
+  { q: "Which of these is NOT a quality of a true friend (सन्मित्र) per Bhartrhari?", opts: ["Prevents you from sin","Connects you to good","Takes your wealth","Does not abandon in danger"], ans: 2 },
+  { q: "Bhartrhari's verse on the sun: great people are like the sun because:", opts: ["They shine at noon only","They are red at rising AND setting — same in prosperity and adversity","They give heat","They are distant"], ans: 1 },
+  { q: "Who does NOT begin a task due to fear of failure — according to Bhartrhari?", opts: ["Uttama (noble)","Madhyama (middle)","Nicha (low people)","Vidwans (scholars)"], ans: 2 },
+  { q: "'ज्ञानलवदुर्विदग्धम्' — this describes:", opts: ["A truly wise man","One who is arrogant due to a little knowledge","A complete fool","A kind-hearted person"], ans: 1 },
+  { q: "Sandhi in 'सन्मित्रम्': the change सत् + मित्र → सन् happens because:", opts: ["Guna Sandhi rule","त् before म् becomes न् (consonant assimilation)","Vriddhi Sandhi","Visarga Sandhi"], ans: 1 },
+  { q: "Bhartrhari says true friends reveal your virtues in front of:", opts: ["Enemies","Others (the public / king)","Your family","Your teacher"], ans: 1 },
+  { q: "A true friend gives at the right time. This quality is called:", opts: ["Kala Gyaana","Timely giving (समये ददाति)","Generous speech","Brave loyalty"], ans: 1 },
+  { q: "Bhartrhari's category of people who begin but abandon at obstacles are:", opts: ["Nicha","Madhyama","Uttama","Sages"], ans: 1 },
+  { q: "Noble (Uttama) people, according to Bhartrhari:", opts: ["Never begin out of fear","Stop when obstacles come","Never abandon what they start, however difficult","Always succeed"], ans: 2 },
+  { q: "Bhartrhari says Vidya is also 'परदेशे बन्धुः' meaning:", opts: ["An enemy abroad","A friend / companion in foreign lands","A passport","A salary"], ans: 1 },
+  { q: "Which Shataka discusses renunciation and detachment?", opts: ["Nitishatakam","Shringarashatakam","Vairagyashatakam","Subhashitam"], ans: 2 },
+  { q: "Vidya gives 'यशः' — this means:", opts: ["Wealth","Fame/reputation","Happiness","Liberation"], ans: 1 },
+  { q: "According to Bhartrhari: 'Ignorant can be pleased easily, wise expert can be pleased easily, but who CANNOT be pleased even by Brahma?'", opts: ["A king","A child","One arrogant with a little knowledge","A sage"], ans: 2 },
 
-  // ══ POETRY Ch.4 — नीतिश्लोकाः ══
-  { q: "'धर्मो रक्षति रक्षितः' means:", opts: ["Dharma is always supreme","Dharma protects those who protect it","God protects everyone","Kings must protect dharma"], ans: 1 },
-  { q: "'सा विद्या या विमुक्तये' — true knowledge leads to:", opts: ["Wealth","Power","Liberation (moksha)","Fame"], ans: 2 },
-  { q: "'वसुधैव कुटुम्बकम्' — small minds think:", opts: ["The world is one family","This is mine, that is another's","Knowledge is power","Unity is strength"], ans: 1 },
-  { q: "'संघे शक्तिः कलौयुगे' means:", opts: ["In Kaliyuga, strength lies in unity","Gold is strength","Brahmin is strongest","God is one"], ans: 0 },
-  { q: "The chain in 'विद्यां ददाति विनयम्': after Vidya comes:", opts: ["Dhanam","Vinaya (humility)","Sukham","Dharma"], ans: 1 },
-  { q: "'जननी जन्मभूमिश्च स्वर्गादपि गरीयसी' is from:", opts: ["Mahabharata","Upanishads","Ramayana","Panchatantra"], ans: 2 },
-  { q: "'शरीरमाद्यं खलु धर्मसाधनम्' means:", opts: ["Wealth is first","The body is the primary instrument of dharma","Mind is supreme","God gives everything"], ans: 1 },
-  { q: "For the wise, time passes in: (from Niti Shlokas)", opts: ["Sleep and quarrel","Vices","Enjoyment of poetry and learning","War"], ans: 2 },
+  // ══════════════════════════════════════════════════════════════════
+  // POETRY Ch.4 — नीतिश्लोकाः (Various Niti verses)
+  // ══════════════════════════════════════════════════════════════════
+  { q: "'धर्मो रक्षति रक्षितः' — complete meaning:", opts: ["Dharma is eternal","Dharma protects those who protect it","God protects everyone","Kings must follow dharma"], ans: 1 },
+  { q: "'सा विद्या या विमुक्तये' — true Vidya leads to:", opts: ["Wealth","Power","Liberation (मोक्ष)","Fame"], ans: 2 },
+  { q: "'वसुधैव कुटुम्बकम्' — what do small minds think?", opts: ["The world is one family","This is mine, that belongs to another","Knowledge is wealth","Unity is strength"], ans: 1 },
+  { q: "'वसुधैव कुटुम्बकम्' is from which text?", opts: ["Ramayana","Mahabharata","Maha Upanishad","Panchatantra"], ans: 2 },
+  { q: "'संघे शक्तिः कलौयुगे' means:", opts: ["In Kaliyuga strength lies in unity","Gold is strength in Kaliyuga","Brahmin is the strongest","God alone is powerful"], ans: 0 },
+  { q: "After Vidya in the chain 'विद्यां ददाति विनयम्' — what comes next?", opts: ["Dhanam","Vinaya (humility)","Sukham","Dharma"], ans: 1 },
+  { q: "Complete the chain: Vidya → Vinaya → ?", opts: ["Dharma → Sukha","Patrata (worthiness) → Dhanam → Dharma → Sukham","Sukham directly","Moksha"], ans: 1 },
+  { q: "'जननी जन्मभूमिश्च स्वर्गादपि गरीयसी' — who says this in Ramayana?", opts: ["Hanuman","Sita","Rama","Lakshmana"], ans: 2 },
+  { q: "'जननी जन्मभूमिश्च स्वर्गादपि गरीयसी' means:", opts: ["Heaven is the best place","Mother and motherland are greater than heaven","God is the greatest","Teachers are most respected"], ans: 1 },
+  { q: "'शरीरमाद्यं खलु धर्मसाधनम्' means:", opts: ["Wealth is the first instrument of dharma","The body is the primary instrument of dharma","Mind is supreme","God gives everything"], ans: 1 },
+  { q: "For wise people, time passes in: (from Niti Shlokas):", opts: ["Sleep and quarrel","Indulging in vices","Enjoyment of poetry and learning","War and hunting"], ans: 2 },
+  { q: "For fools, time passes in: (from Niti Shlokas):", opts: ["Study and poetry","Vices, sleep, and quarrelling","Work and worship","Games and sports"], ans: 1 },
+  { q: "'अनृतं न वद' means:", opts: ["Always speak truth","Do not speak untruth","Never speak","Speak wisely"], ans: 1 },
+  { q: "'सत्यं वद' means:", opts: ["Speak Sanskrit","Speak truth","Do not lie","Speak softly"], ans: 1 },
+  { q: "Which text contains 'काव्यशास्त्रविनोदेन' shloka about how wise spend time?", opts: ["Panchatantra","Nitishatakam","Hitopadesa or similar Niti text","Ramayana"], ans: 2 },
+  { q: "'धर्मो रक्षति रक्षितः' — this line implies a:", opts: ["Threat","Reciprocal relationship between dharma and its follower","Simple definition","Critique of kings"], ans: 1 },
 
-  // ══ POETRY Ch.5 — अमरवाणीप्रशस्तिः ══
+  // ══════════════════════════════════════════════════════════════════
+  // POETRY Ch.5 — अमरवाणीप्रशस्तिः (E. Shankaracharya)
+  // ══════════════════════════════════════════════════════════════════
   { q: "Author of 'अमरवाणीप्रशस्तिः':", opts: ["Ballal","E. Shankaracharya","Dr. Madhavi Joshi","Samudralakshmana"], ans: 1 },
-  { q: "'अमरवाणी' means:", opts: ["Sanskrit grammar","Immortal/divine speech","Vedic chants","Ancient text"], ans: 1 },
-  { q: "Sanskrit is called the mother of:", opts: ["All Indian languages","All world languages","Vedas only","South Indian languages"], ans: 0 },
-  { q: "Which grammarian's work preserved Sanskrit's richness?", opts: ["Valmiki","Panini","Bhartrhari","Patanjali"], ans: 1 },
-  { q: "The fourth Veda mentioned in 'अमरवाणीप्रशस्तिः':", opts: ["Rigveda","Yajurveda","Samaveda","Atharvaveda"], ans: 3 },
+  { q: "'अमरवाणी' literally means:", opts: ["Grammar rules","Immortal/divine speech","Vedic chants only","Ancient inscription"], ans: 1 },
+  { q: "Sanskrit is called 'देवभाषा' meaning:", opts: ["Language of scholars","Language of the gods","Language of kings","Language of poets"], ans: 1 },
+  { q: "Sanskrit is described as 'सनातनी' meaning:", opts: ["Modern","Ancient and eternal","Foreign","Difficult"], ans: 1 },
+  { q: "Sanskrit is called the mother of:", opts: ["All South Indian languages only","All Indian languages","All world languages","Vedas only"], ans: 1 },
+  { q: "Which grammarian's work is said to have preserved Sanskrit's richness?", opts: ["Valmiki","Panini","Bhartrhari","Patanjali"], ans: 1 },
+  { q: "Panini wrote which famous grammar text?", opts: ["Mahabhashya","Ashtadhyayi","Nirukta","Vyakarana"], ans: 1 },
+  { q: "The four Vedas in 'अमरवाणीप्रशस्तिः' — which is the fourth?", opts: ["Rigveda","Yajurveda","Samaveda","Atharvaveda"], ans: 3 },
+  { q: "Which of the four Vedas contains hymns set to music?", opts: ["Rigveda","Yajurveda","Samaveda","Atharvaveda"], ans: 2 },
   { q: "'सुरभारती' in this poem refers to:", opts: ["Goddess Saraswati","Sanskrit language","The Vedas","The gods"], ans: 1 },
   { q: "'अमरवाणीप्रशस्तिः' is from which collection?", opts: ["Panchatantra","Kadambari","Kavyasangraha","Bhoja Prabandha"], ans: 2 },
+  { q: "How many shlokas does 'अमरवाणीप्रशस्तिः' contain?", opts: ["5","8","11","14"], ans: 2 },
+  { q: "The poem praises Sanskrit as 'सर्वासां भाषाणां माता' which means:", opts: ["Equal to all languages","Mother of all languages","Ancient beyond all languages","Greatest language"], ans: 1 },
+  { q: "Rigveda, Yajurveda, Samaveda, Atharvaveda — how many Vedas are there?", opts: ["3","4","5","6"], ans: 1 },
+  { q: "'देवभाषा' — Sanskrit is called this because:", opts: ["Gods created it","It is used in worship of gods and in sacred scriptures","It is very old","Brahmin priests use it"], ans: 1 },
 
-  // ══ POETRY Ch.6 — कपीनामुपवासः ══
+  // ══════════════════════════════════════════════════════════════════
+  // POETRY Ch.6 — कपीनामुपवासः (Shrishailam Tatacharyya)
+  // ══════════════════════════════════════════════════════════════════
   { q: "Author of 'कपीनामुपवासः':", opts: ["E. Shankaracharya","Ballal","Shrishailam Tatacharyya","Samudralakshmana"], ans: 2 },
-  { q: "Why were the monkeys in 'कपीनामुपवासः' thin?", opts: ["They were fasting for God","No fruits in the forest","They were sick","A hunter scared them"], ans: 1 },
-  { q: "What did the monkeys call their starvation?", opts: ["Bad luck","Religious fasting (उपवास)","Punishment","Training"], ans: 1 },
-  { q: "The central satire in 'कपीनामुपवासः' is about:", opts: ["Monkeys' cleverness","Making necessity look like virtue / self-deception","Hunger and food","Forest life"], ans: 1 },
-  { q: "'कपीनामुपवासः' has how many humorous shlokas?", opts: ["11","15","27","32"], ans: 2 },
+  { q: "Why were the monkeys in 'कपीनामुपवासः' thin and weak?", opts: ["They were fasting as religious penance","No fruits in the forest — they were starving","They were sick from disease","A hunter had scared all food away"], ans: 1 },
+  { q: "What did the monkeys call their forced starvation?", opts: ["Bad luck","Religious fasting (उपवास) for merit (पुण्य)","Punishment","Training for war"], ans: 1 },
+  { q: "The central satire in 'कपीनामुपवासः' mocks:", opts: ["Monkeys' cleverness","Self-deception — making necessity appear as virtue","Hunger and food scarcity","Forest life in general"], ans: 1 },
+  { q: "How many shlokas does 'कपीनामुपवासः' have?", opts: ["11","15","27","32"], ans: 2 },
+  { q: "'कपीनामुपवासः' is from which collection?", opts: ["Panchatantra","Kadambari","Kavyasangraha","Bhoja Prabandha"], ans: 2 },
+  { q: "'उपवास' in the context of this satire means:", opts: ["True religious fast","The monkeys calling starvation a voluntary fast","A traditional festival","Going on a diet"], ans: 1 },
+  { q: "'पुण्य' means:", opts: ["Sin","Religious merit","Wealth","Power"], ans: 1 },
+  { q: "The literary genre of 'कपीनामुपवासः' is:", opts: ["Heroic poetry","Devotional verse","Satirical humorous verse (हास्यव्यङ्ग्य)","Epic narration"], ans: 2 },
+  { q: "By claiming starvation as fasting, the monkeys seek to gain:", opts: ["Food","Religious merit (पुण्य)","Leadership","Sympathy"], ans: 1 },
 
-  // ══ PROSE Ch.1 — कपिञ्जलोपदेशः ══
+  // ══════════════════════════════════════════════════════════════════
+  // PROSE Ch.1 — कपिञ्जलोपदेशः (Banabhatta / Kadambari)
+  // ══════════════════════════════════════════════════════════════════
   { q: "Author of Kadambari (कादम्बरी):", opts: ["Kalidasa","Banabhatta","Vishnusharma","Valmiki"], ans: 1 },
   { q: "Who is Kapinjala in 'कपिञ्जलोपदेशः'?", opts: ["A brahmin boy","A partridge bird","A sage","A king"], ans: 1 },
-  { q: "Pundarika became infatuated with:", opts: ["Kadambari","Mahasweta","Parvati","Kapinjala"], ans: 1 },
-  { q: "Kapinjala's advice: Beauty is:", opts: ["Supreme","Eternal","Momentary (क्षणिक)","Divine"], ans: 2 },
-  { q: "'Mahasweta' was devoted to worship of:", opts: ["Shiva","Vishnu","Manmatha (god of love)","Saraswati"], ans: 2 },
-  { q: "Banabhatta was court poet of which emperor?", opts: ["Chandragupta","Ashoka","Harshavardhana","Vikramaditya"], ans: 2 },
-  { q: "The moral of 'कपिञ्जलोपदेशः':", opts: ["Beauty is everything","Listen to wise friends; dharma over desire","Be brave in love","Knowledge is wealth"], ans: 1 },
-  { q: "Kadambari is described as:", opts: ["A Sanskrit poem","A Sanskrit drama","The first major Sanskrit prose novel","A Vedic text"], ans: 2 },
+  { q: "Pundarika was a young:", opts: ["King","Warrior","Brahmin boy","Merchant"], ans: 2 },
+  { q: "Pundarika became infatuated with which woman?", opts: ["Kadambari","Mahasweta","Parvati","Kapinjala"], ans: 1 },
+  { q: "Kapinjala's main advice to Pundarika was:", opts: ["Pursue love at any cost","Beauty is क्षणिक (momentary), follow dharma instead","Women are the greatest treasure","Avoid the forest"], ans: 1 },
+  { q: "Mahasweta was devoted to worship of:", opts: ["Shiva","Vishnu","Manmatha (god of love)","Saraswati"], ans: 2 },
+  { q: "Banabhatta was the court poet of which emperor?", opts: ["Chandragupta Maurya","Ashoka","Harshavardhana","Vikramaditya"], ans: 2 },
+  { q: "The moral of 'कपिञ्जलोपदेशः':", opts: ["Beauty is the highest goal","Wise friends' advice should be heeded; dharma must prevail over desire","Be brave in love always","Knowledge is the only wealth"], ans: 1 },
+  { q: "Kadambari is described as:", opts: ["A Sanskrit poem","A Sanskrit drama","The first major Sanskrit prose novel (गद्यकाव्य)","A Vedic text"], ans: 2 },
+  { q: "What happened to Pundarika because he ignored Kapinjala's advice?", opts: ["He married Mahasweta","He became a king","He met a tragic end","He became a sage"], ans: 2 },
+  { q: "Banabhatta lived in which century CE?", opts: ["4th century","5th century","7th century","10th century"], ans: 2 },
+  { q: "The name 'Kadambari' in the novel refers to:", opts: ["A flower","The heroine of the story","A kingdom","A river"], ans: 1 },
+  { q: "True friendship, according to Kapinjala, is:", opts: ["Common and easy to find","Rare and precious","Based on wealth","Based on beauty"], ans: 1 },
+  { q: "Kapinjala warns that desire without dharma leads to:", opts: ["Success","Wealth","Destruction","Fame"], ans: 2 },
 
-  // ══ PROSE Ch.2 — भोजस्य औदार्यम् ══
-  { q: "'भोजस्य औदार्यम्' is from:", opts: ["Kadambari","Panchatantra","Bhoja Prabandha","Ramayana"], ans: 2 },
+  // ══════════════════════════════════════════════════════════════════
+  // PROSE Ch.2 — भोजस्य औदार्यम् (Ballal / Bhoja Prabandha)
+  // ══════════════════════════════════════════════════════════════════
+  { q: "'भोजस्य औदार्यम्' is from which text?", opts: ["Kadambari","Panchatantra","Bhoja Prabandha","Ramayana"], ans: 2 },
   { q: "Author of Bhoja Prabandha:", opts: ["Vishnusharma","Banabhatta","Ballal","Valmiki"], ans: 2 },
-  { q: "King Bhoja ruled from which city?", opts: ["Pataliputra","Dhara","Varanasi","Ujjain"], ans: 1 },
+  { q: "King Bhoja ruled from which capital city?", opts: ["Pataliputra","Dhara","Varanasi","Ujjain"], ans: 1 },
   { q: "'औदार्य' means:", opts: ["Bravery","Generosity","Intelligence","Devotion"], ans: 1 },
-  { q: "King Bhoja is famous for patronage of:", opts: ["Warriors","Sanskrit poets and scholars","Merchants","Foreign traders"], ans: 1 },
+  { q: "King Bhoja is famous for patronage of:", opts: ["Warriors and soldiers","Sanskrit poets and scholars","Foreign merchants","Temple builders"], ans: 1 },
+  { q: "King Bhoja belonged to which dynasty?", opts: ["Maurya","Gupta","Paramara","Pallava"], ans: 2 },
+  { q: "King Bhoja himself was a scholar in:", opts: ["Mathematics only","Sanskrit literature, philosophy and science","Medicine only","Astrology only"], ans: 1 },
+  { q: "King Bhoja ruled in approximately which century CE?", opts: ["5th century","8th century","11th century","13th century"], ans: 2 },
+  { q: "Bhoja Prabandha is written in which language?", opts: ["Prakrit","Pali","Sanskrit","Telugu"], ans: 2 },
+  { q: "King Bhoja's city Dhara is in modern-day:", opts: ["Gujarat","Andhra Pradesh","Madhya Pradesh","Rajasthan"], ans: 2 },
+  { q: "The chapter 'भोजस्य औदार्यम्' illustrates which value?", opts: ["Bravery in battle","Extreme generosity to poets","Wisdom in governance","Devotion to God"], ans: 1 },
+  { q: "What did King Bhoja give poets apart from treasury rewards?", opts: ["Land grants","Public recognition and reputation (कीर्ति)","Kingdom shares","Military ranks"], ans: 1 },
 
-  // ══ PROSE Ch.3 — शश-कपिञ्जलकथा ══
+  // ══════════════════════════════════════════════════════════════════
+  // PROSE Ch.3 — शश-कपिञ्जलकथा (Vishnusharma / Panchatantra)
+  // ══════════════════════════════════════════════════════════════════
   { q: "Panchatantra was written by:", opts: ["Banabhatta","Vishnusharma","Ballal","Kalidasa"], ans: 1 },
-  { q: "How many Tantras does Panchatantra have?", opts: ["3","4","5","6"], ans: 2 },
-  { q: "'शश-कपिञ्जलकथा' is from which Tantra?", opts: ["1st — Mitrabheda","2nd — Mitralabha","3rd — Kakolukiyam","5th — Aparikshitakaraka"], ans: 2 },
-  { q: "Shasha (शश) means:", opts: ["Dove","Rabbit/hare","Monkey","Parrot"], ans: 1 },
-  { q: "Who was asked to judge the dispute in शश-कपिञ्जलकथा?", opts: ["A sage","A king","A monkey","A lion"], ans: 2 },
-  { q: "The moral of शश-कपिञ्जलकथा:", opts: ["Be kind to animals","Don't take disputes to outsiders","Share what you have","Trust everyone"], ans: 1 },
-  { q: "The dispute between Shasha and Kapinjala was over:", opts: ["Food","A tree hole they shared","Water","A forest path"], ans: 1 },
+  { q: "How many Tantras (books) does Panchatantra have?", opts: ["3","4","5","6"], ans: 2 },
+  { q: "Name the 5 Tantras of Panchatantra:", opts: ["Dharma, Artha, Kama, Moksha, Niti","Mitrabheda, Mitralabha, Kakolukiyam, Labdhapranasham, Aparikshitakaraka","Katha, Upakatha, Subhashita, Niti, Darshana","None of these"], ans: 1 },
+  { q: "'शश-कपिञ्जलकथा' is from which Tantra of Panchatantra?", opts: ["1st — Mitrabheda","2nd — Mitralabha","3rd — Kakolukiyam","5th — Aparikshitakaraka"], ans: 2 },
+  { q: "What does 'शश' (Shasha) mean?", opts: ["Dove","Rabbit / hare","Monkey","Parrot"], ans: 1 },
+  { q: "What does 'कपिञ्जल' mean?", opts: ["Rabbit","Partridge (a bird)","Monkey","Snake"], ans: 1 },
+  { q: "Who was called to judge the dispute between Shasha and Kapinjala?", opts: ["A sage","A king","A monkey named Marmara","A lion"], ans: 2 },
+  { q: "The moral of 'शश-कपिञ्जलकथा':", opts: ["Be kind to all animals","Never take your disputes to outsiders","Always share your home","Trust everyone you meet"], ans: 1 },
+  { q: "The dispute between Shasha and Kapinjala was about:", opts: ["Food rights","Who owned the tree hole they shared","Water from a stream","A forest path"], ans: 1 },
+  { q: "What did the monkey judge (Marmara) do?", opts: ["Gave a fair verdict","Pretended to be deaf, tricked both animals and destroyed them both","Went away without judging","Told them to share"], ans: 1 },
+  { q: "The 3rd Tantra (Kakolukiyam) is about conflict between:", opts: ["Rabbits and doves","Monkeys and lions","Crows (काक) and owls (उलूक)","Deer and tigers"], ans: 2 },
+  { q: "The 1st Tantra 'Mitrabheda' is about:", opts: ["Making friends","Breaking of friendship","Winning disputes","Protecting home"], ans: 1 },
+  { q: "Panchatantra uses stories to teach:", opts: ["Sanskrit grammar","Niti (practical wisdom and statecraft)","Devotion to God","Military strategy"], ans: 1 },
+  { q: "The story of Shasha and Kapinjala teaches us not to trust:", opts: ["Our own friends","Outsiders as arbiters in personal disputes","The forest","Kings"], ans: 1 },
 
-  // ══ PROSE Ch.4 — श्रीमलयालस्वामी ══
-  { q: "Author of 'श्रीमलयालस्वामी' chapter:", opts: ["Ballal","E. Shankaracharya","Samudralakshmana","Dr. Madhavi Joshi"], ans: 2 },
-  { q: "Sri Malayala Swami dedicated his life to:", opts: ["Teaching mathematics","Service of Sanskrit language (संस्कृतभाषासेवा)","Building temples","Vedic rituals only"], ans: 1 },
-  { q: "'संस्कृतभाषासेवा' means:", opts: ["Sanskrit grammar rules","Service and promotion of Sanskrit language","Vedic recitation","Sanskrit examinations"], ans: 1 },
-  { q: "Sri Malayala Swami is from which state?", opts: ["Karnataka","Tamil Nadu","Andhra Pradesh","Maharashtra"], ans: 2 },
+  // ══════════════════════════════════════════════════════════════════
+  // PROSE Ch.4 — श्रीमलयालस्वामी (Samudralakshmana)
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Author of the 'श्रीमलयालस्वामी' chapter:", opts: ["Ballal","E. Shankaracharya","Samudralakshmana","Dr. Madhavi Joshi"], ans: 2 },
+  { q: "Sri Malayala Swami dedicated his life to:", opts: ["Teaching mathematics","Sanskrit language service (संस्कृतभाषासेवा)","Building temples","Vedic rituals only for Brahmins"], ans: 1 },
+  { q: "'संस्कृतभाषासेवा' means:", opts: ["Reciting Sanskrit prayers","Service and promotion of the Sanskrit language","Writing Sanskrit grammar books","Studying Sanskrit for oneself"], ans: 1 },
+  { q: "Sri Malayala Swami is associated with which state?", opts: ["Karnataka","Tamil Nadu","Andhra Pradesh","Maharashtra"], ans: 2 },
+  { q: "Sri Malayala Swami established:", opts: ["Schools of mathematics","Sanskrit pathshalas (schools) for all castes","A Sanskrit university","A Vedic mutt"], ans: 1 },
+  { q: "Sri Malayala Swami's key teaching was that Sanskrit is:", opts: ["Only for Brahmins","Everyone's heritage — open to all castes","Difficult to learn","Only for priests"], ans: 1 },
+  { q: "The chapter on Sri Malayala Swami illustrates which value?", opts: ["Bravery","Language service as spiritual worship (भाषासेवा = ईश्वरसेवा)","Wealth accumulation","Political leadership"], ans: 1 },
 
-  // ══ PROSE Ch.5 — स्वदेस्य पुष्पाणि ══
-  { q: "Author of 'स्वदेस्य पुष्पाणि':", opts: ["Ballal","Samudralakshmana","Dr. Madhavi Joshi","E. Shankaracharya"], ans: 2 },
-  { q: "India's national flower mentioned in this chapter:", opts: ["Jasmine","Rose","Lotus (कमल)","Champaka"], ans: 2 },
-  { q: "The Kadamba flower is associated with:", opts: ["Shiva","Vishnu","Krishna","Brahma"], ans: 2 },
-  { q: "Lotus symbolizes:", opts: ["War","Purity and divine grace","Wealth only","Foreign culture"], ans: 1 },
-  { q: "'स्वदेस्य' means:", opts: ["Foreign","Beautiful","Indigenous / belonging to one's own country","Ancient"], ans: 2 },
-  { q: "The Ashoka tree is famous for blooming when:", opts: ["It rains","Touched by a woman's foot (traditional belief)","Struck by lightning","Sun rises"], ans: 1 },
+  // ══════════════════════════════════════════════════════════════════
+  // PROSE Ch.5 — स्वदेश्यपुष्पाणि (Dr. Madhavi Joshi)
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Author of 'स्वदेश्यपुष्पाणि':", opts: ["Ballal","Samudralakshmana","Dr. Madhavi Joshi","E. Shankaracharya"], ans: 2 },
+  { q: "How many flowers are described in 'स्वदेश्यपुष्पाणि'?", opts: ["3","4","5","6"], ans: 2 },
+  { q: "India's national flower mentioned in 'स्वदेश्यपुष्पाणि':", opts: ["Jasmine","Rose","Lotus (कमल/पद्म)","Champaka"], ans: 2 },
+  { q: "The Sanskrit word for Lotus is:", opts: ["मल्लिका","पद्म / कमल","चम्पक","कदम्ब"], ans: 1 },
+  { q: "The Lotus is associated with which two deities?", opts: ["Shiva and Parvati","Rama and Sita","Lakshmi and Brahma","Vishnu and Saraswati"], ans: 2 },
+  { q: "Lotus symbolizes:", opts: ["War and courage","Purity and divine grace (it blooms in mud but stays pure)","Wealth only","Foreign elegance"], ans: 1 },
+  { q: "Sanskrit for jasmine is:", opts: ["पद्म","मल्लिका","चम्पक","कदम्ब"], ans: 1 },
+  { q: "Jasmine (मल्लिका) is used for:", opts: ["Cooking only","Worship and hair decoration (its fragrance)","Making medicine","Making dye"], ans: 1 },
+  { q: "The Champaka (चम्पक) flower is which colour?", opts: ["White","Red","Golden/yellow","Blue"], ans: 2 },
+  { q: "Champaka is described as 'beloved of gods' — what makes it special?", opts: ["Its size","Its intoxicating fragrance and golden colour","It blooms all year","It grows only on mountains"], ans: 1 },
+  { q: "The Ashoka tree traditionally blooms when:", opts: ["It rains heavily","Touched by a woman's foot (traditional legend)","Struck by lightning","The sun rises"], ans: 1 },
+  { q: "'अशोक' literally means:", opts: ["No grief / sorrow-free (a+shoka)","Beautiful flower","Ancient tree","Eternal bloom"], ans: 0 },
+  { q: "The Kadamba flower is strongly associated with which deity?", opts: ["Shiva","Vishnu","Krishna","Brahma"], ans: 2 },
+  { q: "Kadamba blooms in which season?", opts: ["Winter","Summer","Monsoon / rainy season","Spring"], ans: 2 },
+  { q: "'स्वदेश्य' means:", opts: ["Foreign","Beautiful","Belonging to one's own country / indigenous","Very old"], ans: 2 },
 
-  // ══ PROSE Ch.6 — वर्षापरिदेवनम् ══
-  { q: "'वर्षापरिदेवनम्' means:", opts: ["Praise of rain","Lament/complaint about the rainy season","Rain dance","Monsoon festival"], ans: 1 },
-  { q: "The genre of 'वर्षापरिदेवनम्' is:", opts: ["Tragic poetry","Humorous/satirical prose","Epic narrative","Devotional hymn"], ans: 1 },
-  { q: "Mosquitoes (मशकाः) are mentioned in this chapter as:", opts: ["Beautiful insects","Trouble caused by rain","Sacred creatures","Harmless"], ans: 1 },
-  { q: "The literary device of treating rain as a conscious villain is called:", opts: ["Metaphor","Simile","Personification (मानवीकरण)","Alliteration"], ans: 2 },
+  // ══════════════════════════════════════════════════════════════════
+  // PROSE Ch.6 — वर्षापरिदेवनम् (M.M. Acharya Gupti)
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Author of 'वर्षापरिदेवनम्':", opts: ["Dr. Madhavi Joshi","Ballal","M.M. Acharya Gupti","Samudralakshmana"], ans: 2 },
+  { q: "'वर्षापरिदेवनम्' literally means:", opts: ["Praise of rain","Lament / complaint about the rainy season","Rain festival","Monsoon dance"], ans: 1 },
+  { q: "The literary genre of 'वर्षापरिदेवनम्' is:", opts: ["Tragic epic (करुणरस)","Humorous satirical prose (हास्यव्यङ्ग्यगद्यम्)","Devotional hymn","Historical narrative"], ans: 1 },
+  { q: "What nuisance does the author complain about — creature that disturbs at night?", opts: ["Frogs","Mosquitoes (मशकाः)","Owls","Bats"], ans: 1 },
+  { q: "Which creatures make a loud noise (croaking) in the monsoon in this chapter?", opts: ["Peacocks","Crows","Frogs (मण्डूकाः)","Dogs"], ans: 2 },
+  { q: "The literary device of treating the rain as a conscious mischief-maker is:", opts: ["Metaphor (रूपक)","Simile (उपमा)","Personification (मानवीकरण)","Alliteration"], ans: 2 },
+  { q: "Another literary device in 'वर्षापरिदेवनम्' is exaggeration, called:", opts: ["उपमा","अतिशयोक्ति","मानवीकरण","व्यङ्ग्य"], ans: 1 },
+  { q: "'व्यङ्ग्य' as a literary device means:", opts: ["Direct statement","Metaphor","Satire / implied criticism","Alliteration"], ans: 2 },
+  { q: "Problems from the monsoon mentioned in the chapter — which is NOT one?", opts: ["Muddy roads","Leaky roofs","Snowfall","Flooded fields"], ans: 2 },
+  { q: "The humour in 'वर्षापरिदेवनम्' comes from:", opts: ["Heroic descriptions","Exaggerated complaining about ordinary monsoon troubles","Devotional fervour","Descriptions of war"], ans: 1 },
 
-  // ══ GRAMMAR — Sandhi ══
-  { q: "Guna Sandhi rule: a/ā + i/ī = ?", opts: ["ai","e","o","a"], ans: 1 },
-  { q: "Guna Sandhi rule: a/ā + u/ū = ?", opts: ["au","o","e","a"], ans: 1 },
-  { q: "'महर्षिः' is Sandhi of:", opts: ["महा+ऋषिः","मह+ऋषिः","महे+ऋषिः","महो+ऋषिः"], ans: 0 },
+  // ══════════════════════════════════════════════════════════════════
+  // GRAMMAR — Sandhi (sound combination rules)
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Guna Sandhi: a/ā + i/ī = ?", opts: ["ai","e","o","a"], ans: 1 },
+  { q: "Guna Sandhi: a/ā + u/ū = ?", opts: ["au","o","e","a"], ans: 1 },
+  { q: "Guna Sandhi: a/ā + ṛ = ?", opts: ["ar","r̥","ar (गुण ṛ)","e"], ans: 2 },
+  { q: "'महर्षिः' is the Sandhi of:", opts: ["महा+ऋषिः","मह+ऋषिः","महे+ऋषिः","महो+ऋषिः"], ans: 0 },
   { q: "Vriddhi Sandhi: a + e = ?", opts: ["ai","e","o","au"], ans: 0 },
-  { q: "'सन्मित्रम्': what happens to त् before म्?", opts: ["Stays as त्","Becomes न्","Becomes ण्","Drops"], ans: 1 },
+  { q: "Vriddhi Sandhi: a + o = ?", opts: ["o","au","e","ai"], ans: 1 },
+  { q: "'सन्मित्रम्': the change त् + म् → न्+म् is which type?", opts: ["Guna Sandhi","Consonant Sandhi (व्यञ्जनसन्धि)","Visarga Sandhi","Vriddhi Sandhi"], ans: 1 },
   { q: "Visarga Sandhi: रामः + आगच्छति = ?", opts: ["रामः आगच्छति","रामो आगच्छति","राम आगच्छति","रामाऽऽगच्छति"], ans: 1 },
+  { q: "Visarga Sandhi: रामः + करोति = ? (Visarga before voiced consonant)", opts: ["रामः करोति","रामो करोति","राम करोति","रामाऽकरोति"], ans: 1 },
+  { q: "What is Sandhi?", opts: ["A type of Samasa","The joining / combination of sounds at word boundaries","A verb form","A type of noun"], ans: 1 },
+  { q: "Sandhi is of how many main types?", opts: ["2","3","4","5"], ans: 1 },
+  { q: "The three types of Sandhi are:", opts: ["Guna, Vriddhi, Visarga","Swar, Vyanjana, Visarga","Tatpurusha, Dvandva, Bahuvrihi","Nominal, Verbal, Adjectival"], ans: 1 },
+  { q: "Swar Sandhi (vowel sandhi) applies when:", opts: ["Two consonants meet","A vowel meets a vowel","A consonant meets a vowel","Visarga meets a sound"], ans: 1 },
+  { q: "अ + अ = ?  (Dirgha Sandhi)", opts: ["अआ","आ","ए","ओ"], ans: 1 },
+  { q: "इ + इ = ?  (Dirgha Sandhi)", opts: ["ई","अई","ए","इइ"], ans: 0 },
+  { q: "'देवालयः' is the Sandhi of:", opts: ["देव+आलयः","देवा+लयः","देवाल+यः","देव+अलयः"], ans: 0 },
+  { q: "'नयनम्' (eye) — Sandhi vigraha:", opts: ["न+यनम्","ने+अनम्","नौ+अनम्","नो+अनम्"], ans: 1 },
+  { q: "Anusvara (ं) Sandhi — 'सम् + स्कृत' = ?", opts: ["समस्कृत","संस्कृत","सम्स्कृत","समंस्कृत"], ans: 1 },
+  { q: "Which Sandhi changes ā + i to e?", opts: ["Vriddhi","Guna","Dirgha","Visarga"], ans: 1 },
+  { q: "'नमस्ते' is Sandhi of:", opts: ["नम+ते","नमस्+ते (Visarga + t → s+t)","नम+आस्ते","नमस+ते"], ans: 1 },
 
-  // ══ GRAMMAR — Samasa ══
+  // ══════════════════════════════════════════════════════════════════
+  // GRAMMAR — Samasa (compound words)
+  // ══════════════════════════════════════════════════════════════════
+  { q: "What is a Samasa?", opts: ["A type of Sandhi","A compound word formed by joining two or more words","A verb ending","A type of meter"], ans: 1 },
+  { q: "How many main types of Samasa are there?", opts: ["3","4","5","6"], ans: 1 },
+  { q: "Name the four types of Samasa:", opts: ["Guna, Vriddhi, Dirgha, Visarga","Tatpurusha, Karmadharaya, Dvandva, Bahuvrihi","Vibhakti, Samasa, Sandhi, Krit","None of these"], ans: 1 },
   { q: "'राजपुत्रः' (king's son) — which Samasa?", opts: ["Dvandva","Bahuvrihi","Shashthi Tatpurusha","Karmadharaya"], ans: 2 },
-  { q: "'पीताम्बरः' (refers to Vishnu, 'he whose garment is yellow') — Samasa:", opts: ["Dvandva","Bahuvrihi","Karmadharaya","Tatpurusha"], ans: 1 },
-  { q: "'रामकृष्णौ' (Rama and Krishna) — which Samasa?", opts: ["Dvandva","Bahuvrihi","Tatpurusha","Avyayibhava"], ans: 0 },
+  { q: "'पीताम्बरः' (one whose garment is yellow — Vishnu) — Samasa:", opts: ["Dvandva","Bahuvrihi","Karmadharaya","Tatpurusha"], ans: 1 },
+  { q: "'रामकृष्णौ' (Rama and Krishna — both) — Samasa:", opts: ["Dvandva","Bahuvrihi","Tatpurusha","Avyayibhava"], ans: 0 },
   { q: "'महाराजः' (great king) — Samasa:", opts: ["Tatpurusha","Dvandva","Karmadharaya","Bahuvrihi"], ans: 2 },
-  { q: "'शब्दभेदी' (one who pierces by sound) — Samasa:", opts: ["Karmadharaya","Upapadatatpurusha","Dvandva","Bahuvrihi"], ans: 1 },
-  { q: "'पुत्रशोकः' Samasa vigraha:", opts: ["पुत्रस्य शोकः (Shashthi Tatpurusha)","पुत्रः शोकः (Dvandva)","पुत्रेण शोकः (Tritiya)","न पुत्रशोकः (Nañ)"], ans: 0 },
+  { q: "'नीलकमलम्' (blue lotus) — Samasa:", opts: ["Dvandva","Bahuvrihi","Karmadharaya","Tatpurusha"], ans: 2 },
+  { q: "'शब्दभेदी' (one who pierces by sound) — which Samasa?", opts: ["Karmadharaya","Upapadatatpurusha","Dvandva","Bahuvrihi"], ans: 1 },
+  { q: "'पुत्रशोकः' Samasa vigraha:", opts: ["पुत्रस्य शोकः (Shashthi Tatpurusha)","पुत्रः शोकः (Dvandva)","पुत्रेण शोकः (Tritiya Tatpurusha)","न पुत्रशोकः (Nañ)"], ans: 0 },
+  { q: "In Bahuvrihi Samasa, the compound refers to:", opts: ["The first word","The second word","An outside third person / thing described by the compound","Neither word"], ans: 2 },
+  { q: "In Tatpurusha Samasa, the last word is the:", opts: ["Adjective","Main word (the principal meaning)","Qualifier","Connector"], ans: 1 },
+  { q: "In Dvandva Samasa, both words are:", opts: ["Equally important (co-principals connected by 'and')","The first is main","The second is main","Neither is important"], ans: 0 },
+  { q: "'पितरौ' (father and mother) — Samasa:", opts: ["Tatpurusha","Karmadharaya","Dvandva (pair)","Bahuvrihi"], ans: 2 },
+  { q: "'चन्द्रमुखी' (one whose face is like the moon — a person) — Samasa:", opts: ["Dvandva","Bahuvrihi","Karmadharaya","Tatpurusha"], ans: 1 },
+  { q: "'अनार्यकर्मा' (one who does ignoble deeds) — Samasa type:", opts: ["Tatpurusha","Karmadharaya","Bahuvrihi","Dvandva"], ans: 2 },
+  { q: "'राजपुरुषः' (king's man / royal officer) — Samasa:", opts: ["Dvandva","Bahuvrihi","Tatpurusha","Karmadharaya"], ans: 2 },
+  { q: "Karmadharaya is a sub-type of:", opts: ["Dvandva","Bahuvrihi","Tatpurusha","Avyayibhava"], ans: 2 },
+  { q: "'परमात्मा' (supreme soul) — Samasa:", opts: ["Dvandva","Bahuvrihi","Karmadharaya","Tatpurusha"], ans: 2 },
+  { q: "'दशरथः' — traditionally interpreted as Bahuvrihi meaning:", opts: ["King of Ayodhya","One whose chariot goes in ten directions","Brave warrior","Father of Rama"], ans: 1 },
 
-  // ══ GRAMMAR — Noun forms ══
-  { q: "Instrumental singular of राम (m.):", opts: ["रामेण","रामाय","रामस्य","रामात्"], ans: 0 },
+  // ══════════════════════════════════════════════════════════════════
+  // GRAMMAR — Noun Declensions (Vibhakti / Case endings)
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Nominative singular (Prathamā) of राम:", opts: ["रामम्","रामेण","रामः","रामाय"], ans: 2 },
+  { q: "Accusative singular (Dvitīyā) of राम:", opts: ["रामः","रामम्","रामेण","रामाय"], ans: 1 },
+  { q: "Instrumental singular (Tṛtīyā) of राम:", opts: ["रामेण","रामाय","रामस्य","रामात्"], ans: 0 },
+  { q: "Dative singular (Caturthī) of राम:", opts: ["रामेण","रामाय","रामस्य","रामात्"], ans: 1 },
+  { q: "Ablative singular (Pañcamī) of राम:", opts: ["रामस्य","रामात्","रामेण","रामे"], ans: 1 },
+  { q: "Genitive singular (Ṣaṣṭhī) of राम:", opts: ["रामात्","रामस्य","रामेण","रामाय"], ans: 1 },
+  { q: "Locative singular (Saptamī) of राम:", opts: ["रामे","रामस्य","रामाय","रामः"], ans: 0 },
+  { q: "Vocative singular of राम:", opts: ["रामम्","रामः","हे राम","रामाय"], ans: 2 },
+  { q: "Nominative plural of राम:", opts: ["रामाः","रामम्","रामेण","रामयोः"], ans: 0 },
   { q: "Genitive plural of राम:", opts: ["रामेषु","रामाणाम्","रामयोः","रामान्"], ans: 1 },
+  { q: "Locative plural of राम:", opts: ["रामाणाम्","रामयोः","रामेषु","रामाः"], ans: 2 },
+  { q: "Nominative singular of लता (f. ā-stem):", opts: ["लताम्","लतायाः","लता","लतायाम्"], ans: 2 },
+  { q: "Accusative singular of लता:", opts: ["लताम्","लतया","लतायाः","लते"], ans: 0 },
+  { q: "Dative singular of लता:", opts: ["लतायाः","लतायाम्","लतायै","लतया"], ans: 2 },
+  { q: "Genitive singular of लता:", opts: ["लतायाः","लतायाम्","लतायै","लतया"], ans: 0 },
+  { q: "Nominative singular of फल (neuter a-stem):", opts: ["फलः","फलम्","फलानि","फले"], ans: 1 },
   { q: "Nominative plural of फल (neuter):", opts: ["फलम्","फले","फलानि","फलाः"], ans: 2 },
-  { q: "Dative singular of लता (f.):", opts: ["लतायाः","लतायाम्","लतायै","लतया"], ans: 2 },
-  { q: "'अहम्' is which pronoun form?", opts: ["2nd person singular nom.","1st person plural nom.","1st person singular nom.","3rd person singular nom."], ans: 2 },
-  { q: "'त्वम्' means:", opts: ["We","I","You (singular)","He"], ans: 2 },
+  { q: "Accusative plural of फल (neuter):", opts: ["फलम्","फलानि","फलेषु","फलयोः"], ans: 1 },
+  { q: "How many Vibhaktis (cases) are there in Sanskrit?", opts: ["6","7","8","9"], ans: 2 },
+  { q: "The nominative case (Prathamā) is used for the:", opts: ["Object","Subject of the sentence","Indirect object","Location"], ans: 1 },
+  { q: "The instrumental case (Tṛtīyā) is used to show:", opts: ["Possession","The tool/means by which action is done","Direction from","Time of action"], ans: 1 },
+  { q: "The dative case (Caturthī) is used to show:", opts: ["Possession","The purpose or recipient (for whom)","The agent","Source"], ans: 1 },
+  { q: "The genitive case (Ṣaṣṭhī) is used to show:", opts: ["Location","Possession / of (as in 'of the king')","Instrument","Purpose"], ans: 1 },
+  { q: "The locative case (Saptamī) shows:", opts: ["Possession","The means","Location / place where","Separation"], ans: 2 },
 
-  // ══ GRAMMAR — Verb forms ══
-  { q: "3rd person singular present of भू:", opts: ["भवामि","भवति","भवन्ति","भवसि"], ans: 1 },
-  { q: "1st person plural present of पठ्:", opts: ["पठामि","पठावः","पठामः","पठन्ति"], ans: 2 },
-  { q: "'गच्छति' — which verb root?", opts: ["भू","गम्/गच्छ्","पठ्","कृ"], ans: 1 },
+  // ══════════════════════════════════════════════════════════════════
+  // GRAMMAR — Pronouns
+  // ══════════════════════════════════════════════════════════════════
+  { q: "'अहम्' — which person and number?", opts: ["2nd person singular","1st person plural","1st person singular","3rd person singular"], ans: 2 },
+  { q: "'वयम्' means:", opts: ["I","You","We","They"], ans: 2 },
+  { q: "'त्वम्' means:", opts: ["We","I","You (singular)","He/She"], ans: 2 },
+  { q: "'युयम्' means:", opts: ["We","I","You (plural)","They"], ans: 2 },
+  { q: "Instrumental singular of अस्मद् (I/we):", opts: ["मया","अस्माभिः","मह्यम्","मम"], ans: 0 },
+  { q: "Instrumental plural of अस्मद् (we):", opts: ["मया","अस्माभिः","मह्यम्","मम"], ans: 1 },
+  { q: "Genitive singular of अस्मद् (my):", opts: ["मया","मह्यम्","मम","अस्माकम्"], ans: 2 },
+  { q: "Genitive plural of अस्मद् (our):", opts: ["मया","मम","मह्यम्","अस्माकम्"], ans: 3 },
+  { q: "Genitive singular of युष्मद् (your — singular):", opts: ["त्वया","तव","युष्माकम्","तुभ्यम्"], ans: 1 },
+  { q: "Genitive plural of युष्मद् (your — plural):", opts: ["तव","त्वया","युष्माकम्","युष्मभ्यम्"], ans: 2 },
 
-  // ══ EXAM PATTERN & GENERAL ══
-  { q: "Total marks in APBIE Sanskrit paper:", opts: ["75","80","90","100"], ans: 3 },
-  { q: "Duration of APBIE Sanskrit exam:", opts: ["2 hours","2.5 hours","3 hours","3.5 hours"], ans: 2 },
-  { q: "पद्यभागः (Poetry) carries:", opts: ["20","25","28","30"], ans: 2 },
-  { q: "गद्यभागः (Prose) carries:", opts: ["20","25","28","30"], ans: 2 },
-  { q: "व्याकरणम् (Grammar) carries:", opts: ["10","12","16","20"], ans: 2 },
-  { q: "लेखनम् (Writing) carries:", opts: ["10","14","18","20"], ans: 2 },
-  { q: "उपवाचकम् carries:", opts: ["5","8","10","12"], ans: 2 },
-  { q: "The official Sanskrit textbook name for AP Inter:", opts: ["सुरभाषा","सुरभाषासुषमा","संस्कृतमाला","अमरवाणी"], ans: 1 },
-  { q: "How many Poetry chapters are in the syllabus?", opts: ["4","5","6","7"], ans: 2 },
-  { q: "How many Prose chapters are in the syllabus?", opts: ["4","5","6","7"], ans: 2 },
+  // ══════════════════════════════════════════════════════════════════
+  // GRAMMAR — Verb Conjugations (Dhatu / Lakaras)
+  // ══════════════════════════════════════════════════════════════════
+  { q: "3rd person singular present (Laṭ) of √भू:", opts: ["भवामि","भवति","भवन्ति","भवसि"], ans: 1 },
+  { q: "3rd person dual present of √भू:", opts: ["भवतः","भवन्ति","भवामः","भवावः"], ans: 0 },
+  { q: "3rd person plural present of √भू:", opts: ["भवति","भवतः","भवन्ति","भवावः"], ans: 2 },
+  { q: "2nd person singular present of √भू:", opts: ["भवामि","भवति","भवसि","भवथः"], ans: 2 },
+  { q: "1st person singular present of √भू:", opts: ["भवामि","भवसि","भवति","भवन्ति"], ans: 0 },
+  { q: "1st person plural present of √भू:", opts: ["भवामि","भवावः","भवामः","भवन्ति"], ans: 2 },
+  { q: "3rd person singular present of √पठ् (to read):", opts: ["पठामि","पठति","पठन्ति","पठसि"], ans: 1 },
+  { q: "1st person plural present of √पठ्:", opts: ["पठामि","पठावः","पठामः","पठन्ति"], ans: 2 },
+  { q: "2nd person plural present of √पठ्:", opts: ["पठथः","पठथ","पठन्ति","पठामः"], ans: 1 },
+  { q: "3rd person singular past (Laṅ, imperfect) of √भू:", opts: ["अभवत्","भवति","भविष्यति","बभूव"], ans: 0 },
+  { q: "3rd person singular future (Lṛṭ) of √भू:", opts: ["अभवत्","भवति","भविष्यति","बभूव"], ans: 2 },
+  { q: "'गच्छति' — which verb root (Dhatu)?", opts: ["भू","√गम् / गच्छ","√पठ्","√कृ"], ans: 1 },
+  { q: "'पठति' means:", opts: ["He/she goes","He/she reads/studies","He/she does","He/she speaks"], ans: 1 },
+  { q: "'करोति' — verb root:", opts: ["√गम्","√भू","√कृ","√वद्"], ans: 2 },
+  { q: "'वदति' means:", opts: ["He sees","He goes","He speaks","He reads"], ans: 2 },
+  { q: "'लिखति' means:", opts: ["He reads","He writes","He speaks","He studies"], ans: 1 },
+  { q: "3rd person plural present of √गम् (गच्छ):", opts: ["गच्छति","गच्छतः","गच्छन्ति","गच्छसि"], ans: 2 },
+  { q: "'अस्ति' is the present tense of which root?", opts: ["√भू","√अस् (to be)","√कृ","√गम्"], ans: 1 },
+  { q: "3rd plural of √अस् (to be) — 'they are':", opts: ["अस्ति","स्तः","सन्ति","अस्मि"], ans: 2 },
+  { q: "'ददाति' means — root √दा:", opts: ["He takes","He gives","He reads","He sees"], ans: 1 },
 
-  // ══ UPAVACHAKAM & WRITING ══
+  // ══════════════════════════════════════════════════════════════════
+  // GRAMMAR — Vocabulary & Translation
+  // ══════════════════════════════════════════════════════════════════
+  { q: "'रामः वनं गच्छति' means:", opts: ["Rama comes from forest","Rama is in the forest","Rama goes to the forest","Rama was in the forest"], ans: 2 },
+  { q: "'सः पठति' means:", opts: ["He goes","He reads / studies","He eats","He sleeps"], ans: 1 },
+  { q: "'अहं संस्कृतं पठामि' means:", opts: ["I speak Sanskrit","I learn Sanskrit / I study Sanskrit","Sanskrit is my language","I love Sanskrit"], ans: 1 },
+  { q: "'वयं छात्राः' means:", opts: ["We are teachers","We are students","We study","We are scholars"], ans: 1 },
+  { q: "Sanskrit for 'river' (feminine noun):", opts: ["नदः","नदी","नदम्","नदाः"], ans: 1 },
+  { q: "Sanskrit for 'book':", opts: ["पुस्तकः","पुस्तकम्","पुस्तकी","पुस्तका"], ans: 1 },
+  { q: "Sanskrit for 'student' (masculine):", opts: ["छात्री","छात्रः","छात्रम्","अध्यापकः"], ans: 1 },
+  { q: "Sanskrit for 'teacher' (masculine):", opts: ["छात्रः","अध्यापकः","शिष्यः","गुरुणी"], ans: 1 },
+  { q: "'नमः' means:", opts: ["Goodbye","Praise","Obeisance / salutation / respect","Peace"], ans: 2 },
+  { q: "'शिक्षकः पाठयति' means:", opts: ["The student reads","The teacher teaches","The student writes","The teacher reads"], ans: 1 },
+  { q: "'फलम् मधुरम् अस्ति' means:", opts: ["The fruit is sour","The fruit is sweet","The flower is sweet","The fruit is ripe"], ans: 1 },
+  { q: "Sanskrit for 'lotus' (neuter):", opts: ["नदी","आकाशः","कमलम्","वृक्षः"], ans: 2 },
+  { q: "'आकाशः नीलः अस्ति' means:", opts: ["The lotus is blue","The sky is blue","The river is blue","The water is blue"], ans: 1 },
+  { q: "'पिता माता च' means:", opts: ["Father and mother","Father or mother","Father's mother","Without father and mother"], ans: 0 },
+  { q: "'देशः सुन्दरः अस्ति' means:", opts: ["The city is beautiful","The country is beautiful","The sky is beautiful","The river is beautiful"], ans: 1 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // GRAMMAR — Sanskrit Numbers (Sankhya)
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Sanskrit for 'one' (1):", opts: ["द्विः","एकः","त्रिः","चत्वारः"], ans: 1 },
+  { q: "Sanskrit for 'two' (2):", opts: ["त्रिः","एकः","द्वौ / द्वे","चत्वारः"], ans: 2 },
+  { q: "Sanskrit for 'three' (3):", opts: ["द्वौ","त्रयः","चत्वारः","पञ्च"], ans: 1 },
+  { q: "Sanskrit for 'four' (4):", opts: ["त्रयः","पञ्च","चत्वारः","षट्"], ans: 2 },
+  { q: "Sanskrit for 'five' (5):", opts: ["चत्वारः","पञ्च","षट्","सप्त"], ans: 1 },
+  { q: "Sanskrit for 'ten' (10):", opts: ["पञ्च","सप्त","नव","दश"], ans: 3 },
+  { q: "Sanskrit for 'hundred' (100):", opts: ["दश","शतम्","सहस्रम्","विंशतिः"], ans: 1 },
+  { q: "Sanskrit for 'thousand' (1000):", opts: ["शतम्","सहस्रम्","दशसहस्रम्","लक्षम्"], ans: 1 },
+  { q: "Sanskrit for 'twenty' (20):", opts: ["दश","पञ्चदश","विंशतिः","त्रिंशत्"], ans: 2 },
+  { q: "Sanskrit for 'first' (ordinal — 1st):", opts: ["द्वितीयः","प्रथमः","तृतीयः","चतुर्थः"], ans: 1 },
+  { q: "Sanskrit for 'second' (ordinal — 2nd):", opts: ["प्रथमः","द्वितीयः","तृतीयः","पञ्चमः"], ans: 1 },
+  { q: "Sanskrit for 'third' (ordinal — 3rd):", opts: ["द्वितीयः","चतुर्थः","तृतीयः","पञ्चमः"], ans: 2 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // WRITING SECTION — Letter format & Essay
+  // ══════════════════════════════════════════════════════════════════
   { q: "In a formal Sanskrit letter, 'सविनयं निवेदयामि' means:", opts: ["I humbly submit","Thank you","With blessings","I respectfully invite"], ans: 0 },
-  { q: "Harishchandra is known for:", opts: ["Bravery in war","Absolute truthfulness and honor","Sanskrit poetry","Building temples"], ans: 1 },
-  { q: "Nachiketa asked Yama (death god) for:", opts: ["Wealth","Long life","Knowledge of death and the soul","A kingdom"], ans: 2 },
-  { q: "Sanskrit is important because:", opts: ["It is easy to learn","It is the language of computers","All Indian literature and philosophy is in Sanskrit","It is spoken by millions today"], ans: 2 },
+  { q: "In a Sanskrit letter, the greeting line to a superior starts with:", opts: ["नमस्ते","श्रीचरणेषु सादरं प्रणामाः","वन्दनम्","आशीर्वाद"], ans: 1 },
+  { q: "A formal Sanskrit letter typically ends with:", opts: ["इति सम्पूर्णम्","भवदीयः / भवदीया (Your sincerely)","सर्वम् शुभम्","अलम्"], ans: 1 },
+  { q: "'भवदीयः' in a letter closing means:", opts: ["Respectfully yours","With love","Goodbye","As ordered"], ans: 0 },
+  { q: "The Sanskrit word for 'application / petition' (a type of letter):", opts: ["पत्रम्","अर्जी / प्रार्थनापत्रम्","कथा","श्लोकः"], ans: 1 },
+  { q: "In a Sanskrit letter, 'प्रति' followed by the name means:", opts: ["From","To","About","By"], ans: 1 },
+  { q: "An essay in Sanskrit is called:", opts: ["श्लोकः","निबन्धः","पत्रम्","अनुच्छेदः"], ans: 1 },
+  { q: "Translation from Sanskrit to Telugu/English is called in exam context:", opts: ["अनुवादः","संहिता","विवेचनम्","टीका"], ans: 0 },
+  { q: "'मातुः चरणेषु नमस्कारः' in a letter means:", opts: ["Greetings to father","Respectful salutations at mother's feet","Greetings to the teacher","Blessings for all"], ans: 1 },
+  { q: "Which section of the APBIE exam involves writing a letter or essay?", opts: ["पद्यभागः","गद्यभागः","व्याकरणम्","लेखनम्"], ans: 3 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // UPAVACHAKAM — Harishchandra
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Harishchandra is the king famous for:", opts: ["Military conquests","Absolute truthfulness and keeping his word (सत्यनिष्ठा)","Sanskrit poetry","Building the greatest temple"], ans: 1 },
+  { q: "Who tested King Harishchandra's truthfulness?", opts: ["Brahma","Vishnu","Sage Vishwamitra","Shiva"], ans: 2 },
+  { q: "In the Harishchandra story, he had to sell what to keep his promise?", opts: ["His kingdom first, then himself and his family","His army","His treasure","His palace"], ans: 0 },
+  { q: "Harishchandra worked as a servant in a:", opts: ["Palace","Cremation ground","Forest ashram","Market"], ans: 1 },
+  { q: "The moral of the Harishchandra story:", opts: ["Kings should be wealthy","Truth (सत्यम्) is the highest virtue — never abandon it whatever the cost","Bravery is the best quality","God always punishes the wicked"], ans: 1 },
+  { q: "Harishchandra's wife was named:", opts: ["Sita","Chandramati","Kaushalya","Draupadi"], ans: 1 },
+  { q: "Their son who died in the Harishchandra story was named:", opts: ["Rohitashva","Rama","Lava","Nakula"], ans: 0 },
+  { q: "At the end of the Harishchandra story, due to his truthfulness:", opts: ["He remained poor","Gods appeared and restored everything","He became a sage","He died"], ans: 1 },
+  { q: "'सत्यनिष्ठा' means:", opts: ["Devotion to war","Firm commitment to truth","Devotion to God","Loyalty to king"], ans: 1 },
+  { q: "Harishchandra is considered an ideal because:", opts: ["He was the richest king","He never spoke or acted untruthfully even at the greatest personal cost","He won many wars","He built many temples"], ans: 1 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // UPAVACHAKAM — Nachiketa (Kathopanishad)
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Nachiketa's story is from which Upanishad?", opts: ["Mundaka","Chandogya","Katha (Kathopanishad)","Isha"], ans: 2 },
+  { q: "Nachiketa asked Yama (god of death) for:", opts: ["Wealth and a long life","Knowledge of what lies beyond death — the secret of the soul (Atma Vidya)","A kingdom","Physical strength"], ans: 1 },
+  { q: "Yama first tried to tempt Nachiketa away from his question by offering:", opts: ["War victories","Vast wealth, pleasures, a long life, beautiful women, a kingdom","A palace","Immortality of the body"], ans: 1 },
+  { q: "Nachiketa's father (Uddalaka) sent him to Yama as a result of:", opts: ["Nachiketa's wish","An accidental vow in anger","A sage's instruction","A dream"], ans: 1 },
+  { q: "Why did Yama respect Nachiketa greatly?", opts: ["Because he was a prince","Because of his firm determination, wisdom beyond his age, and refusal to be distracted from seeking truth","Because he was the son of a great sage","Because he had performed penances"], ans: 1 },
+  { q: "The boon Nachiketa got from Yama was:", opts: ["Physical immortality","Supreme knowledge of the Self (Brahmavidya / Atma Vidya)","A huge kingdom","Long life and wealth"], ans: 1 },
+  { q: "The three boons Yama gave Nachiketa — the first was:", opts: ["Knowledge of the soul","His father's anger be pacified and he be welcomed back","Wealth","Immortality"], ans: 1 },
+  { q: "The second boon Nachiketa asked Yama was:", opts: ["His father's peace","Knowledge of the Nachiketa fire (a Vedic rite leading to heaven)","Wealth","Power"], ans: 1 },
+  { q: "The theme of the Nachiketa story is:", opts: ["Obedience to parents","The quest for ultimate truth — Atma Jnana — is the highest human pursuit","Military training","Temple worship"], ans: 1 },
+  { q: "Nachiketa's refusal of all temptations shows:", opts: ["Arrogance","Discrimination (Viveka) — choosing the highest good over lesser pleasures","Disobedience","Ignorance"], ans: 1 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // EXAM PATTERN & GENERAL KNOWLEDGE
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Total marks in the APBIE Sanskrit paper:", opts: ["75","80","90","100"], ans: 3 },
+  { q: "Duration of the APBIE Sanskrit exam:", opts: ["2 hours","2.5 hours","3 hours","3.5 hours"], ans: 2 },
+  { q: "पद्यभागः (Poetry section) carries:", opts: ["20","25","28","30"], ans: 2 },
+  { q: "गद्यभागः (Prose section) carries:", opts: ["20","25","28","30"], ans: 2 },
+  { q: "व्याकरणम् (Grammar section) carries:", opts: ["10","12","16","20"], ans: 2 },
+  { q: "लेखनम् (Writing section) carries:", opts: ["10","14","18","20"], ans: 2 },
+  { q: "उपवाचकम् (Supplementary reader) carries:", opts: ["5","8","10","12"], ans: 2 },
+  { q: "The official APBIE Sanskrit textbook is named:", opts: ["सुरभाषा","सुरभाषासुषमा","संस्कृतमाला","अमरवाणी"], ans: 1 },
+  { q: "How many Poetry (पद्य) chapters are in the syllabus?", opts: ["4","5","6","7"], ans: 2 },
+  { q: "How many Prose (गद्य) chapters are in the syllabus?", opts: ["4","5","6","7"], ans: 2 },
+  { q: "APBIE stands for:", opts: ["Andhra Pradesh Board of Intermediate Education","All People Board of Indian Education","AP Bureau of International Examinations","AP Board of Intermediate Examinations"], ans: 0 },
+  { q: "Poetry and Prose together carry how many marks?", opts: ["40","50","56","60"], ans: 2 },
+  { q: "'Surabhasusama' (सुरभाषासुषमा) means:", opts: ["Fragrance of the Sanskrit language","Grammar of Sanskrit","Sacred language","Divine speech"], ans: 0 },
+  { q: "Sanskrit belongs to which language family?", opts: ["Dravidian","Sino-Tibetan","Indo-European (Indo-Aryan)","Austro-Asiatic"], ans: 2 },
+  { q: "The oldest of the four Vedas is:", opts: ["Yajurveda","Atharvaveda","Samaveda","Rigveda"], ans: 3 },
+  { q: "Ramayana was composed by:", opts: ["Vyasa","Valmiki","Kalidasa","Banabhatta"], ans: 1 },
+  { q: "Mahabharata was composed by:", opts: ["Valmiki","Kalidasa","Vyasa","Panini"], ans: 2 },
+  { q: "The section 'उपवाचकम्' means:", opts: ["Main reader","Supplementary / additional reader","Grammar book","Poetry collection"], ans: 1 },
+  { q: "Which section tests letter writing and essay writing?", opts: ["पद्यभागः","व्याकरणम्","लेखनम्","गद्यभागः"], ans: 2 },
+  { q: "A 'श्लोकः' (Shloka) is:", opts: ["A Sanskrit prose sentence","A Sanskrit verse in Anushtup or other metre","A grammar rule","A type of Samasa"], ans: 1 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // POETRY — Deep-dive Subhashitas & Meanings
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Complete: 'विद्या ददाति विनयं, विनयाद् याति ___'", opts: ["धनम्","पात्रताम्","सुखम्","धर्मम्"], ans: 1 },
+  { q: "Complete: 'पात्रत्वाद् धनमाप्नोति, धनाद् ___'", opts: ["धर्मम्","सुखम्","मोक्षम्","यशः"], ans: 0 },
+  { q: "Complete: 'धर्मात् सर्वसुखानि ___'", opts: ["आप्नोति","लभते","प्राप्नोति","जायन्ते"], ans: 1 },
+  { q: "Bhartrhari: 'विद्या नाम नरस्य रूपम्' — Vidya is a man's true:", opts: ["Wealth","Beauty / form","Strength","Fame"], ans: 1 },
+  { q: "Bhartrhari: knowledge gives enjoyment (भोगकरी), fame (यशस्करी) and:", opts: ["Moksha","Teacher of teachers (गुरुः गुरूणाम्)","Wealth","Power"], ans: 1 },
+  { q: "According to Niti Shlokas, 'श्रेयान् स्वधर्मो विगुणः' means:", opts: ["A flawed duty of one's own is better than the perfect duty of another","Always follow someone else's duty","Duty has no value","War duty is the highest"], ans: 0 },
+  { q: "'काव्यशास्त्रविनोदेन कालो गच्छति धीमताम्' — 'धीमताम्' refers to:", opts: ["Fools","The wise","Warriors","Rulers"], ans: 1 },
+  { q: "'व्यसनेन च मूर्खाणाम्' — this line says fools' time passes in:", opts: ["Study","Vices (व्यसन)","Poetry","Devotion"], ans: 1 },
+  { q: "'उद्यमेन हि सिध्यन्ति कार्याणि' means:", opts: ["Tasks succeed by luck","Tasks are accomplished through effort/diligence","God completes all tasks","Rest brings success"], ans: 1 },
+  { q: "The Niti Shloka about the body — 'शरीरमाद्यं' — says the body is the instrument of:", opts: ["Entertainment","Dharma (righteous living)","Earning wealth","Winning wars"], ans: 1 },
+  { q: "'जननी जन्मभूमिश्च' — what is compared to heaven (स्वर्ग)?", opts: ["Knowledge and wealth","Mother and motherland","Temple and Ganga","Guru and God"], ans: 1 },
+  { q: "'स्वर्गादपि गरीयसी' — 'गरीयसी' means:", opts: ["More beautiful","Greater / weightier / more valuable","More distant","More divine"], ans: 1 },
+  { q: "The shloka 'वसुधैव कुटुम्बकम्' criticises:", opts: ["Selfless people","Those who think only in terms of mine and theirs (parochial thinking)","Royalty","Scholars"], ans: 1 },
+  { q: "'उदारचरितानाम् तु वसुधैव कुटुम्बकम्' — 'उदारचरित' means:", opts: ["Selfish person","One of generous/noble character","A poor person","A king"], ans: 1 },
+  { q: "According to Bhartrhari, the noble person (Uttama) never abandons work because:", opts: ["He fears failure","He is commanded","He sees the work as sacred and sees obstacles as challenges","He is watched by kings"], ans: 2 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // POETRY — Shloka Identification & Authors
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Which Shloka begins 'विद्या ददाति विनयम्'?", opts: ["Niti Shloka about knowledge chain","Bhartrhari's Niti Shataka","Bhartrhari's Vairagya Shataka","Amaravani"], ans: 0 },
+  { q: "Which text does 'धर्मो रक्षति रक्षितः' come from?", opts: ["Ramayana","Mahabharata (Vana Parva)","Panchatantra","Nitishatakam"], ans: 1 },
+  { q: "'जननी जन्मभूमिश्च स्वर्गादपि गरीयसी' — Rama says this to:", opts: ["Sita","Lakshmana","Sugreeva","Hanuman"], ans: 1 },
+  { q: "The Ramayana has approximately how many shlokas?", opts: ["10,000","24,000","50,000","100,000"], ans: 1 },
+  { q: "Valmiki composed Ramayana after which event from his own life?", opts: ["A dream","Witnessing a crane (krauncha) being shot — grief turned into verse","After meeting Rama","After a war"], ans: 1 },
+  { q: "The first shloka of Ramayana arose from Valmiki's:", opts: ["Joy","Sorrow (shoka → shloka)","Anger","Prayer"], ans: 1 },
+  { q: "Kalidasa's Meghadutam is a poem where a Yaksha sends a message through a:", opts: ["River","Bird","Cloud","Wind"], ans: 2 },
+  { q: "Kalidasa's Raghuvamsham describes the dynasty of:", opts: ["Pandavas","Raghu (ancestors of Rama — Solar dynasty)","Yadavas","Pauravas"], ans: 1 },
+  { q: "Bhartrhari says: 'Even kings bow to the learned (विद्वान्).' This illustrates Vidya's value as:", opts: ["Political power","Social respect — kings honour the learned","Financial asset","Divine gift"], ans: 1 },
+  { q: "The Shringara Shataka of Bhartrhari deals with:", opts: ["War","Love, beauty and romance","Renunciation","Ethics"], ans: 1 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // PROSE — Additional story details
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Banabhatta's other famous prose work besides Kadambari is:", opts: ["Bhoja Prabandha","Harshacharita","Panchatantra","Mudrarakshasa"], ans: 1 },
+  { q: "Harshacharita is a biography of:", opts: ["Chandragupta","Vikramaditya","Harshavardhana","Bhoja"], ans: 2 },
+  { q: "King Harshavardhana ruled from which city?", opts: ["Pataliputra","Kanauj (Kanyakubja)","Ujjain","Dhara"], ans: 1 },
+  { q: "Panchatantra was originally composed to teach:", opts: ["Scholars","Three dull princes of a king in niti and practical wisdom","Merchants","Soldiers"], ans: 1 },
+  { q: "Vishnusharma composed Panchatantra through:", opts: ["Lectures","Animal fables (beast tales) illustrating human wisdom","Poems","Essays"], ans: 1 },
+  { q: "The 5th Tantra of Panchatantra — 'Aparikshitakaraka' — is about:", opts: ["Making friends","Breaking friends","Hasty/rash action without thinking","Losing what is gained"], ans: 2 },
+  { q: "The 4th Tantra 'Labdhapranasham' is about:", opts: ["Gaining friends","Losing what one has gained","Making enemies","Winning battles"], ans: 1 },
+  { q: "The monkey judge 'Marmara' in the Shasha story pretended to be:", opts: ["Fair","Deaf","Blind","A sage"], ans: 1 },
+  { q: "What happened to both Shasha and Kapinjala at the end of the Panchatantra story?", opts: ["They became friends","The monkey (judge) destroyed/ate them both","They found justice","They left the forest"], ans: 1 },
+  { q: "King Bhoja is compared to which legendary generous king?", opts: ["Harishchandra","Vikramaditya","Karna","Ashoka"], ans: 1 },
+  { q: "King Bhoja supported poets by giving 'कीर्तिः' (fame) plus:", opts: ["Land grants only","Treasury rewards (धनम्) as well","Military rank","A kingdom share"], ans: 1 },
+  { q: "Sri Malayala Swami taught Sanskrit to people of:", opts: ["Only Brahmin caste","All castes without discrimination","Only royal families","Only men"], ans: 1 },
+  { q: "Champaka flower's Sanskrit name is:", opts: ["मल्लिका","पद्म","चम्पक","कदम्ब"], ans: 2 },
+  { q: "'वर्षापरिदेवनम्' uses 'अतिशयोक्ति' — this is called in English:", opts: ["Metaphor","Personification","Hyperbole / exaggeration","Simile"], ans: 2 },
+  { q: "The author of 'वर्षापरिदेवनम्' complains about wet clothes because of:", opts: ["The sun","Rain making everything wet","River floods","Cold winter"], ans: 1 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // GRAMMAR — Additional Sandhi & Samasa practice
+  // ══════════════════════════════════════════════════════════════════
+  { q: "'राजेन्द्रः' is Sandhi of:", opts: ["राज+इन्द्रः","राजा+इन्द्रः","राजे+इन्द्रः","राजो+इन्द्रः"], ans: 0 },
+  { q: "'गणेशः' is Sandhi of:", opts: ["गण+ईशः","गणा+इशः","गणे+ईशः","गणो+इशः"], ans: 0 },
+  { q: "'सूर्योदयः' is Sandhi of:", opts: ["सूर्य+उदयः","सूर्या+उदयः","सूर्यो+दयः","सूर्यउ+दयः"], ans: 0 },
+  { q: "Sandhi in 'नयनम्': ने+अनम् → नयनम् follows which rule?", opts: ["Guna","Yan Sandhi (e → ay before vowel)","Vriddhi","Dirgha"], ans: 1 },
+  { q: "'पावकः' (fire) Sandhi vigraha: पौ+अकः. The Sandhi type is:", opts: ["Guna","Vriddhi","Yan (औ → āv)","Dirgha"], ans: 2 },
+  { q: "'विद्यालयः' is Sandhi of:", opts: ["विद्या+आलयः","विद्य+आलयः","विद्यः+आलयः","विद्यालय"], ans: 0 },
+  { q: "'हरिश्चन्द्रः' — the श् in the middle is from which Sandhi?", opts: ["Guna","Visarga Sandhi — visarga before च → श्","Dirgha","Consonant doubling"], ans: 1 },
+  { q: "'नरोत्तमः' is Sandhi of:", opts: ["नर+उत्तमः","नरा+उत्तमः","नरो+उत्तमः","नरे+उत्तमः"], ans: 0 },
+  { q: "'विद्यार्थी' Samasa — 'one who seeks knowledge':", opts: ["Bahuvrihi","Shashthi Tatpurusha","Karmadharaya","Dvandva"], ans: 1 },
+  { q: "'नीलोत्पलम्' (blue lotus) Samasa:", opts: ["Dvandva","Bahuvrihi","Karmadharaya","Tatpurusha"], ans: 2 },
+  { q: "'त्रिलोकः' (three worlds) Samasa:", opts: ["Dvandva","Dvigu (numerical Tatpurusha)","Bahuvrihi","Karmadharaya"], ans: 1 },
+  { q: "'सप्ताहः' (seven days = one week) Samasa:", opts: ["Tatpurusha","Bahuvrihi","Karmadharaya","Dvigu"], ans: 3 },
+  { q: "'चतुर्वेदः' (four Vedas) Samasa type:", opts: ["Dvandva","Dvigu","Bahuvrihi","Karmadharaya"], ans: 1 },
+  { q: "'गृहागतः' (one who has come home) — Samasa:", opts: ["Bahuvrihi","Dvandva","Tatpurusha (2nd case)","Karmadharaya"], ans: 2 },
+  { q: "'निर्धनः' (without wealth) — Samasa:", opts: ["Tatpurusha","Nañ Tatpurusha (negative compound)","Dvandva","Bahuvrihi"], ans: 1 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // GRAMMAR — Krit / Taddhita / indeclinables
+  // ══════════════════════════════════════════════════════════════════
+  { q: "'पठित्वा' (having read) — suffix used:", opts: ["-ता","-त्वा (Ktvā — absolutive/gerund)","ल्यप्","तव्यत्"], ans: 1 },
+  { q: "'गत्वा' means:", opts: ["Having gone","Going","He goes","He will go"], ans: 0 },
+  { q: "'पठनीयम्' (should be read) — suffix:", opts: ["क्त","क्तवतु","तव्यत् / अनीयर्","त्वा"], ans: 2 },
+  { q: "An 'अव्यय' (indeclinable) does NOT change for:", opts: ["Gender only","Number only","Gender, number, or case — it never changes","Tense"], ans: 2 },
+  { q: "'च' (and) is an:", opts: ["Noun","Verb","Avyaya (indeclinable conjunction)","Pronoun"], ans: 2 },
+  { q: "'न' (not) is an:", opts: ["Noun","Avyaya (indeclinable negative)","Verb","Adjective"], ans: 1 },
+  { q: "'अत्र' means:", opts: ["There","Here","Somewhere","Nowhere"], ans: 1 },
+  { q: "'तत्र' means:", opts: ["Here","There","Where","Everywhere"], ans: 1 },
+  { q: "'यत्र' means:", opts: ["There","Here","Where (relative)","When"], ans: 2 },
+  { q: "'कदा' means:", opts: ["Where","Who","When","How"], ans: 2 },
+  { q: "'कथम्' means:", opts: ["Where","When","How / in what way","Who"], ans: 2 },
+  { q: "'किम्' means:", opts: ["Who","Where","When","What"], ans: 3 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // ADVANCED TRANSLATION & APPLICATION
+  // ══════════════════════════════════════════════════════════════════
+  { q: "'सः ग्रामं गच्छति' means:", opts: ["He came from the village","He goes to the village","He is in the village","He left the village"], ans: 1 },
+  { q: "'बालकाः विद्यालयं गच्छन्ति' means:", opts: ["The boys come from school","The boys go to school","The boys study at home","The teachers go to school"], ans: 1 },
+  { q: "'अध्यापकः बालकेभ्यः पाठयति' means:", opts: ["The teacher learns from boys","The teacher teaches the boys","The boys teach the teacher","The teacher reads to himself"], ans: 1 },
+  { q: "'फलानि मधूनि सन्ति' means:", opts: ["The fruits are many","The fruits are sweet","The flowers are sweet","The fruits are ripe"], ans: 1 },
+  { q: "'मम नाम रामः' means:", opts: ["My name is Rama","I am going to Rama","Rama is my friend","I belong to Rama"], ans: 0 },
+  { q: "'सा सुन्दरी अस्ति' means:", opts: ["He is handsome","She is beautiful","They are good","It is good"], ans: 1 },
+  { q: "'वयं भारतीयाः स्मः' means:", opts: ["We are Indians","We love India","India is great","We go to India"], ans: 0 },
+  { q: "'संस्कृतं देवभाषा अस्ति' means:", opts: ["Sanskrit is an ancient language","Sanskrit is the language of the gods","Sanskrit is difficult","Sanskrit is our language"], ans: 1 },
+  { q: "'ज्ञानम् एव बलम्' means:", opts: ["Gold is strength","Knowledge itself is strength","Army is strength","Dharma is strength"], ans: 1 },
+  { q: "'सत्यमेव जयते' means:", opts: ["Only dharma wins","Truth alone is victorious","God alone wins","Bravery wins"], ans: 1 },
+  { q: "'अहिंसा परमो धर्मः' means:", opts: ["War is the highest duty","Non-violence is the highest dharma","Truth is the highest dharma","God is the greatest"], ans: 1 },
+  { q: "'विश्वास एव धनम्' means:", opts: ["Trust is gold","Trust/faith is wealth","Gold is everything","Friends are wealth"], ans: 0 },
+  { q: "Translate: 'The lotus blooms in water' — Sanskrit:", opts: ["कमलम् जले विकसति","कमलम् वने अस्ति","जलम् कमलम् भवति","कमलम् सुन्दरम् अस्ति"], ans: 0 },
+  { q: "Translate: 'Knowledge is the greatest wealth':", opts: ["विद्या एव महाधनम्","विद्यालयः महान् अस्ति","विद्यार्थी धनवान् अस्ति","विद्या कठिना अस्ति"], ans: 0 },
+  { q: "'माता देवी भव' — part of which well-known teaching?", opts: ["Taittiriya Upanishad (माता देवो भव, पितृ देवो भव…)","Ramayana","Mahabharata","Panchatantra"], ans: 0 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // UPAVACHAKAM — Additional story questions
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Harishchandra's story is part of which Purana primarily?", opts: ["Vishnu Purana","Markandeya Purana (as part of Devi Mahatmya context)","Bhagavata Purana","Skanda Purana"], ans: 1 },
+  { q: "Vishwamitra was originally a:", opts: ["Brahmin sage","Kshatriya king who became a brahmarshi","Merchant","Warrior-poet"], ans: 1 },
+  { q: "The Kathopanishad is part of which Veda?", opts: ["Rigveda","Samaveda","Krishna Yajurveda","Atharvaveda"], ans: 2 },
+  { q: "Nachiketa's father's name was:", opts: ["Yajnavalkya","Uddalaka / Vajashravasa","Vasishtha","Vishwamitra"], ans: 1 },
+  { q: "Yama waited three days before meeting Nachiketa. As apology he offered:", opts: ["Just an apology","Three boons (one per day waited)","Gold and a kingdom","Liberation"], ans: 1 },
+  { q: "The Kathopanishad is famous for the dialogue between:", opts: ["Brahma and Vishnu","Nachiketa and Yama","Rama and Vasishtha","Arjuna and Krishna"], ans: 1 },
+  { q: "Bhagavad Gita is part of which epic?", opts: ["Ramayana","Mahabharata (Bhishma Parva)","Kathopanishad","Upanishad"], ans: 1 },
+  { q: "'सत्यं वद, धर्मं चर' is from:", opts: ["Ramayana","Panchatantra","Taittiriya Upanishad","Rigveda"], ans: 2 },
+  { q: "Chandramati (Harishchandra's wife) was sold as a:", opts: ["Queen elsewhere","Servant in a brahmin's house","Dancer","Temple worker"], ans: 1 },
+  { q: "The Harishchandra story's ultimate lesson aligns with which Niti Shloka?", opts: ["वसुधैव कुटुम्बकम्","सत्यमेव जयते — truth ultimately triumphs","धर्मो रक्षति रक्षितः","शरीरमाद्यं धर्मसाधनम्"], ans: 1 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // MIXED REVIEW — All chapters
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Which chapter features a partridge advising a young brahmin?", opts: ["दशरथस्य पश्चातापः","शश-कपिञ्जलकथा","कपिञ्जलोपदेशः","भोजस्य औदार्यम्"], ans: 2 },
+  { q: "Which chapter features a rabbit and a dove disputing over a tree hole?", opts: ["कपिञ्जलोपदेशः","शश-कपिञ्जलकथा","भोजस्य औदार्यम्","मायावटुः"], ans: 1 },
+  { q: "Which chapter is about Shiva testing Parvati's love?", opts: ["दशरथस्य पश्चातापः","अमरवाणीप्रशस्तिः","मायावटुः","कपीनामुपवासः"], ans: 2 },
+  { q: "Which chapter is a complaint/lament about the monsoon?", opts: ["स्वदेश्यपुष्पाणि","वर्षापरिदेवनम्","भोजस्य औदार्यम्","श्रीमलयालस्वामी"], ans: 1 },
+  { q: "Which chapter praises the Sanskrit language using 11 shlokas?", opts: ["भर्तृहरिसुभाषितानि","कपीनामुपवासः","अमरवाणीप्रशस्तिः","नीतिश्लोकाः"], ans: 2 },
+  { q: "Which chapter is a satire on monkeys who pretend starvation is fasting?", opts: ["शश-कपिञ्जलकथा","वर्षापरिदेवनम्","कपीनामुपवासः","कपिञ्जलोपदेशः"], ans: 2 },
+  { q: "Which chapter describes five flowers of India?", opts: ["अमरवाणीप्रशस्तिः","स्वदेश्यपुष्पाणि","वर्षापरिदेवनम्","श्रीमलयालस्वामी"], ans: 1 },
+  { q: "The chapter on King Bhoja comes from which prose work (Prabandha)?", opts: ["Kadambari","Harshacharita","Bhoja Prabandha","Panchatantra"], ans: 2 },
+  { q: "Banabhatta wrote both Kadambari and:", opts: ["Bhoja Prabandha","Harshacharita","Panchatantra","Meghadutam"], ans: 1 },
+  { q: "Which author is associated with a collection called 'Kavyasangraha' in our syllabus?", opts: ["E. Shankaracharya and Shrishailam Tatacharyya","Ballal","Vishnusharma","Banabhatta"], ans: 0 },
+  { q: "Name the Panchatantra Tantra about friends coming together:", opts: ["Mitrabheda","Mitralabha","Kakolukiyam","Labdhapranasham"], ans: 1 },
+  { q: "The Ramayana passage in our syllabus highlights which value?", opts: ["Bravery in battle","Repentance and facing the consequences of one's actions","Love between Rama and Sita","Devotion to Vishnu"], ans: 1 },
+  { q: "The Kumarasambhava passage in our syllabus highlights which value?", opts: ["Shiva's power","Steadfast devotion overcoming criticism","War between gods and demons","Creation of the universe"], ans: 1 },
+  { q: "The Bhartrhari subhashitas chapter highlights which value above all?", opts: ["Military courage","Material wealth","The supreme value of knowledge and true friendship","Beauty and romance"], ans: 2 },
+  { q: "'Kavyasangraha' is a collection / anthology of:", opts: ["Puranas","Selected Sanskrit poems by various poets","Grammar texts","Vedic hymns"], ans: 1 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // FINAL QUICK-FIRE REVISION
+  // ══════════════════════════════════════════════════════════════════
+  { q: "Sanskrit word for 'knowledge':", opts: ["बलम्","ज्ञानम् / विद्या","धनम्","यशः"], ans: 1 },
+  { q: "Sanskrit word for 'dharma' (duty/righteousness):", opts: ["अर्थः","धर्मः","कामः","मोक्षः"], ans: 1 },
+  { q: "Sanskrit word for 'truth':", opts: ["धर्मः","सत्यम्","ज्ञानम्","अहिंसा"], ans: 1 },
+  { q: "Sanskrit word for 'peace':", opts: ["युद्धम्","शान्तिः","सत्यम्","बलम्"], ans: 1 },
+  { q: "Sanskrit word for 'friendship':", opts: ["शत्रुता","मित्रता / मैत्री","सेवा","धनम्"], ans: 1 },
+  { q: "Sanskrit word for 'victory':", opts: ["जयः","पराजयः","बलम्","शान्तिः"], ans: 0 },
+  { q: "Sanskrit word for 'God / divine':", opts: ["दानवः","देवः","मनुष्यः","पशुः"], ans: 1 },
+  { q: "Sanskrit word for 'mother':", opts: ["पिता","भ्राता","माता","पुत्रः"], ans: 2 },
+  { q: "Sanskrit word for 'father':", opts: ["माता","पिता","भ्राता","पुत्री"], ans: 1 },
+  { q: "Sanskrit word for 'forest':", opts: ["ग्रामः","नगरम्","वनम् / अरण्यम्","पर्वतः"], ans: 2 },
+  { q: "Sanskrit word for 'king':", opts: ["राजा","सेवकः","मंत्री","सेनापतिः"], ans: 0 },
+  { q: "Sanskrit word for 'water':", opts: ["अग्निः","जलम् / वारि","भूमिः","आकाशः"], ans: 1 },
+  { q: "Sanskrit word for 'fire':", opts: ["जलम्","वायुः","अग्निः","भूमिः"], ans: 2 },
+  { q: "Sanskrit word for 'sky / heaven':", opts: ["भूमिः","अग्निः","आकाशः / स्वर्गः","जलम्"], ans: 2 },
+  { q: "Sanskrit word for 'sun':", opts: ["चन्द्रः","तारा","सूर्यः","नक्षत्रम्"], ans: 2 },
+  { q: "Sanskrit word for 'moon':", opts: ["सूर्यः","चन्द्रः","तारा","मेघः"], ans: 1 },
+  { q: "Sanskrit word for 'star':", opts: ["सूर्यः","चन्द्रः","मेघः","तारा / नक्षत्रम्"], ans: 3 },
+  { q: "Sanskrit word for 'mountain':", opts: ["वनम्","नदी","पर्वतः / गिरिः","ग्रामः"], ans: 2 },
+  { q: "Sanskrit word for 'village':", opts: ["नगरम्","ग्रामः","वनम्","पर्वतः"], ans: 1 },
+  { q: "Sanskrit word for 'city':", opts: ["ग्रामः","वनम्","नगरम् / पुरम्","नदी"], ans: 2 },
+  { q: "Sanskrit word for 'hand':", opts: ["पादः","नेत्रम्","हस्तः / करः","मुखम्"], ans: 2 },
+  { q: "Sanskrit word for 'eye':", opts: ["हस्तः","नेत्रम् / चक्षुः","श्रोत्रम्","नासिका"], ans: 1 },
+  { q: "Sanskrit word for 'ear':", opts: ["नेत्रम्","मुखम्","हस्तः","श्रोत्रम् / कर्णः"], ans: 3 },
+  { q: "Sanskrit word for 'food':", opts: ["जलम्","अन्नम् / भोजनम्","फलम्","पुष्पम्"], ans: 1 },
+  { q: "Sanskrit word for 'flower':", opts: ["फलम्","पत्रम्","पुष्पम् / कुसुमम्","वृक्षः"], ans: 2 },
+
+  // ══════════════════════════════════════════════════════════════════
+  // FINAL 26 — Exam-pattern, grammar tips, and chapter connections
+  // ══════════════════════════════════════════════════════════════════
+  { q: "The Anushtup metre has how many syllables per quarter (pada)?", opts: ["6","8","10","12"], ans: 1 },
+  { q: "'श्लोक' metre — Anushtup has how many padas (quarters)?", opts: ["2","3","4","6"], ans: 2 },
+  { q: "A 'गद्यम्' text is written in:", opts: ["Verse","Prose","Dialogue only","Mixed verse and prose"], ans: 1 },
+  { q: "A 'पद्यम्' text is written in:", opts: ["Prose","Verse / poetry","Grammar rules","Stories"], ans: 1 },
+  { q: "'महाकाव्यम्' means:", opts: ["A short poem","A great epic poem","A grammar text","A prose novel"], ans: 1 },
+  { q: "'चम्पूकाव्यम्' is a literary form that mixes:", opts: ["Two languages","Prose and verse","Two epics","Drama and poetry"], ans: 1 },
+  { q: "The Panchatantra belongs to which literary form?", opts: ["Mahakavya","Champu","Prose narrative / Kathasahitya","Drama"], ans: 2 },
+  { q: "Kadambari belongs to which literary form?", opts: ["Mahakavya","Drama","Prose novel (Gadyakavya)","Katha collection"], ans: 2 },
+  { q: "The Ramayana is a:", opts: ["Gadyakavya","Mahakavya (great epic)","Champu","Katha"], ans: 1 },
+  { q: "'रसः' in Sanskrit poetry means:", opts: ["A liquid","The emotional essence / aesthetic flavour of a poem","A type of Sandhi","A grammar term"], ans: 1 },
+  { q: "The primary rasa in 'दशरथस्य पश्चातापः' is:", opts: ["Shringara (love)","Vira (heroic)","Karuna (pathos / grief)","Hasya (humour)"], ans: 2 },
+  { q: "The primary rasa in 'कपीनामुपवासः' is:", opts: ["Karuna","Hasya (humour)","Vira","Bhayanak"], ans: 1 },
+  { q: "The primary rasa in 'वर्षापरिदेवनम्' is:", opts: ["Vira","Karuna","Hasya (humour and satire)","Shanta"], ans: 2 },
+  { q: "'अलंकारः' in Sanskrit poetry means:", opts: ["A type of Samasa","A figure of speech / literary ornament","A Vedic chant","A verb form"], ans: 1 },
+  { q: "'उपमा' is which figure of speech?", opts: ["Metaphor","Simile (comparison using 'like' / 'as')","Personification","Hyperbole"], ans: 1 },
+  { q: "'रूपक' is which figure of speech?", opts: ["Simile","Metaphor (direct identification)","Personification","Alliteration"], ans: 1 },
+  { q: "Which chapter in prose has the most humorous tone?", opts: ["कपिञ्जलोपदेशः","भोजस्य औदार्यम्","शश-कपिञ्जलकथा","वर्षापरिदेवनम्"], ans: 3 },
+  { q: "Which poetry chapter directly addresses Sanskrit as a language?", opts: ["नीतिश्लोकाः","भर्तृहरिसुभाषितानि","अमरवाणीप्रशस्तिः","मायावटुः"], ans: 2 },
+  { q: "The chapter 'श्रीमलयालस्वामी' is from which section of the textbook?", opts: ["पद्यभागः (Poetry)","गद्यभागः (Prose)","व्याकरणम्","उपवाचकम्"], ans: 1 },
+  { q: "The chapter 'Harishchandra' is from which section?", opts: ["Poetry","Prose","Grammar","Upavachakam (supplementary reader)"], ans: 3 },
+  { q: "How many chapters are covered in उपवाचकम् in this syllabus?", opts: ["1","2","3","4"], ans: 1 },
+  { q: "The two Upavachakam stories are:", opts: ["Dasharatha and Bhartrhari","Harishchandra and Nachiketa","Bhoja and Kayala Swami","Kapinjala and Shasha"], ans: 1 },
+  { q: "'पुनः पुनः' means:", opts: ["Once and only once","Again and again","Never again","Once more"], ans: 1 },
+  { q: "'सर्वे भवन्तु सुखिनः' means:", opts: ["I wish to be happy","May all be happy","God is everywhere","Truth makes us happy"], ans: 1 },
+  { q: "'लोकाः समस्ताः सुखिनो भवन्तु' means:", opts: ["God is the greatest","May all worlds / all people be happy","Only the wise are happy","May the king be happy"], ans: 1 },
+  { q: "The APBIE Sanskrit exam covers how many total sections (भागाः)?", opts: ["3","4","5","6"], ans: 2 },
 ];
 
 const TOTAL_Q = 25;
